@@ -15,24 +15,33 @@ public abstract class BaseEntity
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @NotNull()
-	@Column(nullable = false)
-    private boolean status;
     
-    public Long getId() {
-        return this.id;
-    }
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@Column(nullable = true)
+    private Boolean status;
 
-	public boolean isStatus() {
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public Boolean getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
     
+   
+
+    
+
+
 }
