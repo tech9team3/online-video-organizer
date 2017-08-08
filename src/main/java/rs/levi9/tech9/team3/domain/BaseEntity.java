@@ -13,7 +13,7 @@ public abstract class BaseEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name = "status", nullable=true)
+	@Column(nullable=true)
 	private Boolean status;
 
 	public Long getId() {
