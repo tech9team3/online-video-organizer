@@ -11,23 +11,13 @@ import javax.validation.constraints.NotNull;
 public abstract class BaseEntity
 {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    
-    
-	@Column(nullable = true)
-    private Boolean status;
 
-<<<<<<< HEAD
-=======
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column(nullable=true)
 	private Boolean status;
->>>>>>> bf760fbfd2843448bb88c237e397ff8a06c79141
 
 	public Long getId() {
 		return id;

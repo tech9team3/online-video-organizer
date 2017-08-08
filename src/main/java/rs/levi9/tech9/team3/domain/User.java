@@ -14,12 +14,6 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
-<<<<<<< HEAD
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-=======
->>>>>>> bf760fbfd2843448bb88c237e397ff8a06c79141
-
 import rs.levi9.tech9.team3.web.validation.custom.Password;
 
 @Entity
