@@ -31,8 +31,8 @@ INSERT INTO COMMENT (content,creation_date,user_id) VALUES ("OVO JOS JEDAN KOMEN
 INSERT INTO COMMENT (content,creation_date,user_id) VALUES ("OVO JE User KOMENTAR",NOW(), 5);
 INSERT INTO COMMENT (content,creation_date,user_id) VALUES ("OVO JOS JEDAN KOMENTAR OD Usera",NOW(), 5);
 
-INSERT INTO COMMENT (content,creation_date,user_id) VALUES ("OVO JE Admin KOMENTAR",NOW(), 5);
-INSERT INTO COMMENT (content,creation_date,user_id) VALUES ("OVO JOS JEDAN KOMENTAR OD Admina",NOW(), 5);
+INSERT INTO COMMENT (content,creation_date,user_id) VALUES ("OVO JE Admin KOMENTAR",NOW(), 6);
+INSERT INTO COMMENT (content,creation_date,user_id) VALUES ("OVO JOS JEDAN KOMENTAR OD Admina",NOW(), 6);
 
 INSERT INTO RATE (mark) VALUES (1);
 INSERT INTO RATE (mark) VALUES (1);
