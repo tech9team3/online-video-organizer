@@ -15,18 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 import rs.levi9.tech9.team3.domain.Comment;
 import rs.levi9.tech9.team3.service.CommentService;
 
-
-
 @RestController
 @RequestMapping("/comments")
 public class CommentController {
-	
+
 	private CommentService commentService;
 
 	@Autowired
 	public CommentController(CommentService commentService) {
 		this.commentService = commentService;
 	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Comment> findAll() {
 		return commentService.findAll();
@@ -47,14 +46,14 @@ public class CommentController {
 	}
 
 	@RequestMapping(path = "{id}", method = RequestMethod.DELETE)
-    public ResponseEntity delete(@PathVariable("id") Long id) {
+	public ResponseEntity delete(@PathVariable("id") Long id) {
 		commentService.delete(id);
-        return new ResponseEntity(HttpStatus.OK);
-    }
-	
-	 @RequestMapping(method = RequestMethod.PUT)
-	 public Comment put(@Valid @RequestBody Comment comment) {
-	        return commentService.save(comment);
-	    }
+		return new ResponseEntity(HttpStatus.OK);
+	}
+
+	@RequestMapping(method = RequestMethod.PUT)
+	public Comment put(@Valid @RequestBody Comment comment) {
+		return commentService.save(comment);
+	}
 
 }
