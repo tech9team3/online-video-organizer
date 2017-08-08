@@ -14,40 +14,44 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+=======
+>>>>>>> bf760fbfd2843448bb88c237e397ff8a06c79141
 
+import rs.levi9.tech9.team3.web.validation.custom.Password;
 
 @Entity
 @Table(name = "user")
-public class User extends BaseEntity implements Serializable{
+public class User extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = -5675226269896661922L;
 
-	@Column(name = "first_name", nullable = false)
+	@Column(nullable = false)
 	private String firstName;
 
-	@Column(name = "last_name", nullable = false)
+	@Column(nullable = false)
 	private String lastName;
 
 	@Email
-	@Column(name = "email", nullable = false, unique = true)
+	@Column(nullable = false, unique = true)
 	private String email;
 
 	@Length(min = 5, max = 15)
-	@Column(name = "username", nullable = false)
+	@Column(nullable = false, unique = true)
 	private String username;
 
-	@Length(min = 6, max = 20)
-	@Column(name = "password", nullable = false)
+	@Password // sifra mora da sadrzi izmedju 8 i 20 karaktera, obavezan je jedan specijalan karakter i jedan broj
+	@Column(nullable = false)
 	private String password;
 
-	@Column(name = "registration_date", nullable = false)
+	@Column(nullable = false)
 	private Date registrationDate;
-	
-	@Column(name = "roles", nullable = false)
+
+	@Column(nullable = false)
 	@ManyToMany
-//	@JsonManagedReference
+	// @JsonManagedReference
 	private Set<Role> roles;
 
 	public String getFirstName() {
@@ -109,7 +113,4 @@ public class User extends BaseEntity implements Serializable{
 	public User() {
 	}
 
-	
-
-	
 }
