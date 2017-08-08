@@ -25,7 +25,6 @@ public class Comment  extends BaseEntity implements Serializable
 	@OneToMany
 	private List<Rate> rates;
 
-
 	@Column(nullable = true)
 	private String content;
 	
