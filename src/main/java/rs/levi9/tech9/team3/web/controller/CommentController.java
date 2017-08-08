@@ -1,5 +1,6 @@
 package rs.levi9.tech9.team3.web.controller;
 
+import java.awt.print.Book;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import rs.levi9.tech9.team3.domain.Comment;
+import rs.levi9.tech9.team3.domain.User;
 import rs.levi9.tech9.team3.service.CommentService;
+import rs.levi9.tech9.team3.service.UserService;
 
 @RestController
 @RequestMapping("/comments")
@@ -54,6 +57,11 @@ public class CommentController {
 	@RequestMapping(method = RequestMethod.PUT)
 	public Comment put(@Valid @RequestBody Comment comment) {
 		return commentService.save(comment);
+	}
+
+	@RequestMapping(path = "searchByUser/{user}", method = RequestMethod.GET)
+	public List<Comment> findAllCommentsForUser(@PathVariable("user") String user) {
+		return commentService.findAllCommentForUser(user);
 	}
 
 }
