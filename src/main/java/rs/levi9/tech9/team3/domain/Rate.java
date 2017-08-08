@@ -19,10 +19,6 @@ public class Rate extends BaseEntity implements Serializable
 	@Range(min=0, max=5)
 	@Column(nullable = true)
 	private Long mark;
-	
-	@OneToOne
-	@PrimaryKeyJoinColumn
-	private Comment comment;
 
 	public Long getMark() {
 		return mark;
@@ -30,15 +26,6 @@ public class Rate extends BaseEntity implements Serializable
 
 	public void setMark(Long mark) {
 		this.mark = mark;
-	}
-
-	
-	public Comment getComment() {
-		return comment;
-	}
-
-	public void setComment(Comment comment) {
-		this.comment = comment;
 	}
 
 	public Rate() {

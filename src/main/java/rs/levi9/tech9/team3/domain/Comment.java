@@ -2,11 +2,13 @@ package rs.levi9.tech9.team3.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -20,10 +22,10 @@ public class Comment  extends BaseEntity implements Serializable
 	private static final long serialVersionUID = -8302558199993563066L;
 	
 	
-	@OneToOne
-	@PrimaryKeyJoinColumn
-	private Rate rate;
-	
+	@OneToMany
+	private List<Rate> rates;
+
+
 	@Column(nullable = true)
 	private String content;
 	
@@ -36,13 +38,7 @@ public class Comment  extends BaseEntity implements Serializable
 	@JoinColumn(name = "user_id", nullable = false)
 	private User author;
 
-	public Rate getRate() {
-		return rate;
-	}
-
-	public void setRate(Rate rate) {
-		this.rate = rate;
-	}
+	
 
 	public String getContent() {
 		return content;
@@ -68,6 +64,12 @@ public class Comment  extends BaseEntity implements Serializable
 		this.author = author;
 	}
 	
-	
+	public List<Rate> getRates() {
+		return rates;
+	}
+
+	public void setRates(List<Rate> rates) {
+		this.rates = rates;
+	}
 
 }
