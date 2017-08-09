@@ -3,6 +3,7 @@ package rs.levi9.tech9.team3.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import rs.levi9.tech9.team3.domain.User;
@@ -27,6 +28,7 @@ public class UserService {
 	}
 
 	public User save(User user) {
+		user.setPasswordHash(new BCryptPasswordEncoder().encode(user.getPasswordHash()));
 		return userRepository.save(user);
 	}
 
