@@ -38,7 +38,7 @@ public class User extends BaseEntity implements Serializable {
 
 	@Password // sifra mora da sadrzi izmedju 8 i 20 karaktera, obavezan je jedan specijalan karakter i jedan broj
 	@Column(nullable = false)
-	private String password;
+	private String passwordHash;
 
 	@Column(nullable = false)
 	private Date registrationDate;
@@ -80,12 +80,12 @@ public class User extends BaseEntity implements Serializable {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPasswordHash() {
+		return passwordHash;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
 	}
 
 	public Date getRegistrationDate() {
