@@ -1,9 +1,9 @@
-INSERT INTO USER( email, first_name, last_name, password, registration_date, username) VALUES ( "pera@para.com","Pera","Peric","para@1234",NOW(),"pera");
-INSERT INTO USER( email, first_name, last_name, password, registration_date, username) VALUES ( "zika@zika.com","Zika","Zikic","zika@1234",NOW(),"zile");
-INSERT INTO USER( email, first_name, last_name, password, registration_date, username) VALUES ( "mika@mika.com","Mika","Mikic","mika@1234",NOW(),"mika");
-INSERT INTO USER( email, first_name, last_name, password, registration_date, username) VALUES ( "jeca@jeca.com","Jeca","Jeca","jeca@1234",NOW(),"pereca");
-INSERT INTO USER( email, first_name, last_name, password, registration_date, username) VALUES ( "user@user.com","user","user","user@1234",NOW(),"user");
-INSERT INTO USER( email, first_name, last_name, password, registration_date, username) VALUES ( "admin@admin.com","admin","admin@1234","admin",NOW(),"admin");
+INSERT INTO USER( email, first_name, last_name, password_hash, registration_date, username) VALUES ( "pera@para.com","Pera","Peric","para@1234",NOW(),"pera");
+INSERT INTO USER( email, first_name, last_name, password_hash, registration_date, username) VALUES ( "zika@zika.com","Zika","Zikic","zika@1234",NOW(),"zile");
+INSERT INTO USER( email, first_name, last_name, password_hash, registration_date, username) VALUES ( "mika@mika.com","Mika","Mikic","mika@1234",NOW(),"mika");
+INSERT INTO USER( email, first_name, last_name, password_hash, registration_date, username) VALUES ( "jeca@jeca.com","Jeca","Jeca","jeca@1234",NOW(),"pereca");
+INSERT INTO USER( email, first_name, last_name, password_hash, registration_date, username) VALUES ( "user@user.com","user","user","user@1234",NOW(),"user");
+INSERT INTO USER( email, first_name, last_name, password_hash, registration_date, username) VALUES ( "admin@admin.com","admin","admin@1234","admin@1234",NOW(),"admin");
 
 INSERT INTO `role` (`type`) values("ROLE_USER");
 INSERT INTO `role` (`type`) values("ROLE_ADMIN");
