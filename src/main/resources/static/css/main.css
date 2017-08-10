@@ -1,0 +1,17 @@
+@CHARSET "ISO-8859-1";
+
+/* body { */
+/*     margin-top: 90px; */
+/* } */
+
+/* .modal-item { */
+/*     margin: 15px 0px; */
+/* } */
+
+/* .error { */
+/*     color: red; */
+/* } */
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
