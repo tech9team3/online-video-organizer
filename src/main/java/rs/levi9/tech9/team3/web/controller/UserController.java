@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import rs.levi9.tech9.team3.domain.User;
+import rs.levi9.tech9.team3.service.CommentService;
 import rs.levi9.tech9.team3.service.UserService;
 
 @RestController
@@ -21,10 +22,12 @@ import rs.levi9.tech9.team3.service.UserService;
 public class UserController {
 
 	private UserService userService;
+	private CommentService commentService;
 
 	@Autowired
 	public UserController(UserService userService) {
 		this.userService = userService;
+	
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -42,8 +45,8 @@ public class UserController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public User save(@Valid @RequestBody User user)  {
-	
+	public User save(@Valid @RequestBody User user) {
+
 		return userService.save(user);
 	}
 
@@ -54,17 +57,18 @@ public class UserController {
 
 	@RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity delete(@PathVariable("id") Long id) {
+		
 		userService.delete(id);
 		return new ResponseEntity(HttpStatus.OK);
 	}
+
 	@RequestMapping(path = "searchByName/{username}", method = RequestMethod.GET)
-	public User findOneByUsername(@PathVariable("username")String username) {
+	public User findOneByUsername(@PathVariable("username") String username) {
 		return userService.findOneByUsername(username);
 	}
-	
-	
+
 	@RequestMapping(path = "searchByEmail/{email}", method = RequestMethod.GET)
-	public User findOneByEmail(@PathVariable("email")String email) {
+	public User findOneByEmail(@PathVariable("email") String email) {
 		return userService.findOneByEmail(email);
 	}
 }

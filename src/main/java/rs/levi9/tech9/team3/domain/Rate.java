@@ -4,9 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
 
@@ -20,12 +21,26 @@ public class Rate extends BaseEntity implements Serializable
 	@Column(nullable = true)
 	private Long mark;
 
+	@NotNull
+	@ManyToOne()
+	@JoinColumn(name = "user_id", nullable = false)
+	private User author;
+	
 	public Long getMark() {
 		return mark;
 	}
 
 	public void setMark(Long mark) {
 		this.mark = mark;
+	}
+
+	
+	public User getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(User author) {
+		this.author = author;
 	}
 
 	public Rate() {

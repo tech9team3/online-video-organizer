@@ -2,13 +2,13 @@ package rs.levi9.tech9.team3.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
@@ -38,14 +38,13 @@ public class User extends BaseEntity implements Serializable {
 
 	@Password // sifra mora da sadrzi izmedju 8 i 20 karaktera, obavezan je jedan specijalan karakter i jedan broj
 	@Column(nullable = false)
-	private String passwordHash;
+	private String password;
 
 	@Column(nullable = false)
 	private Date registrationDate;
 
-	@Column(nullable = false)
 	@ManyToMany
-	// @JsonManagedReference
+	@JoinTable(joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
 
 	public String getFirstName() {
@@ -80,12 +79,12 @@ public class User extends BaseEntity implements Serializable {
 		this.username = username;
 	}
 
-	public String getPasswordHash() {
-		return passwordHash;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Date getRegistrationDate() {

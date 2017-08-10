@@ -17,10 +17,6 @@ public class Role extends BaseEntity  {
 
 	@Enumerated(EnumType.STRING)
 	private RoleType type;
-	
-	@JsonBackReference
-	@ManyToMany(mappedBy="roles")
-	private List<User> users;
 
 	public RoleType getType() {
 		return type;
@@ -30,16 +26,8 @@ public class Role extends BaseEntity  {
 		this.type = type;
 	}
 
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
 
 	public Role() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public enum RoleType {

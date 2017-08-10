@@ -6,23 +6,20 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Video extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 5858019068646342779L;
-
-	@NotNull
-	@ManyToOne
-	@JoinColumn(nullable = false)
-	private User user;
 	
 	@NotNull
 	@Column(nullable = false)
 	private String videoUrl;
+	
+	@NotNull
+	@Column(nullable = false)
+	private String title;
 	
 	private String description;
 	
@@ -32,21 +29,27 @@ public class Video extends BaseEntity implements Serializable {
 	@NotNull
 	@Column(nullable = false)
 	private Long videoListId;
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
+	
+	@NotNull
+	@OneToMany(cascade = CascadeType.ALL)
+	private Set<Comment> commentList;
+	
+	
+	
 	public String getVideoUrl() {
 		return videoUrl;
 	}
 
 	public void setVideoUrl(String videoUrl) {
 		this.videoUrl = videoUrl;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getDescription() {
@@ -72,4 +75,16 @@ public class Video extends BaseEntity implements Serializable {
 	public void setVideoListId(Long videoListId) {
 		this.videoListId = videoListId;
 	}
+
+	public Set<Comment> getCommentList() {
+		return commentList;
+	}
+
+	public void setCommentList(Set<Comment> commentList) {
+		this.commentList = commentList;
+	}
+
+	public Video() {
+	}
+	
 }
