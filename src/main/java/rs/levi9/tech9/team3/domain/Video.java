@@ -30,12 +30,6 @@ public class Video extends BaseEntity implements Serializable {
 	@Column(nullable = false)
 	private Long videoListId;
 	
-	@NotNull
-	@OneToMany(cascade = CascadeType.ALL)
-	private Set<Comment> commentList;
-	
-	
-	
 	public String getVideoUrl() {
 		return videoUrl;
 	}
@@ -74,14 +68,6 @@ public class Video extends BaseEntity implements Serializable {
 
 	public void setVideoListId(Long videoListId) {
 		this.videoListId = videoListId;
-	}
-
-	public Set<Comment> getCommentList() {
-		return commentList;
-	}
-
-	public void setCommentList(Set<Comment> commentList) {
-		this.commentList = commentList;
 	}
 
 	public Video() {

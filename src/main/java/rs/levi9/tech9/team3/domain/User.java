@@ -36,7 +36,7 @@ public class User extends BaseEntity implements Serializable {
 	@Column(nullable = false, unique = true)
 	private String username;
 
-	@Password // sifra mora da sadrzi izmedju 8 i 20 karaktera, obavezan je jedan specijalan karakter i jedan broj
+	@Password 
 	@Column(nullable = false)
 	private String password;
 

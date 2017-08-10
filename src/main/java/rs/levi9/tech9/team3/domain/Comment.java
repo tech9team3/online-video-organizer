@@ -24,8 +24,13 @@ public class Comment extends BaseEntity implements Serializable {
 
 	@NotNull
 	@ManyToOne()
-	@JoinColumn(name = "user_id", nullable = false)
-	private User author;
+	@JoinColumn(nullable = false)
+	private User user;
+	
+	@NotNull
+	@ManyToOne()
+	@JoinColumn(nullable = false)
+	private Video video;
 
 	public String getContent() {
 		return content;
@@ -43,12 +48,20 @@ public class Comment extends BaseEntity implements Serializable {
 		this.creationDate = creationDate;
 	}
 
-	public User getAuthor() {
-		return author;
+	public User getUser() {
+		return user;
 	}
 
-	public void setAuthor(User author) {
-		this.author = author;
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Video getVideo() {
+		return video;
+	}
+
+	public void setVideo(Video video) {
+		this.video = video;
 	}
 
 	public Comment() {

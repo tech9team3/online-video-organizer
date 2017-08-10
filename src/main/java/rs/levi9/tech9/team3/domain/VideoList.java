@@ -26,4 +26,33 @@ public class VideoList extends BaseEntity implements Serializable {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "videoListId")	
 	private List<Video> videoList;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public List<Video> getVideoList() {
+		return videoList;
+	}
+
+	public void setVideoList(List<Video> videoList) {
+		this.videoList = videoList;
+	}
+
+	public VideoList() {
+	}
+	
+	
 }

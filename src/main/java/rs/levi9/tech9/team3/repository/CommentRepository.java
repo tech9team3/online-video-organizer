@@ -11,5 +11,5 @@ import rs.levi9.tech9.team3.domain.User;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long>{
 
-	public List<Comment> findAllByAuthor(User author);
+	public List<Comment> findAllByUser(User user);
 }

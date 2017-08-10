@@ -38,8 +38,8 @@ public class CommentService {
 		commentRepository.delete(id);
 	}
 
-	public List<Comment> findAllCommentForUser(String author) {
-		User foundUser = userRepository.findByUsername(author);
-		return commentRepository.findAllByAuthor(foundUser);
+	public List<Comment> findAllCommentForUser(String user) {
+		User foundUser = userRepository.findByUsername(user);
+		return commentRepository.findAllByUser(foundUser);
 	}
 }

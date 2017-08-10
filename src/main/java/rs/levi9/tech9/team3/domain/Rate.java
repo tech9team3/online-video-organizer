@@ -23,8 +23,13 @@ public class Rate extends BaseEntity implements Serializable
 
 	@NotNull
 	@ManyToOne()
-	@JoinColumn(name = "user_id", nullable = false)
-	private User author;
+	@JoinColumn(nullable = false)
+	private User user;
+	
+	@NotNull
+	@ManyToOne()
+	@JoinColumn(nullable = false)
+	private Video video;
 	
 	public Long getMark() {
 		return mark;
@@ -34,13 +39,20 @@ public class Rate extends BaseEntity implements Serializable
 		this.mark = mark;
 	}
 
-	
-	public User getAuthor() {
-		return author;
+	public User getUser() {
+		return user;
 	}
 
-	public void setAuthor(User author) {
-		this.author = author;
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Video getVideo() {
+		return video;
+	}
+
+	public void setVideo(Video video) {
+		this.video = video;
 	}
 
 	public Rate() {
