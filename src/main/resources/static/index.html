@@ -9,6 +9,7 @@
 
 		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/main.css">
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -19,8 +20,8 @@
 	</head>
 
 	<body class="ng-cloak">
+	 <div class="container" ng-show="!mainCtrl.user" ng-include src="'views/login.html'"></div>
 		
-
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -37,9 +38,10 @@
 		<script src="js/app.js" type="text/javascript"></script>
 
  		<!-- services -->
-
-
+      
+       
 		<!-- controllers -->
+		<script src="js/controllers/mainController.js" type="text/javascript"></script>
 
 	</body>
 
