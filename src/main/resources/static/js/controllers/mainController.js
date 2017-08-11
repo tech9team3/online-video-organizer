@@ -6,6 +6,7 @@
 
     function MainController($location, $http, $route) {
 
+
         var self = this;
         self.isActive = isActive;
         self.register = register;
@@ -154,6 +155,7 @@
                     break;
             }
         }
+
         
     }
 
