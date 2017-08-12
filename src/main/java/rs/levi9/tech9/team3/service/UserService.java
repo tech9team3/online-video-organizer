@@ -42,4 +42,10 @@ public class UserService {
 		userRepository.delete(id);
 	}
 	
+	public User findOneByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
+	public User findOneByUsername (String username) {
+		return userRepository.findByUsername(username);
+	}
 }
