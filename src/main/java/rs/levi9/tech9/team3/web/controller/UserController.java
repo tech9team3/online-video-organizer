@@ -1,18 +1,24 @@
 package rs.levi9.tech9.team3.web.controller;
 
+import java.net.URI;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.client.RestOperations;
 import rs.levi9.tech9.team3.domain.User;
 import rs.levi9.tech9.team3.service.CommentService;
 import rs.levi9.tech9.team3.service.UserService;
@@ -24,6 +30,9 @@ public class UserController {
 	private UserService userService;
 	private CommentService commentService;
 
+	@Autowired
+	private RestOperations restTemplate;
+	
 	@Autowired
 	public UserController(UserService userService) {
 		this.userService = userService;
@@ -71,4 +80,24 @@ public class UserController {
 	public User findOneByEmail(@PathVariable("email") String email) {
 		return userService.findOneByEmail(email);
 	}
+	
+    @RequestMapping("/user")
+    public Map<String, Object> user(Authentication user) {
+      Map<String, Object> map = new LinkedHashMap<String, Object>();
+      map.put("username", user.getName());
+      map.put("roles", AuthorityUtils.authorityListToSet((user).getAuthorities()));
+      return map;
+    }
+    
+    @RequestMapping(path ="/captcha", method = RequestMethod.POST)
+    public String getSomethingSomething(@RequestBody Map<String, String> request){
+    	String response = request.get("g-recaptcha-response");
+    	String secret = "6LdBOCsUAAAAALm08B68C_poDY9IgIVIs1ZY2ll3";
+    	URI verifyUri = URI.create(String.format("https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s", secret, response));
+    	String googleResponse = restTemplate.getForObject(verifyUri, String.class);
+    	System.out.println(googleResponse);
+    	return googleResponse;
+    }
+    
+
 }
