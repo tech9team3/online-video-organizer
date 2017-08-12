@@ -23,13 +23,13 @@ public class Comment extends BaseEntity implements Serializable {
 	private Date creationDate;
 
 	@NotNull
-	@ManyToOne()
+	@ManyToOne
 	@JoinColumn(nullable = false)
 	private User user;
 	
 	@NotNull
-	@ManyToOne()
-	@JoinColumn(nullable = false)
+	@ManyToOne
+	@JoinColumn( nullable = false)
 	private Video video;
 
 	public String getContent() {

@@ -55,4 +55,9 @@ public class VideoListController {
 		videoListService.delete(id);
 		return new ResponseEntity(HttpStatus.OK);
 	}
+	
+	@RequestMapping(path = "/search/userId/{userId}", method = RequestMethod.GET)
+	public List<VideoList> findAllVideoListsForUserByUserId(@PathVariable("userId") Long userId){
+		return videoListService.findAllVideoListsByUser(userId);
+	}
 }

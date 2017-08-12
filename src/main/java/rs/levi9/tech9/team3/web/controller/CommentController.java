@@ -57,9 +57,9 @@ public class CommentController {
 		return commentService.save(comment);
 	}
 
-	@RequestMapping(path = "searchByUser/{user}", method = RequestMethod.GET)
-	public List<Comment> findAllCommentsForUser(@PathVariable("user") String user) {
-		return commentService.findAllCommentForUser(user);
+	@RequestMapping(path = "/search/comments/forVideo/{videoId}", method = RequestMethod.GET)
+	public List<Comment> findAllCommentsForOneVideo(@PathVariable("videoId") Long videoId){
+		return commentService.findAllCommentsForVideo(videoId);
 	}
 
 }

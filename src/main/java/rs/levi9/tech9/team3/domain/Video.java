@@ -1,35 +1,39 @@
 package rs.levi9.tech9.team3.domain;
 
 import java.io.Serializable;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Video extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 5858019068646342779L;
-	
+
 	@NotNull
 	@Column(nullable = false)
 	private String videoUrl;
-	
+
 	@NotNull
 	@Column(nullable = false)
 	private String title;
-	
-	private String description;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "videoId")	
-	private Set<VideoTag> videoTags;
-	
+
 	@NotNull
 	@Column(nullable = false)
-	private Long videoListId;
-	
+	private String description;
+
+	@NotNull
+	@ManyToOne 
+	@JoinColumn( nullable = false)
+	private VideoList videoList;
+
+	@NotNull
+	@ManyToOne
+	@JoinColumn( nullable = false)
+	private User user;
+
 	public String getVideoUrl() {
 		return videoUrl;
 	}
@@ -54,23 +58,24 @@ public class Video extends BaseEntity implements Serializable {
 		this.description = description;
 	}
 
-	public Set<VideoTag> getVideoTags() {
-		return videoTags;
+	public VideoList getVideoList() {
+		return videoList;
 	}
 
-	public void setVideoTags(Set<VideoTag> videoTags) {
-		this.videoTags = videoTags;
+	public void setVideoList(VideoList videoList) {
+		this.videoList = videoList;
 	}
 
-	public Long getVideoListId() {
-		return videoListId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setVideoListId(Long videoListId) {
-		this.videoListId = videoListId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
+	
 	public Video() {
 	}
-	
+
 }

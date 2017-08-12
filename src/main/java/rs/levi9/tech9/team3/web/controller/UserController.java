@@ -62,13 +62,4 @@ public class UserController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "searchByName/{username}", method = RequestMethod.GET)
-	public User findOneByUsername(@PathVariable("username") String username) {
-		return userService.findOneByUsername(username);
-	}
-
-	@RequestMapping(path = "searchByEmail/{email}", method = RequestMethod.GET)
-	public User findOneByEmail(@PathVariable("email") String email) {
-		return userService.findOneByEmail(email);
-	}
 }

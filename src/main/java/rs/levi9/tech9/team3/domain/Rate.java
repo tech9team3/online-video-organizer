@@ -22,12 +22,12 @@ public class Rate extends BaseEntity implements Serializable
 	private Long mark;
 
 	@NotNull
-	@ManyToOne()
+	@ManyToOne
 	@JoinColumn(nullable = false)
 	private User user;
 	
 	@NotNull
-	@ManyToOne()
+	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Video video;
 	

@@ -41,7 +41,7 @@ public class VideoTagController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public VideoTag save(@Valid @RequestBody VideoTag videoTag)  {	
+	public VideoTag save(@Valid @RequestBody VideoTag videoTag) {
 		return videoTagService.save(videoTag);
 	}
 
@@ -54,5 +54,10 @@ public class VideoTagController {
 	public ResponseEntity delete(@PathVariable("id") Long id) {
 		videoTagService.delete(id);
 		return new ResponseEntity(HttpStatus.OK);
+	}
+
+	@RequestMapping(path = "/tagsForVideo/{videoId}", method = RequestMethod.GET)
+	public List<VideoTag> findAllTagsByVideo(@PathVariable("videoId") Long videoId) {
+		return videoTagService.findAllTagsForVideo(videoId);
 	}
 }

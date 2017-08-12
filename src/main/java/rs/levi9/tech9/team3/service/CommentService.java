@@ -7,19 +7,23 @@ import org.springframework.stereotype.Service;
 
 import rs.levi9.tech9.team3.domain.Comment;
 import rs.levi9.tech9.team3.domain.User;
+import rs.levi9.tech9.team3.domain.Video;
 import rs.levi9.tech9.team3.repository.CommentRepository;
 import rs.levi9.tech9.team3.repository.UserRepository;
+import rs.levi9.tech9.team3.repository.VideoRepository;
 
 @Service
 public class CommentService {
 
 	private CommentRepository commentRepository;
 	private UserRepository userRepository;
+	private VideoRepository videoRepository;
 
 	@Autowired
-	public CommentService(CommentRepository commentRepository, UserRepository userRepository) {
+	public CommentService(CommentRepository commentRepository, UserRepository userRepository,VideoRepository videoRepository) {
 		this.commentRepository = commentRepository;
 		this.userRepository = userRepository;
+		this.videoRepository = videoRepository;
 	}
 
 	public List<Comment> findAll() {
@@ -38,8 +42,9 @@ public class CommentService {
 		commentRepository.delete(id);
 	}
 
-	public List<Comment> findAllCommentForUser(String user) {
-		User foundUser = userRepository.findByUsername(user);
-		return commentRepository.findAllByUser(foundUser);
+	public List<Comment> findAllCommentsForVideo(Long videoId){
+		Video foundVideo = videoRepository.findOne(videoId);
+			List<Comment> listOfComments = commentRepository.findAllByVideo(foundVideo);
+			return listOfComments;
 	}
 }

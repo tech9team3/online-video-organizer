@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+
+
 
 @Entity
 public class VideoTag extends BaseEntity implements Serializable {
@@ -13,10 +17,11 @@ public class VideoTag extends BaseEntity implements Serializable {
 	@NotNull
 	@Column(nullable = false)
 	private String name;
-	
+
 	@NotNull
-	@Column(nullable = false)
-	private Long videoId;
+	@ManyToOne 
+	@JoinColumn( nullable = false)
+	private Video video;
 
 	public String getName() {
 		return name;
@@ -26,11 +31,17 @@ public class VideoTag extends BaseEntity implements Serializable {
 		this.name = name;
 	}
 
-	public Long getVideoId() {
-		return videoId;
+	public Video getVideo() {
+		return video;
 	}
 
-	public void setVideoId(Long videoId) {
-		this.videoId = videoId;
+	public void setVideo(Video video) {
+		this.video = video;
 	}
+
+	public VideoTag() {
+	}
+	
+	
+
 }

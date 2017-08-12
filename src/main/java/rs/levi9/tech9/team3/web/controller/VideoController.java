@@ -41,7 +41,7 @@ public class VideoController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public Video save(@Valid @RequestBody Video video)  {	
+	public Video save(@Valid @RequestBody Video video) {
 		return videoService.save(video);
 	}
 
@@ -54,5 +54,10 @@ public class VideoController {
 	public ResponseEntity delete(@PathVariable("id") Long id) {
 		videoService.delete(id);
 		return new ResponseEntity(HttpStatus.OK);
+	}
+
+	@RequestMapping(path = "/search/videos/byVideoList/{videoListId}", method = RequestMethod.GET)
+	public List<Video> findAllVideosForVideoList(@PathVariable("videoListId") Long videoListId) {
+		return videoService.findAllVideoByVideoList(videoListId);
 	}
 }

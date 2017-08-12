@@ -7,16 +7,20 @@ import org.springframework.stereotype.Service;
 
 import rs.levi9.tech9.team3.domain.Comment;
 import rs.levi9.tech9.team3.domain.Rate;
+import rs.levi9.tech9.team3.domain.Video;
 import rs.levi9.tech9.team3.repository.RateRepository;
+import rs.levi9.tech9.team3.repository.VideoRepository;
 
 @Service
 public class RateService
 {
     private RateRepository rateRepository;
+    private VideoRepository videoRepository;
 
     @Autowired
-	public RateService(RateRepository rateRepository) {
+	public RateService(RateRepository rateRepository,VideoRepository videoRepository) {
 		this.rateRepository = rateRepository;
+		this.videoRepository = videoRepository;
 	}
     
 	public List<Rate> findAll() {
@@ -35,4 +39,9 @@ public class RateService
 		rateRepository.delete(id);
 	}
     
+	public List<Rate> findAllRatesForVideo(Long videoId){
+		Video foundVideo = videoRepository.findOne(videoId);
+		List<Rate> videoRateLists = rateRepository.findAllByVideo(foundVideo);
+		return videoRateLists;
+	}
 }

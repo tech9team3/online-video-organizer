@@ -1,14 +1,11 @@
 package rs.levi9.tech9.team3.domain;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -17,15 +14,12 @@ public class VideoList extends BaseEntity implements Serializable {
 
 	@NotNull
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn( nullable = false)
 	private User user;
-	
+
 	@NotNull
 	@Column(nullable = false)
 	private String title;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "videoListId")	
-	private List<Video> videoList;
 
 	public User getUser() {
 		return user;
@@ -43,16 +37,7 @@ public class VideoList extends BaseEntity implements Serializable {
 		this.title = title;
 	}
 
-	public List<Video> getVideoList() {
-		return videoList;
-	}
-
-	public void setVideoList(List<Video> videoList) {
-		this.videoList = videoList;
-	}
-
 	public VideoList() {
 	}
-	
-	
+
 }

@@ -9,5 +9,4 @@ import rs.levi9.tech9.team3.domain.User;
 public interface UserRepository extends JpaRepository<User, Long>{
 
 	public User findByUsername(String username);
-	public User findByEmail(String email);
 }

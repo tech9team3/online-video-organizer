@@ -6,16 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import rs.levi9.tech9.team3.domain.User;
+import rs.levi9.tech9.team3.domain.VideoList;
 import rs.levi9.tech9.team3.repository.UserRepository;
 
 @Service
 public class UserService {
 
 	private UserRepository userRepository;
+	private VideoListService videoListService;
 
 	@Autowired
-	public UserService(UserRepository userRepository) {
+	public UserService(UserRepository userRepository,VideoListService videoListService) {
 		this.userRepository = userRepository;
+		this.videoListService = videoListService;
 	}
 
 	public List<User> findAll() {
@@ -31,13 +34,12 @@ public class UserService {
 	}
 
 	public void delete(Long id) {
+		User foundUser = userRepository.findOne(id);
+		List<VideoList> foundVideoLists = videoListService.findAllVideoListsByUser(foundUser.getId());
+		for (VideoList videoList : foundVideoLists) {
+			videoListService.delete(videoList.getId());
+		}
 		userRepository.delete(id);
 	}
 	
-	public User findOneByUsername(String username) {
-		return userRepository.findByUsername(username);
-	}
-	public User findOneByEmail(String email) {
-		return userRepository.findByEmail(email);
-	}
 }

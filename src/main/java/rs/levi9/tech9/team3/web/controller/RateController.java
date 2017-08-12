@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import rs.levi9.tech9.team3.domain.Rate;
 import rs.levi9.tech9.team3.service.RateService;
 
-
-
 @RestController
 @RequestMapping("/rate")
 public class RateController {
@@ -28,6 +26,7 @@ public class RateController {
 	public RateController(RateService ratetService) {
 		this.rateService = rateService;
 	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Rate> findAll() {
 		return rateService.findAll();
@@ -48,14 +47,18 @@ public class RateController {
 	}
 
 	@RequestMapping(path = "{id}", method = RequestMethod.DELETE)
-    public ResponseEntity delete(@PathVariable("id") Long id) {
+	public ResponseEntity delete(@PathVariable("id") Long id) {
 		rateService.delete(id);
-        return new ResponseEntity(HttpStatus.OK);
-    }
-	
-	 @RequestMapping(method = RequestMethod.PUT)
-	 public Rate put(@Valid @RequestBody Rate rate) {
-	        return rateService.save(rate);
-	    }
+		return new ResponseEntity(HttpStatus.OK);
+	}
 
+	@RequestMapping(method = RequestMethod.PUT)
+	public Rate put(@Valid @RequestBody Rate rate) {
+		return rateService.save(rate);
+	}
+
+	@RequestMapping(path = "/search/ratesForVideo/{videoId}", method = RequestMethod.GET)
+	public List<Rate> findAllRatesForVideoByVideoId(@PathVariable("videoId") Long videoId) {
+		return rateService.findAllRatesForVideo(videoId);
+	}
 }
