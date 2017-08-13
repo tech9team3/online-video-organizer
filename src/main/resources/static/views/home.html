@@ -1,7 +1,45 @@
-<div>
-	<div class="row">		
-		<div class="col-sm-12">
-			Home!
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-8">
+			<ul class="nav nav-pills">
+				<li role="presentation"><a href="">Latest</a></li>
+				<li role="presentation"><a href="">Top Rated</a></li>
+				<li role="presentation"><a href="">Most Commented</a></li>
+				<li role="presentation"><a href="">Alphabetic Order</a></li>
+			</ul>
+		</div>
+		<div class="col-md-4">
+			<div class="input-group input-group-sm">
+				<input type="text" class="form-control" placeholder="Search..."></input>
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">
+						<span class="glyphicon glyphicon-search"></span>
+				</button>
+				</span>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="row">
+				<div class="col-md-3 col-xs-6" ng-repeat="video in homeCtrl.publicVideos">
+					<strong class="might-overflow">{{video.videoList.user.username}}</strong>
+					<a href="" class="thumbnail">
+						<img class="img-responsive" ng-src="http://img.youtube.com/vi/{{video.videoUrl | GetYouTubeID}}/hqdefault.jpg" alt="{{video.title}}" /> 
+					</a>
+					<strong class="might-overflow" data-toggle="tooltip" title="{{video.title}}">{{video.title}}</strong>
+					<p class="might-overflow"data-toggle="tooltip" title="{{video.description}}">{{video.description}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="list-group">
+				<a href="" class="list-group-item disabled">Playlists</a>
+				<a href="" class="list-group-item">First playlist</a>
+				<a href="" class="list-group-item">Second playlist</a>
+				<a href="" class="list-group-item">Third playlist</a>
+			</div>
 		</div>
 	</div>
 </div>
