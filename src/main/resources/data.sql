@@ -16,6 +16,11 @@ INSERT INTO user_roles(user_id,role_id) values (5,1);
 INSERT INTO user_roles(user_id,role_id) values (6,1);
 INSERT INTO user_roles(user_id,role_id) values (6,2);
 
+INSERT INTO video (description, title, video_url, user_id) VALUES ("November Rain", "Guns N' Roses - November Rain","www.youtube.com/watch?v=8SbUC-UaAxE",1);
+INSERT INTO video (description, title, video_url, user_id) VALUES ("Don't Cry", "Guns N' Roses - Don't Cry","www.youtube.com/watch?v=zRIbf6JqkNc",1);
+INSERT INTO video (description, title, video_url, user_id) VALUES ("Crazy", "Aerosmith - Crazy","www.youtube.com/watch?v=NMNgbISmF4I",3);
+INSERT INTO video (description, title, video_url, user_id) VALUES ("Always", "Bon Jovi - Always","www.youtube.com/watch?v=9BMwcO6_hyA",4);
+
 INSERT INTO video_list (title, user_id) VALUES ("Moja play lista", 1);
 INSERT INTO video (description, title, video_url, user_id, video_list_id) VALUES ("We Don’t Talk", "We Don't Talk Anymore","www.youtube.com/watch?v=3AtDnEC4zak",1,1);
 INSERT INTO video_tag (name,video_id) values ("cool",1);

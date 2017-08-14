@@ -60,4 +60,10 @@ public class VideoController {
 	public List<Video> findAllVideosForVideoList(@PathVariable("videoListId") Long videoListId) {
 		return videoService.findAllVideoByVideoList(videoListId);
 	}
+	
+	@RequestMapping(path = "/search/videos/byUser/{userId}", method = RequestMethod.GET)
+	public List<Video> findAllVideosForUser(@PathVariable("userId") Long userId){
+		return videoService.findAllVideoByUser(userId);
+	}
+	
 }
