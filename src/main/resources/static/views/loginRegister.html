@@ -1,130 +1,99 @@
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <div ng-switch on="mainCtrl.loginOrRegister">
+            <div ng-switch-when="login">
+                <form name="mainCtrl.loginUserForm" role="form" ng-submit="mainCtrl.login()">
+                    <div class="form-group">
+                        <label for="username1">Username</label>
+                        <div class="input-group" ng-class="{ 'has-error' : mainCtrl.loginUserForm.username.$invalid && !mainCtrl.loginUserForm.username.$pristine }">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" id="username1" name="username-login" placeholder="Enter your username" required ng-model="mainCtrl.credentials.username" />
+                        </div>
+                        <span class="error" ng-show="mainCtrl.loginUserForm.username.$invalid && !mainCtrl.loginUserForm.username.$pristine">* Username is required!</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password-login">Password</label>
+                        <div class="input-group" ng-class="{ 'has-error' : mainCtrl.loginUserForm.password.$invalid && !mainCtrl.loginUserForm.password.$pristine }">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input type="password" class="form-control" id="password-login" name="password" placeholder="Enter your password" required ng-model="vm.credentials.password" />
+                        </div>
+                        <span class="error" ng-show="mainCtrl.loginUserForm.password.$invalid && !mainCtrl.loginUserForm.password.$pristine">* Password is required!</span>
+                    </div>
+                    <div class="alert alert-danger" ng-if="mainCtrl.loginError">Bad credentials!</div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="javascript:void(0)" ng-click="mainCtrl.toggleLoginRegister('register')" class=pull-right>Register</a>
+                </form>
+            </div>
+            <div ng-switch-when="register">
+                <form name="mainCtrl.registerUserForm" role="form" ng-submit="mainCtrl.register(mainCtrl.registerInput)">
+                    <div class="form-group">
+                        <label for="username2">Username</label>
+                        <div class="input-group" ng-class="{ 'has-error' : mainCtrl.registerUserForm.username.$invalid && !mainCtrl.registerUserForm.username.$pristine }">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input name="username" type="text" class="form-control" id="username2" placeholder="Enter your username" required ng-model="mainCtrl.registerInput.username" />
+                        </div>
+                        <span class="error" ng-show="mainCtrl.registerUserForm.username.$invalid && !mainCtrl.registerUserForm.username.$pristine">* Username is required!</span>
+                        <span ng-if="mainCtrl.registrationError.username" class="error">* {{mainCtrl.registrationError.username}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-group" ng-class="{ 'has-error' : mainCtrl.registerUserForm.password.$invalid && !mainCtrl.registerUserForm.password.$pristine }">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input name="password" type="password" class="form-control" id="password" placeholder="Enter your password" data-toggle="tooltip" data-placement="right" title="Password must contain between 8 and 20 characters, one special character and one number is required" required ng-model="mainCtrl.registerInput.password" />
+                        </div>
+                        <span class="error" ng-show="mainCtrl.registerUserForm.password.$invalid && !mainCtrl.registerUserForm.password.$pristine">* Password is required!</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname">Firstname</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter your firstname" ng-model="mainCtrl.registerInput.firstName" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Lastname</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter your lastname" ng-model="mainCtrl.registerInput.lastName" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <div class="input-group" ng-class="{ 'has-error' : mainCtrl.registerUserForm.email.$invalid && !mainCtrl.registerUserForm.email.$pristine }">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <input name="email" type="email" class="form-control" id="email" placeholder="Enter your email" required ng-model="mainCtrl.registerInput.email" />
+                        </div>
+                        <span class="error" ng-show="mainCtrl.registerUserForm.email.$invalid && !mainCtrl.registerUserForm.email.$pristine">* Email is required!</span>
+                        <span ng-if="mainCtrl.registrationError.email" class="error">* {{mainCtrl.registrationError.email}}</span>
+                    </div>
 
-	<div class="container">
-			<div class="row main">
-				<div class="main-login main-center">
-				<h5>Online video organizer</h5>
-    	<div ng-switch on="mainCtrl.loginOrRegister">
-			<div ng-switch-when="login">
-				<form name="mainCtrl.loginUserForm" role="form" ng-submit="mainCtrl.login()">
-						<div class="form-group">
-							<label for="login-form-username" class="cols-sm-2 control-label">Username</label>
-							<div class="cols-sm-10">
-								<div class="input-group" ng-class="{ 'has-error' : mainCtrl.loginUserForm.username.$invalid && !mainCtrl.loginUserForm.username.$pristine }">
-									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="username" id="login-form-username" placeholder="Enter your Username" required ng-model="mainCtrl.credentials.username" />
-									<span class="error" ng-show="mainCtrl.loginUserForm.username.$invalid && !mainCtrl.loginUserForm.username.$pristine">* Username is required!</span> 
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="login-form-password" class="cols-sm-2 control-label">Password</label>
-							<div class="cols-sm-10">
-								<div class="input-group" ng-class="{ 'has-error' : mainCtrl.loginUserForm.password.$invalid && !mainCtrl.loginUserForm.password.$pristine }">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="password" id="login-form-password" placeholder="Enter your password" required ng-model="mainCtrl.credentials.password"/>
-									<span class="error" ng-show="mainCtrl.loginUserForm.password.$invalid && !mainCtrl.loginUserForm.password.$pristine">* Password is required!</span>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group row">
-                             <div class="offset-sm-2 col-sm-8">
-                                <div class="alert alert-danger" ng-if="mainCtrl.loginError">Bad credentials!</div>
-                                  <button type="submit" class="btn btn-primary">Sign in</button>
-                               <a href="javascript:void(0)" ng-click="mainCtrl.toggleLoginRegister('register')" class=pull-right>Register</a>
-                             </div>	
-                       </div>
-					</form>
-					</div>
-		<div ng-switch-when="register">
-				<form name="mainCtrl.registerUserForm" role="form" ng-submit="mainCtrl.register(mainCtrl.registerInput)">
-						<div class="form-group">
-							<label for="firstname" class="cols-sm-2 control-label">Firstname</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="firstname" id="firstname"  placeholder="Enter your firstname"  ng-model="mainCtrl.registerInput.firstName">
-							    </div>
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<label for="lastname" class="cols-sm-2 control-label">Lastname</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="lastname" id="lastname"  placeholder="Enter your lastname"  ng-model="mainCtrl.registerInput.lastName"/>
-								</div>
-							</div>
-						</div>
-					
-						<div class="form-group">
-							<label for="email" class="cols-sm-2 control-label">Email</label>
-							<div class="cols-sm-10">
-								<div class="input-group" ng-class="{ 'has-error' : mainCtrl.registerUserForm.email.$invalid && !mainCtrl.registerUserForm.email.$pristine }">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email" required ng-model="mainCtrl.registerInput.email"/>
-								    <span class="error" ng-show="mainCtrl.registerUserForm.email.$invalid && !mainCtrl.registerUserForm.email.$pristine">* Email is required!</span>
-							        <span ng-if="mainCtrl.registrationError.email" class="error">* {{mainCtrl.registrationError.email}}</span>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="register-form-username" class="cols-sm-2 control-label">Username</label>
-							<div class="cols-sm-10">
-								<div class="input-group" ng-class="{ 'has-error' : mainCtrl.registerUserForm.username.$invalid && !mainCtrl.registerUserForm.username.$pristine }">
-									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="username" id="register-form-username"  placeholder="Enter your Username" required ng-model="mainCtrl.registerInput.username"//>
-							     	<span class="error" ng-show="mainCtrl.registerUserForm.username.$invalid && !mainCtrl.registerUserForm.username.$pristine">* Username is required!</span>
-						         	<span ng-if="mainCtrl.registrationError.username" class="error">* {{mainCtrl.registrationError.username}}</span>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="register-form-password-field" class="cols-sm-2 control-label">Password</label>
-							<div class="cols-sm-10">
-								<div class="input-group" ng-class="{ 'has-error' : mainCtrl.registerUserForm.password.$invalid && !mainCtrl.registerUserForm.password.$pristine }">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="password" id="register-form-password-field"  placeholder="Enter your password" required ng-model="mainCtrl.registerInput.password" />
-							    	<span class="error" ng-show="mainCtrl.registerUserForm.password.$invalid && !mainCtrl.registerUserForm.password.$pristine">* Password is required!</span>
-								</div>
-								<p style="text-align: justify;">*Password must contain between 8 and 20 characters, one special character and one number is required.</p>
-							</div>
-						</div>
-                         <div class="text-center">
-						<div vc-recaptcha key="mainCtrl.publicKey" theme="dark" size="normal" style="display:inline-block"></div>
-				     	</div><br>
-						<div class="form-group row">
-                             <div class="offset-sm-2 col-sm-8">
-                            <div class="alert alert-danger" ng-if="mainCtrl.registrationError">Registration failed!</div>
-                                  <button type="submit" class="btn btn-primary">Register</button>
-                                  <a href="javascript:void(0)" ng-click="mainCtrl.toggleLoginRegister('login')" class=pull-right>Login</a>
-                            </div>
-					 </div>	
-					
-				</form>
-				 </div>
-			</div>
-		</div>
-	</div>
-   </div>
-   <div class="modal fade" id="registrationModal" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="mainCtrl.closeRegistrationConfirmation()">&times;</button>
-				<h4 class="modal-title">Registration</h4>
-			</div>
-			<div class="modal-body">
-				<p>{{mainCtrl.registrationMessage}}</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="mainCtrl.closeRegistrationConfirmation()">Close</button>
-			</div>
-		</div>
-	</div>
+                    <!-- reCaptcha -->
+                    <div class="text-center">
+                        <div vc-recaptcha key="mainCtrl.publicKey" theme="dark" size="normal" style="display:inline-block"></div>
+                    </div>
+                    <!--  -->
+                    <br>
+                    <div class="alert alert-danger" ng-if="mainCtrl.registrationError">Registration failed!</div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="javascript:void(0)" ng-click="mainCtrl.toggleLoginRegister('login')" class=pull-right>Login</a>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-	
+<div class="modal fade" id="registrationModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="mainCtrl.closeRegistrationConfirmation()">&times;</button>
+                <h4 class="modal-title">Registration</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{mainCtrl.registrationMessage}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="mainCtrl.closeRegistrationConfirmation()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

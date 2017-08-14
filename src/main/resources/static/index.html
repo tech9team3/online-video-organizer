@@ -67,17 +67,6 @@
 	<script src="bower_components/angular-recaptcha/release/angular-recaptcha.js"></script>
 	<script src="js/app.js" type="text/javascript"></script>
 
-	<script>
-		$(function () {
-			$("#register-form-password-field")
-				.popover({ content: "Password must contain between 8 and 20 characters, one special character and one number is required" })
-				.blur(function () {
-					$(this).popover('hide');
-				});
-		});
-	</script>
-
-
 	<!-- services -->
 	<script src="js/services/userService.js" type="text/javascript"></script>
 	<script src="js/services/videoService.js" type="text/javascript"></script>
