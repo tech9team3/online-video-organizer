@@ -11,15 +11,20 @@
                 controller: 'HomeController',
                 controllerAs: 'homeCtrl'
 	        })
+            .when('/login', {
+                templateUrl: '/views/loginRegister.html',
+                controller: 'MainController',
+                controllerAs: 'mainCtrl'
+            })
             .when('/home', {
                 templateUrl: '/views/home.html',
                 controller: 'HomeController',
                 controllerAs: 'homeCtrl'
             })
-            .when('/login', {
-                templateUrl: '/views/loginRegister.html',
-                controller: 'MainController',
-                controllerAs: 'mainCtrl'
+            .when('/video/:videoId', {
+                templateUrl: '/views/video.html',
+                controller: 'VideoController',
+                controllerAs: 'videoCtrl'
             })
             .otherwise('/');
             }
