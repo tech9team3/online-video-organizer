@@ -21,8 +21,7 @@
                 data: data
             }
             return $http(req).success(function (response) {
-            	return response;
-            	console.log(response);
+            	return response;            	
             }).error(function () {
                 def.reject("Failed");
             });

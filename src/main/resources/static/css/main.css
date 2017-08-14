@@ -1,4 +1,8 @@
 @CHARSET "ISO-8859-1";
+body {
+    margin-top: 90px;
+}
+
 .might-overflow {
   display:block;
   text-overflow: ellipsis;
