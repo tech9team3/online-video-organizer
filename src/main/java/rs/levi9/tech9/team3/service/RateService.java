@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import rs.levi9.tech9.team3.domain.Comment;
 import rs.levi9.tech9.team3.domain.Rate;
 import rs.levi9.tech9.team3.domain.Video;
 import rs.levi9.tech9.team3.repository.RateRepository;

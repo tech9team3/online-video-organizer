@@ -54,4 +54,7 @@ public class VideoListService {
 		User foundUser = userRepository.findOne(userId);
 		return videoListRepository.findAllByUser(foundUser);
 	}
+	public List<VideoList> findAllVisibleVideoLists(){
+		return videoListRepository.findByVisibleIsTrue();
+	}
 }
