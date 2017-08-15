@@ -28,8 +28,8 @@
 					<a ng-href="#/video/{{video.videoUrl | GetYouTubeID}}" class="thumbnail">
 						<img ng-click="" class="img-responsive" ng-src="http://img.youtube.com/vi/{{video.videoUrl | GetYouTubeID}}/hqdefault.jpg" alt="{{video.title}}" /> 
 					</a>
-					<strong class="might-overflow" data-toggle="tooltip" title="{{video.title}}">{{video.title}}</strong>
-					<p class="might-overflow"data-toggle="tooltip" title="{{video.description}}">{{video.description}}</p>
+					<strong class="might-overflow" uib-tooltip="{{video.title}}">{{video.title}}</strong>
+					<p class="might-overflow" uib-tooltip="{{video.description}}">{{video.description}}</p>
 				</div>
 			</div>
 		</div>
