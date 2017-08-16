@@ -22,5 +22,19 @@
                 return def.reject("Failed to get videos");
             });
         }
+        
+        this.getVideosByVideoListId = function (videoListId) {
+          var def = $q.defer();
+          var req = {
+              method: 'GET',
+              url: "videos/search/videos/byVideoList/" + videoListId,
+       
+          }
+          return $http(req).success(function (response) {
+              return response;
+          }).error(function () {
+              return def.reject("Failed to get videos");
+          });
+      }
     };
 }());

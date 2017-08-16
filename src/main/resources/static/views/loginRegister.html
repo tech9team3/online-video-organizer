@@ -15,7 +15,7 @@
                         <label for="password-login">Password</label>
                         <div class="input-group" ng-class="{ 'has-error' : mainCtrl.loginUserForm.password.$invalid && !mainCtrl.loginUserForm.password.$pristine }">
                             <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                            <input type="password" class="form-control" id="password-login" name="password" placeholder="Enter your password" required ng-model="vm.credentials.password" />
+                            <input type="password" class="form-control" id="password-login" name="password" placeholder="Enter your password" required ng-model="mainCtrl.credentials.password" />
                         </div>
                         <span class="error" ng-show="mainCtrl.loginUserForm.password.$invalid && !mainCtrl.loginUserForm.password.$pristine">* Password is required!</span>
                     </div>
@@ -39,7 +39,7 @@
                         <label for="password">Password</label>
                         <div class="input-group" ng-class="{ 'has-error' : mainCtrl.registerUserForm.password.$invalid && !mainCtrl.registerUserForm.password.$pristine }">
                             <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                            <input name="password" type="password" class="form-control" id="password" placeholder="Enter your password" data-toggle="tooltip" data-placement="right" title="Password must contain between 8 and 20 characters, one special character and one number is required" required ng-model="mainCtrl.registerInput.password" />
+                            <input name="password" type="password" class="form-control" id="password" placeholder="Enter your password"  uib-tooltip="Password must contain between 8 and 20 characters, one special character and one number is required" required ng-model="mainCtrl.registerInput.password" />
                         </div>
                         <span class="error" ng-show="mainCtrl.registerUserForm.password.$invalid && !mainCtrl.registerUserForm.password.$pristine">* Password is required!</span>
                     </div>

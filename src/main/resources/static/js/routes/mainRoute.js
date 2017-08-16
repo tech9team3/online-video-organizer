@@ -7,9 +7,9 @@
     function config($routeProvider) {
         $routeProvider     
 	        .when('/', {
-	        	templateUrl: '/views/home.html',
-                controller: 'HomeController',
-                controllerAs: 'homeCtrl'
+	           templateUrl: '/views/home.html',
+               controller: 'HomeController',
+               controllerAs: 'homeCtrl'
 	        })
             .when('/login', {
                 templateUrl: '/views/loginRegister.html',
@@ -25,6 +25,11 @@
                 templateUrl: '/views/video.html',
                 controller: 'VideoController',
                 controllerAs: 'videoCtrl'
+            })
+            .when('/playlists', {
+                templateUrl: '/views/playlists.html',
+                controller: 'VideoListsController',
+                controllerAs: 'videoListsCtrl'
             })
             .otherwise('/');
             }

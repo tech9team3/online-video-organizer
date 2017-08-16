@@ -1,0 +1,71 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-8">
+			<ul class="nav nav-pills">
+				<li role="presentation"><a href="">Latest</a></li>
+				<li role="presentation"><a href="">Top Rated</a></li>
+				<li role="presentation"><a href="">Most Commented</a></li>
+				<li role="presentation"><a href="">Alphabetic Order</a></li>
+			</ul>
+		</div>
+		<div class="col-md-4">
+			<div class="input-group input-group-sm">
+				<input type="text" class="form-control" placeholder="Search..."></input>
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">
+						<span class="glyphicon glyphicon-search"></span>
+				</button>
+				</span>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="row">
+				<div class="col-md-3 col-xs-6" ng-repeat="video in videoListsCtrl.videos">
+					<strong class="might-overflow">{{video.videoList.user.username}}</strong>
+					<a ng-href="#/video/{{video.videoUrl | GetYouTubeID}}" class="thumbnail">
+						<img ng-click="" class="img-responsive" ng-src="http://img.youtube.com/vi/{{video.videoUrl | GetYouTubeID}}/hqdefault.jpg" alt="{{video.title}}" /> 
+					</a>
+					<strong class="might-overflow" data-toggle="tooltip" title="{{videoLists.title}}">{{video.title}}</strong>
+					<p class="might-overflow"data-toggle="tooltip" title="{{video.description}}">{{video.description}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="list-group">		
+				<a href="" class="list-group-item disabled">Playlists  <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#add-lists-modal" ng-click="videoListsCtrl.addVideoLists()"><span class="glyphicon glyphicon-plus"></span></button></a>
+				<div ng-repeat="videoList in videoListsCtrl.videoLists">
+					<a href="" class="list-group-item"  ng-click="videoListsCtrl.getVideosByVideoList(videoList.id)">{{videoList.title}}  <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#add-lists-modal" ng-click="videoListsCtrl.editVideoLists()"><span class="glyphicon glyphicon-remove"></span></button>
+					 <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#add-lists-modal" ng-click="videoListsCtrl.addVideoLists()"><span class="glyphicon glyphicon-pencil"></span></button></a>
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal" id="add-lists-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Playlists</h4>
+      </div>
+      <div class="modal-body">
+             <form name="videoListsCtrl.addVideoListsForm" novalidate ng-class="{ 'has-error' : videoListsCtrl.addVideoListsyForm.title.$invalid && !videoListsCtrl.addVideoListsForm.title.$pristine }">
+                            <div class="form-group">
+                                <div class="modal-item">
+                                    <label><h5>Title:</h5></label>
+                                    <input name="title" type="text" class="form-control" required ng-model="videoList.title" />
+                                    <span class="error" ng-show="videoListsCtrl.addVideoListsForm.title.$invalid && !videoListsCtrl.addVideoListsForm.title.$pristine">* Tittle is required! </span>
+                                    <br>
+                                </div>
+                            </div>
+                        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="videoListsCtrl.saveVideoLists(videoList)">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
