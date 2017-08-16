@@ -144,3 +144,7 @@ body {
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
+
+select {
+  font-family: 'FontAwesome', 'Second Font name'
+}

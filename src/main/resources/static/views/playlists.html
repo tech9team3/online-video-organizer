@@ -64,7 +64,18 @@
                         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" ng-click="videoListsCtrl.saveVideoLists(videoList)">Save</button>
+      <div class="row">
+      <i class="fa fa-global" aria-hidden="true"></i>
+      	<div class="col-xs-3">
+      	    <select aria-label="ngSelected demo" class="form-control">
+	          <option>&#xf023; Private</option>
+	          <option>&#xf0ac; Public</option>
+      		</select>
+      	</div>
+      	<div class="col-xs-9">
+      		<button type="button" class="btn btn-primary" ng-click="videoListsCtrl.saveVideoLists(videoList)">Save</button>
+      	</div>      	
+      </div>          
       </div>
     </div>
   </div>
