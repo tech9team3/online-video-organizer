@@ -93,15 +93,8 @@
                 // setting the same header value for all request calling from this app
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + base64Credential;
                 self.user = res;
-                console.log(self.user);
-                UserService.getLoggedInUserByUsername(self.user.username).then(function(response){
-                	if(!response.data.status)
-                		logout();
-                	else{
-                      init();
-                       delete self.loginError;
-                    }
-                });
+                UserService.setLoggedInUser(res);
+                $location.path('playlists');
             }).error(function (error) {
                 self.loginError = 'Bad credentials!';
             });

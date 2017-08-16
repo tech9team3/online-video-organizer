@@ -2,9 +2,9 @@
     angular.module('app')
             .controller('VideoListsController', VideoListsController);
 
-    VideoListsController.$inject = ['$location', '$http', '$route', 'VideoListsService', 'VideoService'];
+    VideoListsController.$inject = ['$location', '$http', '$route', 'VideoListsService', 'VideoService','UserService'];
 
-    function VideoListsController($location, $http, $route, VideoListsService, VideoService) {
+    function VideoListsController($location, $http, $route, VideoListsService, VideoService, UserService) {
     	
         var videoListsCtrl = this;
         videoListsCtrl.addVideoLists = addVideoLists;
@@ -25,10 +25,12 @@
         }
         
         function saveVideoLists(videoList){
-        	
+        	videoList.user = {};
+        	videoList.user.id = UserService.getLoggedInUserId();
+        	console.log(videoList);
         	VideoListsService.saveVideoList(videoList).then(function(response){
                 getVideoLists();
-                $('#add-videoLists-modal').modal('hide');
+                $('#add-lists-modal').modal('hide');
             }, function(error){
 
             })

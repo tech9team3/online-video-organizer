@@ -9,9 +9,19 @@
         var usersList = [];
         var loggedInUser;
 
-        this.loggedInUser = function() {
+        this.getLoggedInUser = function() {
             return loggedInUser;
         }
+        
+        this.getLoggedInUserId = function() {
+            return loggedInUser.id;
+        }
+        
+        this.setLoggedInUser = function (user) {
+        	loggedInUser = user;
+        }
+        
+        
 
         this.sendCaptcha = function (data) {
             var def = $q.defer();
@@ -54,18 +64,6 @@
             });
         }
 
-        this.getLoggedInUserByUsername = function (username) {
-            var def = $q.defer();
-            var req = {
-                method: 'GET',
-                url: "users/searchByName/" + username
-            }
-            return $http(req).success(function (response) {
-                loggedInUser = response;
-            }).error(function () {
-                return def.reject("Failed to get user");
-            });
-        }
 
         this.saveUser = function (user) {
             var def = $q.defer();
