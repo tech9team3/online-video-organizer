@@ -24,21 +24,23 @@ public class Video extends BaseEntity implements Serializable {
 	@Column(nullable = false)
 	private String description;
 
-	
-	@ManyToOne 
-	@JoinColumn( nullable = true)
+	@ManyToOne
+	@JoinColumn(nullable = true)
 	private VideoList videoList;
 
 	@NotNull
 	@ManyToOne
-	@JoinColumn( nullable = false)
+	@JoinColumn(nullable = false)
 	private User user;
-	
-	@Column (nullable= true)
+
+	@Column(nullable = true)
 	private String providerName;
-	
-	@Column (nullable= true)
+
+	@Column(nullable = true)
 	private String videoUrlId;
+
+	@Column(nullable = true, columnDefinition = "tinyint(1) default 1")
+	private Boolean visible;
 
 	public String getVideoUrl() {
 		return videoUrl;
@@ -79,7 +81,7 @@ public class Video extends BaseEntity implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	public String getProviderName() {
 		return providerName;
 	}
@@ -96,7 +98,14 @@ public class Video extends BaseEntity implements Serializable {
 		this.videoUrlId = videoUrlId;
 	}
 
-	
+	public Boolean getVisible() {
+		return visible;
+	}
+
+	public void setVisible(Boolean visible) {
+		this.visible = visible;
+	}
+
 	public Video() {
 	}
 

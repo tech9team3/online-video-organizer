@@ -11,5 +11,6 @@ import rs.levi9.tech9.team3.domain.VideoList;
 @Repository
 public interface VideoListRepository extends JpaRepository<VideoList, Long> {
 	public List<VideoList> findAllByUser(User user);
+	public List<VideoList> findByVisibleIsTrue();
 
 }
