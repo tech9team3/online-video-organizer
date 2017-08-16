@@ -2,10 +2,10 @@
 	<div class="row">
 		<div class="col-md-8">
 			<ul class="nav nav-pills">
-				<li role="presentation"><a href="">Latest</a></li>
-				<li role="presentation"><a href="">Top Rated</a></li>
-				<li role="presentation"><a href="">Most Commented</a></li>
-				<li role="presentation"><a href="">Alphabetic Order</a></li>
+				<li role="presentation"><a href="" ng-click="homeCtrl.orderBy('id')">Latest</a></li>
+				<li role="presentation"><a href="" ng-click="homeCtrl.orderBy('rates')">Top Rated</a></li>
+				<li role="presentation"><a href="" ng-click="homeCtrl.orderBy('comments')">Most Commented</a></li>
+				<li role="presentation"><a href="" ng-click="homeCtrl.orderBy('title')">Alphabetic Order</a></li>
 			</ul>
 		</div>
 		<div class="col-md-4">
@@ -23,13 +23,13 @@
 	<div class="row">
 		<div class="col-md-8">
 			<div class="row">
-				<div class="col-md-3 col-xs-6" ng-repeat="video in homeCtrl.publicVideos">
+				<div class="col-md-3 col-xs-6" ng-repeat="video in homeCtrl.publicVideos | orderBy:homeCtrl.order:homeCtrl.reverseOrder:homeCtrl.ratesAndCommentsComparator">
 					<strong class="might-overflow">{{video.videoList.user.username}}</strong>
 					<a ng-href="#/video/{{video.videoUrl | GetYouTubeID}}" class="thumbnail">
 						<img ng-click="" class="img-responsive" ng-src="http://img.youtube.com/vi/{{video.videoUrl | GetYouTubeID}}/hqdefault.jpg" alt="{{video.title}}" /> 
 					</a>
-					<strong class="might-overflow" data-toggle="tooltip" title="{{video.title}}">{{video.title}}</strong>
-					<p class="might-overflow"data-toggle="tooltip" title="{{video.description}}">{{video.description}}</p>
+					<strong class="might-overflow" uib-tooltip="{{video.title}}">{{video.title}}</strong>
+					<p class="might-overflow" uib-tooltip="{{video.description}}">{{video.description}}</p>
 				</div>
 			</div>
 		</div>

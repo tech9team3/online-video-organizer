@@ -20,6 +20,9 @@ public class VideoList extends BaseEntity implements Serializable {
 	@NotNull
 	@Column(nullable = false)
 	private String title;
+	
+	@Column(nullable = true, columnDefinition = "tinyint(1) default 1")
+	private Boolean visible;
 
 	public User getUser() {
 		return user;
@@ -35,6 +38,14 @@ public class VideoList extends BaseEntity implements Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public Boolean getVisible() {
+		return visible;
+	}
+
+	public void setVisible(Boolean visible) {
+		this.visible = visible;
 	}
 
 	public VideoList() {

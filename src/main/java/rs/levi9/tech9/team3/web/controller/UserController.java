@@ -1,6 +1,7 @@
 package rs.levi9.tech9.team3.web.controller;
 
 import java.net.URI;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +56,7 @@ public class UserController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public User save(@Valid @RequestBody User user) {
-
+		user.setRegistrationDate(new Date());
 		return userService.save(user);
 	}
 
@@ -85,6 +86,7 @@ public class UserController {
     @RequestMapping("/user")
     public Map<String, Object> user(Authentication user) {
       Map<String, Object> map = new LinkedHashMap<String, Object>();
+      map.put("id", (userService.findOneByUsername(user.getName())).getId());
       map.put("username", user.getName());
       map.put("roles", AuthorityUtils.authorityListToSet((user).getAuthorities()));
       return map;
@@ -93,7 +95,7 @@ public class UserController {
     @RequestMapping(path ="/captcha", method = RequestMethod.POST)
     public String getSomethingSomething(@RequestBody Map<String, String> request){
     	String response = request.get("g-recaptcha-response");
-    	String secret = "6LdBOCsUAAAAALm08B68C_poDY9IgIVIs1ZY2ll3";
+    	String secret = "6LceCy0UAAAAAIOUKGpGoM2tlct9Et_JdO9xLjA9";
     	URI verifyUri = URI.create(String.format("https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s", secret, response));
     	String googleResponse = restTemplate.getForObject(verifyUri, String.class);
     	System.out.println(googleResponse);

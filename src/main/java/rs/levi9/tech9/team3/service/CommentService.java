@@ -6,23 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import rs.levi9.tech9.team3.domain.Comment;
-import rs.levi9.tech9.team3.domain.User;
 import rs.levi9.tech9.team3.domain.Video;
 import rs.levi9.tech9.team3.repository.CommentRepository;
-import rs.levi9.tech9.team3.repository.UserRepository;
 import rs.levi9.tech9.team3.repository.VideoRepository;
 
 @Service
 public class CommentService {
 
 	private CommentRepository commentRepository;
-	private UserRepository userRepository;
 	private VideoRepository videoRepository;
 
 	@Autowired
-	public CommentService(CommentRepository commentRepository, UserRepository userRepository,VideoRepository videoRepository) {
+	public CommentService(CommentRepository commentRepository, VideoRepository videoRepository) {
 		this.commentRepository = commentRepository;
-		this.userRepository = userRepository;
 		this.videoRepository = videoRepository;
 	}
 

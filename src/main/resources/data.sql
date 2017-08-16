@@ -18,8 +18,19 @@ INSERT INTO user_roles(user_id,role_id) values (6,2);
 
 INSERT INTO video (description, title, video_url, user_id) VALUES ("November Rain", "Guns N' Roses - November Rain","www.youtube.com/watch?v=8SbUC-UaAxE",1);
 INSERT INTO video (description, title, video_url, user_id) VALUES ("Don't Cry", "Guns N' Roses - Don't Cry","www.youtube.com/watch?v=zRIbf6JqkNc",1);
-INSERT INTO video (description, title, video_url, user_id) VALUES ("Crazy", "Aerosmith - Crazy","www.youtube.com/watch?v=NMNgbISmF4I",3);
-INSERT INTO video (description, title, video_url, user_id) VALUES ("Always", "Bon Jovi - Always","www.youtube.com/watch?v=9BMwcO6_hyA",4);
+INSERT INTO video (description, title, video_url, user_id) VALUES ( "Crazy", "Aerosmith - Crazy","www.youtube.com/watch?v=NMNgbISmF4I",3);
+INSERT INTO video (description, title, video_url, user_id) VALUES ( "Always", "Bon Jovi - Always","www.youtube.com/watch?v=9BMwcO6_hyA",4);
+
+
+INSERT INTO video (visible, description, title, video_url, user_id) VALUES ( false, "asd", "asdasd","https://www.youtube.com/watch?v=lYGGpc2mMno",3);
+INSERT INTO video (visible, description, title, video_url, user_id) VALUES ( false, "Alwasdays", "asdasd","https://vimeo.com/229153204",4);
+INSERT INTO video (visible, description, title, video_url, user_id) VALUES ( false, "Crasdasazy", "asdas","https://vimeo.com/228724581",3);
+INSERT INTO video (visible, description, title, video_url, user_id) VALUES ( false, "Alwasdasdays", "asdasd","http://www.dailymotion.com/video/x5wzr9a",4);
+INSERT INTO video (visible, description, title, video_url, user_id) VALUES ( false, "Craasdasdzy", "asdasdas","http://www.dailymotion.com/video/x5wypz4",3);
+INSERT INTO video (visible, description, title, video_url, user_id) VALUES ( false, "Alwasdasays", "Basdasd","http://www.dailymotion.com/video/x5psnvz",4);
+
+
+
 
 INSERT INTO video_list (title, user_id) VALUES ("Moja play lista", 1);
 INSERT INTO video (description, title, video_url, user_id, video_list_id) VALUES ("We Don’t Talk", "We Don't Talk Anymore","www.youtube.com/watch?v=3AtDnEC4zak",1,1);
@@ -46,13 +57,13 @@ INSERT INTO video_tag (name,video_id) values ("cool 4",4);
 INSERT INTO video_tag (name,video_id) values ("good 4",4);
 INSERT INTO video_tag (name,video_id) values ("Super 4",4);
 
-INSERT INTO video_list (title, user_id) VALUES ("Moja nova play lista", 1);
+INSERT INTO video_list (title, user_id,visible) VALUES ("Moja nova play lista", 1,false);
 INSERT INTO video (description, title, video_url, user_id, video_list_id) VALUES ("Music video by Jonas Blue performing Mama.", "Mama ft. William Singe","www.youtube.com/watch?v=qPTfXwPf_HM",1,2);
 INSERT INTO video (description, title, video_url, user_id, video_list_id) VALUES ("David Guetta feat Justin Bieber - 2U", "David Guetta ft Justin Bieber - 2U (The Victoria’s Secret Angels Lip Sync","www.youtube.com/watch?v=RqcjBLMaWCg",1,2);
 INSERT INTO video (description, title, video_url, user_id, video_list_id) VALUES ("DJ Khaled - I'm the One ft. Justin Bieber, Quavo, Chance the Rapper, Lil Wayne", " I'm the One","www.youtube.com/watch?v=weeI1G46q0o",1,2);
 INSERT INTO video (description, title, video_url, user_id, video_list_id) VALUES ("Jason Derulo - Swalla (feat. Nicki Minaj & Ty Dolla $ign)", "Swalla","www.youtube.com/watch?v=NGLxoKOvzu4",1,2);
 
-INSERT INTO video_list (title, user_id) VALUES ("Spanish play lista", 2);
+INSERT INTO video_list (title, user_id,visible) VALUES ("Spanish play lista", 2,false);
 INSERT INTO video (description, title, video_url, user_id, video_list_id) VALUES ("Luis Fonsi - Despacito ft. Daddy Yankee", "Despacito","www.youtube.com/watch?v=kJQP7kiw5Fk",2,3);
 INSERT INTO video (description, title, video_url, user_id, video_list_id) VALUES ("Enrique Iglesias - SUBEME LA RADIO (Official Video) ft. Descemer Bueno, Zion & Lennox", "SUBEME LA RADIO","www.youtube.com/watch?v=9sg-A-eS6Ig",2,3);
 
