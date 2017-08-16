@@ -22,7 +22,7 @@
         self.registerUserForm;
         
         //reCaptcha
-        self.publicKey = "6LdBOCsUAAAAAApZH8xQDF78JM5e-4bFMdY1LYaK";     
+        self.publicKey = "6LceCy0UAAAAALAVMh0eYQnnlXsyvWkksQYayaCN";     
 
         
         
@@ -43,31 +43,26 @@
         }
 
         function register(user) {
-            if(vcRecaptchaService.getResponse() === ""){ //if string is empty
-                self.registrationMessage = "Please resolve the captcha and submit!"
-                $('#registrationModal').modal('show');
-            } else {
-                var data = {
-                    'g-recaptcha-response': vcRecaptchaService.getResponse()  //send g-captcah-reponse to our server        
-                }
-                UserService.sendCaptcha(data).then(function(response){
-                    if(response.data.success){
-                        saveUser(user);
-                    }
-                    else{
-                        self.registrationMessage = "You are a robot!";
-                        $('#registrationModal').modal('show');
-                    }
-                }, function(error) {
-                    self.registrationMessage = "User registration failed!";
-                    $('#registrationModal').modal('show');
-                })
+            var data = {
+                'g-recaptcha-response': vcRecaptchaService.getResponse()  //send g-captcah-reponse to our server        
             }
+            UserService.sendCaptcha(data).then(function(response){
+                if(response.data.success){
+                    saveUser(user);
+                }
+                else{
+                    self.registrationMessage = "You are a robot!";
+                    $('#registrationModal').modal('show');
+                }
+            }, function(error) {
+                self.registrationMessage = "User registration failed!";
+                $('#registrationModal').modal('show');
+            })
         }
 
         function saveUser(user){
             user.status = true;
-        	user.roles = [{"id":1,"type":"ROLE_USER"}];
+        	user.roles = [{"id":1,"type":"ROLE_USER"}]; 
         	UserService.saveUser(user).then(function(response){
         		//self.loginOrRegister = "login";
                 self.registrationMessage = user.username + "  is registered!";
@@ -97,7 +92,8 @@
                 self.message = '';
                 // setting the same header value for all request calling from this app
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + base64Credential;
-                self.user = res;          
+                self.user = res;
+                console.log(self.user);
                 UserService.getLoggedInUserByUsername(self.user.username).then(function(response){
                 	if(!response.data.status)
                 		logout();

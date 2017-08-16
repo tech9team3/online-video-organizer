@@ -16,7 +16,7 @@
                         <label for="password-login">Password</label>
                         <div class="input-group" ng-class="{ 'has-error' : mainCtrl.loginUserForm.password.$invalid && !mainCtrl.loginUserForm.password.$pristine }">
                             <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                            <input type="password" class="form-control" id="password-login" name="password" placeholder="Enter your password" required ng-model="vm.credentials.password" />
+                            <input type="password" class="form-control" id="password-login" name="password" placeholder="Enter your password" required ng-model="mainCtrl.credentials.password" />
                         </div>
                         <span class="error" ng-show="mainCtrl.loginUserForm.password.$invalid && !mainCtrl.loginUserForm.password.$pristine">* Password is required!</span>
                     </div>
