@@ -4,6 +4,7 @@ INSERT INTO USER( email, first_name, last_name, password, registration_date, use
 INSERT INTO USER( email, first_name, last_name, password, registration_date, username) VALUES ( "jeca@jeca.com","Jeca","Jeca","jeca@1234",NOW(),"pereca");
 INSERT INTO USER( email, first_name, last_name, password, registration_date, username) VALUES ( "user@user.com","user","user","user@1234",NOW(),"user");
 INSERT INTO USER( email, first_name, last_name, password, registration_date, username) VALUES ( "admin@admin.com","admin","admin","admin@1234",NOW(),"admin");
+INSERT INTO USER( email, first_name, last_name, password, registration_date, username) VALUES ( "jewraaaa@gmail.com","Vladimir","Jevremov","jewra@1234",NOW(),"jewra");
 
 INSERT INTO `role` (`type`) values("ROLE_USER");
 INSERT INTO `role` (`type`) values("ROLE_ADMIN");
@@ -15,6 +16,8 @@ INSERT INTO user_roles(user_id,role_id) VALUES (4,1);
 INSERT INTO user_roles(user_id,role_id) VALUES (5,1);
 INSERT INTO user_roles(user_id,role_id) VALUES (6,1);
 INSERT INTO user_roles(user_id,role_id) VALUES (6,2);
+INSERT INTO user_roles(user_id,role_id) VALUES (7,1);
+INSERT INTO user_roles(user_id,role_id) VALUES (7,2);
 
 INSERT INTO video_list (title, user_id) VALUES ("Moja play lista", 1);
 INSERT INTO video_list (title, user_id,visible) VALUES ("Moja nova play lista", 1,false);
@@ -51,6 +54,7 @@ INSERT INTO video (visible, description, title, video_url, user_id) VALUES ( fal
 INSERT INTO video (visible, description, title, video_url, user_id) VALUES ( false, "Craasdasdzy", "asdasdas","http://www.dailymotion.com/video/x5wypz4",3);
 INSERT INTO video (visible, description, title, video_url, user_id) VALUES ( false, "Alwasdasays", "Basdasd","http://www.dailymotion.com/video/x5psnvz",4);
 
+INSERT INTO video (description, title, video_url, user_id) VALUES ("November Rain", "Guns N' Roses - November Rain","www.youtube.com/watch?v=8SbUC-UaAxE",7);
 
 
 INSERT INTO video_tag (name,video_id) values ("cool",1);

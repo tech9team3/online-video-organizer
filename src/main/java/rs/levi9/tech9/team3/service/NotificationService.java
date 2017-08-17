@@ -71,14 +71,14 @@ public class NotificationService {
 		javaMailSender.send(mail);
 	}
 
-	public void sendNotification(User user, Notification notification) {
-		User commentAuthor = notification.getComment().getUser();
+	public void sendNotification(User user, Comment comment) {
+		User commentAuthor = comment.getUser();
 		
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(user.getEmail());
 		mail.setFrom("organizetech9@gmail.com");
 		mail.setSubject("Online video organize registration.");
-		mail.setText("This is a email notification after ~"+commentAuthor.getUsername()+" posted a comment on one of your video: "+notification.getComment().getVideo().getTitle());
+		mail.setText("This is a email notification after "+commentAuthor.getUsername()+" posted a comment: "+comment.getContent()+" on one of your video: "+comment.getVideo().getTitle());
 
 		javaMailSender.send(mail);
 	}
