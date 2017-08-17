@@ -1,24 +1,22 @@
 <div class="row">
     <div class="col-md-12">
         <div class="input-group input-group-sm">
-            <input type="text" class="form-control" placeholder="Add video...">
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button">
-                    <span class="glyphicon glyphicon-search"></span>
-                </button>
-            </span>
+            <input type="text" class="form-control" placeholder="Add video..." ng-model="$ctrl.searchVideoTerm">
         </div>
     </div>
 </div>
 <div class="row">
     <div class="col-md-4 text-center">
-        <button class="btn btn-sm" ng-click="$ctrl.searchYouTube()">YouTube</button>
+        <br>
+        <button class="btn btn-sm" ng-click="$ctrl.searchYouTube($ctrl.searchVideoTerm)">YouTube</button>
     </div>
     <div class="col-md-4 text-center">
-        <button class="btn btn-sm" ng-click="$ctrl.searchVimeo()">Vimeo</button>
+        <br>
+        <button class="btn btn-sm" ng-click="$ctrl.searchVimeo($ctrl.searchVideoTerm)">Vimeo</button>
     </div>
     <div class="col-md-4 text-center">
-        <button class="btn btn-sm" ng-click="$ctrl.searchDailymotion()">Dailymotion</button>
+        <br>
+        <button class="btn btn-sm" ng-click="$ctrl.searchDailymotion($ctrl.searchVideoTerm)">Dailymotion</button>
     </div>
 </div>
 <div class="row">
