@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	            .antMatchers("/", "/bower_components/**", "/css/**", "/js/**", "/views/**", "/images/**").permitAll()
 	            .antMatchers(HttpMethod.POST, "/users").permitAll()
 	            .antMatchers(HttpMethod.POST, "/users/captcha").permitAll()
-	            .antMatchers(HttpMethod.GET, "/videos").permitAll()
+	            .antMatchers(HttpMethod.GET, "/videos/search/visible").permitAll()
 	            .anyRequest().fullyAuthenticated().and()
 	            .httpBasic().and()
 	            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

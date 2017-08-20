@@ -14,10 +14,16 @@
         videoListsCtrl.selectVideoList = selectVideoList;
         videoListsCtrl.operation;
         videoListsCtrl.getVideosByVideoList = getVideosByVideoList;
+        videoListsCtrl.addVideo = addVideo;
 
         videoListsCtrl.videoLists = {};
         videoListsCtrl.videos;
         getVideoLists();
+
+        
+        //delete for production
+        $http.defaults.headers.common['Authorization'] = 'Basic ' + btoa('pera:para@1234');
+
 
         function addVideoList() {
             videoListsCtrl.operation = "Add";
@@ -53,7 +59,7 @@
             }, function (error) {
 
             });
-             videoListsCtrl.videoList = {};
+            videoListsCtrl.videoList = {};
         }
 
 
@@ -70,6 +76,10 @@
             VideoService.getVideosByVideoListId(videoListId).then(function (response) {
                 videoListsCtrl.videos = response.data;
             })
+        }
+        
+        function addVideo(video) {
+            console.log(video);
         }
     }
 

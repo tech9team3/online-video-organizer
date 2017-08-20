@@ -17,7 +17,7 @@
             <i>Loading...</i>
         </div>
         <div ng-show="!$ctrl.progressBar">
-            <a ng-repeat="video in $ctrl.providerVideoList" href="" title="{{video.title}}">
+            <a ng-repeat="video in $ctrl.providerVideoList" ng-click="$ctrl.onVideoSelect({video: video})" href="" title="{{video.title}}">
                 <h5>{{video.title}}</h5>{{video.id}}
                 <img ng-src="{{video.thumbnail}}" alt="{{video.title}}" class="img-responsive" />
                 <span class="glyphicon glyphicon-pluss"></span>

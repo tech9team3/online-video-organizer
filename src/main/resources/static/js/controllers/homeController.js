@@ -11,7 +11,7 @@
         homeCtrl.reverseOrder = false;
         homeCtrl.ratesAndCommentsComparatro = ratesAndCommentsComparatro;
 
-        VideoService.getVideos().then(function(response){
+        VideoService.getPublicVideos().then(function(response){
             homeCtrl.publicVideos = response.data;
         })
 

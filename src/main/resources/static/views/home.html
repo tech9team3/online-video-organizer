@@ -1,48 +1,54 @@
 <div class="container-fluid">
-	<div class="row">
+    <div class="row">
         <div class="col-md-3">
-	        <search-video-providers></search-video-providers>
-	    </div>
-		<div class="col-md-6">
-			<ul class="nav nav-pills">
-				<li role="presentation"><a href="" ng-click="homeCtrl.orderBy('id')">Latest</a></li>
-				<li role="presentation"><a href="" ng-click="homeCtrl.orderBy('rates')">Top Rated</a></li>
-				<li role="presentation"><a href="" ng-click="homeCtrl.orderBy('comments')">Most Commented</a></li>
-				<li role="presentation"><a href="" ng-click="homeCtrl.orderBy('title')">Alphabetic Order</a></li>
-			</ul>
-		</div>
-		<div class="col-md-3">
-			<div class="input-group input-group-sm">
-				<input type="text" class="form-control" placeholder="Search..."></input>
-				<span class="input-group-btn">
-					<button class="btn btn-default" type="button">
-						<span class="glyphicon glyphicon-search"></span>
-				</button>
-				</span>
-			</div>
-		</div>
-	</div>
-	<br>
-	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
-			<div class="row">
-				<div class="col-md-4 col-xs-6" ng-repeat="video in homeCtrl.publicVideos | orderBy:homeCtrl.order:homeCtrl.reverseOrder:homeCtrl.ratesAndCommentsComparator">
-					<strong class="might-overflow">{{video.videoList.user.username}}</strong>
-					<a ng-href="#/video/{{video.videoUrl | GetYouTubeID}}" class="thumbnail">
-						<img ng-click="" class="img-responsive" ng-src="http://img.youtube.com/vi/{{video.videoUrl | GetYouTubeID}}/hqdefault.jpg" alt="{{video.title}}" /> 
-					</a>
-					<strong class="might-overflow" uib-tooltip="{{video.title}}">{{video.title}}</strong>
-					<p class="might-overflow" uib-tooltip="{{video.description}}">{{video.description}}</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="list-group">
-				<a href="" class="list-group-item disabled">Playlists</a>
-				<a href="" class="list-group-item">First playlist</a>
-				<a href="" class="list-group-item">Second playlist</a>
-				<a href="" class="list-group-item">Third playlist</a>
-			</div>
-		</div>
-	</div>
+<!--            <search-video-providers on-video-select="homeCtrl.addVideo(video)"></search-video-providers>-->
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-pills">
+                        <li role="presentation"><a href="" ng-click="homeCtrl.orderBy('id')">Latest</a></li>
+                        <li role="presentation"><a href="" ng-click="homeCtrl.orderBy('rates')">Top Rated</a></li>
+                        <li role="presentation"><a href="" ng-click="homeCtrl.orderBy('comments')">Most Commented</a></li>
+                        <li role="presentation"><a href="" ng-click="homeCtrl.orderBy('title')">Alphabetic Order</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-xs-6" ng-repeat="video in homeCtrl.publicVideos | orderBy:homeCtrl.order:homeCtrl.reverseOrder:homeCtrl.ratesAndCommentsComparator">
+                    <strong class="might-overflow">{{video.videoList.user.username}}</strong>
+                    <a ng-href="#/video/{{video.videoUrl | GetYouTubeID}}" class="thumbnail">
+                        <img ng-click="" class="img-responsive" ng-src="http://img.youtube.com/vi/{{video.videoUrl | GetYouTubeID}}/hqdefault.jpg" alt="{{video.title}}" />
+                    </a>
+                    <strong class="might-overflow" uib-tooltip="{{video.title}}">{{video.title}}</strong>
+                    <p class="might-overflow" uib-tooltip="{{video.description}}">{{video.description}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" placeholder="Search..."></input>
+                        <span class="input-group-btn">
+					        <button class="btn btn-default" type="button">
+						        <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="list-group">
+                        <a href="" class="list-group-item disabled">Playlists</a>
+                        <a href="" class="list-group-item">First playlist</a>
+                        <a href="" class="list-group-item">Second playlist</a>
+                        <a href="" class="list-group-item">Third playlist</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

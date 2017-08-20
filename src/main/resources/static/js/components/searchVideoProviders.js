@@ -3,7 +3,7 @@
         .component("searchVideoProviders", {
             templateUrl: 'js/components/searchVideoProviders.html',
             bindings: {
-
+                onVideoSelect: '&'
             },
             controller: function ($http, $cookieStore) {
                 var ctrl = this;
@@ -70,6 +70,10 @@
 
                     var req = {
                         method: 'GET',
+                        headers: {
+                            'X-Requested-With': undefined,
+                            'Authorization': undefined
+                        },
                         url: YOUTUBE_SERARCH_API_URL,
                         params: {
                             'maxResults': '25',
@@ -114,7 +118,8 @@
                     var req = {
                         method: 'GET',
                         headers: {
-                            'X-Requested-With': undefined
+                            'X-Requested-With': undefined,
+                            'Authorization': undefined
                         },
                         url: VIMEO_SERARCH_API_URL,
                         params: {
@@ -159,7 +164,8 @@
                     var req = {
                         method: 'GET',
                         headers: {
-                            'X-Requested-With': undefined
+                            'X-Requested-With': undefined,
+                            'Authorization': undefined
                         },
                         url: DAILYMOTION_SERARCH_API_URL,
                         params: {
