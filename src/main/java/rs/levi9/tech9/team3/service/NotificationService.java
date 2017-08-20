@@ -77,7 +77,7 @@ public class NotificationService {
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(user.getEmail());
 		mail.setFrom("organizetech9@gmail.com");
-		mail.setSubject("Online video organize registration.");
+		mail.setSubject("Comment notification.");
 		mail.setText("This is a email notification after "+commentAuthor.getUsername()+" posted a comment: "+comment.getContent()+" on one of your video: "+comment.getVideo().getTitle());
 
 		javaMailSender.send(mail);

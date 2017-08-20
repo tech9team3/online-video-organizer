@@ -44,6 +44,7 @@ public class CommentController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public Comment save(@Valid @RequestBody Comment comment) {
+		comment.setCreationDate(new Date());
 		return commentService.save(comment);
 	}
 
