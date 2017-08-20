@@ -1,26 +1,30 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="input-group input-group-sm">
+        <div class="form-group form-group-sm">
             <input type="text" class="form-control" placeholder="Add video..." ng-model="$ctrl.searchVideoTerm">
+        </div>
+        <div class="text-center">
+            <button class="btn btn-sm" ng-click="$ctrl.searchYouTube()">YouTube&nbsp;&nbsp;<span class="glyphicon glyphicon-search"></span></button>
+            <button class="btn btn-sm" ng-click="$ctrl.searchVimeo()">Vimeo&nbsp;&nbsp;<span class="glyphicon glyphicon-search"></span></button>
+            <button class="btn btn-sm" ng-click="$ctrl.searchDailymotion()">Dailymotion&nbsp;&nbsp;<span class="glyphicon glyphicon-search"></span></button>
         </div>
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4 text-center">
-        <br>
-        <button class="btn btn-sm" ng-click="$ctrl.searchYouTube()">YouTube</button>
-    </div>
-    <div class="col-md-4 text-center">
-        <br>
-        <button class="btn btn-sm" ng-click="$ctrl.searchVimeo()">Vimeo</button>
-    </div>
-    <div class="col-md-4 text-center">
-        <br>
-        <button class="btn btn-sm" ng-click="$ctrl.searchDailymotion()">Dailymotion</button>
-    </div>
-</div>
-<div class="row">
     <div class="col-md-12">
-        {{$ctrl.text}}
+        <br>
+        <div ng-show="$ctrl.progressBar" class="progress-bar progress-bar-striped active" role="progressbar" style="width:100%">
+            <i>Loading...</i>
+        </div>
+        <div ng-show="!$ctrl.progressBar">
+            <a ng-repeat="video in $ctrl.providerVideoList" href="" title="{{video.title}}">
+                <h5>{{video.title}}</h5>{{video.id}}
+                <img ng-src="{{video.thumbnail}}" alt="{{video.title}}" class="img-responsive" />
+                <span class="glyphicon glyphicon-pluss"></span>
+                <span class="duration"></span>
+            </a>
+            {{$ctrl.text | json}}
+        </div>
+
     </div>
 </div>
