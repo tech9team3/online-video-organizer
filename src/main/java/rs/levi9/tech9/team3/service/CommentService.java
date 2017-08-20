@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import rs.levi9.tech9.team3.domain.Comment;
+import rs.levi9.tech9.team3.domain.Notification;
 import rs.levi9.tech9.team3.domain.User;
 import rs.levi9.tech9.team3.domain.Video;
 import rs.levi9.tech9.team3.repository.CommentRepository;
@@ -38,11 +39,16 @@ public class CommentService {
 	public Comment save(Comment comment) {
 		Comment savedComment = commentRepository.save(comment);
 		Video commentedVideo = comment.getVideo();
+		Notification notification = new Notification();
 		System.out.println(commentedVideo.getId());
 		User userToNotify = commentedVideo.getUser();
 		System.out.println(userToNotify.getFirstName());
-		notificationService.sendNotification(userToNotify, savedComment);
 		
+		notificationService.sendNotification(userToNotify, savedComment);
+		notification.setComment(savedComment);
+		notification.setCreationDate(savedComment.getCreationDate());
+		notification.setUser(userToNotify);
+		notificationService.save(notification);
 		return savedComment;
 	}
 

@@ -53,7 +53,6 @@ public class VideoService {
 	public Video save(Video video) {
 		Video newVideo = new Video();
 		String url = video.getVideoUrl();
-		String videoUrldId;
 		String providerName;
 		newVideo = video;
 
