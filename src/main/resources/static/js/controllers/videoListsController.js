@@ -34,13 +34,11 @@
 
         function addVideoList() {
             videoListsCtrl.operation = "Add";
-            videoListsCtrl.videoList = {};
-            videoListsCtrl.videoList.visible = true;
+            videoListsCtrl.videoList = {visible: true};
             videoListsCtrl.addVideoListsForm.$setPristine();
         }
 
         function editVideoList(videoList) {
-            console.log(videoList);
             videoListsCtrl.operation = "Edit";
             videoListsCtrl.videoList = angular.copy(videoList);
         }
