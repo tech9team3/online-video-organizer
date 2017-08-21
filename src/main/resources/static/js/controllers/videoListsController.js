@@ -16,13 +16,20 @@
         videoListsCtrl.getVideosByVideoList = getVideosByVideoList;
         videoListsCtrl.addVideo = addVideo;
 
-        videoListsCtrl.videoLists = {};
-        videoListsCtrl.videos;
-        getVideoLists();
 
-        
         //delete for production
         $http.defaults.headers.common['Authorization'] = 'Basic ' + btoa('pera:para@1234');
+        UserService.setLoggedInUser({id: 1});
+
+
+        videoListsCtrl.videoLists = {};
+        videoListsCtrl.videos;
+        videoListsCtrl.loggedInUser = {
+            id: UserService.getLoggedInUserId()
+        };
+        
+        
+        getVideoListsByUserId(videoListsCtrl.loggedInUser);
 
 
         function addVideoList() {
@@ -39,10 +46,9 @@
         }
 
         function saveVideoList(videoList) {
-            videoList.user = {};
-            videoList.user.id = UserService.getLoggedInUserId();
+            videoList.user = videoListsCtrl.loggedInUser;
             VideoListsService.saveVideoList(videoList).then(function (response) {
-                getVideoLists();
+                getVideoListsByUserId(videoListsCtrl.loggedInUser);
                 $('#add-lists-modal').modal('hide');
             }, function (error) {
 
@@ -55,7 +61,7 @@
 
         function deleteVideoList() {
             VideoListsService.deleteVideoList(videoListsCtrl.videoList.id).then(function (response) {
-                getVideoLists();
+                getVideoListsByUserId(videoListsCtrl.loggedInUser);
             }, function (error) {
 
             });
@@ -63,8 +69,8 @@
         }
 
 
-        function getVideoLists() {
-            VideoListsService.getVideoLists().then(handleSuccessVideoLists);
+        function getVideoListsByUserId(loggedInUser) {
+            VideoListsService.getVideoListsByUserId(loggedInUser.id).then(handleSuccessVideoLists);
         }
 
 
@@ -77,7 +83,7 @@
                 videoListsCtrl.videos = response.data;
             })
         }
-        
+
         function addVideo(video) {
             console.log(video);
         }

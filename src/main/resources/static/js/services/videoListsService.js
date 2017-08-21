@@ -19,6 +19,20 @@
                 return def.reject("Failed to get video lists");
             });
         }
+        
+        this.getVideoListsByUserId = function (userId) {
+            var def = $q.defer();
+            var req = {
+                method: 'GET',
+                url: "videoLists/search/userId/" + userId,
+
+            }
+            return $http(req).success(function (response) {
+                return response;
+            }).error(function () {
+                return def.reject("Failed to get video lists");
+            });
+        }
 
         this.saveVideoList = function (videoList) {
             var def = $q.defer();
