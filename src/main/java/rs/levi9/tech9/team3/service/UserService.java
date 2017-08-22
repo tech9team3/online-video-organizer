@@ -15,7 +15,6 @@ import rs.levi9.tech9.team3.domain.Video;
 import rs.levi9.tech9.team3.domain.VideoList;
 import rs.levi9.tech9.team3.repository.CommentRepository;
 import rs.levi9.tech9.team3.repository.UserRepository;
-import rs.levi9.tech9.team3.repository.VideoRepository;
 
 @Service
 public class UserService {
@@ -25,25 +24,20 @@ public class UserService {
 	private NotificationService notificationService;
 	private RateService rateService;
 	private CommentRepository commentRepository;
-	private VideoRepository videoRepository;
 	private VideoService videoService;
 	private Logger logger = LoggerFactory.getLogger(UserService.class);
 
 	@Autowired
-	public UserService( UserRepository userRepository, 
-						VideoListService videoListService,
-						NotificationService notificationService,
-						RateService rateService,
-						CommentRepository commentRepository,
-						VideoRepository videoRepository,
-						VideoService videoService) {
-			
+	public UserService(UserRepository userRepository, VideoListService videoListService,
+			NotificationService notificationService, RateService rateService, CommentRepository commentRepository,
+			VideoService videoService) {
+
 		this.userRepository = userRepository;
 		this.videoListService = videoListService;
 		this.notificationService = notificationService;
 		this.rateService = rateService;
 		this.commentRepository = commentRepository;
-		this.videoRepository = videoRepository;
+
 		this.videoService = videoService;
 	}
 
@@ -56,9 +50,12 @@ public class UserService {
 	}
 
 	public User save(User user) {
+
 		if (userRepository.findByEmail(user.getEmail()) == null
 				&& userRepository.findByUsername(user.getUsername()) == null) {
 			try {
+				user.setStatus(false);
+				userRepository.save(user);
 				notificationService.sendRegistrationNotification(user);
 
 			} catch (Exception e) {
@@ -67,6 +64,7 @@ public class UserService {
 		}
 		return userRepository.save(user);
 	}
+	
 
 	public void delete(Long id) {
 		User foundUser = userRepository.findOne(id);
@@ -83,7 +81,7 @@ public class UserService {
 		for (Notification notification : foundNotificationList) {
 			notificationService.delete(notification.getId());
 		}
-		
+
 		List<Video> foundVideoList = videoService.findAllVideoByUser(foundUser.getId());
 		for (Video video : foundVideoList) {
 			videoService.delete(video.getId());

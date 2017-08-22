@@ -12,5 +12,5 @@ import rs.levi9.tech9.team3.domain.Video;
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
 	
 public Notification findByComment(Comment comment);
-public List<Notification> findByUser(User user);
+public List<Notification> findByUserOrderByCreationDateDesc(User user);
 }
