@@ -90,7 +90,6 @@
                 // setting the same header value for all request calling from this app
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + base64Credential;
                 self.user = res;
-                $scope.$parent.mainCtrl.user = res; 
                 UserService.setLoggedInUser(res);
                 $location.path('playlists');
             }).error(function (error) {

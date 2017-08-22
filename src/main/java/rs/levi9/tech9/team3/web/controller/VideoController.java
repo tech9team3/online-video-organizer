@@ -70,4 +70,8 @@ public class VideoController {
 		return videoService.findAllVisible();
 	}
 	
+	@RequestMapping(path="/search/public/videoListId/{videoListId}")
+	public List<Video> findPublicVideosForVideoList(@PathVariable("videoListId")Long videoListId){
+		return videoService.findAllVisibleForVideoList(videoListId);
+	}
 }

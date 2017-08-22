@@ -41,14 +41,11 @@
             <br>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="list-group">
-                        <a href="" class="list-group-item disabled">Playlists  
-                            <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#add-lists-modal" ng-click="videoListsCtrl.addVideoList()">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button>
-                        </a>
-                        <div ng-repeat="videoList in videoListsCtrl.videoLists">
-                            <a href="" class="list-group-item" ng-click="videoListsCtrl.getVideosByVideoList(videoList.id);videoListsCtrl.selectVideoList(videoList);">{{videoList.title}}  
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Playlists <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#add-lists-modal" ng-click="videoListsCtrl.addVideoList()"><span class="glyphicon glyphicon-plus"></span></button></div>
+                        <div class="list-group">
+                            <div ng-repeat="videoList in videoListsCtrl.videoLists">
+                                <a ng-class="{ 'active': videoListsCtrl.selectedVideoList() === videoList }" href="" class="list-group-item" ng-click="videoListsCtrl.getVideosByVideoList(videoList.id);videoListsCtrl.selectVideoList(videoList);">{{videoList.title}}  
                                 <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#deleteVideoListModal" ng-click="videoListsCtrl.selectVideoList(videoList)">
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </button>
@@ -56,6 +53,7 @@
                                      <span class="glyphicon glyphicon-pencil"></span>
                                 </button>
                             </a>
+                            </div>
                         </div>
                     </div>
                 </div>

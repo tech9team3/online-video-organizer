@@ -12,6 +12,7 @@
         videoListsCtrl.editVideoList = editVideoList;
         videoListsCtrl.saveVideoList = saveVideoList;
         videoListsCtrl.selectVideoList = selectVideoList;
+        videoListsCtrl.selectedVideoList = selectedVideoList;
         videoListsCtrl.operation;
         videoListsCtrl.getVideosByVideoList = getVideosByVideoList;
         videoListsCtrl.addVideo = addVideo;
@@ -58,6 +59,10 @@
 
         function selectVideoList(videoList) {
             videoListsCtrl.videoList = videoList;
+        }
+        
+        function selectedVideoList() {
+            return videoListsCtrl.videoList;
         }
 
         function deleteVideoList() {

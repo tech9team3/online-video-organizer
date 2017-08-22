@@ -1,6 +1,7 @@
 package rs.levi9.tech9.team3.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,11 +14,10 @@ import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Table(name = "rate")
-public class Rate extends BaseEntity implements Serializable
-{
+public class Rate extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 2018902269409557939L;
-	
-	@Range(min=0, max=5)
+
+	@Range(min = 0, max = 5)
 	@Column(nullable = true)
 	private Long mark;
 
@@ -25,12 +25,25 @@ public class Rate extends BaseEntity implements Serializable
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private User user;
-	
+
 	@NotNull
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Video video;
 	
+	@Column(nullable = false)
+	private Date creationDate;
+
+	@NotNull()
+	@Column(nullable = false)
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
 	public Long getMark() {
 		return mark;
 	}
@@ -56,9 +69,7 @@ public class Rate extends BaseEntity implements Serializable
 	}
 
 	public Rate() {
-		
+
 	}
-     
-	
-	
+
 }

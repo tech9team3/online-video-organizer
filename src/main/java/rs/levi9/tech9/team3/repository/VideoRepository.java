@@ -15,6 +15,7 @@ public interface VideoRepository extends JpaRepository<Video, Long>{
 	public List<Video> getAllByVideoList(VideoList videoList);
 	public List<Video> getAllByUser(User user);
 	public List<Video> findByVisibleIsTrue();
+	public List<Video> findAllByVideoListAndVisibleIsTrue(VideoList videoList);
 	
 	
 

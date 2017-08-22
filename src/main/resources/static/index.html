@@ -40,7 +40,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li ng-class="{ 'active': mainCtrl.isActive('/home') }"><a href="#home">Home </a></li>
-                            <li ng-if="mainCtrl.user" ng-class="{ 'active': mainCtrl.isActive('/playlists') }"><a href="#playlists">Playlists </a></li>
+                            <li  ng-class="{ 'active': mainCtrl.isActive('/playlists') }"><a href="#playlists">Playlists </a></li> <!-- ng-if="mainCtrl.user" -->
                         </ul>
                         <ul ng-show="!mainCtrl.user" class="nav navbar-nav pull-right">
                             <li><a href="" data-toggle="modal" data-target="#login-register-modal">Login/Register </a></li>
@@ -60,6 +60,7 @@
         <div class="container-fluid">
             <div ng-view></div>
         </div>
+        <div ng-include src="'views/footer.html'"></div>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

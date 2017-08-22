@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import rs.levi9.tech9.team3.domain.Comment;
 import rs.levi9.tech9.team3.domain.Notification;
+import rs.levi9.tech9.team3.domain.Rate;
 import rs.levi9.tech9.team3.domain.User;
 import rs.levi9.tech9.team3.repository.CommentRepository;
 import rs.levi9.tech9.team3.repository.NotificationRepository;
@@ -82,5 +83,17 @@ public class NotificationService {
 
 		javaMailSender.send(mail);
 	}
+
+	public void sendNotification(User user, Rate rate) {
+		User ratetAuthor = rate.getUser();
+		
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(user.getEmail());
+		mail.setFrom("organizetech9@gmail.com");
+		mail.setSubject("Comment notification.");
+		mail.setText("This is a email notification after"+ratetAuthor.getUsername() + " rated your video :" +rate.getVideo().getTitle());
+		javaMailSender.send(mail);
+	}
+
 
 }
