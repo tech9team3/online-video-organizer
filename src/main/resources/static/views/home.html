@@ -41,10 +41,11 @@
             <br>
             <div class="row">
                 <div class="col-md-12">
+                <div class="panel panel-default">
+                <div class="panel-heading">Playlists <button type="button" class="btn btn-default btn-xs pull-right" ng-click="homeCtrl.getPublicVideos()" >All videos</button></div>
                     <div class="list-group">
-                        <a href="" class="list-group-item disabled">Playlists</a>
                          <div ng-repeat="videoList in homeCtrl.publicVideoLists">
-                        	<a href="" class="list-group-item">{{videoList.title}}</a>
+                        	<a href="" class="list-group-item" ng-click="homeCtrl.getPublicVideosByVideoListId(videoList.id)">{{videoList.title}}</a>
                         </div>
                     </div>
                 </div>
@@ -52,3 +53,6 @@
         </div>
     </div>
 </div>
+</div>
+
+

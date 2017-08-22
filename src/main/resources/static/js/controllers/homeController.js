@@ -11,12 +11,16 @@
         homeCtrl.reverseOrder = false;
         homeCtrl.ratesAndCommentsComparatro = ratesAndCommentsComparatro;
         homeCtrl.getVideoListsByVisible = getVideoListsByVisible();
+        homeCtrl.getPublicVideosByVideoListId  = getPublicVideosByVideoListId ;
+        homeCtrl.getPublicVideos = getPublicVideos;
         
+        getPublicVideos();
 
-
-        VideoService.getPublicVideos().then(function(response){
-            homeCtrl.publicVideos = response.data;
-        })
+        function getPublicVideos() {
+	        VideoService.getPublicVideos().then(function(response){
+	            homeCtrl.publicVideos = response.data;
+	        })
+        }
 
         function orderBy(order) {
             homeCtrl.reverseOrder = (homeCtrl.order === order) ? !homeCtrl.reverseOrder : false;
@@ -30,6 +34,12 @@
         function getVideoListsByVisible() {
             VideoListsService.getVideoListsByVisible().then(function (response) {
             	homeCtrl.publicVideoLists = response.data;
+            })
+        }
+        
+        function getPublicVideosByVideoListId (videoListId) {
+            VideoService.getPublicVideosByVideoListId(videoListId).then(function (response) {
+                homeCtrl.publicVideos = response.data;
             })
         }
     }
