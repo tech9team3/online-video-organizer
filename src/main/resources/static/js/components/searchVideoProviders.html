@@ -10,20 +10,21 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
+<div class="row" style="height: 100%;">
+    <div class="col-md-12" style="height: 100%;">
         <br>
-        <div ng-show="$ctrl.progressBar" class="progress-bar progress-bar-striped active" role="progressbar" style="width:100%">
-            <i>Loading...</i>
-        </div>
-        <div ng-show="!$ctrl.progressBar">
-            <a ng-repeat="video in $ctrl.providerVideoList" ng-click="$ctrl.onVideoSelect({video: video})" href="" title="{{video.title}}">
-                <h5>{{video.title}}</h5>{{video.id}}
-                <img ng-src="{{video.thumbnail}}" alt="{{video.title}}" class="img-responsive" />
-                <span class="glyphicon glyphicon-pluss"></span>
-                <span class="duration"></span>
-            </a>
-            {{$ctrl.text | json}}
+        <div style="height: 100%; overflow-y: auto">
+            <div ng-show="$ctrl.progressBar" class="progress-bar progress-bar-striped active" role="progressbar" style="width:100%">
+                <i>Loading...</i>
+            </div>
+            <div ng-show="!$ctrl.progressBar">
+                <a ng-repeat="video in $ctrl.providerVideoList" ng-click="$ctrl.onVideoSelect({video: video})" href="" title="{{video.title}}">
+                    <h5>{{video.title}}</h5>{{video.id}}
+                    <img ng-src="{{video.thumbnail}}" alt="{{video.title}}" class="img-responsive" />
+                    <span class="glyphicon glyphicon-pluss"></span>
+                    <span class="duration"></span>
+                </a>
+                {{$ctrl.text | json}}
+            </div>
         </div>
     </div>
-</div>

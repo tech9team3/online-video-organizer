@@ -91,6 +91,7 @@
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + base64Credential;
                 self.user = res;
                 UserService.setLoggedInUser(res);
+                angular.element('#login-register-modal').modal('hide');
                 $location.path('playlists');
             }).error(function (error) {
                 self.loginError = 'Bad credentials!';
@@ -131,6 +132,7 @@
             delete self.error;
             delete self.registrationError;
             delete self.loginError;
+            $location.path('home');
         }
         
         function errorHandler(error){

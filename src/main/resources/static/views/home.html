@@ -26,26 +26,28 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="input-group input-group-sm">
-                        <input type="text" class="form-control" placeholder="Search..."></input>
-                        <span class="input-group-btn">
+            <div class="affix">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control" placeholder="Search..."></input>
+                            <span class="input-group-btn">
 					        <button class="btn btn-default" type="button">
 						        <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        </span>
+                            </button>
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Playlists <button type="button" class="btn btn-default btn-xs pull-right" ng-click="homeCtrl.getPublicVideos();homeCtrl.selectVideoList(null);">All videos</button></div>
-                        <div class="list-group">
-                            <div ng-repeat="videoList in homeCtrl.publicVideoLists">
-                                <a ng-class="{ 'active': homeCtrl.selectedVideoList() === videoList }" href="" class="list-group-item" ng-click="homeCtrl.getPublicVideosByVideoListId(videoList.id);homeCtrl.selectVideoList(videoList);">{{videoList.title}}</a>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Playlists <button type="button" class="btn btn-default btn-xs pull-right" ng-click="homeCtrl.getPublicVideos();homeCtrl.selectVideoList(null);">All videos</button></div>
+                            <div class="list-group">
+                                <div ng-repeat="videoList in homeCtrl.publicVideoLists">
+                                    <a ng-class="{ 'active': homeCtrl.selectedVideoList() === videoList }" href="" class="list-group-item" ng-click="homeCtrl.getPublicVideosByVideoListId(videoList.id);homeCtrl.selectVideoList(videoList);">{{videoList.title}}</a>
+                                </div>
                             </div>
                         </div>
                     </div>

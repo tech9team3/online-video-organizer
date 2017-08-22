@@ -22,7 +22,7 @@
 </head>
 
 <body class="ng-cloak">
-    <div class="wrapper">
+    <div class="wrapper" style="height: 100%;">
         <div ng-include src="'views/loginRegister.html'"></div>
         <header>
             <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -42,7 +42,7 @@
                             <li ng-class="{ 'active': mainCtrl.isActive('/home') }"><a href="#home">Home </a></li>
                             <li  ng-class="{ 'active': mainCtrl.isActive('/playlists') }"><a href="#playlists">Playlists </a></li> <!-- ng-if="mainCtrl.user" -->
                         </ul>
-                        <ul ng-show="!mainCtrl.user" class="nav navbar-nav pull-right">
+                        <ul ng-show="!mainCtrl.user" class="nav navbar-nav navbar-right">
                             <li><a href="" data-toggle="modal" data-target="#login-register-modal">Login/Register </a></li>
                         </ul>
                         <ul ng-show="mainCtrl.user" class="nav navbar-nav navbar-right">
