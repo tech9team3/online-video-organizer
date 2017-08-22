@@ -35,6 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	            .authorizeRequests()
 	            .antMatchers("/", "/bower_components/**", "/css/**", "/js/**", "/views/**", "/images/**").permitAll()
 	            .antMatchers(HttpMethod.POST, "/users").permitAll()
+	            .antMatchers(HttpMethod.GET, "/users/activateUser/*").permitAll()
+
 	            .antMatchers(HttpMethod.POST, "/users/captcha").permitAll()
 	            .antMatchers(HttpMethod.GET, "/videos/search/visible").permitAll()
 	            .antMatchers(HttpMethod.GET, "/videoLists/search/visible").permitAll()

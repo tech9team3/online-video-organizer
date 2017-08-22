@@ -12,6 +12,7 @@
         videoListsCtrl.editVideoList = editVideoList;
         videoListsCtrl.saveVideoList = saveVideoList;
         videoListsCtrl.selectVideoList = selectVideoList;
+        videoListsCtrl.selectedVideoList = selectedVideoList;
         videoListsCtrl.operation;
         videoListsCtrl.getVideosByVideoList = getVideosByVideoList;
         videoListsCtrl.addVideo = addVideo;
@@ -37,13 +38,11 @@
 
         function addVideoList() {
             videoListsCtrl.operation = "Add";
-            videoListsCtrl.videoList = {};
-            videoListsCtrl.videoList.visible = true;
+            videoListsCtrl.videoList = {visible: true};
             videoListsCtrl.addVideoListsForm.$setPristine();
         }
 
         function editVideoList(videoList) {
-            console.log(videoList);
             videoListsCtrl.operation = "Edit";
             videoListsCtrl.videoList = angular.copy(videoList);
         }
@@ -60,6 +59,10 @@
 
         function selectVideoList(videoList) {
             videoListsCtrl.videoList = videoList;
+        }
+        
+        function selectedVideoList() {
+            return videoListsCtrl.videoList;
         }
 
         function deleteVideoList() {

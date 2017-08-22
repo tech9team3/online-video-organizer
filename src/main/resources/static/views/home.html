@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3">
-<!--            <search-video-providers on-video-select="homeCtrl.addVideo(video)"></search-video-providers>-->
+            <!--            <search-video-providers on-video-select="homeCtrl.addVideo(video)"></search-video-providers>-->
         </div>
         <div class="col-md-6">
             <div class="row">
@@ -33,7 +33,7 @@
                         <span class="input-group-btn">
 					        <button class="btn btn-default" type="button">
 						        <span class="glyphicon glyphicon-search"></span>
-                            </button>
+                        </button>
                         </span>
                     </div>
                 </div>
@@ -41,11 +41,12 @@
             <br>
             <div class="row">
                 <div class="col-md-12">
-                <div class="panel panel-default">
-                <div class="panel-heading">Playlists <button type="button" class="btn btn-default btn-xs pull-right" ng-click="homeCtrl.getPublicVideos()" >All videos</button></div>
-                    <div class="list-group">
-                         <div ng-repeat="videoList in homeCtrl.publicVideoLists">
-                        	<a href="" class="list-group-item" ng-click="homeCtrl.getPublicVideosByVideoListId(videoList.id)">{{videoList.title}}</a>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Playlists <button type="button" class="btn btn-default btn-xs pull-right" ng-click="homeCtrl.getPublicVideos();homeCtrl.selectVideoList(null);">All videos</button></div>
+                        <div class="list-group">
+                            <div ng-repeat="videoList in homeCtrl.publicVideoLists">
+                                <a ng-class="{ 'active': homeCtrl.selectedVideoList() === videoList }" href="" class="list-group-item" ng-click="homeCtrl.getPublicVideosByVideoListId(videoList.id);homeCtrl.selectVideoList(videoList);">{{videoList.title}}</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -53,6 +54,3 @@
         </div>
     </div>
 </div>
-</div>
-
-

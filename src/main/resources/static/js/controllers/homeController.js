@@ -1,6 +1,6 @@
 (function () {
     angular.module('app')
-            .controller('HomeController', HomeController);
+        .controller('HomeController', HomeController);
 
     HomeController.$inject = ['$location', '$http', '$route', 'VideoService', 'VideoListsService'];
 
@@ -11,15 +11,19 @@
         homeCtrl.reverseOrder = false;
         homeCtrl.ratesAndCommentsComparatro = ratesAndCommentsComparatro;
         homeCtrl.getVideoListsByVisible = getVideoListsByVisible();
-        homeCtrl.getPublicVideosByVideoListId  = getPublicVideosByVideoListId ;
+        homeCtrl.getPublicVideosByVideoListId = getPublicVideosByVideoListId;
         homeCtrl.getPublicVideos = getPublicVideos;
+        homeCtrl.selectVideoList = selectVideoList;
+        homeCtrl.selectedVideoList = selectedVideoList;
         
+        homeCtrl.videoLists;
+
         getPublicVideos();
 
         function getPublicVideos() {
-	        VideoService.getPublicVideos().then(function(response){
-	            homeCtrl.publicVideos = response.data;
-	        })
+            VideoService.getPublicVideos().then(function (response) {
+                homeCtrl.publicVideos = response.data;
+            })
         }
 
         function orderBy(order) {
@@ -27,20 +31,28 @@
             homeCtrl.order = order;
         }
 
-        function ratesAndCommentsComparatro(v1, v2){
-            
+        function ratesAndCommentsComparatro(v1, v2) {
+
         }
-        
+
         function getVideoListsByVisible() {
             VideoListsService.getVideoListsByVisible().then(function (response) {
-            	homeCtrl.publicVideoLists = response.data;
+                homeCtrl.publicVideoLists = response.data;
             })
         }
-        
-        function getPublicVideosByVideoListId (videoListId) {
+
+        function getPublicVideosByVideoListId(videoListId) {
             VideoService.getPublicVideosByVideoListId(videoListId).then(function (response) {
                 homeCtrl.publicVideos = response.data;
             })
+        }
+
+        function selectVideoList(videoList) {
+            homeCtrl.videoList = videoList;
+        }
+
+        function selectedVideoList() {
+            return homeCtrl.videoList;
         }
     }
 })();

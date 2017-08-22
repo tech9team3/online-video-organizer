@@ -11,11 +11,6 @@
                controller: 'HomeController',
                controllerAs: 'homeCtrl'
 	        })
-            .when('/login', {
-                templateUrl: '/views/loginRegister.html',
-                controller: 'LoginRegisterController',
-                controllerAs: 'loginRegisterCtrl'
-            })
             .when('/home', {
                 templateUrl: '/views/home.html',
                 controller: 'HomeController',

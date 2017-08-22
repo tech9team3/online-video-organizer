@@ -60,6 +60,14 @@ public class UserController {
 		return userService.save(user);
 	}
 
+	@RequestMapping(path = "/activateUser/{userId}", method = RequestMethod.GET)
+	public User enableUser( @PathVariable Long userId){
+		User foundUser = userService.findOne(userId);
+		
+		foundUser.setStatus(true);
+		return userService.save(foundUser);
+		
+	}
 	@RequestMapping(method = RequestMethod.PUT)
 	public User put(@Valid @RequestBody User user) {
 		return userService.save(user);
