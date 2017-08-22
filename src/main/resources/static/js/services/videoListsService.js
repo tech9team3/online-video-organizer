@@ -33,6 +33,20 @@
                 return def.reject("Failed to get video lists");
             });
         }
+        
+        this.getVideoListsByVisible = function () {
+            var def = $q.defer();
+            var req = {
+                method: 'GET',
+                url: "videoLists/search/visible" ,
+
+            }
+            return $http(req).success(function (response) {
+                return response;
+            }).error(function () {
+                return def.reject("Failed to get video lists");
+            });
+        }
 
         this.saveVideoList = function (videoList) {
             var def = $q.defer();

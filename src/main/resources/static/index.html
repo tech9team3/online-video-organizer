@@ -44,6 +44,14 @@
                         <ul class="nav navbar-nav pull-right">
                             <li><a href="#login">Login/Register </a></li>
                         </ul>
+                        <ul class="nav navbar-nav navbar-right">
+						     <li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{mainCtrl.user.username}} <span class="caret"></span></a>
+								    <ul class="dropdown-menu">
+										<li><a href="#" ng-click="mainCtrl.logout()">Log out</a></li>
+									</ul>
+							</li>
+						</ul>
                     </div>
                 </div>
             </nav>
@@ -79,6 +87,7 @@
 	<script src="js/controllers/homeController.js" type="text/javascript"></script>
 	<script src="js/controllers/videoController.js" type="text/javascript"></script>
     <script src="js/controllers/videoListsController.js" type="text/javascript"></script>
+    <script src="js/controllers/loginRegisterController.js" type="text/javascript"></script>
 	<script src="js/routes/mainRoute.js" type="text/javascript"></script>
 
 	<!-- filters -->

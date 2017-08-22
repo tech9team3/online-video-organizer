@@ -12,16 +12,15 @@
         this.getLoggedInUser = function() {
             return loggedInUser;
         }
-        
+            
         this.getLoggedInUserId = function() {
             return loggedInUser.id;
         }
         
         this.setLoggedInUser = function (user) {
         	loggedInUser = user;
+        	console.log(loggedInUser);
         }
-        
-        
 
         this.sendCaptcha = function (data) {
             var def = $q.defer();
