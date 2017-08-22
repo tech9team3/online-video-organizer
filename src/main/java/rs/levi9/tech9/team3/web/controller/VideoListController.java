@@ -64,4 +64,6 @@ public class VideoListController {
 	public List<VideoList> findAllPublicVideoLists(){
 		return videoListService.findAllVisibleVideoLists();
 	}
+	
+	
 }

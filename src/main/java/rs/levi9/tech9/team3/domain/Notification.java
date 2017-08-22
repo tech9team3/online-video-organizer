@@ -23,6 +23,11 @@ public class Notification extends BaseEntity implements Serializable {
 	private Comment comment;
 
 	@NotNull
+	@OneToOne
+	@JoinColumn(nullable = false)
+	private Rate rate;
+
+	@NotNull
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private User user;// primaoc notifikacije
@@ -53,6 +58,14 @@ public class Notification extends BaseEntity implements Serializable {
 
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
+	}
+
+	public Rate getRate() {
+		return rate;
+	}
+
+	public void setRate(Rate rate) {
+		this.rate = rate;
 	}
 
 	public Notification() {

@@ -34,8 +34,8 @@ INSERT INTO video (description, title, video_url, user_id) VALUES ("November Rai
 INSERT INTO video (description, title, video_url, user_id) VALUES ("Don't Cry", "Guns N' Roses - Don't Cry","www.youtube.com/watch?v=zRIbf6JqkNc",1);
 INSERT INTO video (description, title, video_url, user_id) VALUES ( "Crazy", "Aerosmith - Crazy","www.youtube.com/watch?v=NMNgbISmF4I",3);
 INSERT INTO video (description, title, video_url, user_id) VALUES ( "Always", "Bon Jovi - Always","www.youtube.com/watch?v=9BMwcO6_hyA",4);
-INSERT INTO video (description, title, video_url, user_id, video_list_id) VALUES ("We Don’t Talk", "We Don't Talk Anymore","www.youtube.com/watch?v=3AtDnEC4zak",1,1);
-INSERT INTO video (description, title, video_url, user_id, video_list_id) VALUES ("Treat", "Treat You Better","www.youtube.com/watch?v=lY2yjAdbvdQ",1,1);
+INSERT INTO video (visible, description, title, video_url, user_id, video_list_id) VALUES (false,"We Don’t Talk", "We Don't Talk Anymore","www.youtube.com/watch?v=3AtDnEC4zak",1,1);
+INSERT INTO video (visible, description, title, video_url, user_id, video_list_id) VALUES (false,"Treat", "Treat You Better","www.youtube.com/watch?v=lY2yjAdbvdQ",1,1);
 INSERT INTO video (description, title, video_url, user_id, video_list_id) VALUES ("Description of Stitches", "Stitches","www.youtube.com/watch?v=VbfpW0pbvaU",1,1);
 INSERT INTO video (description, title, video_url, user_id, video_list_id) VALUES ("A Short Film Created by Justin Bieber, Parris Goebel and Scott Scooter Braun", "Love Yourself ","www.youtube.com/watch?v=oyEuk8j8imI",1,1);
 INSERT INTO video (description, title, video_url, user_id, video_list_id) VALUES ("Music video by Jonas Blue performing Mama.", "Mama ft. William Singe","www.youtube.com/watch?v=qPTfXwPf_HM",1,2);
@@ -80,15 +80,7 @@ INSERT INTO COMMENT (content,creation_date,user_id,video_id) VALUES("Komentar 03
 
 
 
-INSERT INTO RATE(mark,user_id,video_id) VALUES (2,2,1);
-INSERT INTO RATE(mark,user_id,video_id) VALUES (3,3,2);
-INSERT INTO RATE(mark,user_id,video_id) VALUES (4,4,2);
-INSERT INTO RATE(mark,user_id,video_id) VALUES (5,5,1);
 
-INSERT INTO RATE(mark,user_id,video_id) VALUES (2,1,3);
-INSERT INTO RATE(mark,user_id,video_id) VALUES (3,2,4);
-INSERT INTO RATE(mark,user_id,video_id) VALUES (4,3,4);
-INSERT INTO RATE(mark,user_id,video_id) VALUES (5,4,3);
 
 
 

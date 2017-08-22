@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.hibernate.loader.custom.Return;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,62 +52,8 @@ public class VideoService {
 	}
 
 	public Video save(Video video) {
-		Video newVideo = new Video();
-		String url = video.getVideoUrl();
-		String providerName;
-		newVideo = video;
 
-		if (url.contains("youtube")) {
-			// System.out.println("usao je u uslov za yt");
-
-			String regExp = "/.*(?:youtu.be\\/|v\\/|u/\\w/|embed\\/|watch\\?.*&?v=)";
-			Pattern compiledPattern = Pattern.compile(regExp);
-			Matcher matcher = compiledPattern.matcher(url);
-
-			if (matcher.find()) {
-				// System.out.println("nasao je id");
-				int start = matcher.end();
-				System.out.println("videoId je : " + url.substring(start, start + 11));
-				providerName = "youtube";
-				newVideo.setProviderName(providerName);
-				newVideo.setVideoUrlId(url.substring(start, start + 11));
-			}
-
-		} else if (url.contains("vimeo")) {
-			// System.out.println("usao je u vimeo uslov");
-			String regExp = "^.*(vimeo\\.com\\/)((channels\\/[A-z]+\\/)|(groups\\/[A-z]+\\/videos\\/))?([0-9]+)";
-			Pattern compiledPattern = Pattern.compile(regExp);
-			Matcher matcher = compiledPattern.matcher(url);
-			if (matcher.find()) {
-				String match = matcher.group();
-				String idGroop = match.substring(match.lastIndexOf("/"));
-				// System.out.println("videoId je : "+idGroop.substring(1));
-				providerName = "vimeo";
-				newVideo.setProviderName(providerName);
-				newVideo.setVideoUrlId(idGroop.substring(1));
-
-			}
-
-		} else if (url.contains("dailymotion")) {
-
-			// System.out.println("usao je u uslov za dailymotion.");
-
-			String regExp = "/video/([^_]+)/?";
-			Pattern compiledPattern = Pattern.compile(regExp);
-			Matcher matcher = compiledPattern.matcher(url);
-			if (matcher.find()) {
-				String match = matcher.group();
-				// System.out.println("videoId je : " + match.substring(match.lastIndexOf("/") +
-				// 1));
-
-				providerName = "dailymotion";
-				newVideo.setProviderName(providerName);
-				newVideo.setVideoUrlId(match.substring(match.lastIndexOf("/") + 1));
-
-			}
-		}
-
-		return videoRepository.save(newVideo);
+		return videoRepository.save(video);
 	}
 
 	public void delete(Long id) {
@@ -137,8 +84,14 @@ public class VideoService {
 		List<Video> userVideos = videoRepository.getAllByUser(foundUser);
 		return userVideos;
 	}
-	
-	public List<Video> findAllVisible(){
+
+	public List<Video> findAllVisible() {
 		return videoRepository.findByVisibleIsTrue();
+	}
+	
+	public List<Video> findAllVisibleForVideoList(Long videoListId){
+		VideoList foundVideoList = videoListRepository.findOne(videoListId);
+		List<Video> listOfVideos = videoRepository.findAllByVideoListAndVisibleIsTrue(foundVideoList);
+		 return listOfVideos;
 	}
 }

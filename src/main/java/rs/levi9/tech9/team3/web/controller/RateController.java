@@ -1,5 +1,6 @@
 package rs.levi9.tech9.team3.web.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -43,6 +44,7 @@ public class RateController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public Rate save(@Valid @RequestBody Rate rate) {
+		rate.setCreationDate(new Date());
 		return rateService.save(rate);
 	}
 
