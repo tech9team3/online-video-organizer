@@ -50,6 +50,7 @@ gradle-app.setting
 *.iml
 *.ipr
 classes/
+out/
 
 ### NetBeans ###
 nbproject/
