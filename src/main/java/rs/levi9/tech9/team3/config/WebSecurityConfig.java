@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	            .antMatchers(HttpMethod.POST, "/users/captcha").permitAll()
 	            .antMatchers(HttpMethod.GET, "/videos/search/visible").permitAll()
 	            .antMatchers(HttpMethod.GET, "/videoLists/search/visible").permitAll()
+	            .antMatchers(HttpMethod.GET, "/videos/search/public/videoListId/*").permitAll()
 	            .anyRequest().fullyAuthenticated().and()
 	            .httpBasic().and()
 	            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
