@@ -89,11 +89,13 @@
                         .then(function (response) {
                             angular.forEach(response.data.items, function (item) {
                                 var video = {
-                                    provider: "youtube",
-                                    id: item.id.videoId,
+                                    videoUrl: "https://www.youtube.com/watch?v=" + item.id.videoId,
+                                    videoPlayerUrl: "https://www.youtube.com/embed/" + item.id.videoId,
+                                    providerName: "youtube",
+                                    videoUrlId: item.id.videoId,
                                     title: item.snippet.title,
                                     description: item.snippet.description,
-                                    thumbnail: item.snippet.thumbnails.high.url
+                                    videoImageUrl: item.snippet.thumbnails.high.url
                                 }
                                 ctrl.providerVideoList.push(video);
                             });
@@ -134,11 +136,13 @@
                         .then(function (response) {
                             angular.forEach(response.data.data, function (item) {
                                 var video = {
-                                    provider: "vimeo",
-                                    id: item.uri.split('/videos/')[1],
+                                    videoUrl: "https://vimeo.com/" + item.uri.split('/videos/')[1],
+                                    videoPlayerUrl: "https://player.vimeo.com/video/" + item.uri.split('/videos/')[1],
+                                    providerName: "vimeo",
+                                    videoUrlId: item.uri.split('/videos/')[1],
                                     title: item.name,
                                     description: item.description,
-                                    thumbnail: item.pictures.sizes[3].link,
+                                    videoImageUrl: item.pictures.sizes[3].link,
                                     tags: item.tags
                                 }
                                 ctrl.providerVideoList.push(video);
@@ -179,11 +183,13 @@
                         .then(function (response) {
                             angular.forEach(response.data.list, function (item) {
                                 var video = {
-                                    provider: "dailymotion",
-                                    id: item.id,
+                                    videoUrl: "http://www.dailymotion.com/video/" + item.id,
+                                    videoPlayerUrl:"http://www.dailymotion.com/embed/video/" + item.id,
+                                    providerName: "dailymotion",
+                                    videoUrlId: item.id,
                                     title: item.title,
                                     description: item.description,
-                                    thumbnail: item.thumbnail_360_url,
+                                    videoImageUrl: item.thumbnail_360_url,
                                     tags: item.tags
                                 }
                                 ctrl.providerVideoList.push(video);
