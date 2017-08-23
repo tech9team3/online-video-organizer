@@ -1,6 +1,9 @@
 (function () {
     angular.module('app')
-        .controller('VideoController', VideoController);
+        .controller('VideoController', VideoController)
+        .config(function($sceProvider){
+        $sceProvider.enabled(false);
+    });
 
     VideoController.$inject = ['$location', '$http', '$route', 'VideoService', '$routeParams', '$sce', 'CommentService', 'UserService'];
 
