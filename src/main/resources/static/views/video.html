@@ -18,19 +18,19 @@
                 <span>Add Comment:</span>
                 <div class="pull-right">
                     <span>Rate:&nbsp;&nbsp;&nbsp;</span>
-                    <span uib-rating class="text-primary" ng-model="vm.comment.rate" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>
+                    <span uib-rating class="text-primary" ng-model="videoCtrl.comment.rate" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>
                 </div>
             </h4>
-            <textarea class="form-control" style="max-width: 100%;" id="comment" ng-model="vm.comment.content"></textarea>
-            <button class="btn btn-primary btn-md" ng-click="vm.postComment(vm.comment)">Post</button>
+            <textarea class="form-control" style="max-width: 100%;" id="comment" ng-model="videoCtrl.comment.content"></textarea>
+            <button class="btn btn-primary btn-md" ng-click="videoCtrl.postComment(videoCtrl.comment)">Post</button>
             <br>
             <br>
-            <div ng-repeat="comment in videoCtrl.video.comment">
+            <div ng-repeat="comment in videoCtrl.comments">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-md-3">
-                                <span><u><i>{{comment.user.username}}</i></u></span> </div>
+                                <span><strong><i>{{comment.user.username}}</i></strong></span> </div>
 
                         </div>
                     </div>

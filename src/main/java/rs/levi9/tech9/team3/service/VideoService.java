@@ -58,7 +58,7 @@ public class VideoService {
 
 	public void delete(Long id) {
 		Video foundVideo = videoRepository.findOne(id);
-		List<Comment> commentList = commentRepository.findAllByVideo(foundVideo);
+		List<Comment> commentList = commentRepository.findAllByVideoOrderByCreationDateDesc(foundVideo);
 		for (Comment comment : commentList) {
 			commentRepository.delete(comment.getId());
 		}
