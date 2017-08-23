@@ -7,12 +7,20 @@
     function VideoController($location, $http, $route, VideoService, $routeParams, $sce, CommentService, UserService) {
         var videoCtrl = this;
         videoCtrl.getCommentsForVideo=getCommentsForVideo;
+        videoCtrl.postComment = postComment;
+        var videoId = parseInt($routeParams.videoId);
+        
+        videoCtrl.loggedInUser = {
+                id: UserService.getLoggedInUserId()
+            };
+        
+     
 
         init();
 
          function init() {
-            videoCtrl.embeddedVideoUrl = $sce.trustAsResourceUrl("//www.youtube.com/embed/" + $routeParams.videoId);
-            getCommentsForVideo($routeParams.videoId);
+            videoCtrl.embeddedVideoUrl = $sce.trustAsResourceUrl("//www.youtube.com/embed/" + videoId);
+            getCommentsForVideo(videoId);
         }     
          
          function getCommentsForVideo(videoId) {
@@ -22,16 +30,17 @@
          }
          
          function postComment(comment) {
-            // videoCtrl.comments = [];
-           //  videoCtrl.comments.push({content:comment.content, user:UserService.getLoggedInUserId(), video:$routeParams.videoId,  creationDate:(new Date()).getTime()});
-             CommentService.saveComment(comment).then(function(){
-            	 getCommentsForVideo($routeParams.videoId); 
-                   
-                 });
-         
+        	   comment.user = videoCtrl.loggedInUser;
+        	   videoCtrl.comment = {content:comment.content, user:comment.user, video:videoId};
+        	    CommentService.saveComment(videoCtrl.comment).then(function (response) {
+        	    	 console.log(response);
+        	    	 getCommentsForVideo(videoId); 
+             }, function (error) {
+
+             })
             // delete videoCtrl.comment;
          }
-       
+  
     }
 
 })();

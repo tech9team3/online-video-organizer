@@ -19,11 +19,11 @@
 
 
         //delete for production
-        $http.defaults.headers.common['Authorization'] = 'Basic ' + btoa('pera:para@1234');
-        UserService.setLoggedInUser({
-        	id: 1,
-        	username: 'pera'
-        });
+//        $http.defaults.headers.common['Authorization'] = 'Basic ' + btoa('pera:para@1234');
+//        UserService.setLoggedInUser({
+//        	id: 1,
+//        	username: 'pera'
+//        });
 
 
         videoListsCtrl.videoLists = {};
