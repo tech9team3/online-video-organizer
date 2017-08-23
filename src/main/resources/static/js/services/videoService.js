@@ -18,6 +18,19 @@
             });
         }
         
+        this.getVideoByVideoId = function (videoId) {
+            var def = $q.defer();
+            var req = {
+                method: 'GET',
+                url: "videos/" + videoId
+            }
+            return $http(req).success(function (response) {
+                return response;
+            }).error(function () {
+                return def.reject("Failed to get video");
+            });
+        }
+        
         this.getPublicVideos = function () {
             var def = $q.defer();
             var req = {
