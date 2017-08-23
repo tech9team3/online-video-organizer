@@ -12,6 +12,6 @@ import rs.levi9.tech9.team3.domain.Video;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-	public List<Comment> findAllByVideo(Video video);
+	public List<Comment> findAllByVideoOrderByCreationDateDesc(Video video);
 	public List<Comment> findAllByUser(User user);
 }

@@ -42,6 +42,12 @@ public class Video extends BaseEntity implements Serializable {
 	@Column(nullable = true, columnDefinition = "tinyint(1) default 1")
 	private Boolean visible;
 
+	@Column(nullable=true)
+	private String videoPlayerUrl;
+
+	@Column(nullable=true)
+	private String videoImageUrl;
+
 	public String getVideoUrl() {
 		return videoUrl;
 	}
@@ -106,7 +112,24 @@ public class Video extends BaseEntity implements Serializable {
 		this.visible = visible;
 	}
 
+	public String getVideoPlayerUrl() {
+		return videoPlayerUrl;
+	}
+
+	public void setVideoPlayerUrl(String videoPlayerUrl) {
+		this.videoPlayerUrl = videoPlayerUrl;
+	}
+
+	public String getVideoImageUrl() {
+		return videoImageUrl;
+	}
+
+	public void setVideoImageUrl(String videoImageUrl) {
+		this.videoImageUrl = videoImageUrl;
+	}
+
 	public Video() {
 	}
+
 
 }
