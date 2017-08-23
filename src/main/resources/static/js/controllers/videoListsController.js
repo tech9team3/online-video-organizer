@@ -25,15 +25,18 @@
 //        	username: 'pera'
 //        });
 
+        init();
 
-        videoListsCtrl.videoLists = {};
-        videoListsCtrl.videos;
-        videoListsCtrl.loggedInUser = {
-            id: UserService.getLoggedInUserId()
-        };
-        
-        
-        getVideoListsByUserId(videoListsCtrl.loggedInUser);
+        function init() {
+            videoListsCtrl.videoLists = {};
+            videoListsCtrl.videos;
+            videoListsCtrl.loggedInUser = {
+                id: UserService.getLoggedInUserId()
+            };
+            if(videoListsCtrl.loggedInUser) {
+                videoListsCtrl.videoLists=getVideoListsByUserId(videoListsCtrl.loggedInUser);
+            }
+        }
 
 
         function addVideoList() {
