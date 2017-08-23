@@ -7,12 +7,10 @@
     function VideoController($location, $http, $route, VideoService, $routeParams, $sce, CommentService, UserService) {
         var videoCtrl = this;
         videoCtrl.getCommentsForVideo = getCommentsForVideo;
-        videoCtrl.getCommentsForVideo = getCommentsForVideo;
 
         init();
 
         function init() {
-            videoCtrl.embeddedVideoUrl = $sce.trustAsResourceUrl("//www.youtube.com/embed/" + $routeParams.videoId);
             getVideoByVideoId($routeParams.videoId);
             getCommentsForVideo($routeParams.videoId);
         }
