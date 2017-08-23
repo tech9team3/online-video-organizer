@@ -17,14 +17,12 @@ public class Notification extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 4620567645342653211L;
 
-	@NotNull
 	@OneToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = true)
 	private Comment comment;
 
-	@NotNull
 	@OneToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = true)
 	private Rate rate;
 
 	@NotNull

@@ -22,7 +22,7 @@
                 </div>
             </h4>
             <textarea class="form-control" style="max-width: 100%;" id="comment" ng-model="videoCtrl.comment.content"></textarea>
-            <button class="btn btn-primary btn-md" ng-click="videoCtrl.postComment(videoCtrl.comment)">Post</button>
+            <button class="btn btn-primary btn-md" ng-click="videoCtrl.postComment()">Post</button>
             <br>
             <br>
             <div ng-repeat="comment in videoCtrl.comments">
@@ -30,8 +30,8 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-md-3">
-                                <span><strong><i>{{comment.user.username}}</i></strong></span> </div>
-
+                                <span><strong><i>{{comment.user.username}}</i></strong></span> 
+                             </div>
                         </div>
                     </div>
                     <div class="panel-body">

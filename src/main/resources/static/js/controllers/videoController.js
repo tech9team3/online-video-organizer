@@ -33,12 +33,14 @@
             })
         }
 
-        function postComment(comment) {
-     	   videoCtrl.comment = {content:comment.content, user:{id: UserService.getLoggedInUserId()}, video:{id:videoId}};
+        function postComment() {
+        	videoCtrl.comment.user = UserService.getLoggedInUser();
+        	delete videoCtrl.comment.user.roles;
+        	videoCtrl.comment.video = videoCtrl.video;
      	    CommentService.saveComment(videoCtrl.comment).then(function (response) {
-     	    	 console.log(response);
      	    	 getCommentsForVideo(videoId); 
           });
+     	   delete videoCtrl.comment;
         }
   
     }
