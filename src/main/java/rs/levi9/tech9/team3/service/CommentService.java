@@ -40,9 +40,9 @@ public class CommentService {
 		Comment savedComment = commentRepository.save(comment);
 		Video commentedVideo = comment.getVideo();
 		Notification notification = new Notification();
-		System.out.println(commentedVideo.getId());
+//		System.out.println(commentedVideo.getId());
 		User userToNotify = commentedVideo.getUser();
-		System.out.println(userToNotify.getFirstName());
+//		System.out.println(userToNotify.getFirstName());
 		
 		notificationService.sendNotification(userToNotify, savedComment);
 		notification.setComment(savedComment);

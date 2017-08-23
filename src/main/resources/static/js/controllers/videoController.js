@@ -9,13 +9,16 @@
 
     function VideoController($location, $http, $route, VideoService, $routeParams, $sce, CommentService, UserService) {
         var videoCtrl = this;
+
         videoCtrl.getCommentsForVideo = getCommentsForVideo;
+        videoCtrl.postComment = postComment;
+        var videoId = parseInt($routeParams.videoId);
 
         init();
 
         function init() {
-            getVideoByVideoId($routeParams.videoId);
-            getCommentsForVideo($routeParams.videoId);
+            getVideoByVideoId(videoId);
+            getCommentsForVideo(videoId);
         }
 
         function getVideoByVideoId(videoId) {
@@ -30,17 +33,16 @@
             })
         }
 
-        function postComment(comment) {
-            // videoCtrl.comments = [];
-            //  videoCtrl.comments.push({content:comment.content, user:UserService.getLoggedInUserId(), video:$routeParams.videoId,  creationDate:(new Date()).getTime()});
-            CommentService.saveComment(comment).then(function () {
-                getCommentsForVideo($routeParams.videoId);
-
-            });
-
-            // delete videoCtrl.comment;
+        function postComment() {
+        	videoCtrl.comment.user = UserService.getLoggedInUser();
+        	delete videoCtrl.comment.user.roles;
+        	videoCtrl.comment.video = videoCtrl.video;
+     	    CommentService.saveComment(videoCtrl.comment).then(function (response) {
+     	    	 getCommentsForVideo(videoId); 
+          });
+     	   delete videoCtrl.comment;
         }
-
+  
     }
 
 })();

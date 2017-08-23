@@ -18,8 +18,7 @@ public class Comment extends BaseEntity implements Serializable {
 	@Column(nullable = true)
 	private String content;
 
-	@NotNull()
-	@Column(nullable = false)
+	@Column()
 	private Date creationDate;
 
 	@NotNull
