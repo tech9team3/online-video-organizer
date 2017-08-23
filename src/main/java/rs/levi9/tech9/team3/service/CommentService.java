@@ -58,7 +58,7 @@ public class CommentService {
 
 	public List<Comment> findAllCommentsForVideo(Long videoId) {
 		Video foundVideo = videoRepository.findOne(videoId);
-		List<Comment> listOfComments = commentRepository.findAllByVideo(foundVideo);
+		List<Comment> listOfComments = commentRepository.findAllByVideoOrderByCreationDateDesc(foundVideo);
 		return listOfComments;
 	}
 	public List<Comment> findAllCommentsForUser(Long userId){
