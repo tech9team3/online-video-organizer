@@ -62,6 +62,21 @@
                 return def.reject("Failed to get comment");
             });
         } 
+        
+        this.saveComment = function (comment) {
+            var def = $q.defer();
+            var req = {
+                method: comment.id ? 'PUT': 'POST',
+                url: "comments",
+                data: comment
+            }
+            return $http(req).success(function (response) {
+            	return response;
+            }).error(function () {
+                def.reject("Failed");
+            });
+            return def.promise;
+        }
 
        
 
