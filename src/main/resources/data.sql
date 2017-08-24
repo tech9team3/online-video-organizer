@@ -30,7 +30,7 @@ INSERT INTO video_list (title, user_id, visible) VALUES ("Moja nova rock play li
 
 
 
-INSERT INTO video (visible, description, title, video_url, user_id, video_player_url, video_image_url ) VALUES (true, "November Rain", "Guns N' Roses - November Rain","www.youtube.com/watch?v=8SbUC-UaAxE", 7, "https://www.youtube.com/embed/8SbUC-UaAxE", "https://i.ytimg.com/vi/8SbUC-UaAxE/hqdefault.jpg");
+INSERT INTO video (visible, description, title, video_url, user_id, video_player_url, video_image_url ) VALUES (true, "November Rain", "Guns N' Roses - November Rain","www.youtube.com/watch?v=8SbUC-UaAxE", 1, "https://www.youtube.com/embed/8SbUC-UaAxE", "https://i.ytimg.com/vi/8SbUC-UaAxE/hqdefault.jpg");
 INSERT INTO video (visible, description, title, video_url, user_id, video_player_url, video_image_url ) VALUES (true, "Don't Cry", "Guns N' Roses - Don't Cry","www.youtube.com/watch?v=zRIbf6JqkNc",1, "https://www.youtube.com/embed/zRIbf6JqkNc", "https://i.ytimg.com/vi/zRIbf6JqkNc/hqdefault.jpg");
 INSERT INTO video (visible, description, title, video_url, user_id, video_player_url, video_image_url ) VALUES (true, "Crazy", "Aerosmith - Crazy","www.youtube.com/watch?v=NMNgbISmF4I",3, "https://www.youtube.com/embed/NMNgbISmF4I", "https://i.ytimg.com/vi/NMNgbISmF4I/hqdefault.jpg");
 INSERT INTO video (visible, description, title, video_url, user_id, video_player_url, video_image_url ) VALUES (true, "Always", "Bon Jovi - Always","www.youtube.com/watch?v=9BMwcO6_hyA",4, "https://www.youtube.com/embed/9BMwcO6_hyA", "https://i.ytimg.com/vi/9BMwcO6_hyA/hqdefault.jpg");
@@ -53,7 +53,6 @@ INSERT INTO video (visible, description, title, video_url, user_id, video_list_i
 INSERT INTO video (visible, description, title, video_url, user_id, video_list_id, video_player_url, video_image_url) VALUES ( false, "Alwasdasdays", "asdasd","http://www.dailymotion.com/video/x5wzr9a",1,1, "http://www.dailymotion.com/embed/video/x5wzr9a",  "http://s1.dmcdn.net/lrP1N/x240-pbT.jpg");
 INSERT INTO video (visible, description, title, video_url, user_id, video_list_id, video_player_url, video_image_url) VALUES ( false, "Craasdasdzy", "asdasdas","http://www.dailymotion.com/video/x5wypz4",1,1, "http://www.dailymotion.com/embed/video/x5wypz4", "http://s2.dmcdn.net/lq5Lu/x240-QQd.jpg");
 INSERT INTO video (visible, description, title, video_url, user_id, video_list_id, video_player_url, video_image_url) VALUES ( false, "Alwasdasays", "Basdasd","http://www.dailymotion.com/video/x5psnvz",1, 1,"http://www.dailymotion.com/embed/video/x5psnvz", "http://s1.dmcdn.net/kKEpQ/x240-9uy.jpg");
-INSERT INTO video (visible, description, title, video_url, user_id, video_list_id, video_player_url, video_image_url) VALUES ( true, "November Rain", "Guns N' Roses - November Rain","www.youtube.com/watch?v=8SbUC-UaAxE",7, 1,"https://www.youtube.com/embed/8SbUC-UaAxE", "https://i.ytimg.com/vi/8SbUC-UaAxE/hqdefault.jpg");
 
 
 INSERT INTO video_tag (name,video_id) values ("cool",1);
@@ -72,8 +71,8 @@ INSERT INTO video_tag (name,video_id) values ("Super 4",4);
 INSERT INTO COMMENT (content,creation_date,user_id,video_id) VALUES("Komentar 01, za neki video", NOW(), 2,1);
 INSERT INTO COMMENT (content,creation_date,user_id,video_id) VALUES("Komentar 02, za neki video", NOW(), 3,1);
 INSERT INTO COMMENT (content,creation_date,user_id,video_id) VALUES("Komentar 03, za neki video", NOW(), 4,1);
-INSERT INTO COMMENT (content,creation_date,user_id,video_id) VALUES("Komentar 033, za neki video", NOW(), 1,1);
-INSERT INTO COMMENT (content,creation_date,user_id,video_id) VALUES("Komentar 033, za neki video", NOW(), 1,1);
+
+
 
 
 
