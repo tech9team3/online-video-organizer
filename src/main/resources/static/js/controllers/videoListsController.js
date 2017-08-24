@@ -94,6 +94,8 @@
         }
 
         function addVideo(video) {
+            videoListsCtrl.video = video;
+            $('#add-video-modal').modal('show');
             console.log(video);
         }
     }

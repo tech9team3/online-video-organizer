@@ -18,7 +18,7 @@
                 //YouTube
                 const YOUTUBE_SERARCH_API_URL = "https://www.googleapis.com/youtube/v3/search";
                 const YOUTUBE_API_KEY = "AIzaSyAODuK_7-4SIKgPBScK0y6pj7CX6s7E8X8";
-                const YOUTUBE_RETURN_FIELDS = "items(id,snippet(title,description,thumbnails/high/url))";
+                const YOUTUBE_RETURN_FIELDS = "items(id,snippet(title,description,thumbnails/medium/url))";
 
                 //Vimeo
                 const VIMEO_SERARCH_API_URL = "https://api.vimeo.com/videos";
@@ -87,6 +87,7 @@
 
                     $http(req)
                         .then(function (response) {
+                            console.log(response.data.items);
                             angular.forEach(response.data.items, function (item) {
                                 var video = {
                                     videoUrl: "https://www.youtube.com/watch?v=" + item.id.videoId,
@@ -95,7 +96,7 @@
                                     videoUrlId: item.id.videoId,
                                     title: item.snippet.title,
                                     description: item.snippet.description,
-                                    videoImageUrl: item.snippet.thumbnails.high.url
+                                    videoImageUrl: item.snippet.thumbnails.medium.url
                                 }
                                 ctrl.providerVideoList.push(video);
                             });
@@ -143,7 +144,7 @@
                                     title: item.name,
                                     description: item.description,
                                     videoImageUrl: item.pictures.sizes[3].link,
-                                    tags: item.tags
+                                    vidoTags: item.tags
                                 }
                                 ctrl.providerVideoList.push(video);
                             });
@@ -184,13 +185,15 @@
                             angular.forEach(response.data.list, function (item) {
                                 var video = {
                                     videoUrl: "http://www.dailymotion.com/video/" + item.id,
-                                    videoPlayerUrl:"http://www.dailymotion.com/embed/video/" + item.id,
+                                    videoPlayerUrl: "http://www.dailymotion.com/embed/video/" + item.id,
                                     providerName: "dailymotion",
                                     videoUrlId: item.id,
                                     title: item.title,
                                     description: item.description,
                                     videoImageUrl: item.thumbnail_360_url,
-                                    tags: item.tags
+                                    videoTags: item.tags.map(function (item) {
+                                        return {name: item};
+                                    })
                                 }
                                 ctrl.providerVideoList.push(video);
                             });

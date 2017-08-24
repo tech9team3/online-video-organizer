@@ -19,6 +19,10 @@ html {
     overflow-y: scroll; 
 }
 
+tags-input .tags {
+    border: 0;
+}
+
 [ng\:cloak],
 [ng-cloak],
 [data-ng-cloak],

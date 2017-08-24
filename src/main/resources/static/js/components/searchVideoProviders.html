@@ -14,9 +14,11 @@
     <div class="col-md-12" style="height: 100%;">
         <br>
         <div style="height: 100%; overflow-y: auto">
-            <div ng-show="$ctrl.progressBar" class="progress-bar progress-bar-striped active" role="progressbar" style="width:100%">
-                <i>Loading...</i>
+            <div ng-show="$ctrl.progressBar" class="text-center">
+                <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+                <span class="sr-only">Loading...</span>
             </div>
+
             <div ng-show="!$ctrl.progressBar">
                 <a ng-repeat="video in $ctrl.providerVideoList" ng-click="$ctrl.onVideoSelect({video: video})" href="" title="{{video.title}}">
                     <h5>{{video.title}}</h5>{{video.videoUrlId}}

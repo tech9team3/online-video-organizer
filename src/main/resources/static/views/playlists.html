@@ -34,9 +34,9 @@
                         <div class="input-group input-group-sm">
                             <input type="text" class="form-control" placeholder="Search..."></input>
                             <span class="input-group-btn">
-					    <button class="btn btn-default" type="button">
-						    <span class="glyphicon glyphicon-search"></span>
-                            </button>
+                                <button class="btn btn-default" type="button">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
                             </span>
                         </div>
                     </div>
@@ -49,13 +49,13 @@
                             <div class="list-group">
                                 <div ng-repeat="videoList in videoListsCtrl.videoLists">
                                     <a ng-class="{ 'active': videoListsCtrl.selectedVideoList() === videoList }" href="" class="list-group-item" ng-click="videoListsCtrl.getVideosByVideoList(videoList.id);videoListsCtrl.selectVideoList(videoList);">{{videoList.title}}  
-                                <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#deleteVideoListModal" ng-click="videoListsCtrl.selectVideoList(videoList)">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                                <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#add-lists-modal" ng-click="videoListsCtrl.editVideoList(videoList)">
-                                     <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                            </a>
+                                        <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#deleteVideoListModal" ng-click="videoListsCtrl.selectVideoList(videoList)">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#add-lists-modal" ng-click="videoListsCtrl.editVideoList(videoList)">
+                                             <span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -127,27 +127,33 @@
                     <h4 class="modal-title">Add video to {{videoListsCtrl.selectedVideoList().title}}</h4>
                 </div>
                 <div class="modal-body">
-                    <form name="mainCtrl.loginUserForm" role="form" ng-submit="mainCtrl.login()" novalidate>
+                    <form name="videoListsCtrl.addVideoForm" role="form" ng-submit="videoListsCtrl.saveVideo()" novalidate>
                         <div class="form-group">
-                            <label for="username1">Username</label>
-                            <div class="input-group" ng-class="{ 'has-error' : mainCtrl.loginUserForm.username.$invalid && !mainCtrl.loginUserForm.username.$pristine }">
-                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" id="username1" name="username-login" placeholder="Enter your username" required ng-model="mainCtrl.credentials.username" />
+                            <label for="title">Title</label>
+                            <div class="input-group" ng-class="{ 'has-error' : videoListsCtrl.addVideoForm.title.$invalid && !videoListsCtrl.addVideoForm.title.$pristine }">
+                                <span class="input-group-addon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Enter video title" required ng-model="videoListsCtrl.video.title" />
                             </div>
-                            <span class="error" ng-show="mainCtrl.loginUserForm.username.$invalid && !mainCtrl.loginUserForm.username.$pristine">* Username is required!</span>
+                            <span class="error" ng-show="videoListsCtrl.addVideoForm.title.$invalid && !videoListsCtrl.addVideoForm.title.$pristine">* Title is required!</span>
                         </div>
                         <div class="form-group">
-                            <label for="password-login">Password</label>
-                            <div class="input-group" ng-class="{ 'has-error' : mainCtrl.loginUserForm.password.$invalid && !mainCtrl.loginUserForm.password.$pristine }">
-                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                <input type="password" class="form-control" id="password-login" name="password" placeholder="Enter your password" required ng-model="mainCtrl.credentials.password" />
+                            <label for="description">Description</label>
+                            <div class="input-group" ng-class="{ 'has-error' : videoListsCtrl.addVideoForm.description.$invalid && !videoListsCtrl.addVideoForm.description.$pristine }">
+                                <span class="input-group-addon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" id="description" name="description" placeholder="Enter video description" required ng-model="videoListsCtrl.video.description" />
                             </div>
-                            <span class="error" ng-show="mainCtrl.loginUserForm.password.$invalid && !mainCtrl.loginUserForm.password.$pristine">* Password is required!</span>
+                            <span class="error" ng-show="videoListsCtrl.addVideoForm.description.$invalid && !videoListsCtrl.addVideoForm.description.$pristine">* Description is required!</span>
                         </div>
-                        <div class="alert alert-danger" ng-if="mainCtrl.loginError">Bad credentials!</div>
+                        <div class="form-group">
+                            <label for="description">Tags</label>
+                            <div class="input-group" ng-class="{ 'has-error' : videoListsCtrl.addVideoForm.tags.$invalid && !videoListsCtrl.addVideoForm.tags.$pristine }">
+                                <span class="input-group-addon"><i class="fa fa-tags" aria-hidden="true"></i></span>
+                                <tags-input style="height: auto;" class="form-control" id="tags" name="tags" placeholder="Enter video tag" ng-model="videoListsCtrl.video.videoTags" display-property="name"></tags-input>
+                            </div>
+                            
+                        </div>
                         <div class="modal-footer">
-                            <a href="javascript:void(0)" ng-click="mainCtrl.toggleLoginRegister('register')" class="pull-left">Register</a>
-                            <button type="submit" class="btn btn-primary" ng-disabled="mainCtrl.loginUserForm.$invalid">Submit</button>
+                            <button type="submit" class="btn btn-primary" ng-disabled="videoListsCtrl.addVideoForm.$invalid">Submit</button>
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                         </div>
                     </form>

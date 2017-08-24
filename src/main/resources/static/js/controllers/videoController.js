@@ -5,9 +5,9 @@
         $sceProvider.enabled(false);
     });
 
-    VideoController.$inject = ['$location', '$http', '$route', 'VideoService', '$routeParams', '$sce', 'CommentService', 'UserService'];
+    VideoController.$inject = ['$location', '$http', '$route', 'VideoService', '$routeParams', '$sce', 'CommentService', 'UserService', 'TagService'];
 
-    function VideoController($location, $http, $route, VideoService, $routeParams, $sce, CommentService, UserService) {
+    function VideoController($location, $http, $route, VideoService, $routeParams, $sce, CommentService, UserService, TagService) {
         var videoCtrl = this;
 
         videoCtrl.getCommentsForVideo = getCommentsForVideo;
@@ -24,6 +24,8 @@
         function getVideoByVideoId(videoId) {
             VideoService.getVideoByVideoId(videoId).then(function(response){
                 videoCtrl.video = response.data;
+                getTagsByVideoId(videoId);
+                console.log(videoCtrl.video);
             })
         }
 
@@ -41,6 +43,12 @@
      	    	 getCommentsForVideo(videoId); 
           });
      	   delete videoCtrl.comment;
+        }
+        
+        function getTagsByVideoId(videoId) {
+            TagService.getTagsByVideoId(videoId).then(function(response){
+                videoCtrl.video.videoTags = response.data;                
+            })
         }
   
     }
