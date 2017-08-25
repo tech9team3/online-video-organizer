@@ -1,6 +1,6 @@
 (function () {
     angular.module('app')
-            .controller('MainController', MainController);
+        .controller('MainController', MainController);
 
     MainController.$inject = ['$location', '$http', '$route', 'UserService', 'vcRecaptchaService', '$scope'];
 
@@ -20,19 +20,23 @@
         self.registrationMessage;
         self.loginUserForm;
         self.registerUserForm;
-        
+
         //reCaptcha
-        self.publicKey = "6LceCy0UAAAAALAVMh0eYQnnlXsyvWkksQYayaCN";     
-        
-        
+        self.publicKey = "6LceCy0UAAAAALAVMh0eYQnnlXsyvWkksQYayaCN";
+
+
         init();
 
         function init() {
+            if(localStorage.getItem("base64Credential")) {
+                login(localStorage.getItem("base64Credential"));
+                self.credentials = {autologin: false};
+            }
             if (self.user) {
                 $route.reload();
-                self.loginUserForm.$setPristine(); 
+                self.loginUserForm.$setPristine();
             }
-        }        
+        }
 
         //nav-bar
         function isActive(viewLocation) {
@@ -41,32 +45,34 @@
 
         function register(user) {
             var data = {
-                'g-recaptcha-response': vcRecaptchaService.getResponse()  //send g-captcah-reponse to our server        
+                'g-recaptcha-response': vcRecaptchaService.getResponse() //send g-captcah-reponse to our server        
             }
-            UserService.sendCaptcha(data).then(function(response){
-                if(response.data.success){
+            UserService.sendCaptcha(data).then(function (response) {
+                if (response.data.success) {
                     saveUser(user);
-                }
-                else{
+                } else {
                     self.registrationMessage = "You are a robot!";
                     $('#registrationModal').modal('show');
                 }
-            }, function(error) {
+            }, function (error) {
                 self.registrationMessage = "User registration failed!";
                 $('#registrationModal').modal('show');
             })
         }
 
-        function saveUser(user){
+        function saveUser(user) {
             user.status = true;
-        	user.roles = [{"id":1,"type":"ROLE_USER"}]; 
-        	UserService.saveUser(user).then(function(response){
-        		//self.loginOrRegister = "login";
+            user.roles = [{
+                "id": 1,
+                "type": "ROLE_USER"
+            }];
+            UserService.saveUser(user).then(function (response) {
+                //self.loginOrRegister = "login";
                 self.registrationMessage = user.username + "  is registered!";
                 $('#registrationModal').modal('show');
-            }, function(error){
-            	self.registrationError = {};
-                angular.forEach(error.data.exceptions, function(e){
+            }, function (error) {
+                self.registrationError = {};
+                angular.forEach(error.data.exceptions, function (e) {
                     errorHandler(e);
                 });
             })
@@ -74,21 +80,21 @@
             self.registerUserForm.$setPristine();
         }
 
-        function login() {
-            // creating base64 encoded String from username and password
-            var base64Credential = btoa(self.credentials.username + ':' + self.credentials.password);
-
-            // calling GET request for getting the user details
+        function login(base64Credential) {
+            if (!base64Credential) {
+                var base64Credential = btoa(self.credentials.username + ':' + self.credentials.password);
+            }
             $http.get('users/user', {
                 headers: {
                     // setting the Authorization Header
                     'Authorization': 'Basic ' + base64Credential
                 }
             }).success(function (res) {
-                self.credentials.password = null;
                 self.message = '';
-                // setting the same header value for all request calling from this app
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + base64Credential;
+                if (self.credentials.autologin) {
+                    localStorage.setItem("base64Credential", base64Credential);
+                }
                 self.user = res;
                 UserService.setLoggedInUser(res);
                 angular.element('#login-register-modal').modal('hide');
@@ -99,55 +105,52 @@
         }
 
         function toggleLoginRegister(showForm) {
-            if(showForm == "register") {
+            if (showForm == "register") {
                 self.loginUserForm.$setPristine();
                 delete self.credentials;
                 delete self.loginError;
-            }
-            else {
+            } else {
                 self.registerUserForm.$setPristine();
                 delete self.registerInput;
                 delete self.registrationError;
             }
             self.loginOrRegister = showForm;
-           // grecaptcha.reset();
+            // grecaptcha.reset();
         }
 
         function closeRegistrationConfirmation() {
-            if(self.registrationMessage.includes("is registered!")) {
-            	grecaptcha.reset();
-            	self.registerUserForm.$setPristine();
+            if (self.registrationMessage.includes("is registered!")) {
+                grecaptcha.reset();
+                self.registerUserForm.$setPristine();
                 delete self.registrationError;
-            	self.loginOrRegister = "login";
+                self.loginOrRegister = "login";
             }
         }
 
-        // method for logout
         function logout() {
-            // clearing the authorization header
             $http.defaults.headers.common['Authorization'] = null;
-            // clearing all data
-            UserService.setLoggedInUser(null); 
+            UserService.setLoggedInUser(null);
+            localStorage.removeItem("base64Credential");
             delete self.user;
             delete self.error;
             delete self.registrationError;
             delete self.loginError;
             $location.path('home');
         }
-        
-        function errorHandler(error){
-            switch(error.field){
+
+        function errorHandler(error) {
+            switch (error.field) {
                 case 'username':
                     self.registrationError.username = error.message;
                     grecaptcha.reset();
                     break;
                 case 'email':
                     self.registrationError.email = error.message;
-                    grecaptcha.reset();                    
+                    grecaptcha.reset();
                     break;
             }
         }
-        
+
     }
 
 })();

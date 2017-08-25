@@ -1,11 +1,24 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
+            <div class="page-header">
+                <h4><strong>{{videoCtrl.video.title}}</strong></h4>
+            </div>
             <div class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item" ng-src="{{videoCtrl.video.videoPlayerUrl}}" frameborder="0" allowfullscreen></iframe>
                 <!--                <iframe frameborder="0" width="480" height="269" ng-src="http://www.dailymotion.com/embed/video/x5x3qop" allowfullscreen></iframe>-->
                 <!--                <iframe width="459" height="344" src="https://www.youtube.com/embed/bDOYN-6gdRE?feature=oembed\" frameborder="0" allowfullscreen="allowfullscreen"></iframe>-->
                 <!--                <iframe src="https://player.vimeo.com/video/160697056" width="640" height="360" frameborder="0" title="DOKU-TUR (presented by NOWNESS)" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>-->
+            </div>
+            <button class="btn btn-primary btn-sm pull-right" data-toggle="collapse" data-target="#videoDetails">Details</button>
+
+            <div id="videoDetails" class="collapse">
+                <p>
+                    {{videoCtrl.video.description}}
+                    <div>
+                        <span ng-repeat="tag in videoCtrl.video.videoTag" class="tag-item">{{tag.name}}</span>
+                    </div>
+                </p>
             </div>
         </div>
     </div>
@@ -14,38 +27,37 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-	        <div ng-if="videoCtrl.loggedInUser.id !== videoCtrl.video.user.id">
-	            <h4>
-	              <span><i class="fa fa-comment fa" aria-hidden="true"></i></span>
-	                <span>Add Comment:</span>
-	                <div class="pull-right">
-	                    <span>Rate:&nbsp;&nbsp;&nbsp;</span>
-	                    <span uib-rating class="text-primary" ng-model="videoCtrl.comment.rate" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>
-	                </div>
-	            </h4>
-	            <textarea class="form-control" style="max-width: 100%;" id="comment" ng-model="videoCtrl.comment.content"></textarea>   
-	            <button class="btn btn-primary btn-md" ng-click="videoCtrl.postComment()">Post</button>
-	             <span ng-show="videoCtrl.spin">  
+            <div ng-if="videoCtrl.loggedInUser.id !== videoCtrl.video.user.id">
+                <h4>
+                    <span><i class="fa fa-comment fa" aria-hidden="true"></i></span>
+                    <span>Add Comment:</span>
+                    <div class="pull-right">
+                        <span>Rate:&nbsp;&nbsp;&nbsp;</span>
+                        <span uib-rating class="text-primary" ng-model="videoCtrl.comment.rate" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>
+                    </div>
+                </h4>
+                <textarea class="form-control" style="max-width: 100%;" id="comment" ng-model="videoCtrl.comment.content"></textarea>
+                <button class="btn btn-primary btn-sm" ng-click="videoCtrl.postComment()">Post</button>
+                <span ng-show="videoCtrl.spin">  
 	             	<i class="fa fa-cog fa-spin fa-1x fa-fw"></i>
-	                 <span class="sr-only">Loading...</span> 
-	                 Sending notification...
-	             </span>
-	         </div>
-	         <br>
-	         <br>
+	                 <span class="sr-only">Loading...</span> Sending notification...
+                </span>
+            </div>
+            <br>
+            <br>
             <div ng-repeat="comment in videoCtrl.comments">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col-md-3">                              
+                            <div class="col-md-3">
                                 <span><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                <span><strong><i>{{comment.user.username}}</i></strong></span> 
-                             </div>
-                             <div class="col-md-9">
-                             	<button ng-if="comment.user.username == videoCtrl.loggedInUser.username" type="button" class="close pull-right" ng-click="videoCtrl.deleteComment(comment.id)"><span class="glyphicon glyphicon-remove"></span></button>
-                             	<button  class="btn btn-default btn-xs pull-right"  data-toggle="modal" data-target="#notifyAdminModal" ng-if="videoCtrl.loggedInUser.id === videoCtrl.video.user.id">Report</button>
-                             	
-                             </div>
+                                <span><strong><i>{{comment.user.username}}</i></strong></span>
+                            </div>
+                            <div class="col-md-9">
+                                <button ng-if="comment.user.username == videoCtrl.loggedInUser.username" type="button" class="close pull-right" ng-click="videoCtrl.deleteComment(comment.id)"><span class="glyphicon glyphicon-remove"></span></button>
+                                <button class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#notifyAdminModal" ng-if="videoCtrl.loggedInUser.id === videoCtrl.video.user.id">Report</button>
+
+                            </div>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -60,22 +72,22 @@
     </div>
 </div>
 <div class="modal fade" id="notifyAdminModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title"><b>Notify admin</b></h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><b>Notify admin</b></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true"></span>
         </button>
-      </div>
-      <div class="modal-body">
-       Reason for notify:
-        <textarea class="form-control" style="max-width: 100%;" id="notify"></textarea> 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Send</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+            </div>
+            <div class="modal-body">
+                Reason for notify:
+                <textarea class="form-control" style="max-width: 100%;" id="notify"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Send</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
