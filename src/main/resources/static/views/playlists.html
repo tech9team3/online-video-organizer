@@ -127,7 +127,7 @@
                     <h4 class="modal-title">Add video to {{videoListsCtrl.selectedVideoList().title}}</h4>
                 </div>
                 <div class="modal-body">
-                    <form name="videoListsCtrl.addVideoForm" role="form" ng-submit="videoListsCtrl.saveVideo()" novalidate>
+                    <form name="videoListsCtrl.addVideoForm" role="form" ng-submit="videoListsCtrl.saveVideo(videoListsCtrl.video)" novalidate>
                         <div class="form-group">
                             <label for="title">Title</label>
                             <div class="input-group" ng-class="{ 'has-error' : videoListsCtrl.addVideoForm.title.$invalid && !videoListsCtrl.addVideoForm.title.$pristine }">

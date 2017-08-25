@@ -71,5 +71,20 @@
                 return def.reject("Failed to get videos");
             });
         }
+        
+         this.saveVideo = function (video) {
+            var def = $q.defer();
+            var req = {
+                method: video.id ? 'PUT': 'POST',
+                url: "videos",
+                data: video
+            }
+            return $http(req).success(function (response) {
+            	return response;
+            }).error(function () {
+                def.reject("Failed");
+            });
+            return def.promise;
+        }
     };
 }());

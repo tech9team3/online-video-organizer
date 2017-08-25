@@ -16,6 +16,7 @@
         videoListsCtrl.operation;
         videoListsCtrl.getVideosByVideoList = getVideosByVideoList;
         videoListsCtrl.addVideo = addVideo;
+        videoListsCtrl.saveVideo = saveVideo;
 
 
         //delete for production
@@ -34,7 +35,7 @@
                 id: UserService.getLoggedInUserId()
             };
             if(videoListsCtrl.loggedInUser) {
-                videoListsCtrl.videoLists=getVideoListsByUserId(videoListsCtrl.loggedInUser);
+                getVideoListsByUserId(videoListsCtrl.loggedInUser);
             }
         }
 
@@ -96,7 +97,21 @@
         function addVideo(video) {
             videoListsCtrl.video = video;
             $('#add-video-modal').modal('show');
+        }
+        
+        function saveVideo(video) {
+            if(!video.videoTag){
+                video.videoTag = [];
+            }
+            video.videoList = videoListsCtrl.videoList;
+            video.user = {id:UserService.getLoggedInUserId()};
             console.log(video);
+            VideoService.saveVideo(video).then(function(response){
+                console.log(response.data);
+                getVideoListsByUserId(videoListsCtrl.loggedInUser);
+                getVideosByVideoList(videoListsCtrl.videoList.id);
+            });
+            $('#add-video-modal').modal('hide');
         }
     }
 
