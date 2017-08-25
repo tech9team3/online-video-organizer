@@ -48,12 +48,17 @@ public class VideoService {
     public Video save(Video video) {
 
         Set<VideoTag> tagSet = video.getVideoTag();
+
         for (VideoTag videoTag : tagSet) {
-            if (videoTag.getId() == null) {
+            VideoTag foundVideoTag = videoTagService.findOneByName(videoTag.getName());
+            if (foundVideoTag == null) {
+                videoTag.setStatus(true);
                 videoTagService.save(videoTag);
             }
+            else {
+                videoTag.setId(foundVideoTag.getId());
+            }
         }
-
         return videoRepository.save(video);
     }
 
