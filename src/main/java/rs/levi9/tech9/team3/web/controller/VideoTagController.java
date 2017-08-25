@@ -56,8 +56,8 @@ public class VideoTagController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/tagsForVideo/{videoId}", method = RequestMethod.GET)
-	public List<VideoTag> findAllTagsByVideo(@PathVariable("videoId") Long videoId) {
-		return videoTagService.findAllTagsForVideo(videoId);
-	}
+//	@RequestMapping(path = "/tagsForVideo/{videoId}", method = RequestMethod.GET)
+//	public List<VideoTag> findAllTagsByVideo(@PathVariable("videoId") Long videoId) {
+//		return videoTagService.findAllTagsForVideo(videoId);
+//	}
 }

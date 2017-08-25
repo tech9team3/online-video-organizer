@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import rs.levi9.tech9.team3.domain.User;
 import rs.levi9.tech9.team3.domain.Video;
 import rs.levi9.tech9.team3.domain.VideoList;
+import rs.levi9.tech9.team3.domain.VideoTag;
 
 @Repository
 public interface VideoRepository extends JpaRepository<Video, Long>{
@@ -16,6 +17,7 @@ public interface VideoRepository extends JpaRepository<Video, Long>{
 	public List<Video> getAllByUser(User user);
 	public List<Video> findByVisibleIsTrue();
 	public List<Video> findAllByVideoListAndVisibleIsTrue(VideoList videoList);
+
 	
 	
 

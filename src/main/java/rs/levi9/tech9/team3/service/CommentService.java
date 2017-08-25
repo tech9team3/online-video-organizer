@@ -33,6 +33,7 @@ public class CommentService {
 	}
 
 	public Comment findOne(Long id) {
+
 		return commentRepository.findOne(id);
 	}
 
@@ -53,6 +54,8 @@ public class CommentService {
 	}
 
 	public void delete(Long id) {
+		Notification notification = notificationService.findByComment(id);
+		notificationService.delete(notification.getId());
 		commentRepository.delete(id);
 	}
 

@@ -1,135 +1,147 @@
 package rs.levi9.tech9.team3.domain;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 public class Video extends BaseEntity implements Serializable {
-	private static final long serialVersionUID = 5858019068646342779L;
+    private static final long serialVersionUID = 5858019068646342779L;
 
-	@NotNull
-	@Column(nullable = false)
-	private String videoUrl;
+    @NotNull
+    @Column(nullable = false)
+    private String videoUrl;
 
-	@NotNull
-	@Column(nullable = false)
-	private String title;
+    @NotNull
+    @Column(nullable = false)
+    private String title;
 
-	@NotNull
-	@Column(nullable = false)
-	private String description;
+    @NotNull
+    @Column(nullable = false)
+    private String description;
 
-	@ManyToOne
-	@JoinColumn(nullable = true)
-	private VideoList videoList;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private VideoList videoList;
 
-	@NotNull
-	@ManyToOne
-	@JoinColumn(nullable = false)
-	private User user;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private User user;
 
-	@Column(nullable = true)
-	private String providerName;
+    @Column(nullable = true)
+    private String providerName;
 
-	@Column(nullable = true)
-	private String videoUrlId;
+    @Column(nullable = true)
+    private String videoUrlId;
 
-	@Column(nullable = true, columnDefinition = "tinyint(1) default 1")
-	private Boolean visible;
+    @Column(nullable = true, columnDefinition = "tinyint(1) default 1")
+    private Boolean visible;
 
-	@Column(nullable=true)
-	private String videoPlayerUrl;
+    @Column(nullable = true)
+    private String videoPlayerUrl;
 
-	@Column(nullable=true)
-	private String videoImageUrl;
+    @Column(nullable = true)
+    private String videoImageUrl;
 
-	public String getVideoUrl() {
-		return videoUrl;
-	}
+    @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "video_id"),
+            inverseJoinColumns = @JoinColumn(name = "video_tag_id"))
+    private Set<VideoTag> videoTag;
 
-	public void setVideoUrl(String videoUrl) {
-		this.videoUrl = videoUrl;
-	}
 
-	public String getTitle() {
-		return title;
-	}
+    public String getVideoUrl() {
+        return videoUrl;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public VideoList getVideoList() {
-		return videoList;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setVideoList(VideoList videoList) {
-		this.videoList = videoList;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public VideoList getVideoList() {
+        return videoList;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setVideoList(VideoList videoList) {
+        this.videoList = videoList;
+    }
 
-	public String getProviderName() {
-		return providerName;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setProviderName(String providerName) {
-		this.providerName = providerName;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public String getVideoUrlId() {
-		return videoUrlId;
-	}
+    public String getProviderName() {
+        return providerName;
+    }
 
-	public void setVideoUrlId(String videoUrlId) {
-		this.videoUrlId = videoUrlId;
-	}
+    public void setProviderName(String providerName) {
+        this.providerName = providerName;
+    }
 
-	public Boolean getVisible() {
-		return visible;
-	}
+    public String getVideoUrlId() {
+        return videoUrlId;
+    }
 
-	public void setVisible(Boolean visible) {
-		this.visible = visible;
-	}
+    public void setVideoUrlId(String videoUrlId) {
+        this.videoUrlId = videoUrlId;
+    }
 
-	public String getVideoPlayerUrl() {
-		return videoPlayerUrl;
-	}
+    public Boolean getVisible() {
+        return visible;
+    }
 
-	public void setVideoPlayerUrl(String videoPlayerUrl) {
-		this.videoPlayerUrl = videoPlayerUrl;
-	}
+    public void setVisible(Boolean visible) {
+        this.visible = visible;
+    }
 
-	public String getVideoImageUrl() {
-		return videoImageUrl;
-	}
+    public String getVideoPlayerUrl() {
+        return videoPlayerUrl;
+    }
 
-	public void setVideoImageUrl(String videoImageUrl) {
-		this.videoImageUrl = videoImageUrl;
-	}
+    public void setVideoPlayerUrl(String videoPlayerUrl) {
+        this.videoPlayerUrl = videoPlayerUrl;
+    }
 
-	public Video() {
-	}
+    public String getVideoImageUrl() {
+        return videoImageUrl;
+    }
+
+    public void setVideoImageUrl(String videoImageUrl) {
+        this.videoImageUrl = videoImageUrl;
+    }
+
+    public Set<VideoTag> getVideoTag() {
+        return videoTag;
+    }
+
+    public void setVideoTag(Set<VideoTag> videoTag) {
+        this.videoTag = videoTag;
+    }
+
+    public Video() {
+    }
 
 
 }

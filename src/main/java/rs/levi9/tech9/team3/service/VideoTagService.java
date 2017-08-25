@@ -37,9 +37,4 @@ public class VideoTagService {
 		videoTagRepository.delete(id);
 	}
 	
-	public List<VideoTag> findAllTagsForVideo(Long videoId){
-		Video foundVideo = videoRepository.findOne(videoId);
-		List<VideoTag> videoTagList = videoTagRepository.findAllByVideo(foundVideo);
-		return videoTagList;
-	}
 }
