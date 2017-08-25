@@ -9,6 +9,8 @@
         adminCtrl.getVideoListsByUser = getVideoListsByUser;
         adminCtrl.getVideosByVideoList = getVideosByVideoList;
         adminCtrl.getCommentsForVideo = getCommentsForVideo;
+        adminCtrl.deleteUser = deleteUser;
+        adminCtrl.selectUser = selectUser;
         
         getUsers();       
         
@@ -35,6 +37,19 @@
             CommentService.getCommentsForVideo(video.id).then(function (response) {
                 video.comments = response.data;
             });
+        }
+        
+        function deleteUser(userId){
+            UserService.deleteUser(adminCtrl.user.id).then(function(response){
+            	 getUsers();
+            }, function(error){
+
+            });
+          //  vm.user= {};
+        }
+        
+        function selectUser(user){
+            adminCtrl.user = user;
         }
     }
 })();

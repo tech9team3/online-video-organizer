@@ -15,7 +15,7 @@
                             <div class="col-md-2">{{user.lastName}}</div>
                             <div class="col-md-2">{{user.email}}</div>
                             <div class="col-md-2">
-                                <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                                <a class="pull-right btn btn-danger btn-xs" data-nodrag data-toggle="modal" data-target="#delete-user-modal" ng-click="adminCtrl.selectUser(user)"><span class="glyphicon glyphicon-remove"></span></a>
                                 <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="block(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-ban-circle"></span></a>
                                 <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="edit(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
                             </div>
@@ -72,3 +72,21 @@
         </div>
     </div>
 </div>
+  <div class="modal fade" id="delete-user-modal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Delete User</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Do you want to delete <i>{{adminCtrl.user.username}}</i> with all user video list?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="adminCtrl.deleteUser(adminCtrl.user.id)">OK</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
