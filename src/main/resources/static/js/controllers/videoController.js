@@ -28,8 +28,6 @@
         function getVideoByVideoId(videoId) {
             VideoService.getVideoByVideoId(videoId).then(function(response){
                 videoCtrl.video = response.data;
-                getTagsByVideoId(videoId);
-                console.log(videoCtrl.video);
             })
         }
 
@@ -63,14 +61,7 @@
             	 getCommentsForVideo(videoId);
                 });
             //videoCtrl.comment= {};
-        }
-        
-        function getTagsByVideoId(videoId) {
-            TagService.getTagsByVideoId(videoId).then(function(response){
-                videoCtrl.video.videoTags = response.data;                
-            })
-        }
-  
+        }  
     }
 
 })();

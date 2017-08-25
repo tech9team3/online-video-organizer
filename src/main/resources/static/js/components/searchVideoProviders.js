@@ -144,7 +144,7 @@
                                     title: item.name,
                                     description: item.description,
                                     videoImageUrl: item.pictures.sizes[3].link,
-                                    vidoTags: item.tags
+                                    videoTag: item.tags
                                 }
                                 ctrl.providerVideoList.push(video);
                             });
@@ -191,7 +191,7 @@
                                     title: item.title,
                                     description: item.description,
                                     videoImageUrl: item.thumbnail_360_url,
-                                    videoTags: item.tags.map(function (item) {
+                                    videoTag: item.tags.map(function (item) {
                                         return {name: item};
                                     })
                                 }
