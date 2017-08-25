@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div ui-tree data-drag-enabled="false">
+            <ol ui-tree-nodes="" ng-model="adminCtrl.users" ng-class="{hidden: collapsed}">
+                <li ng-repeat="user in adminCtrl.users" data-collapsed="true" ui-tree-node>
+                    <div ui-tree-handle class="tree-node tree-node-content">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <a class="btn btn-success btn-xs" data-nodrag ng-click="adminCtrl.getVideoListsByUser(user);this.toggle();">
+                                    <span class="glyphicon glyphicon-chevron-right" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+                                </a>
+                            </div>
+                            <div class="col-md-2">{{user.username}}</div>
+                            <div class="col-md-2">{{user.firstName}}</div>
+                            <div class="col-md-2">{{user.lastName}}</div>
+                            <div class="col-md-2">{{user.email}}</div>
+                            <div class="col-md-2">
+                                <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                                <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="block(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-ban-circle"></span></a>
+                                <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="edit(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <ol ui-tree-nodes="" ng-model="user.videoLists" ng-class="{hidden: collapsed}">
+                        <li ng-repeat="videoList in user.videoLists" data-collapsed="true" ui-tree-node>
+                            <div ui-tree-handle>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <a class="btn btn-success btn-xs" data-nodrag ng-click="adminCtrl.getVideosByVideoList(videoList);this.toggle();">
+                                            <span class="glyphicon glyphicon-chevron-right" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4">{{videoList.title}}</div>
+                                    <div class="col-md-2"><span ng-if="videoList.visible===true">Public</span>
+                                        <span ng-if="videoList.visible===false">Private</span></div>
+                                </div>
+                            </div>
+                            <ol ui-tree-nodes="" ng-model="videoList.videos" ng-class="{hidden: collapsed}">
+                                <li ng-repeat="video in videoList.videos" data-collapsed="true" ui-tree-node>
+                                    <div ui-tree-handle>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <a ng-href="#/video/{{video.id}}">
+                                                    <span>{{video.title}}</span>
+                                                    <span><img ng-click="" style="width: 120px" class="img-responsive" ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" /></span>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-4">{{video.description}}</div>
+                                            <div class="col-md-4"><a ng-href="http://{{video.videoUrl}}" target="_blank">{{video.videoUrl}}</a></div>
+                                        </div>
+                                        <a class="btn btn-success btn-xs" data-nodrag ng-click="adminCtrl.getCommentsForVideo(video);this.toggle();">
+                                            <span class="glyphicon glyphicon-chevron-right" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+                                        </a>
+                                    </div>
+                                    <ol ui-tree-nodes="" ng-model="video.comments" ng-class="{hidden: collapsed}">
+                                        <li ng-repeat="comment in video.comments" data-collapsed="true" ui-tree-node>
+                                            <div ui-tree-handle>
+                                                <div class="row">
+                                                    <div class="col-md-4">{{comment.user.username}}</div>
+                                                    <div class="col-md-4">{{comment.content}}</div>
+                                                    <div class="col-md-4">{{comment.creationDate | date: "dd. MMM y."}}</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>

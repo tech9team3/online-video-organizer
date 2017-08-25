@@ -11,7 +11,7 @@ import rs.levi9.tech9.team3.domain.VideoTag;
 @Repository
 public interface VideoTagRepository extends JpaRepository<VideoTag, Long> {
 
-
+VideoTag findByName(String name);
 
 
 }

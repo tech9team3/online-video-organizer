@@ -36,5 +36,8 @@ public class VideoTagService {
 	public void delete(Long id) {
 		videoTagRepository.delete(id);
 	}
+	public VideoTag findOneByName(String name){
+		return videoTagRepository.findByName(name);
+	}
 	
 }
