@@ -14,7 +14,7 @@
                                 <h4 class="modal-title">Login</h4>
                             </div>
                             <div class="modal-body">
-                                <form name="mainCtrl.loginUserForm" role="form" ng-submit="mainCtrl.login()" novalidate>
+                                <form name="mainCtrl.loginUserForm" role="form" ng-submit="mainCtrl.login(btoa(mainCtrl.credentials.username + ':' + mainCtrl.credentials.password))" novalidate>
                                     <div class="form-group">
                                         <label for="username1">Username</label>
                                         <div class="input-group" ng-class="{ 'has-error' : mainCtrl.loginUserForm.username.$invalid && !mainCtrl.loginUserForm.username.$pristine }">
@@ -31,6 +31,11 @@
                                         </div>
                                         <span class="error" ng-show="mainCtrl.loginUserForm.password.$invalid && !mainCtrl.loginUserForm.password.$pristine">* Password is required!</span>
                                     </div>
+                                    <br>
+                                    <div class="checkbox text-center">
+                                        <label><input type="checkbox" ng-model="mainCtrl.credentials.autologin">Remember me next time.</label>
+                                    </div>
+                                    <br>
                                     <div class="alert alert-danger" ng-if="mainCtrl.loginError">Bad credentials!</div>
                                     <div class="modal-footer">
                                         <a href="javascript:void(0)" ng-click="mainCtrl.toggleLoginRegister('register')" class="pull-left">Register</a>

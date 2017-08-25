@@ -23,6 +23,16 @@ tags-input .tags {
     border: 0;
 }
 
+.tag-item {
+    color:#fff;
+    background:#428bca;
+    border:1px solid #357ebd;
+    border-radius:4px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: 2px;
+}
+
 [ng\:cloak],
 [ng-cloak],
 [data-ng-cloak],
