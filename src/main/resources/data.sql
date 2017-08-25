@@ -57,6 +57,8 @@ INSERT INTO video (visible, description, title, video_url, user_id, video_list_i
 INSERT INTO COMMENT (content,creation_date,user_id,video_id) VALUES("Komentar 01, za neki video", NOW(), 2,1);
 INSERT INTO COMMENT (content,creation_date,user_id,video_id) VALUES("Komentar 02, za neki video", NOW(), 3,1);
 INSERT INTO COMMENT (content,creation_date,user_id,video_id) VALUES("Komentar 03, za neki video", NOW(), 4,1);
+INSERT INTO COMMENT (content,creation_date,user_id,video_id) VALUES("Komentar 03, za neki video", NOW(), 4,2);
+INSERT INTO COMMENT (content,creation_date,user_id,video_id) VALUES("Komentar 03, za neki video", NOW(), 4,2);
 
 INSERT INTO video_tag (name) VALUES ("test_tag");
 INSERT INTO video_tag (name) VALUES ("test_tag_2");

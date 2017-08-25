@@ -26,6 +26,11 @@
                 controller: 'VideoListsController',
                 controllerAs: 'videoListsCtrl'
             })
+             .when('/admin', {
+                templateUrl: '/views/admin.html',
+                controller: 'AdminController',
+                controllerAs: 'adminCtrl'
+            })
             .otherwise('/');
             }
 }());
