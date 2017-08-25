@@ -17,7 +17,7 @@
                             <div class="col-md-2">
                                 <a class="pull-right btn btn-danger btn-xs" data-nodrag data-toggle="modal" data-target="#delete-user-modal" ng-click="adminCtrl.selectUser(user)"><span class="glyphicon glyphicon-remove"></span></a>
                                 <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="block(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-ban-circle"></span></a>
-                                <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="edit(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
+                                <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#add-user-modal" ng-click="adminCtrl.editUser(user)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
                             </div>
                         </div>
                     </div>
@@ -72,21 +72,81 @@
         </div>
     </div>
 </div>
-  <div class="modal fade" id="delete-user-modal" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Delete User</h4>
+<div class="modal fade" id="delete-user-modal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete User</h4>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to delete <i>{{adminCtrl.user.username}}</i> with all user video list?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="adminCtrl.deleteUser(adminCtrl.user.id)">OK</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="add-user-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{adminCtrl.operation}} user</h4>
+            </div>
+
+            <div class="modal-body">
+                <form name="adminCtrl.adminUserForm" role="form" ng-submit="adminCtrl.saveUser(adminCtrl.user)" novalidate>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <div class="input-group" ng-class="{ 'has-error' : adminCtrl.adminUserForm.username.$invalid && !adminCtrl.adminUserForm.username.$pristine }">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input name="username" type="text" class="form-control" id="username2" placeholder="Enter your username" required ng-model="adminCtrl.user.username" />
                         </div>
-                        <div class="modal-body">
-                            <p>Do you want to delete <i>{{adminCtrl.user.username}}</i> with all user video list?</p>
+                        <span class="error" ng-show="adminCtrl.adminUserForm.username.$invalid && !adminCtrl.adminUserForm.username.$pristine">* Username is required!</span>
+                        <span ng-if="adminCtrl.error.username" class="error">* {{adminCtrl.error.username}}</span>
+                    </div>
+                    <div class="form-group" uib-tooltip="Password must contain between 8 and 20 characters! One special character and one number is required!">
+                        <label for="password">Password</label>
+                        <div class="input-group" ng-class="{ 'has-error' : adminCtrl.adminUserForm.password.$invalid && !adminCtrl.adminUserForm.password.$pristine }">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input name="password" type="password" ng-pattern="/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[@#$%^&+=!@#$%&*()_+=|<>?{}\\[\]~-])(?!.*\s).{8,20}$/" class="form-control" id="password" placeholder="Enter your password" required ng-model="adminCtrl.user.password" />
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="adminCtrl.deleteUser(adminCtrl.user.id)">OK</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <span class="error" ng-show="adminCtrl.adminUserForm.password.$invalid && !adminCtrl.adminUserForm.password.$pristine">* Password is not valid!</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname">Firstname</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter your firstname" ng-model="adminCtrl.user.firstName" />
                         </div>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="lastname">Lastname</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter your lastname" ng-model="adminCtrl.user.lastName" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <div class="input-group" ng-class="{ 'has-error' : adminCtrl.adminUserForm.email.$invalid && !adminCtrl.adminUserForm.email.$pristine }">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <input name="email" type="email" ng-pattern="/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/" class="form-control" id="email" placeholder="Enter your email" required ng-model="adminCtrl.user.email" />
+                        </div>
+                        <span class="error" ng-show="adminCtrl.adminUserForm.email.$invalid && !adminCtrl.adminUserForm.email.$pristine">* Email is required!</span>
+                        <span ng-if="adminCtrl.error.email" class="error">* {{adminCtrl.error.email}}</span>
+                    </div>
+                     <div class="alert alert-danger" ng-if="adminCtrl.error">Failed to add user!</div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" ng-disabled="adminCtrl.adminUserForm.$invalid">Submit</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
             </div>
+        </div>
+    </div>
+</div>
