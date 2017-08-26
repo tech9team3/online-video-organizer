@@ -15,8 +15,8 @@
                             <div class="col-md-2">{{user.lastName}}</div>
                             <div class="col-md-2">{{user.email}}</div>
                             <div class="col-md-2">
-                                <a class="pull-right btn btn-danger btn-xs" data-nodrag data-toggle="modal" data-target="#delete-user-modal" ng-click="adminCtrl.selectUser(user)"><span class="glyphicon glyphicon-remove"></span></a>
-                                <a class="pull-right btn btn-danger btn-xs" data-nodrag data-toggle="modal" data-target="#block-user-modal" ng-click="block(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-ban-circle"></span></a>
+                                <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#delete-user-modal" ng-click="adminCtrl.selectUser(user)"><span class="glyphicon glyphicon-remove"></span></a>
+                                <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#block-user-modal" ng-click="block(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-ban-circle"></span></a>
                                 <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#add-user-modal" ng-click="adminCtrl.editUser(user)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
                             </div>
                         </div>
@@ -56,9 +56,12 @@
                                         <li ng-repeat="comment in video.comments" data-collapsed="true" ui-tree-node>
                                             <div ui-tree-handle>
                                                 <div class="row">
-                                                    <div class="col-md-4">{{comment.user.username}}</div>
+                                                    <div class="col-md-2">{{comment.user.username}}</div>
                                                     <div class="col-md-4">{{comment.content}}</div>
                                                     <div class="col-md-4">{{comment.creationDate | date: "dd. MMM y."}}</div>
+                                                    <div class="col-md-2">
+                                                    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="adminCtrl.deleteComment(comment.id)"><span class="glyphicon glyphicon-remove"></span></a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </li>
@@ -73,29 +76,29 @@
     </div>
     <div class="col-md-3">
         <div class="input-group input-group-sm">
-            <input type="text" class="form-control" placeholder="Search user..." ng-model="adminCtrl.searchByUsername"/>
+            <input type="text" class="form-control" placeholder="Search user..." ng-model="adminCtrl.searchByUsername" />
             <span class="input-group-btn">
-	       			<button class="btn btn-default" type="button" ng-click="adminCtrl.searchByUsername = ''"><span class="glyphicon glyphicon-remove"></span></button>
+	       			<button class="btn btn-primary" type="button" ng-click="adminCtrl.searchByUsername = ''"><span class="glyphicon glyphicon-remove"></span></button>
             </span>
         </div>
         <br>
         <div class="input-group input-group-sm">
-            <input type="text" class="form-control" placeholder="Search playlist..." ng-model="adminCtrl.searchByVideolistTitle"/>
+            <input type="text" class="form-control" placeholder="Search playlist..." ng-model="adminCtrl.searchByVideolistTitle" />
             <span class="input-group-btn">
-	       			<button class="btn btn-default" type="button" ng-click="adminCtrl.searchByVideolistTitle = ''"><span class="glyphicon glyphicon-remove"></span></button>
+	       			<button class="btn btn-primary" type="button" ng-click="adminCtrl.searchByVideolistTitle = ''"><span class="glyphicon glyphicon-remove"></span></button>
             </span>
         </div>
-         <br>
+        <br>
         <div class="input-group input-group-sm">
-            <input type="text" class="form-control" placeholder="Search video..." ng-model="adminCtrl.searchByVideoTitle"/>
+            <input type="text" class="form-control" placeholder="Search video..." ng-model="adminCtrl.searchByVideoTitle" />
             <span class="input-group-btn">
-	       			<button class="btn btn-default" type="button" ng-click="adminCtrl.searchByVideoTitle = ''"><span class="glyphicon glyphicon-remove"></span></button>
+	       			<button class="btn btn-primary" type="button" ng-click="adminCtrl.searchByVideoTitle = ''"><span class="glyphicon glyphicon-remove"></span></button>
             </span>
         </div>
-         <br>
+        <br>
         <div class="input-group input-group-sm">
             <span class="input-group-btn">
-	       			<button class="btn btn-default pull-right" type="button" ng-click="adminCtrl.clearAll()">Clear All</button>
+	       			<button class="btn btn-primary pull-right" type="button" ng-click="adminCtrl.clearAll()">Clear All</button>
 	   			</span>
         </div>
     </div>

@@ -15,6 +15,7 @@
         adminCtrl.saveUser = saveUser;
         adminCtrl.operation;
         adminCtrl.clearAll = clearAll;
+        adminCtrl.deleteComment = deleteComment;
         
         getUsers();       
         
@@ -101,5 +102,12 @@
         	adminCtrl.searchByVideoTitle = "";
         	
         }
+        
+        function deleteComment(commentId){
+            CommentService.deleteComment(commentId).then(function(response){
+            	 getCommentsForVideo(videoId);
+                });
+            //videoCtrl.comment= {};
+        }  
     }
 })();
