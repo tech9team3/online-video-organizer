@@ -14,6 +14,7 @@
         adminCtrl.editUser = editUser;
         adminCtrl.saveUser = saveUser;
         adminCtrl.operation;
+        adminCtrl.clearAll = clearAll;
         
         getUsers();       
         
@@ -92,6 +93,13 @@
                     break;
                     }
         
+        }
+        
+        function clearAll(){
+        	adminCtrl.searchByUsername = "";
+        	adminCtrl.searchByVideolistTitle = "";
+        	adminCtrl.searchByVideoTitle = "";
+        	
         }
     }
 })();

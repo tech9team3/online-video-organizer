@@ -1,8 +1,8 @@
 <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-9">
         <div ui-tree data-drag-enabled="false">
             <ol ui-tree-nodes="" ng-model="adminCtrl.users" ng-class="{hidden: collapsed}">
-                <li ng-repeat="user in adminCtrl.users" data-collapsed="true" ui-tree-node>
+                <li ng-repeat="user in adminCtrl.users  | filter: adminCtrl.searchByUsername" data-collapsed="true" ui-tree-node>
                     <div ui-tree-handle class="tree-node tree-node-content">
                         <div class="row">
                             <div class="col-md-2">
@@ -16,13 +16,13 @@
                             <div class="col-md-2">{{user.email}}</div>
                             <div class="col-md-2">
                                 <a class="pull-right btn btn-danger btn-xs" data-nodrag data-toggle="modal" data-target="#delete-user-modal" ng-click="adminCtrl.selectUser(user)"><span class="glyphicon glyphicon-remove"></span></a>
-                                <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="block(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-ban-circle"></span></a>
+                                <a class="pull-right btn btn-danger btn-xs" data-nodrag data-toggle="modal" data-target="#block-user-modal" ng-click="block(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-ban-circle"></span></a>
                                 <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#add-user-modal" ng-click="adminCtrl.editUser(user)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
                             </div>
                         </div>
                     </div>
                     <ol ui-tree-nodes="" ng-model="user.videoLists" ng-class="{hidden: collapsed}">
-                        <li ng-repeat="videoList in user.videoLists" data-collapsed="true" ui-tree-node>
+                        <li ng-repeat="videoList in user.videoLists | filter: adminCtrl.searchByVideolistTitle" data-collapsed="true" ui-tree-node>
                             <div ui-tree-handle>
                                 <div class="row">
                                     <div class="col-md-2">
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                             <ol ui-tree-nodes="" ng-model="videoList.videos" ng-class="{hidden: collapsed}">
-                                <li ng-repeat="video in videoList.videos" data-collapsed="true" ui-tree-node>
+                                <li ng-repeat="video in videoList.videos | filter: adminCtrl.searchByVideoTitle" data-collapsed="true" ui-tree-node>
                                     <div ui-tree-handle>
                                         <div class="row">
                                             <div class="col-md-4">
@@ -69,6 +69,34 @@
                     </ol>
                 </li>
             </ol>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="input-group input-group-sm">
+            <input type="text" class="form-control" placeholder="Search user..." ng-model="adminCtrl.searchByUsername"/>
+            <span class="input-group-btn">
+	       			<button class="btn btn-default" type="button" ng-click="adminCtrl.searchByUsername = ''"><span class="glyphicon glyphicon-remove"></span></button>
+            </span>
+        </div>
+        <br>
+        <div class="input-group input-group-sm">
+            <input type="text" class="form-control" placeholder="Search playlist..." ng-model="adminCtrl.searchByVideolistTitle"/>
+            <span class="input-group-btn">
+	       			<button class="btn btn-default" type="button" ng-click="adminCtrl.searchByVideolistTitle = ''"><span class="glyphicon glyphicon-remove"></span></button>
+            </span>
+        </div>
+         <br>
+        <div class="input-group input-group-sm">
+            <input type="text" class="form-control" placeholder="Search video..." ng-model="adminCtrl.searchByVideoTitle"/>
+            <span class="input-group-btn">
+	       			<button class="btn btn-default" type="button" ng-click="adminCtrl.searchByVideoTitle = ''"><span class="glyphicon glyphicon-remove"></span></button>
+            </span>
+        </div>
+         <br>
+        <div class="input-group input-group-sm">
+            <span class="input-group-btn">
+	       			<button class="btn btn-default pull-right" type="button" ng-click="adminCtrl.clearAll()">Clear All</button>
+	   			</span>
         </div>
     </div>
 </div>
@@ -140,12 +168,47 @@
                         <span class="error" ng-show="adminCtrl.adminUserForm.email.$invalid && !adminCtrl.adminUserForm.email.$pristine">* Email is required!</span>
                         <span ng-if="adminCtrl.error.email" class="error">* {{adminCtrl.error.email}}</span>
                     </div>
-                     <div class="alert alert-danger" ng-if="adminCtrl.error">Failed to add user!</div>
+                    <div class="alert alert-danger" ng-if="adminCtrl.error">Failed to add user!</div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" ng-disabled="adminCtrl.adminUserForm.$invalid">Submit</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="block-user-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Block user</h4>
+            </div>
+            <div class="modal-body">
+                Period of time:
+                <div class="radio">
+                    <label><input type="radio" name="optradio">One week</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="optradio">One month</label>
+                </div>
+                <div class="radio disabled">
+                    <label><input type="radio" name="optradio">Three months</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="optradio">Six months</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="optradio">Nine months</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="optradio">One year</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
