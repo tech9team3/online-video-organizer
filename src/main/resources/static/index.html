@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css"> 
     <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css">
+    <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="css/main.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,7 +26,7 @@
 </head>
 
 <body class="ng-cloak">
-    <div class="wrapper" style="height: 100%;">
+    <div class="wrapper">
         <div ng-include src="'views/loginRegister.html'"></div>
         <header>
             <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -44,7 +45,7 @@
                         <ul class="nav navbar-nav">
                             <li ng-class="{ 'active': mainCtrl.isActive('/home') }"><a href="#home">Home </a></li>
                             <li ng-if="mainCtrl.user" ng-class="{ 'active': mainCtrl.isActive('/playlists') }"><a href="#playlists">Playlists </a></li> <!-- ng-if="mainCtrl.user" -->
-                            <li ng-if="mainCtrl.user.roles.indexOf('ROLE_ADMIN') !== -1" ng-class="{ 'active': mainCtrl.isActive('/admin') }"><a href="#/admin">User </a></li>
+                            <li ng-if="mainCtrl.user && mainCtrl.user.roles.indexOf('ROLE_ADMIN') !== -1" ng-class="{ 'active': mainCtrl.isActive('/admin') }"><a href="#/admin">User </a></li>
                         </ul>
                         <ul ng-show="!mainCtrl.user" class="nav navbar-nav navbar-right">
                             <li><a href="" data-toggle="modal" data-target="#login-register-modal">Login/Register </a></li>
@@ -83,6 +84,8 @@
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
     <script src="bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
+    <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
     <script src="js/app.js" type="text/javascript"></script>
 
     <!-- services -->

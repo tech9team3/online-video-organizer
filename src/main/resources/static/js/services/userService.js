@@ -19,7 +19,6 @@
         
         this.setLoggedInUser = function (user) {
         	loggedInUser = user;
-        	console.log(loggedInUser);
         }
 
         this.sendCaptcha = function (data) {

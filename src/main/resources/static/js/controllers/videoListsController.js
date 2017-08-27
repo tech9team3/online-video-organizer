@@ -18,13 +18,16 @@
         videoListsCtrl.addVideo = addVideo;
         videoListsCtrl.saveVideo = saveVideo;
 
-
-        //delete for production
-//        $http.defaults.headers.common['Authorization'] = 'Basic ' + btoa('pera:para@1234');
-//        UserService.setLoggedInUser({
-//        	id: 1,
-//        	username: 'pera'
-//        });
+        videoListsCtrl.scrollbarsConfig = {
+            axis: 'y',
+            autoHideScrollbar: true,
+            theme: 'rounded-dots-dark',
+            advanced: {
+                updateOnContentResize: true
+            },
+            setHeight: 500,
+            scrollInertia: 500,
+        }
 
         init();
 
@@ -34,7 +37,7 @@
             videoListsCtrl.loggedInUser = {
                 id: UserService.getLoggedInUserId()
             };
-            if(videoListsCtrl.loggedInUser) {
+            if (videoListsCtrl.loggedInUser) {
                 getVideoListsByUserId(videoListsCtrl.loggedInUser);
             }
         }
@@ -42,7 +45,9 @@
 
         function addVideoList() {
             videoListsCtrl.operation = "Add";
-            videoListsCtrl.videoList = {visible: true};
+            videoListsCtrl.videoList = {
+                visible: true
+            };
             videoListsCtrl.addVideoListsForm.$setPristine();
         }
 
@@ -64,7 +69,7 @@
         function selectVideoList(videoList) {
             videoListsCtrl.videoList = videoList;
         }
-        
+
         function selectedVideoList() {
             return videoListsCtrl.videoList;
         }
@@ -95,18 +100,21 @@
         }
 
         function addVideo(video) {
+            video.visible = true;
             videoListsCtrl.video = video;
             $('#add-video-modal').modal('show');
         }
-        
+
         function saveVideo(video) {
-            if(!video.videoTag){
+            if (!video.videoTag) {
                 video.videoTag = [];
             }
             video.videoList = videoListsCtrl.videoList;
-            video.user = {id:UserService.getLoggedInUserId()};
+            video.user = {
+                id: UserService.getLoggedInUserId()
+            };
             console.log(video);
-            VideoService.saveVideo(video).then(function(response){
+            VideoService.saveVideo(video).then(function (response) {
                 console.log(response.data);
                 getVideoListsByUserId(videoListsCtrl.loggedInUser);
                 getVideosByVideoList(videoListsCtrl.videoList.id);

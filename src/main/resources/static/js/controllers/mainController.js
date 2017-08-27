@@ -6,23 +6,23 @@
 
     function MainController($location, $http, $route, UserService, vcRecaptchaService, $scope) {
 
-        var self = this;
-        self.isActive = isActive;
-        self.register = register;
-        self.login = login;
-        self.logout = logout;
-        self.toggleLoginRegister = toggleLoginRegister;
-        self.closeRegistrationConfirmation = closeRegistrationConfirmation;
-        self.loginOrRegister = "login";
-        self.user;
-        self.loginError;
-        self.registrationError;
-        self.registrationMessage;
-        self.loginUserForm;
-        self.registerUserForm;
+        var mainCtrl = this;
+        mainCtrl.isActive = isActive;
+        mainCtrl.register = register;
+        mainCtrl.login = login;
+        mainCtrl.logout = logout;
+        mainCtrl.toggleLoginRegister = toggleLoginRegister;
+        mainCtrl.closeRegistrationConfirmation = closeRegistrationConfirmation;
+        mainCtrl.loginOrRegister = "login";
+        mainCtrl.user;
+        mainCtrl.loginError;
+        mainCtrl.registrationError;
+        mainCtrl.registrationMessage;
+        mainCtrl.loginUserForm;
+        mainCtrl.registerUserForm;
 
         //reCaptcha
-        self.publicKey = "6LceCy0UAAAAALAVMh0eYQnnlXsyvWkksQYayaCN";
+        mainCtrl.publicKey = "6LceCy0UAAAAALAVMh0eYQnnlXsyvWkksQYayaCN";
 
 
         init();
@@ -30,11 +30,11 @@
         function init() {
             if(localStorage.getItem("base64Credential")) {
                 login(localStorage.getItem("base64Credential"));
-                self.credentials = {autologin: false};
+                mainCtrl.credentials = {autologin: false};
             }
-            if (self.user) {
+            if (mainCtrl.user) {
                 $route.reload();
-                self.loginUserForm.$setPristine();
+                mainCtrl.loginUserForm.$setPristine();
             }
         }
 
@@ -51,11 +51,11 @@
                 if (response.data.success) {
                     saveUser(user);
                 } else {
-                    self.registrationMessage = "You are a robot!";
+                    mainCtrl.registrationMessage = "You are a robot!";
                     $('#registrationModal').modal('show');
                 }
             }, function (error) {
-                self.registrationMessage = "User registration failed!";
+                mainCtrl.registrationMessage = "User registration failed!";
                 $('#registrationModal').modal('show');
             })
         }
@@ -67,22 +67,22 @@
                 "type": "ROLE_USER"
             }];
             UserService.saveUser(user).then(function (response) {
-                //self.loginOrRegister = "login";
-                self.registrationMessage = user.username + "  is registered!";
+                //mainCtrl.loginOrRegister = "login";
+                mainCtrl.registrationMessage = user.username + "  is registered!";
                 $('#registrationModal').modal('show');
             }, function (error) {
-                self.registrationError = {};
+                mainCtrl.registrationError = {};
                 angular.forEach(error.data.exceptions, function (e) {
                     errorHandler(e);
                 });
             })
             //remove input value after submit
-            self.registerUserForm.$setPristine();
+            mainCtrl.registerUserForm.$setPristine();
         }
 
         function login(base64Credential) {
             if (!base64Credential) {
-                var base64Credential = btoa(self.credentials.username + ':' + self.credentials.password);
+                var base64Credential = btoa(mainCtrl.credentials.username + ':' + mainCtrl.credentials.password);
             }
             $http.get('users/user', {
                 headers: {
@@ -90,40 +90,40 @@
                     'Authorization': 'Basic ' + base64Credential
                 }
             }).success(function (res) {
-                self.message = '';
+                mainCtrl.message = '';
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + base64Credential;
-                if (self.credentials.autologin) {
+                if (mainCtrl.credentials.autologin) {
                     localStorage.setItem("base64Credential", base64Credential);
                 }
-                self.user = res;
+                mainCtrl.user = res;
                 UserService.setLoggedInUser(res);
                 angular.element('#login-register-modal').modal('hide');
                 $location.path('playlists');
             }).error(function (error) {
-                self.loginError = 'Bad credentials!';
+                mainCtrl.loginError = 'Bad credentials!';
             });
         }
 
         function toggleLoginRegister(showForm) {
             if (showForm == "register") {
-                self.loginUserForm.$setPristine();
-                delete self.credentials;
-                delete self.loginError;
+                mainCtrl.loginUserForm.$setPristine();
+                delete mainCtrl.credentials;
+                delete mainCtrl.loginError;
             } else {
-                self.registerUserForm.$setPristine();
-                delete self.registerInput;
-                delete self.registrationError;
+                mainCtrl.registerUserForm.$setPristine();
+                delete mainCtrl.registerInput;
+                delete mainCtrl.registrationError;
             }
-            self.loginOrRegister = showForm;
+            mainCtrl.loginOrRegister = showForm;
             // grecaptcha.reset();
         }
 
         function closeRegistrationConfirmation() {
-            if (self.registrationMessage.includes("is registered!")) {
+            if (mainCtrl.registrationMessage.includes("is registered!")) {
                 grecaptcha.reset();
-                self.registerUserForm.$setPristine();
-                delete self.registrationError;
-                self.loginOrRegister = "login";
+                mainCtrl.registerUserForm.$setPristine();
+                delete mainCtrl.registrationError;
+                mainCtrl.loginOrRegister = "login";
             }
         }
 
@@ -131,21 +131,21 @@
             $http.defaults.headers.common['Authorization'] = null;
             UserService.setLoggedInUser(null);
             localStorage.removeItem("base64Credential");
-            delete self.user;
-            delete self.error;
-            delete self.registrationError;
-            delete self.loginError;
+            delete mainCtrl.user;
+            delete mainCtrl.error;
+            delete mainCtrl.registrationError;
+            delete mainCtrl.loginError;
             $location.path('home');
         }
 
         function errorHandler(error) {
             switch (error.field) {
                 case 'username':
-                    self.registrationError.username = error.message;
+                    mainCtrl.registrationError.username = error.message;
                     grecaptcha.reset();
                     break;
                 case 'email':
-                    self.registrationError.email = error.message;
+                    mainCtrl.registrationError.email = error.message;
                     grecaptcha.reset();
                     break;
             }

@@ -15,10 +15,39 @@
                 ctrl.providerVideoList = [];
                 ctrl.progressBar = false;
 
+                ctrl.scrollbarsConfig = {
+                    axis: 'y',
+                    autoHideScrollbar: true,
+                    theme: 'rounded-dots-dark',
+                    advanced: {
+                        updateOnContentResize: true
+                    },
+                    callbacks: {
+                        onTotalScrollOffset: 3000,
+                        onTotalScroll: function () {
+                            switch (ctrl.providerName) {
+                                case 'youtube':
+                                    searchYouTube(youtubeNextPageToken);
+                                    break;
+                                case 'vimeo':
+                                    searchVimeo(vimeoPage + 1);
+                                    break;
+                                case 'dailymotion':
+                                    searchDailymotion(dailymotionPage +1);
+                                    break;
+                            }
+                        }
+                    },
+                    setHeight: 450,
+                    scrollInertia: 500,
+                }
+
+
                 //YouTube
                 const YOUTUBE_SERARCH_API_URL = "https://www.googleapis.com/youtube/v3/search";
                 const YOUTUBE_API_KEY = "AIzaSyAODuK_7-4SIKgPBScK0y6pj7CX6s7E8X8";
-                const YOUTUBE_RETURN_FIELDS = "items(id,snippet(title,description,thumbnails/medium/url))";
+                const YOUTUBE_RETURN_FIELDS = "items(id,snippet(title,description,thumbnails/medium/url)),nextPageToken";
+                var youtubeNextPageToken;
 
                 //Vimeo
                 const VIMEO_SERARCH_API_URL = "https://api.vimeo.com/videos";
@@ -28,10 +57,12 @@
                 const VIMEO_ACCESS_TOKEN_URL = "https://api.vimeo.com/oauth/access_token";
                 const VIMEO_RETURN_FIELDS = "uri,name,link,description,tags.name,pictures.sizes.link";
                 const VIMEO_TOKEN = "24649bd87ad57cf0331a1a5754464bf1";
+                var vimeoPage;
 
                 //Dailymotion
                 const DAILYMOTION_SERARCH_API_URL = "https://api.dailymotion.com/videos";
                 const DAILYMOTION_RETURN_FIELDS = "description,id,tags,thumbnail_360_url,title";
+                var dailymotionPage;
 
                 //var vimeoToken = generateVimeoToken();
                 var vimeoToken = VIMEO_TOKEN;
@@ -64,8 +95,12 @@
 
 
                 //Search YouTube
-                function searchYouTube() {
-                    ctrl.providerVideoList = [];
+                function searchYouTube(nextPageToken) {
+                    delete ctrl.error;
+                    if (!nextPageToken){
+                        ctrl.providerVideoList = [];
+                    }                        
+                    ctrl.providerName = "youtube";
                     ctrl.progressBar = true;
 
                     var req = {
@@ -79,6 +114,7 @@
                             'maxResults': '25',
                             'part': 'snippet',
                             'fields': YOUTUBE_RETURN_FIELDS,
+                            'pageToken': nextPageToken,
                             'q': ctrl.searchVideoTerm,
                             'type': 'video',
                             'key': YOUTUBE_API_KEY
@@ -87,7 +123,7 @@
 
                     $http(req)
                         .then(function (response) {
-                            console.log(response.data.items);
+                            youtubeNextPageToken = response.data.nextPageToken;
                             angular.forEach(response.data.items, function (item) {
                                 var video = {
                                     videoUrl: "https://www.youtube.com/watch?v=" + item.id.videoId,
@@ -100,10 +136,9 @@
                                 }
                                 ctrl.providerVideoList.push(video);
                             });
-                            //ctrl.text = ctrl.providerVideoList;
                         }, function (error) {
                             // Error handler
-                            ctrl.text = error.data;
+                            ctrl.error = error.data;
                         }).finally(function () {
                             // Always execute this on both error and success
                             ctrl.progressBar = false;
@@ -113,8 +148,13 @@
 
 
                 //Search Vimeo
-                function searchVimeo() {
-                    ctrl.providerVideoList = [];
+                function searchVimeo(page) {
+                    delete ctrl.error;
+                    ctrl.providerName = "vimeo";
+                    if(page === 1){
+                        vimeoPage = page;
+                        ctrl.providerVideoList = [];
+                    }                    
                     ctrl.progressBar = true;
 
                     //vimeoToken.then(function (vimeoToken) {
@@ -128,6 +168,7 @@
                         params: {
                             'fields': VIMEO_RETURN_FIELDS,
                             'per_page': '25',
+                            'page': page,
                             'query': ctrl.searchVideoTerm,
                             'access_token': vimeoToken // $cookieStore.get('vimeoToken');
                         }
@@ -148,10 +189,9 @@
                                 }
                                 ctrl.providerVideoList.push(video);
                             });
-                            //ctrl.text = response.data;
                         }, function (error) {
                             // Error handler
-                            ctrl.text = error.data.error;
+                            ctrl.error = error.data.error;
                         }).finally(function () {
                             // Always execute this on both error and success
                             ctrl.progressBar = false;
@@ -162,8 +202,13 @@
 
 
                 //Search Dailymotion
-                function searchDailymotion() {
-                    ctrl.providerVideoList = [];
+                function searchDailymotion(page) {
+                    delete ctrl.error;
+                    ctrl.providerName = "dailymotion";
+                    if(page === 1){
+                        dailymotionPage = page;
+                        ctrl.providerVideoList = [];
+                    }
                     ctrl.progressBar = true;
 
                     var req = {
@@ -175,6 +220,7 @@
                         url: DAILYMOTION_SERARCH_API_URL,
                         params: {
                             'limit': '25',
+                            'page': page,
                             'fields': DAILYMOTION_RETURN_FIELDS,
                             'search': ctrl.searchVideoTerm,
                         }
@@ -192,15 +238,16 @@
                                     description: item.description,
                                     videoImageUrl: item.thumbnail_360_url,
                                     videoTag: item.tags.map(function (item) {
-                                        return {name: item};
+                                        return {
+                                            name: item
+                                        };
                                     })
                                 }
                                 ctrl.providerVideoList.push(video);
                             });
-                            //ctrl.text = response.data;
                         }, function (error) {
                             // Error handler
-                            ctrl.text = error.data;
+                            ctrl.error = error.data;
                         }).finally(function () {
                             // Always execute this on both error and success
                             ctrl.progressBar = false;

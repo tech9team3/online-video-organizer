@@ -34,6 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        http
 	            .authorizeRequests()
 	            .antMatchers("/", "/bower_components/**", "/css/**", "/js/**", "/views/**", "/images/**").permitAll()
+	            .antMatchers(HttpMethod.GET, "/favicon.ico").permitAll()
 	            .antMatchers(HttpMethod.POST, "/users").permitAll()
 	            .antMatchers(HttpMethod.GET, "/users/activateUser/*").permitAll()
 	            .antMatchers(HttpMethod.POST, "/users/captcha").permitAll()

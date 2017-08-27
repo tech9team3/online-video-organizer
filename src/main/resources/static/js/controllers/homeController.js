@@ -15,7 +15,18 @@
         homeCtrl.getPublicVideos = getPublicVideos;
         homeCtrl.selectVideoList = selectVideoList;
         homeCtrl.selectedVideoList = selectedVideoList;
-        
+
+        homeCtrl.scrollbarsConfig = {
+            axis: 'y',
+            autoHideScrollbar: true,
+            theme: 'rounded-dots-dark',
+            advanced: {
+                updateOnContentResize: true
+            },
+            setHeight: 500,
+            scrollInertia: 500,
+        }
+
         homeCtrl.videoLists;
 
         getPublicVideos();

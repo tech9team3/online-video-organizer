@@ -14,15 +14,17 @@
                     </ul>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4 col-xs-6" ng-repeat="video in homeCtrl.publicVideos | orderBy:homeCtrl.order:homeCtrl.reverseOrder:homeCtrl.ratesAndCommentsComparator">
-                    <strong class="might-overflow">{{video.videoList.user.username}}</strong>
-                    <a ng-href="#/video/{{video.id}}" class="thumbnail">
-                        <img ng-click="" class="img-responsive" ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" />
-                    </a>
-                    <strong class="might-overflow" uib-tooltip="{{video.title}}">{{video.title}}</strong>
-                    <p class="might-overflow" uib-tooltip="{{video.description}}">{{video.description}}</p>
-                </div>
+            <div ng-scrollbars ng-scrollbars-config="homeCtrl.scrollbarsConfig">
+                <ul class="list-unstyled video-list-thumbs row">
+                    <li class="col-md-4 col-xs-6" ng-repeat="video in homeCtrl.publicVideos | orderBy:homeCtrl.order:homeCtrl.reverseOrder:homeCtrl.ratesAndCommentsComparator">
+                        <a ng-href="#/video/{{video.id}}" uib-popover="{{video.title}}" popover-append-to-body="true" popover-placement="auto top" popover-trigger="'mouseenter'">
+                            <img ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" class="img-responsive" height="130px" />
+                            <h2 class="might-overflow">{{video.title}}</h2>
+                            <span class="glyphicon glyphicon-play-circle"></span>
+                            <span class="username">{{video.videoList.user.username}}</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="col-md-3">
@@ -42,7 +44,7 @@
                 <br>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="panel panel-default">
+                        <div class="panel panel-default playlists">
                             <div class="panel-heading">Playlists <button type="button" class="btn btn-default btn-xs pull-right" ng-click="homeCtrl.getPublicVideos();homeCtrl.selectVideoList(null);">All videos</button></div>
                             <div class="list-group">
                                 <div ng-repeat="videoList in homeCtrl.publicVideoLists">
