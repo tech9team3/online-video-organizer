@@ -61,11 +61,11 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "/activateUser/{userId}", method = RequestMethod.GET)
-	public User enableUser( @PathVariable Long userId){
+	public String enableUser( @PathVariable Long userId){
 		User foundUser = userService.findOne(userId);
 		
 		foundUser.setStatus(true);
-		return userService.save(foundUser);
+		return userService.save(foundUser).getUsername();
 		
 	}
 	@RequestMapping(method = RequestMethod.PUT)

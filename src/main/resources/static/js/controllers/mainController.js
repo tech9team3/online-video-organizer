@@ -68,7 +68,7 @@
             }];
             UserService.saveUser(user).then(function (response) {
                 //mainCtrl.loginOrRegister = "login";
-                mainCtrl.registrationMessage = user.username + "  is registered!";
+                mainCtrl.registrationMessage = "Please check your email to activate your account!";
                 $('#registrationModal').modal('show');
             }, function (error) {
                 mainCtrl.registrationError = {};

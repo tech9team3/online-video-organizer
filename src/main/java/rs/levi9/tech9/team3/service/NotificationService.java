@@ -68,8 +68,8 @@ public class NotificationService {
         MimeMessageHelper helper;
 
         String text = "Thank you for registration. In order to use your account, you'll need to activate it. Just click " +
-                "activate to confirm.<br><br><a href='http://localhost:8080/users/activateUser/"
-                + user.getId() + "'>Activate your account</a> " + user.getId();
+                "activate to confirm.<br><br><a href='http://localhost:8080/#/activate/"
+                + user.getId() + "'>Activate your account " + user.getUsername() + "</a>";
         System.out.println(user.getId());
         helper = new MimeMessageHelper(message, true);
         helper.setFrom("organizetech9@gmail.com");
