@@ -11,12 +11,14 @@
         videoListsCtrl.deleteVideoList = deleteVideoList;
         videoListsCtrl.editVideoList = editVideoList;
         videoListsCtrl.saveVideoList = saveVideoList;
+        videoListsCtrl.selectVideo = selectVideo;
         videoListsCtrl.selectVideoList = selectVideoList;
         videoListsCtrl.selectedVideoList = selectedVideoList;
         videoListsCtrl.operation;
         videoListsCtrl.getVideosByVideoList = getVideosByVideoList;
         videoListsCtrl.addVideo = addVideo;
         videoListsCtrl.saveVideo = saveVideo;
+        videoListsCtrl.deleteVideo = deleteVideo;
 
         videoListsCtrl.scrollbarsConfig = {
             axis: 'y',
@@ -100,7 +102,8 @@
         }
 
         function addVideo(video) {
-            video.visible = true;
+            if(!video.id)
+                video.visible = true;
             videoListsCtrl.video = video;
             $('#add-video-modal').modal('show');
         }
@@ -121,6 +124,20 @@
             });
             $('#add-video-modal').modal('hide');
         }
+
+        function selectVideo(video) {
+            videoListsCtrl.video = video;
+        }
+        
+        function deleteVideo() {
+            VideoService.deleteVideo(videoListsCtrl.video.id).then(function (response) {
+                getVideosByVideoList(videoListsCtrl.video.videoList.id);
+            }, function (error) {
+
+            });
+            //videoListsCtrl.video = {};
+        }
+
     }
 
 })();

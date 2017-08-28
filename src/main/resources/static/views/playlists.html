@@ -19,11 +19,13 @@
             <div ng-scrollbars ng-scrollbars-config="videoListsCtrl.scrollbarsConfig">
                 <ul class="list-unstyled video-list-thumbs row">
                     <li class="col-md-4 col-xs-6" ng-repeat="video in videoListsCtrl.videos">
-                        <a ng-href="#/video/{{video.id}}" uib-popover="{{video.title}}" popover-append-to-body="true" popover-placement="auto top" popover-trigger="'mouseenter'">
+                        <a class="play-video" ng-href="#/video/{{video.id}}" uib-popover="{{video.title}}" popover-append-to-body="true" popover-placement="auto top" popover-trigger="'mouseenter'">
                             <img ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" class="img-responsive" height="130px" />
                             <h2 class="might-overflow">{{video.title}}</h2>
                             <span class="glyphicon glyphicon-play-circle"></span>
                             <span class="username">{{video.videoList.user.username}}</span>
+                            <a class="delete-video" href="" ng-click="videoListsCtrl.selectVideo(video);" data-toggle="modal" data-target="#delete-video-modal"><span class="glyphicon glyphicon-remove-circle"></span></a>
+                            <a class="edit-video" href="" ng-click="videoListsCtrl.addVideo(video);"><span class="glyphicon glyphicon-edit"></span></a>
                         </a>
                     </li>
                 </ul>
@@ -70,7 +72,7 @@
             </div>
         </div>
     </div>
-
+    
     <div class="modal fade" id="deleteVideoListModal" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -153,7 +155,7 @@
                         <label for="description">Tags</label>
                         <div class="input-group" ng-class="{ 'has-error' : videoListsCtrl.addVideoForm.tags.$invalid && !videoListsCtrl.addVideoForm.tags.$pristine }">
                             <span class="input-group-addon"><i class="fa fa-tags" aria-hidden="true"></i></span>
-                            <tags-input style="height: auto;" class="form-control" id="tags" name="tags" placeholder="Enter video tag" ng-model="videoListsCtrl.video.videoTags" display-property="name"></tags-input>
+                            <tags-input style="height: auto;" class="form-control" id="tags" name="tags" placeholder="Enter video tag" ng-model="videoListsCtrl.video.videoTag" display-property="name"></tags-input>
                         </div>
                     </div>
                 </div>
@@ -170,5 +172,23 @@
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="modal fade" id="delete-video-modal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Video</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Do you want to delete <i>{{videoListsCtrl.video.title}}</i>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="videoListsCtrl.deleteVideo()">OK</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
         </div>
     </div>

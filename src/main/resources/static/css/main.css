@@ -123,7 +123,7 @@ tr.angular-ui-tree-empty {
 
 .video-list-thumbs>li:last-child {}
 
-.video-list-thumbs>li>a {
+.video-list-thumbs .play-video{
     display: block;
     position: relative;
     background-color: #111;
@@ -184,6 +184,62 @@ tr.angular-ui-tree-empty {
 
 .video-list-thumbs>li>a:hover .username {
     background-color: #000;
+}
+
+.video-list-thumbs .delete-video {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 2px;
+    color: #fff;
+    font-weight: bold;
+    padding: 2px 3px 1px;
+    position: absolute;
+    top: 12px;
+    right: 26px;
+    transition: all 500ms ease;
+}
+
+.video-list-thumbs .glyphicon-remove-circle {
+    background-color: #111;
+    color: #fff;
+    border-radius: 3px transition:all 500ms ease-in-out;
+    border-radius: 4px;
+    opacity: 0.6;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+    transition: all 500ms ease-in-out;
+}
+
+.video-list-thumbs .glyphicon-remove-circle:hover {
+    color: #fff;
+    opacity: 1;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .8);
+}
+
+.video-list-thumbs .edit-video {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 2px;
+    color: #fff;
+    font-weight: bold;
+    padding: 2px 3px 1px;
+    position: absolute;
+    top: 12px;
+    right: 50px;
+    transition: all 500ms ease;
+}
+
+.video-list-thumbs .glyphicon-edit {
+    background-color: #111;
+    color: #fff;
+    border-radius: 3px transition:all 500ms ease-in-out;
+    border-radius: 4px;
+    opacity: 0.6;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+    transition: all 500ms ease-in-out;
+}
+
+.video-list-thumbs .glyphicon-edit:hover {
+    color: #fff;
+    opacity: 1;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .8);
 }
 
 @media (min-width:320px) and (max-width: 480px) {
