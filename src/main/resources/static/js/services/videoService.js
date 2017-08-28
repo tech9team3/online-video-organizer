@@ -86,5 +86,19 @@
             });
             return def.promise;
         }
+         
+         this.deleteVideo = function (id) {
+             var def = $q.defer();
+             var req = {
+                 method: 'DELETE',
+                 url: "videos/" + id
+             }
+             $http(req).success(function (data) {
+                 def.resolve(data);
+             }).error(function () {
+                 def.reject("Failed");
+             });
+             return def.promise;
+         }
     };
 }());

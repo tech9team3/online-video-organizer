@@ -25,28 +25,36 @@
                         <li ng-repeat="videoList in user.videoLists | filter: adminCtrl.searchByVideolistTitle" data-collapsed="true" ui-tree-node>
                             <div ui-tree-handle>
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <a class="btn btn-success btn-xs" data-nodrag ng-click="adminCtrl.getVideosByVideoList(videoList);this.toggle();">
                                             <span class="glyphicon glyphicon-chevron-right" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
                                         </a>
                                     </div>
                                     <div class="col-md-4">{{videoList.title}}</div>
-                                    <div class="col-md-2"><span ng-if="videoList.visible===true">Public</span>
+                                    <div class="col-md-3"><span ng-if="videoList.visible===true">Public</span>
                                         <span ng-if="videoList.visible===false">Private</span></div>
+                                    <div class="col-md-2">
+                                        <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#delete-videolist-modal" ng-click="adminCtrl.selectVideoList(videoList, user)"><span class="glyphicon glyphicon-remove"></span></a>
+                                        <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#edit-lists-modal" ng-click="adminCtrl.editVideoList(videoList)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
+                                    </div>
                                 </div>
                             </div>
                             <ol ui-tree-nodes="" ng-model="videoList.videos" ng-class="{hidden: collapsed}">
                                 <li ng-repeat="video in videoList.videos | filter: adminCtrl.searchByVideoTitle" data-collapsed="true" ui-tree-node>
                                     <div ui-tree-handle>
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <a ng-href="#/video/{{video.id}}">
                                                     <span>{{video.title}}</span>
                                                     <span><img ng-click="" style="width: 120px" class="img-responsive" ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" /></span>
                                                 </a>
                                             </div>
-                                            <div class="col-md-4">{{video.description}}</div>
-                                            <div class="col-md-4"><a ng-href="http://{{video.videoUrl}}" target="_blank">{{video.videoUrl}}</a></div>
+                                            <div class="col-md-3">{{video.description}}</div>
+                                            <div class="col-md-3"><a ng-href="http://{{video.videoUrl}}" target="_blank">{{video.videoUrl}}</a></div>
+                                            <div class="col-md-3">
+                                                <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#delete-video-modal" ng-click="adminCtrl.selectVideo(video, videoList)"><span class="glyphicon glyphicon-remove"></span></a>
+                                                <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#add-user-modal" ng-click="adminCtrl.editUser(user)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
+                                            </div>
                                         </div>
                                         <a class="btn btn-success btn-xs" data-nodrag ng-click="adminCtrl.getCommentsForVideo(video);this.toggle();">
                                             <span class="glyphicon glyphicon-chevron-right" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
@@ -60,7 +68,7 @@
                                                     <div class="col-md-4">{{comment.content}}</div>
                                                     <div class="col-md-4">{{comment.creationDate | date: "dd. MMM y."}}</div>
                                                     <div class="col-md-2">
-                                                        <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="adminCtrl.deleteComment(comment.id)"><span class="glyphicon glyphicon-remove"></span></a>
+                                                        <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="adminCtrl.deleteComment(comment.id, video)"><span class="glyphicon glyphicon-remove"></span></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -116,6 +124,42 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="adminCtrl.deleteUser(adminCtrl.user.id)">OK</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="delete-videolist-modal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete User</h4>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to delete <i>{{adminCtrl.videoList.title}}</i> with all user video list?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="adminCtrl.deleteVideoList(adminCtrl.videoList.id, adminCtrl.user)">OK</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="delete-video-modal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete User</h4>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to delete <i>{{adminCtrl.video.title}}</i>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="adminCtrl.deleteVideo(adminCtrl.video.id, adminCtrl.videoList)">OK</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
@@ -178,7 +222,40 @@
         </form>
     </div>
 </div>
-
+  <div class="modal" id="edit-lists-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Edit playlist</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="adminCtrl.editVideoListsForm" novalidate ng-class="{ 'has-error' : adminCtrl.editVideoListsForm.title.$invalid && !adminCtrl.editVideoListsForm.title.$pristine }">
+                        <div class="form-group">
+                            <div class="modal-item">
+                                <label><h5>Title:</h5></label>
+                                <input name="title" type="text" class="form-control" required ng-model="adminCtrl.videoList.title" />
+                                <span class="error" ng-show="adminCtrl.editVideoListsForm.title.$invalid && !adminCtrl.editVideoListsForm.title.$pristine">* Tittle is required! </span>
+                                <br>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <i class="fa fa-global" aria-hidden="true"></i>
+                        <div class="col-xs-3">
+                            <select aria-label="ngSelected demo" class="form-control" ng-model="adminCtrl.videoList.visible" ng-options="o.v as o.n for o in [{ n: '&#xf0ac; Public', v: true },{ n: '&#xf023; Private', v: false }]"></select>
+                        </div>
+                        <div class="col-xs-9">
+                            <button type="button" class="btn btn-primary" ng-click="adminCtrl.saveVideoList(adminCtrl.videoList)">Save</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <div class="modal" id="block-user-modal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -207,7 +284,7 @@
                     <label><input type="radio" name="optradio">One year</label>
                 </div>
             </div>
-            <div class="modal-footer">                
+            <div class="modal-footer">
                 <button type="button" class="btn btn-primary">Save</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
