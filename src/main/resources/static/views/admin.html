@@ -35,7 +35,7 @@
                                         <span ng-if="videoList.visible===false">Private</span></div>
                                     <div class="col-md-2">
                                         <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#delete-videolist-modal" ng-click="adminCtrl.selectVideoList(videoList, user)"><span class="glyphicon glyphicon-remove"></span></a>
-                                        <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#edit-lists-modal" ng-click="adminCtrl.editVideoList(videoList)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
+                                        <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#edit-lists-modal" ng-click="adminCtrl.editVideoList(videoList, user)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
                                     </div>
                                 </div>
                             </div>
@@ -43,17 +43,20 @@
                                 <li ng-repeat="video in videoList.videos | filter: adminCtrl.searchByVideoTitle" data-collapsed="true" ui-tree-node>
                                     <div ui-tree-handle>
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <a ng-href="#/video/{{video.id}}">
                                                     <span>{{video.title}}</span>
                                                     <span><img ng-click="" style="width: 120px" class="img-responsive" ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" /></span>
                                                 </a>
                                             </div>
-                                            <div class="col-md-3">{{video.description}}</div>
-                                            <div class="col-md-3"><a ng-href="http://{{video.videoUrl}}" target="_blank">{{video.videoUrl}}</a></div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">{{video.description}}</div>
+                                            <div class="col-md-2"><span ng-if="video.visible===true">Public</span>
+                                                <span ng-if="video.visible===false">Private</span></div>
+                                            <div class="col-md-2"> <span ng-repeat="tag in video.videoTag" class="tag-item">{{tag.name}}</span></div>
+                                            <div class="col-md-2"><a ng-href="http://{{video.videoUrl}}" target="_blank">{{video.videoUrl}}</a></div>
+                                            <div class="col-md-2">
                                                 <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#delete-video-modal" ng-click="adminCtrl.selectVideo(video, videoList)"><span class="glyphicon glyphicon-remove"></span></a>
-                                                <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#add-user-modal" ng-click="adminCtrl.editUser(user)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
+                                                <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#edit-video-modal" ng-click="adminCtrl.editVideo(video, videoList, user)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
                                             </div>
                                         </div>
                                         <a class="btn btn-success btn-xs" data-nodrag ng-click="adminCtrl.getCommentsForVideo(video);this.toggle();">
@@ -222,40 +225,90 @@
         </form>
     </div>
 </div>
-  <div class="modal" id="edit-lists-modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Edit playlist</h4>
-                </div>
-                <div class="modal-body">
-                    <form name="adminCtrl.editVideoListsForm" novalidate ng-class="{ 'has-error' : adminCtrl.editVideoListsForm.title.$invalid && !adminCtrl.editVideoListsForm.title.$pristine }">
-                        <div class="form-group">
-                            <div class="modal-item">
-                                <label><h5>Title:</h5></label>
-                                <input name="title" type="text" class="form-control" required ng-model="adminCtrl.videoList.title" />
-                                <span class="error" ng-show="adminCtrl.editVideoListsForm.title.$invalid && !adminCtrl.editVideoListsForm.title.$pristine">* Tittle is required! </span>
-                                <br>
-                            </div>
+
+<div class="modal" id="edit-lists-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Edit playlist</h4>
+            </div>
+            <div class="modal-body">
+                <form name="adminCtrl.editVideoListsForm" novalidate ng-class="{ 'has-error' : adminCtrl.editVideoListsForm.title.$invalid && !adminCtrl.editVideoListsForm.title.$pristine }">
+                    <div class="form-group">
+                        <div class="modal-item">
+                            <label><h5>Title:</h5></label>
+                            <input name="title" type="text" class="form-control" required ng-model="adminCtrl.videoList.title" />
+                            <span class="error" ng-show="adminCtrl.editVideoListsForm.title.$invalid && !adminCtrl.editVideoListsForm.title.$pristine">* Tittle is required! </span>
+                            <br>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <div class="row">
-                        <i class="fa fa-global" aria-hidden="true"></i>
-                        <div class="col-xs-3">
-                            <select aria-label="ngSelected demo" class="form-control" ng-model="adminCtrl.videoList.visible" ng-options="o.v as o.n for o in [{ n: '&#xf0ac; Public', v: true },{ n: '&#xf023; Private', v: false }]"></select>
-                        </div>
-                        <div class="col-xs-9">
-                            <button type="button" class="btn btn-primary" ng-click="adminCtrl.saveVideoList(adminCtrl.videoList)">Save</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <i class="fa fa-global" aria-hidden="true"></i>
+                    <div class="col-xs-3">
+                        <select aria-label="ngSelected demo" class="form-control" ng-model="adminCtrl.videoList.visible" ng-options="o.v as o.n for o in [{ n: '&#xf0ac; Public', v: true },{ n: '&#xf023; Private', v: false }]"></select>
+                    </div>
+                    <div class="col-xs-9">
+                        <button type="button" class="btn btn-primary" ng-click="adminCtrl.saveVideoList(adminCtrl.videoList, adminCtrl.user)">Save</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<div class="modal fade" id="edit-video-modal" role="dialog">
+    <div class="modal-dialog">
+        <form class="modal-content" name="adminCtrl.editVideoForm" role="form" ng-submit="adminCtrl.saveVideo(adminCtrl.video, adminCtrl.videoList, adminCtrl.user)" novalidate>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit video</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <div class="input-group" ng-class="{ 'has-error' : adminCtrl.editVideoForm.title.$invalid && !adminCtrl.editVideoForm.title.$pristine }">
+                        <span class="input-group-addon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter video title" required ng-model="adminCtrl.video.title" />
+                    </div>
+                    <span class="error" ng-show="adminCtrl.editVideoForm.title.$invalid && !adminCtrl.editVideoForm.title.$pristine">* Title is required!</span>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <div class="input-group" ng-class="{ 'has-error' : adminCtrl.editVideoForm.description.$invalid && !adminCtrl.editVideoForm.description.$pristine }">
+                        <span class="input-group-addon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" id="description" name="description" placeholder="Enter video description" ng-model="adminCtrl.video.description" />
+                    </div>
+                    <span class="error" ng-show="adminCtrl.editVideoForm.description.$invalid && !adminCtrl.editVideoForm.description.$pristine">* Description is required!</span>
+                </div>
+                <div class="form-group">
+                    <label for="description">Tags</label>
+                    <div class="input-group" ng-class="{ 'has-error' : adminCtrl.editVideoForm.tags.$invalid && !adminCtrl.editVideoForm.tags.$pristine }">
+                        <span class="input-group-addon"><i class="fa fa-tags" aria-hidden="true"></i></span>
+                        <tags-input style="height: auto;" class="form-control" id="tags" name="tags" placeholder="Enter video tag" ng-model="adminCtrl.video.videoTag" display-property="name"></tags-input>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <i class="fa fa-global" aria-hidden="true"></i>
+                    <div class="col-xs-3">
+                        <select aria-label="ngSelected demo" class="form-control" ng-model="adminCtrl.video.visible" ng-options="o.v as o.n for o in [{ n: '&#xf0ac; Public', v: true },{ n: '&#xf023; Private', v: false }]"></select>
+                    </div>
+                    <div class="col-xs-9">
+                        <button type="submit" class="btn btn-primary" ng-disabled="adminCtrl.editVideoForm.$invalid">Submit</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <div class="modal" id="block-user-modal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">

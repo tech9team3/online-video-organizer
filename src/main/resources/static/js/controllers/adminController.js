@@ -20,6 +20,10 @@
         adminCtrl.deleteVideoList = deleteVideoList;
         adminCtrl.selectVideo = selectVideo;
         adminCtrl.deleteVideo = deleteVideo;
+        adminCtrl.editVideoList = editVideoList;
+        adminCtrl.saveVideoList = saveVideoList;
+        adminCtrl.editVideo = editVideo;
+        adminCtrl.saveVideo = saveVideo;
 
 
         getUsers();
@@ -63,8 +67,8 @@
         }
 
         function deleteVideoList(videoListId, user) {
-            VideoListsService.deleteVideoList(adminCtrl.videoList.id).then(function (response) {
-                getVideoListsByUser(adminCtrl.user);
+            VideoListsService.deleteVideoList(videoListId).then(function (response) {
+                getVideoListsByUser(user);
             }, function (error) {
 
             });
@@ -77,8 +81,8 @@
         }
 
         function deleteVideo(videoId, videoList) {
-            VideoService.deleteVideo(adminCtrl.video.id).then(function (response) {
-                getVideosByVideoList(adminCtrl.videoList)
+            VideoService.deleteVideo(videoId).then(function (response) {
+                getVideosByVideoList(videoList)
             }, function (error) {
 
             });
@@ -114,6 +118,42 @@
             //remove input value after submit
             adminCtrl.adminUserForm.$setPristine();
             delete adminCtrl.error;
+        }
+        
+        function editVideoList(videoList, user) {
+            adminCtrl.videoList = angular.copy(videoList);
+            adminCtrl.user = user;
+        }
+
+        function saveVideoList(videoList, user) {
+            adminCtrl.user = user;
+            VideoListsService.saveVideoList(videoList).then(function (response) {
+            	  getVideoListsByUser(adminCtrl.user);
+                $('#edit-lists-modal').modal('hide');
+            }, function (error) {
+
+            })
+        }
+          
+        function editVideo(video, videoList, user) {
+            adminCtrl.video = angular.copy(video);
+            adminCtrl.videoList = videoList;
+            adminCtrl.user = user;
+          
+        }
+        
+        function saveVideo(video, videoList, user) {
+            if (!video.videoTag) {
+                video.videoTag = [];
+            }
+            video.videoList = videoList;
+            video.user = user;   
+            console.log(video);
+            VideoService.saveVideo(video).then(function (response) {
+                console.log(response.data);
+                getVideosByVideoList(videoList)
+            });
+            $('#edit-video-modal').modal('hide');
         }
 
         function capitalize(error) {

@@ -84,6 +84,11 @@ INSERT INTO video_tag (name) VALUES ("MP3");
 INSERT INTO video_video_tag (video_id, video_tag_id) VALUES (1,1);
 INSERT INTO video_video_tag (video_id, video_tag_id) VALUES (1,2);
 
+INSERT INTO video_video_tag (video_id, video_tag_id) VALUES (2,3);
+INSERT INTO video_video_tag (video_id, video_tag_id) VALUES (2,4);
+
+INSERT INTO video_video_tag (video_id, video_tag_id) VALUES (5,4);
+INSERT INTO video_video_tag (video_id, video_tag_id) VALUES (5,5);
 
 
 
