@@ -1,16 +1,16 @@
 (function () {
     angular.module('app')
-            .config(config);
+        .config(config);
 
     config.$inject = ['$routeProvider'];
 
     function config($routeProvider) {
-        $routeProvider     
-	        .when('/', {
-	           templateUrl: '/views/home.html',
-               controller: 'HomeController',
-               controllerAs: 'homeCtrl'
-	        })
+        $routeProvider
+            .when('/', {
+                templateUrl: '/views/home.html',
+                controller: 'HomeController',
+                controllerAs: 'homeCtrl'
+            })
             .when('/home', {
                 templateUrl: '/views/home.html',
                 controller: 'HomeController',
@@ -26,11 +26,16 @@
                 controller: 'VideoListsController',
                 controllerAs: 'videoListsCtrl'
             })
-             .when('/admin', {
+            .when('/admin', {
                 templateUrl: '/views/admin.html',
                 controller: 'AdminController',
                 controllerAs: 'adminCtrl'
             })
+            .when('/activate/:userId', {
+                templateUrl: '/views/activate.html',
+                controller: 'ActivateController',
+                controllerAs: 'activateCtrl'
+            })
             .otherwise('/');
-            }
+    }
 }());
