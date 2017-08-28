@@ -8,11 +8,29 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Online Video Organizer</title>
 
+    <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="images/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
     <link rel="stylesheet" ng-href="https://bootswatch.com/cosmo/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css"> 
+    <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css">
     <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css">
     <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css">
@@ -38,13 +56,14 @@
                             <span class="icon-bar"></span> 
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#/">Online Video Organizer</a>
+                        <a style="padding-top: 10px" class="navbar-brand" href="#/"><span><img style="padding-bottom: 7px;" src="images/favicon/favicon-32x32.png"></span>nline <span><img style="padding-bottom: 7px;" src="images/favicon/favicon-32x32.png"></span>ideo <span><img style="padding-bottom: 7px;" src="images/favicon/favicon-32x32.png"></span>rganizer</a>
                     </div>
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li ng-class="{ 'active': mainCtrl.isActive('/home') }"><a href="#home">Home </a></li>
-                            <li ng-if="mainCtrl.user" ng-class="{ 'active': mainCtrl.isActive('/playlists') }"><a href="#playlists">Playlists </a></li> <!-- ng-if="mainCtrl.user" -->
+                            <li ng-if="mainCtrl.user" ng-class="{ 'active': mainCtrl.isActive('/playlists') }"><a href="#playlists">Playlists </a></li>
+                            <!-- ng-if="mainCtrl.user" -->
                             <li ng-if="mainCtrl.user && mainCtrl.user.roles.indexOf('ROLE_ADMIN') !== -1" ng-class="{ 'active': mainCtrl.isActive('/admin') }"><a href="#/admin">User </a></li>
                         </ul>
                         <ul ng-show="!mainCtrl.user" class="nav navbar-nav navbar-right">

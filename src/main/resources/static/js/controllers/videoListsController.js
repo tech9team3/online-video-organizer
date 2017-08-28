@@ -2,9 +2,9 @@
     angular.module('app')
         .controller('VideoListsController', VideoListsController);
 
-    VideoListsController.$inject = ['$location', '$http', '$route', 'VideoListsService', 'VideoService', 'UserService'];
+    VideoListsController.$inject = ['$location', '$http', '$route', '$window', 'VideoListsService', 'VideoService', 'UserService'];
 
-    function VideoListsController($location, $http, $route, VideoListsService, VideoService, UserService) {
+    function VideoListsController($location, $http, $route, $window, VideoListsService, VideoService, UserService) {
 
         var videoListsCtrl = this;
         videoListsCtrl.addVideoList = addVideoList;
@@ -27,7 +27,7 @@
             advanced: {
                 updateOnContentResize: true
             },
-            setHeight: 500,
+            setHeight: $window.innerHeight - 153,
             scrollInertia: 500,
         }
 

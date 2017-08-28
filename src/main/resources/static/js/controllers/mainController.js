@@ -98,7 +98,7 @@
                 mainCtrl.user = res;
                 UserService.setLoggedInUser(res);
                 angular.element('#login-register-modal').modal('hide');
-                $location.path('playlists');
+                //$location.path('playlists');
             }).error(function (error) {
                 mainCtrl.loginError = 'Bad credentials!';
             });

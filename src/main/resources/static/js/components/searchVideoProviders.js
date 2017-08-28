@@ -5,7 +5,7 @@
             bindings: {
                 onVideoSelect: '&'
             },
-            controller: function ($http, $cookieStore) {
+            controller: function ($http, $cookieStore, $window) {
                 var ctrl = this;
 
                 ctrl.searchYouTube = searchYouTube;
@@ -38,7 +38,7 @@
                             }
                         }
                     },
-                    setHeight: 450,
+                    setHeight: $window.innerHeight - 210,
                     scrollInertia: 500,
                 }
 

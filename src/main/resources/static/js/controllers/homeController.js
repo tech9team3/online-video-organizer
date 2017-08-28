@@ -2,9 +2,9 @@
     angular.module('app')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$location', '$http', '$route', 'VideoService', 'VideoListsService'];
+    HomeController.$inject = ['$location', '$http', '$route', '$window', 'VideoService', 'VideoListsService'];
 
-    function HomeController($location, $http, $route, VideoService, VideoListsService) {
+    function HomeController($location, $http, $route, $window, VideoService, VideoListsService) {
         var homeCtrl = this;
         homeCtrl.orderBy = orderBy;
         homeCtrl.order = 'id';
@@ -23,7 +23,7 @@
             advanced: {
                 updateOnContentResize: true
             },
-            setHeight: 500,
+            setHeight: $window.innerHeight - 153,
             scrollInertia: 500,
         }
 

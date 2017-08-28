@@ -123,7 +123,7 @@ tr.angular-ui-tree-empty {
 
 .video-list-thumbs>li:last-child {}
 
-.video-list-thumbs .play-video{
+.video-list-thumbs .play-video, .add-video{
     display: block;
     position: relative;
     background-color: #111;
