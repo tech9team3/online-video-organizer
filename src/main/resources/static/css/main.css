@@ -11,11 +11,10 @@ body {
     overflow-y: scroll;
 }
 
-.playlists {
-/*
+.element-border {
     border: solid;
     border-color: black;
-*/
+    border-radius: 4px
 }
 
 .active-playlist {
