@@ -118,7 +118,7 @@ public class NotificationService {
         mail.setTo(user.getEmail());
         mail.setFrom("organizetech9@gmail.com");
         mail.setSubject("Ban notification.");
-        mail.setText("Account with username: " +user.getUsername()+ " is temporarily disabled.");
+        mail.setText("Account with username: " +user.getUsername()+ " is temporarily disabled. Untill :"+user.getBanExpirationDate().toString());
         javaMailSender.send(mail);
     }
 
