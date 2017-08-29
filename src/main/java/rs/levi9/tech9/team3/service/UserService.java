@@ -8,6 +8,7 @@ import rs.levi9.tech9.team3.domain.*;
 import rs.levi9.tech9.team3.repository.CommentRepository;
 import rs.levi9.tech9.team3.repository.UserRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -96,5 +97,23 @@ public class UserService {
 
     public User findOneByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public  List<User> listOfBanUsers(){
+        Date startDate = new Date(System.currentTimeMillis() - 3600 * 1000);
+        Date endDate = new Date(System.currentTimeMillis() + 3600 * 1000);
+        System.out.println("Start date : "+startDate.toString());
+        System.out.println("End date : "+endDate.toString());
+
+        return userRepository.findAllByBanExpirationDateIsNotNullAndBanExpirationDateAfterAndBanExpirationDateBefore(startDate,endDate);
+    }
+    public void setBanToUser (String userName, Date banExpDate){
+        User foundUser = this.findOneByUsername(userName);
+        foundUser.setBanExpirationDate(banExpDate);
+        foundUser.setStatus(false);
+        this.save(foundUser);
+        if(foundUser.getStatus()!=true){
+            notificationService.sendTemporarilyBanNotification(foundUser);
+        }
     }
 }

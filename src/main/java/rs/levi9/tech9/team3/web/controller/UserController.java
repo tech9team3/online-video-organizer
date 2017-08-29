@@ -109,7 +109,16 @@ public class UserController {
     	System.out.println(googleResponse);
     	return googleResponse;
     }
-    
 
+	@RequestMapping(path ="/admin/banUsers", method = RequestMethod.GET)
+	public List<User> getListOfBanedUsers2Hours(){
+    	return  userService.listOfBanUsers();
+	}
+
+	@RequestMapping(path = "/admin/banUser/{username}/until/{date}")
+	public void banUser(@PathVariable("username") String username,
+						@PathVariable("date")Long date){
+		userService.setBanToUser( username, new Date(date));
+	}
 
 }
