@@ -4,7 +4,7 @@ INSERT INTO USER( status, email, first_name, last_name, password, registration_d
 INSERT INTO USER( status, email, first_name, last_name, password, registration_date, username) VALUES ( true, "jeca@jeca.com","Jeca","Jeca","jeca@1234",NOW(),"pereca");
 INSERT INTO USER( status, email, first_name, last_name, password, registration_date, username) VALUES ( true, "user@user.com","user","user","user@1234",NOW(),"user");
 INSERT INTO USER( status, email, first_name, last_name, password, registration_date, username) VALUES ( true, "admin@admin.com","admin","admin","admin@1234",NOW(),"admin");
-INSERT INTO USER( status, email, first_name, last_name, password, registration_date, username) VALUES ( true, "jewraaaa@gmail.com","Vladimir","Jevremov","jewra@1234",NOW(),"jewra");
+INSERT INTO USER( status, email, first_name, last_name, password, registration_date, username) VALUES ( true, "jewraaaa@gmail.com","Vladimir","Jevremov","jewra@1234",NOW(),"jewraaa");
 
 INSERT INTO `role` (`type`) values("ROLE_USER");
 INSERT INTO `role` (`type`) values("ROLE_ADMIN");

@@ -5,14 +5,15 @@
             $sceProvider.enabled(false);
         });
 
-    VideoController.$inject = ['$location', '$http', '$route', 'VideoService', '$routeParams', '$sce', 'CommentService', 'UserService', 'TagService'];
+    VideoController.$inject = ['$location', '$http', '$route', 'VideoService', '$routeParams', '$sce', 'CommentService', 'UserService', 'TagService', 'RateService'];
 
-    function VideoController($location, $http, $route, VideoService, $routeParams, $sce, CommentService, UserService, TagService) {
+    function VideoController($location, $http, $route, VideoService, $routeParams, $sce, CommentService, UserService, TagService, RateService) {
         var videoCtrl = this;
 
         videoCtrl.getCommentsForVideo = getCommentsForVideo;
         videoCtrl.postComment = postComment;
         videoCtrl.deleteComment = deleteComment;
+        videoCtrl.saveRate = saveRate;
         var videoId = parseInt($routeParams.videoId);
         videoCtrl.spin = false;
 
@@ -38,11 +39,11 @@
         }
 
         function postComment() {
-            if (!videoCtrl.loggedInUser) {
+            if (!UserService.getLoggedInUser()) {
                 $('#login-register-modal').modal('show');
             } else {
                 videoCtrl.spin = true;
-                videoCtrl.comment.user = videoCtrl.loggedInUser;
+                videoCtrl.comment.user = UserService.getLoggedInUser();
                 delete videoCtrl.comment.user.roles;
                 videoCtrl.comment.video = videoCtrl.video;
                 CommentService.saveComment(videoCtrl.comment).then(function (response) {
@@ -61,6 +62,18 @@
             });
             //videoCtrl.comment= {};
         }
+        
+        function saveRate() {
+        	 if (!UserService.getLoggedInUser()) {
+                 $('#login-register-modal').modal('show');
+        	 } else {
+            videoCtrl.rate.user = UserService.getLoggedInUser();
+            delete videoCtrl.rate.user.roles;
+            rate.video = videoCtrl.video;
+            RateService.saveRate(videoCtrl.rate);
+        	}
+        }
+          
     }
 
 })();
