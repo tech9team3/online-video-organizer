@@ -69,14 +69,10 @@
         	 } else {
         	videoCtrl.rate={};
             videoCtrl.rate.user = UserService.getLoggedInUser();
-            console.log(videoCtrl.rate.user);
             delete videoCtrl.rate.user.roles;
             videoCtrl.rate.video = videoCtrl.video;
-            console.log(videoCtrl.rate.video);
             videoCtrl.rate.mark = videoCtrl.rateModal;
-            console.log(videoCtrl.rate.mark);
             RateService.saveRate(videoCtrl.rate).then(function (response) {
-            	  console.log(videoCtrl.rate)
                
             });
            
