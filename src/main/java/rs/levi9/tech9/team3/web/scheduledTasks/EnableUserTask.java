@@ -40,7 +40,7 @@ public class EnableUserTask {
                 long banMiliSeconds = user.getBanExpirationDate().getTime();
                 long currentTimeMiliSeconds = System.currentTimeMillis();
 
-                if (banMiliSeconds > currentTimeMiliSeconds) {
+                if (banMiliSeconds < currentTimeMiliSeconds) {
 
                     user.setStatus(true);
                     user.setBanExpirationDate(null);
