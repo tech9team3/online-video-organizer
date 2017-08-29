@@ -31,11 +31,9 @@ public class Rate extends BaseEntity implements Serializable {
 	@JoinColumn(nullable = false)
 	private Video video;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Date creationDate;
 
-	@NotNull()
-	@Column(nullable = false)
 	public Date getCreationDate() {
 		return creationDate;
 	}

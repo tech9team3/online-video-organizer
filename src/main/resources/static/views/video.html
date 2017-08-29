@@ -22,8 +22,8 @@
   <div class="row">
         <div class="col-md-6 col-md-offset-3">
            <span>Rate:&nbsp;&nbsp;&nbsp;</span>
-                 <span uib-rating class="text-primary"  ng-init="videoCtrl.rate = 5" ng-model="videoCtrl.rate" max="5"  ng-click="videoCtrl.saveRate()" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>           
-               ({{videoCtrl.rate}})
+                 <span uib-rating class="text-primary"  ng-init="videoCtrl.rateModal = 0" ng-model="videoCtrl.rateModal" max="5"  ng-click="videoCtrl.saveRate()" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>           
+               ({{videoCtrl.rateModal}})
                
              <div class="pull-right" ng-if="vm.rateNumber != 0">
 				<div>Average Rate:&nbsp;&nbsp;&nbsp;</div>
