@@ -63,4 +63,10 @@ public class RateController {
 	public List<Rate> findAllRatesForVideoByVideoId(@PathVariable("videoId") Long videoId) {
 		return rateService.findAllRatesForVideo(videoId);
 	}
+	
+	@RequestMapping(path = "/search/mark/video/{videoId}/user/{username}", method = RequestMethod.GET)
+	public Rate findRateByVideoAndUser(@PathVariable("videoId")long videoId, @PathVariable("username") String username){
+		return rateService.findRateByVideoAndUser(videoId, username);
+	}
+
 }

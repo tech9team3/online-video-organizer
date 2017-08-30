@@ -69,4 +69,10 @@ public class RateService
 		List<Rate> listOfRates = rateRepository.findAllByUser(foundUser);
 		return listOfRates;
 	}
+	
+	public Rate findRateByVideoAndUser(long videoId, String username){
+		User foundUser = userRepository.findByUsername(username);
+		Video foundVideo = videoRepository.findOne(videoId);
+		return rateRepository.findByVideoAndUser(foundVideo, foundUser);
+	}
 }
