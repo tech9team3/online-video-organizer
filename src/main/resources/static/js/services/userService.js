@@ -91,5 +91,18 @@
             });
             return def.promise;
         }
+        
+        this.setBanUser = function (username, time) {
+            var def = $q.defer();
+            var req = {
+                method: 'GET',
+                url: "users//admin/banUser/" + username + "/forTime/" + time 
+            }
+            return $http(req).success(function (response) {
+                return response.data;
+            }).error(function () {
+                return def.reject("Failed");
+            });
+        }
     };
 }());

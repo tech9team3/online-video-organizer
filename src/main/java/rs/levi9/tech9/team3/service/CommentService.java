@@ -18,14 +18,20 @@ public class CommentService {
     private VideoRepository videoRepository;
     private NotificationService notificationService;
     private UserService userService;
+    private VideoService videoService;
+
 
     @Autowired
-    public CommentService(CommentRepository commentRepository, VideoRepository videoRepository, UserService
-            userService, NotificationService notificationService) {
+    public CommentService(CommentRepository commentRepository,
+                          VideoRepository videoRepository,
+                          UserService userService,
+                          NotificationService notificationService,
+                          VideoService videoService) {
         this.commentRepository = commentRepository;
         this.videoRepository = videoRepository;
         this.userService = userService;
         this.notificationService = notificationService;
+        this.videoService = videoService;
     }
 
     public List<Comment> findAll() {
@@ -40,10 +46,11 @@ public class CommentService {
     public Comment save(Comment comment) {
         Comment savedComment = commentRepository.save(comment);
         Video commentedVideo = comment.getVideo();
+        commentedVideo.setNumberOfComments(this.getNumberOfCommentsForVideo(commentedVideo.getId()));
+        videoService.save(commentedVideo);
+
         Notification notification = new Notification();
-//		System.out.println(commentedVideo.getId());
         User userToNotify = commentedVideo.getUser();
-//		System.out.println(userToNotify.getFirstName());
 
         notificationService.sendNotification(userToNotify, savedComment);
         notification.setComment(savedComment);
@@ -73,5 +80,9 @@ public class CommentService {
         List<Comment> listOfComments = commentRepository.findAllByUser(foundUser);
         return listOfComments;
 
+    }
+    public Long getNumberOfCommentsForVideo (Long videoId){
+        Video foundVideo = videoRepository.getOne(videoId);
+        return commentRepository.countCommentByVideo(foundVideo);
     }
 }

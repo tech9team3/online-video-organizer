@@ -102,8 +102,8 @@ public class UserService {
     public  List<User> listOfBanUsers(){
         Date startDate = new Date(System.currentTimeMillis() - 3600 * 1000);
         Date endDate = new Date(System.currentTimeMillis() + 3600 * 1000);
-        System.out.println("Start date : "+startDate.toString());
-        System.out.println("End date : "+endDate.toString());
+//        System.out.println("Start date : "+startDate.toString());
+//        System.out.println("End date : "+endDate.toString());
 
         return userRepository.findAllByBanExpirationDateIsNotNullAndBanExpirationDateAfterAndBanExpirationDateBefore(startDate,endDate);
     }

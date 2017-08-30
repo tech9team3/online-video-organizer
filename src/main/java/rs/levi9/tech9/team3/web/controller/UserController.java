@@ -115,10 +115,11 @@ public class UserController {
     	return  userService.listOfBanUsers();
 	}
 
-	@RequestMapping(path = "/admin/banUser/{username}/until/{date}")
+	@RequestMapping(path = "/admin/banUser/{username}/forTime/{time}", method = RequestMethod.GET)
 	public void banUser(@PathVariable("username") String username,
-						@PathVariable("date")Long date){
-		userService.setBanToUser( username, new Date(date));
+						@PathVariable("time")Long time){
+			Long newDate = System.currentTimeMillis()+time;
+		userService.setBanToUser( username, new Date(newDate));
 	}
 
 }

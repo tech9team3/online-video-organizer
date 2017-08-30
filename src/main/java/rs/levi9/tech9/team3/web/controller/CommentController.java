@@ -63,5 +63,8 @@ public class CommentController {
 	public List<Comment> findAllCommentsForOneVideo(@PathVariable("videoId") Long videoId){
 		return commentService.findAllCommentsForVideo(videoId);
 	}
-
+	@RequestMapping(path = "/numberOfComments/forVideo/{videoId}", method = RequestMethod.GET)
+	public Long findNumberOfCommentsForVideo(@PathVariable("videoId") Long videoId){
+		return  commentService.getNumberOfCommentsForVideo(videoId);
+	}
 }

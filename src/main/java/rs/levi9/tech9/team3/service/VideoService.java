@@ -12,7 +12,6 @@ import java.util.Set;
 public class VideoService {
 
     private VideoRepository videoRepository;
-    private VideoTagRepository videoTagRepository;
     private CommentRepository commentRepository;
     private VideoListRepository videoListRepository;
     private RateRepository rateRepository;
@@ -21,15 +20,14 @@ public class VideoService {
 
     @Autowired
     public VideoService(VideoRepository videoRepository,
-                        VideoTagRepository videoTagRepository,
                         CommentRepository commentRepository,
                         VideoListRepository videoListRepository,
                         RateRepository rateRepository,
                         UserRepository userRepository,
-                        VideoTagService videoTagService) {
+                        VideoTagService videoTagService
+    ) {
 
         this.videoRepository = videoRepository;
-        this.videoTagRepository = videoTagRepository;
         this.commentRepository = commentRepository;
         this.videoListRepository = videoListRepository;
         this.rateRepository = rateRepository;
@@ -54,8 +52,7 @@ public class VideoService {
             if (foundVideoTag == null) {
                 videoTag.setStatus(true);
                 videoTagService.save(videoTag);
-            }
-            else {
+            } else {
                 videoTag.setId(foundVideoTag.getId());
             }
         }

@@ -24,6 +24,10 @@
         function init() {
             getVideoByVideoId(videoId);
             getCommentsForVideo(videoId);
+            if (UserService.getLoggedInUser()){
+            getRateByVideoAndUser();
+            getAverageRateForVideo();
+            }
         }
 
         function getVideoByVideoId(videoId) {
@@ -67,18 +71,30 @@
         	 if (!UserService.getLoggedInUser()) {
                  $('#login-register-modal').modal('show');
         	 } else {
-        	videoCtrl.rate={};
-            videoCtrl.rate.user = UserService.getLoggedInUser();
-            delete videoCtrl.rate.user.roles;
-            videoCtrl.rate.video = videoCtrl.video;
-            videoCtrl.rate.mark = videoCtrl.rateModal;
-            RateService.saveRate(videoCtrl.rate).then(function (response) {
-               
-            });
-           
+	            videoCtrl.rate.user = UserService.getLoggedInUser();
+	            delete videoCtrl.rate.user.roles;
+	            videoCtrl.rate.video = videoCtrl.video;
+	            RateService.saveRate(videoCtrl.rate).then(function (response) {
+         
+	            });           
         	}
         }
+        
+        function getRateByVideoAndUser() {
+            RateService.getRateByVideoAndUser(videoId, UserService.getLoggedInUser().username).then(function (response) {
+            	videoCtrl.rate = response.data;
+            });        	
+        }
+        
+        function getAverageRateForVideo() {
+            RateService.getAverageRateForVideo(videoId).then(function (response) {
+               videoCtrl.rateModel=response.data;
+            });        	
+        }
+        
+        }
+        
           
-    }
+    
 
 })();

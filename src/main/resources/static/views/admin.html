@@ -16,7 +16,7 @@
                             <div class="col-md-2">{{user.email}}</div>
                             <div class="col-md-2">
                                 <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#delete-user-modal" ng-click="adminCtrl.selectUser(user)"><span class="glyphicon glyphicon-remove"></span></a>
-                                <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#block-user-modal" ng-click="block(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-ban-circle"></span></a>
+                                <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#block-user-modal" ng-click="adminCtrl.selectUser(user)" style="margin-right: 8px;"><span class="glyphicon glyphicon-ban-circle"></span></a>
                                 <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#add-user-modal" ng-click="adminCtrl.editUser(user)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
                             </div>
                         </div>
@@ -319,26 +319,25 @@
             <div class="modal-body">
                 Period of time:
                 <div class="radio">
-                    <label><input type="radio" name="optradio">One week</label>
+                    <label><input type="radio"  ng-model="adminCtrl.time" name="optradio" value="60000">One min</label>
+                <div class="radio">
+                    <label><input type="radio"  ng-model="adminCtrl.time" name="optradio" value="2592000000">One month</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" name="optradio">One month</label>
-                </div>
-                <div class="radio disabled">
-                    <label><input type="radio" name="optradio">Three months</label>
+                    <label><input type="radio" ng-model="adminCtrl.time" name="optradio" value="7776000000">Three months</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" name="optradio">Six months</label>
+                    <label><input type="radio" ng-model="adminCtrl.time" name="optradio" value="15552000000">Six months</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" name="optradio">Nine months</label>
+                    <label><input type="radio" ng-model="adminCtrl.time" name="optradio" value="23328000000">Nine months</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" name="optradio">One year</label>
+                    <label><input type="radio" ng-model="adminCtrl.time" name="optradio" value="31104000000">One year</label>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" ng-click = "adminCtrl.banUser()">Save</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
