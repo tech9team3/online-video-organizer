@@ -77,10 +77,11 @@ public class RateService {
     public double getAverageRateForVideo(Long videoId) {
         Video foundVideo = videoRepository.findOne(videoId);
         List<Rate> listOfRatesForVideo = rateRepository.findAllByVideo(foundVideo);
+
         double averageRate = 0;
         double totalRate = 0;
         for (Rate rate : listOfRatesForVideo) {
-            totalRate = totalRate + rate.getMark();
+            totalRate += rate.getMark();
         }
         averageRate = totalRate / listOfRatesForVideo.size();
         return averageRate;
