@@ -79,7 +79,6 @@ public class NotificationService {
         helper.setTo(user.getEmail());
         helper.setSubject("Registration email");
         helper.setText(text, true);
-        simpMessagingTemplate.convertAndSend("/topic/public.messages", "Some processed text!");
         javaMailSender.send(message);
     }
 
@@ -92,7 +91,8 @@ public class NotificationService {
         mail.setSubject("Comment notification.");
         mail.setText("This is a email notification after " + commentAuthor.getUsername() + " posted a comment: "
                 + comment.getContent() + " on one of your video: " + comment.getVideo().getTitle());
-        simpMessagingTemplate.convertAndSend("/topic/public.messages", "Some processed text!");
+        simpMessagingTemplate.convertAndSendToUser(user.getUsername(), "/queue/private.messages", commentAuthor.getUsername() + " posted a comment: "
+                + comment.getContent() + " on one of your video: " + comment.getVideo().getTitle());
         javaMailSender.send(mail);
     }
 
@@ -105,7 +105,8 @@ public class NotificationService {
         mail.setSubject("Rate notification.");
         mail.setText("This is a email notification after ~:" + ratetAuthor.getUsername() + " rated your video :"
                 + rate.getVideo().getTitle()+"he/she/it rated your video with mark ~:"+rate.getMark());
-		simpMessagingTemplate.convertAndSendToUser(user.getUsername(), "/ovo/notify/acceptNotification", "Some processed text!");
+        simpMessagingTemplate.convertAndSendToUser(user.getUsername(), "/queue/private.messages", ratetAuthor.getUsername() + " rated your video :"
+                + rate.getVideo().getTitle()+"he/she/it rated your video with mark ~:"+rate.getMark());
         javaMailSender.send(mail);
     }
 
@@ -115,7 +116,6 @@ public class NotificationService {
         mail.setFrom("organizetech9@gmail.com");
         mail.setSubject("Ban notification.");
         mail.setText("Account with username: " +user.getUsername()+ " is permanently disabled.");
-        simpMessagingTemplate.convertAndSendToUser(user.getUsername(), "/ovo/notify/acceptNotification", "Some processed text!");
         javaMailSender.send(mail);
     }
 
@@ -125,7 +125,6 @@ public class NotificationService {
         mail.setFrom("organizetech9@gmail.com");
         mail.setSubject("Ban notification.");
         mail.setText("Account with username: " +user.getUsername()+ " is temporarily disabled. Untill :"+user.getBanExpirationDate().toString());
-        simpMessagingTemplate.convertAndSendToUser(user.getUsername(), "/ovo/notify/acceptNotification", "Some processed text!");
         javaMailSender.send(mail);
     }
 
@@ -135,7 +134,6 @@ public class NotificationService {
         mail.setFrom("organizetech9@gmail.com");
         mail.setSubject("DisableBan notification.");
         mail.setText("Account with username: " +user.getUsername()+ " is enabled. You can use it again...");
-        simpMessagingTemplate.convertAndSendToUser(user.getUsername(), "/ovo/notify/acceptNotification", "Some processed text!");
         javaMailSender.send(mail);
     }
 }

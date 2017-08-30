@@ -2,9 +2,9 @@
     angular.module('app')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['$location', '$http', '$route', 'UserService', 'vcRecaptchaService', '$scope', '$stomp', '$log'];
+    MainController.$inject = ['$location', '$http', '$route', 'UserService', 'vcRecaptchaService', '$scope', '$stomp', '$log', 'growl'];
 
-    function MainController($location, $http, $route, UserService, vcRecaptchaService, $scope, $stomp, $log) {
+    function MainController($location, $http, $route, UserService, vcRecaptchaService, $scope, $stomp, $log, growl) {
 
         var mainCtrl = this;
         mainCtrl.isActive = isActive;
@@ -32,36 +32,38 @@
             var socket = new SockJS('/stompwebsocket');
             stompClient = Stomp.over(socket);
             stompClient.connect({}, function (frame) {
-                stompClient.subscribe('/topic/public.messages', function (retVal) {
-                    console.log(retVal);
+                stompClient.subscribe('/user/queue/private.messages', function (retVal) {
+                    growl.success(retVal.body);
                 });
             });
         }
 
-//        $stomp.setDebug(function (args) {
-//            $log.debug(args);
-//        })
-//
-//        $stomp.connect('/sendNotification', {
-//                "headers": {
-//                    "Authorization": "Basic " + btoa('pera:para@1234')
-//                }
-//            }) // frame = CONNECTED headers
-//            .then(function (frame) {
-//                var subscription = $stomp.subscribe('/ovo/notify/', function (payload, headers, res) {
-//                    mainCtrl.payload = payload;
-//                    console.log(mainCtrl.payload);
-//                }, {
-//                    "headers": {
-//                        "Authorization": "Basic " + btoa('pera:para@1234')
-//                    }
-//                })
-//            });
+        //        $stomp.setDebug(function (args) {
+        //            $log.debug(args);
+        //        })
+        //
+        //        $stomp.connect('/stompwebsocket', {
+        //                "headers": {
+        //                    'Authorization': 'Basic ' + btoa('perazdera:para@1234'),
+        //                    'X-Requested-With': 'XMLHttpRequest'
+        //                }
+        //            }) // frame = CONNECTED headers
+        //            .then(function (frame) {
+        //                var subscription = $stomp.subscribe('topic/public.messages', function (payload, headers, res) {
+        //                    mainCtrl.payload = payload;
+        //                    console.log(mainCtrl.payload);
+        //                }, {
+        //                    "headers": {
+        //                        'Authorization': 'Basic ' + btoa('perazdera:para@1234'),
+        //                        'X-Requested-With': 'XMLHttpRequest'
+        //                    }
+        //                })
+        //            });
 
 
 
         function init() {
-            connect();
+
             if (localStorage.getItem("base64Credential")) {
                 login(localStorage.getItem("base64Credential"));
                 mainCtrl.credentials = {
@@ -133,6 +135,7 @@
                 }
                 mainCtrl.user = res;
                 UserService.setLoggedInUser(res);
+                connect();
                 angular.element('#login-register-modal').modal('hide');
                 //$location.path('playlists');
             }).error(function (error) {
