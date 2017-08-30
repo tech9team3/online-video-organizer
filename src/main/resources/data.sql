@@ -1,8 +1,8 @@
-INSERT INTO USER( status, email, first_name, last_name, password, registration_date, username) VALUES ( true, "pera@para.com","Pera","Peric","para@1234",NOW(),"pera");
-INSERT INTO USER( status, email, first_name, last_name, password, registration_date, username) VALUES ( false, "zika@zika.com","Zika","Zikic","zika@1234",NOW(),"zile");
-INSERT INTO USER( status, email, first_name, last_name, password, registration_date, username) VALUES ( true, "mika@mika.com","Mika","Mikic","mika@1234",NOW(),"mika");
+INSERT INTO USER( status, email, first_name, last_name, password, registration_date, username) VALUES ( true, "pera@para.com","Pera","Peric","para@1234",NOW(),"perazdera");
+INSERT INTO USER( status, email, first_name, last_name, password, registration_date, username) VALUES ( false, "zika@zika.com","Zika","Zikic","zika@1234",NOW(),"zilekile");
+INSERT INTO USER( status, email, first_name, last_name, password, registration_date, username) VALUES ( true, "mika@mika.com","Mika","Mikic","mika@1234",NOW(),"mikaslika");
 INSERT INTO USER( status, email, first_name, last_name, password, registration_date, username) VALUES ( true, "jeca@jeca.com","Jeca","Jeca","jeca@1234",NOW(),"pereca");
-INSERT INTO USER( status, email, first_name, last_name, password, registration_date, username) VALUES ( true, "user@user.com","user","user","user@1234",NOW(),"user");
+INSERT INTO USER( status, email, first_name, last_name, password, registration_date, username) VALUES ( true, "user@user.com","user","user","user@1234",NOW(),"userica");
 INSERT INTO USER( status, email, first_name, last_name, password, registration_date, username) VALUES ( true, "admin@admin.com","admin","admin","admin@1234",NOW(),"admin");
 INSERT INTO USER( status, email, first_name, last_name, password, registration_date, username) VALUES ( true, "jewraaaa@gmail.com","Vladimir","Jevremov","jewra@1234",NOW(),"jewraaa");
 
