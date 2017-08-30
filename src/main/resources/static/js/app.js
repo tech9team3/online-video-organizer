@@ -1,5 +1,5 @@
 (function () {
-    var app = angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'vcRecaptcha','ngCookies','ngTagsInput','ui.tree','ngScrollbars']);
+    var app = angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'vcRecaptcha', 'ngCookies', 'ngTagsInput', 'ui.tree', 'ngScrollbars', 'ngStomp']);
 
     // If we implement the basic security in spring boot then the response will
     // contains the header 'WWW-Authenticate: Basic'. So the browser will popup a

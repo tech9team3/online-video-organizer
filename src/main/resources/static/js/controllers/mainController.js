@@ -2,9 +2,9 @@
     angular.module('app')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['$location', '$http', '$route', 'UserService', 'vcRecaptchaService', '$scope'];
+    MainController.$inject = ['$location', '$http', '$route', 'UserService', 'vcRecaptchaService', '$scope', '$stomp', '$log'];
 
-    function MainController($location, $http, $route, UserService, vcRecaptchaService, $scope) {
+    function MainController($location, $http, $route, UserService, vcRecaptchaService, $scope, $stomp, $log) {
 
         var mainCtrl = this;
         mainCtrl.isActive = isActive;
@@ -20,6 +20,7 @@
         mainCtrl.registrationMessage;
         mainCtrl.loginUserForm;
         mainCtrl.registerUserForm;
+        mainCtrl.payload;
 
         //reCaptcha
         mainCtrl.publicKey = "6LceCy0UAAAAALAVMh0eYQnnlXsyvWkksQYayaCN";
@@ -27,10 +28,45 @@
 
         init();
 
+        function connect() {
+            var socket = new SockJS('/stompwebsocket');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function (frame) {
+                stompClient.subscribe('/topic/public.messages', function (retVal) {
+                    console.log(retVal);
+                });
+            });
+        }
+
+//        $stomp.setDebug(function (args) {
+//            $log.debug(args);
+//        })
+//
+//        $stomp.connect('/sendNotification', {
+//                "headers": {
+//                    "Authorization": "Basic " + btoa('pera:para@1234')
+//                }
+//            }) // frame = CONNECTED headers
+//            .then(function (frame) {
+//                var subscription = $stomp.subscribe('/ovo/notify/', function (payload, headers, res) {
+//                    mainCtrl.payload = payload;
+//                    console.log(mainCtrl.payload);
+//                }, {
+//                    "headers": {
+//                        "Authorization": "Basic " + btoa('pera:para@1234')
+//                    }
+//                })
+//            });
+
+
+
         function init() {
-            if(localStorage.getItem("base64Credential")) {
+            connect();
+            if (localStorage.getItem("base64Credential")) {
                 login(localStorage.getItem("base64Credential"));
-                mainCtrl.credentials = {autologin: false};
+                mainCtrl.credentials = {
+                    autologin: false
+                };
             }
             if (mainCtrl.user) {
                 $route.reload();

@@ -57,7 +57,7 @@
                                     <label for="username2">Username</label>
                                     <div class="input-group" ng-class="{ 'has-error' : mainCtrl.registerUserForm.username.$invalid && !mainCtrl.registerUserForm.username.$pristine }">
                                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                        <input name="username" type="text" class="form-control" id="username2" placeholder="Enter your username" required ng-model="mainCtrl.registerInput.username" />
+                                        <input name="username" type="text" class="form-control" id="username2" placeholder="Enter your username" required ng-model="mainCtrl.registerInput.username" ng-minlength="5" ng-maxlength="15"/>
                                     </div>
                                     <span class="error" ng-show="mainCtrl.registerUserForm.username.$invalid && !mainCtrl.registerUserForm.username.$pristine">* Username is required!</span>
                                     <span ng-if="mainCtrl.registrationError.username" class="error">* {{mainCtrl.registrationError.username}}</span>
