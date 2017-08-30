@@ -35,6 +35,18 @@
              });
          }
          
+         this.getAverageRateForVideo = function (videoId) {
+             var def = $q.defer();
+             var req = {
+                 method: 'GET',
+                 url: "rate/search/averageRateForVideo/" + videoId
+             }
+             return $http(req).success(function (response) {
+                 return response.data;
+             }).error(function () {
+                 return def.reject("Failed");
+             });
+         }
        
     };
 }());

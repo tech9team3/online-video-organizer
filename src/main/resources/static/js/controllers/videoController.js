@@ -24,8 +24,10 @@
         function init() {
             getVideoByVideoId(videoId);
             getCommentsForVideo(videoId);
+            if (UserService.getLoggedInUser()){
             getRateByVideoAndUser();
-            
+            getAverageRateForVideo();
+            }
         }
 
         function getVideoByVideoId(videoId) {
@@ -84,7 +86,15 @@
             });        	
         }
         
+        function getAverageRateForVideo() {
+            RateService.getAverageRateForVideo(videoId).then(function (response) {
+               videoCtrl.rateModel=response.data;
+            });        	
+        }
+        
+        }
+        
           
-    }
+    
 
 })();

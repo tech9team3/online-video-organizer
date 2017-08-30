@@ -24,6 +24,7 @@
         adminCtrl.saveVideoList = saveVideoList;
         adminCtrl.editVideo = editVideo;
         adminCtrl.saveVideo = saveVideo;
+        adminCtrl.banUser = banUser;
 
 
         getUsers();
@@ -184,6 +185,13 @@
                 getCommentsForVideo(video);
             });
             //videoCtrl.comment= {};
+        }
+        
+        function banUser()
+        {
+        	UserService.setBanUser(adminCtrl.user.username, adminCtrl.time).then(function (response) {
+              $('#block-user-modal').modal('hide');
+        	 });
         }
     }
 })();
