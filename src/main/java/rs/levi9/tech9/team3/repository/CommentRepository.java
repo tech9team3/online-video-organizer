@@ -14,4 +14,5 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
 	public List<Comment> findAllByVideoOrderByCreationDateDesc(Video video);
 	public List<Comment> findAllByUser(User user);
+	public Long countCommentByVideo(Video video);
 }

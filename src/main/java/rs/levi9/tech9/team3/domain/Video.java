@@ -46,11 +46,17 @@ public class Video extends BaseEntity implements Serializable {
     @Column(nullable = true)
     private String videoImageUrl;
 
+
     @ManyToMany
     @JoinTable(joinColumns = @JoinColumn(name = "video_id"),
             inverseJoinColumns = @JoinColumn(name = "video_tag_id"))
     private Set<VideoTag> videoTag;
 
+    @Column(nullable = true)
+    private Long numberOfComments;
+
+    @Column(nullable = true)
+    private Double averageRate;
 
     public String getVideoUrl() {
         return videoUrl;
@@ -138,6 +144,22 @@ public class Video extends BaseEntity implements Serializable {
 
     public void setVideoTag(Set<VideoTag> videoTag) {
         this.videoTag = videoTag;
+    }
+
+    public Long getNumberOfComments() {
+        return numberOfComments;
+    }
+
+    public void setNumberOfComments(Long numberOfComments) {
+        this.numberOfComments = numberOfComments;
+    }
+
+    public Double getAverageRate() {
+        return averageRate;
+    }
+
+    public void setAverageRate(Double averageRate) {
+        this.averageRate = averageRate;
     }
 
     public Video() {

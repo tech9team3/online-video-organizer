@@ -31,12 +31,12 @@ public class EnableUserTask {
 
         List<User> listBanUsers=userService.listOfBanUsers();
         if(listBanUsers.isEmpty()){
-            System.out.println("Niko nije dobio ban");
+//            System.out.println("Niko nije dobio ban");
         }else {
 
             for (User user : listBanUsers) {
-                System.out.print("Korisnik ~"+user.getUsername()+" ima ban");
-                System.out.println(" koji traje do "+user.getBanExpirationDate().toString());
+//                System.out.print("Korisnik ~"+user.getUsername()+" ima ban");
+//                System.out.println(" koji traje do "+user.getBanExpirationDate().toString());
                 long banMiliSeconds = user.getBanExpirationDate().getTime();
                 long currentTimeMiliSeconds = System.currentTimeMillis();
 
@@ -44,7 +44,7 @@ public class EnableUserTask {
 
                     user.setStatus(true);
                     user.setBanExpirationDate(null);
-                    System.out.println("Korisnik ~:"+user.getUsername()+" vise nije banovan");
+//                    System.out.println("Korisnik ~:"+user.getUsername()+" vise nije banovan");
                     userService.save(user);
                     if(user.getStatus()){
                         notificationService.sendAccountEnabledNotification(user);
