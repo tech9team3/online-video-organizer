@@ -1,17 +1,14 @@
 package rs.levi9.tech9.team3.web.scheduledTasks;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
 import rs.levi9.tech9.team3.domain.User;
 import rs.levi9.tech9.team3.service.NotificationService;
 import rs.levi9.tech9.team3.service.UserService;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 @Component
 public class EnableUserTask {

@@ -5,6 +5,7 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import rs.levi9.tech9.team3.domain.Comment;
 import rs.levi9.tech9.team3.domain.Notification;
@@ -25,10 +26,11 @@ public class NotificationService {
     private JavaMailSender javaMailSender;
     private CommentRepository commentRepository;
     private UserRepository userRepository;
+    private SimpMessagingTemplate simpMessagingTemplate;
 
     @Autowired
     public NotificationService(NotificationRepository notificationRepository, JavaMailSender javaMailSender,
-                               CommentRepository commentRepository, UserRepository userRepository) {
+                               CommentRepository commentRepository, UserRepository userRepository, SimpMessagingTemplate simpMessagingTemplate) {
         this.notificationRepository = notificationRepository;
         this.javaMailSender = javaMailSender;
         this.commentRepository = commentRepository;
