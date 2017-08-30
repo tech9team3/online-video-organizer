@@ -98,9 +98,9 @@ public class NotificationService {
         SimpleMailMessage mail = new SimpleMailMessage();
         mail.setTo(user.getEmail());
         mail.setFrom("organizetech9@gmail.com");
-        mail.setSubject("Comment notification.");
-        mail.setText("This is a email notification after" + ratetAuthor.getUsername() + " rated your video :"
-                + rate.getVideo().getTitle());
+        mail.setSubject("Rate notification.");
+        mail.setText("This is a email notification after ~:" + ratetAuthor.getUsername() + " rated your video :"
+                + rate.getVideo().getTitle()+"he/she/it rated your video with mark ~:"+rate.getMark());
         javaMailSender.send(mail);
     }
 
@@ -126,7 +126,7 @@ public class NotificationService {
         SimpleMailMessage mail = new SimpleMailMessage();
         mail.setTo(user.getEmail());
         mail.setFrom("organizetech9@gmail.com");
-        mail.setSubject("Ban notification.");
+        mail.setSubject("DisableBan notification.");
         mail.setText("Account with username: " +user.getUsername()+ " is enabled. You can use it again...");
         javaMailSender.send(mail);
     }

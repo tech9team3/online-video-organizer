@@ -86,4 +86,10 @@ public class RateService {
         return averageRate;
     }
 
+
+	public Rate findRateByVideoAndUser(long videoId, String username){
+		User foundUser = userRepository.findByUsername(username);
+		Video foundVideo = videoRepository.findOne(videoId);
+		return rateRepository.findByVideoAndUser(foundVideo, foundUser);
+	}
 }

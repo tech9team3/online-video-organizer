@@ -13,5 +13,6 @@ import rs.levi9.tech9.team3.domain.Video;
 public interface RateRepository extends JpaRepository<Rate, Long>{
 	public List<Rate> findAllByVideo(Video video);
 	public List<Rate> findAllByUser(User user);
+	public Rate findByVideoAndUser(Video video,User user);
 
 }
