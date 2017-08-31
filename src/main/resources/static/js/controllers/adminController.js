@@ -2,9 +2,9 @@
     angular.module('app')
         .controller('AdminController', AdminController);
 
-    AdminController.$inject = ['$location', '$http', '$route', 'VideoService', 'VideoListsService', 'UserService', 'CommentService'];
+    AdminController.$inject = ['$location', '$http', '$route', 'VideoService', 'VideoListsService', 'UserService', 'CommentService', 'RateService'];
 
-    function AdminController($location, $http, $route, VideoService, VideoListsService, UserService, CommentService) {
+    function AdminController($location, $http, $route, VideoService, VideoListsService, UserService, CommentService, RateService) {
         var adminCtrl = this;
         adminCtrl.getVideoListsByUser = getVideoListsByUser;
         adminCtrl.getVideosByVideoList = getVideosByVideoList;
@@ -25,6 +25,7 @@
         adminCtrl.editVideo = editVideo;
         adminCtrl.saveVideo = saveVideo;
         adminCtrl.banUser = banUser;
+    
 
 
         getUsers();
@@ -194,5 +195,7 @@
               $('#block-user-modal').modal('hide');
         	 });
         }
+        
+    
     }
 })();
