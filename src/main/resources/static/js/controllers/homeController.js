@@ -9,7 +9,6 @@
         homeCtrl.orderBy = orderBy;
         homeCtrl.order = 'id';
         homeCtrl.reverseOrder = false;
-        homeCtrl.ratesAndCommentsComparatro = ratesAndCommentsComparatro;
         homeCtrl.getVideoListsByVisible = getVideoListsByVisible();
         homeCtrl.getPublicVideosByVideoListId = getPublicVideosByVideoListId;
         homeCtrl.getPublicVideos = getPublicVideos;
@@ -42,9 +41,7 @@
             homeCtrl.order = order;
         }
 
-        function ratesAndCommentsComparatro(v1, v2) {
-
-        }
+      
 
         function getVideoListsByVisible() {
             VideoListsService.getVideoListsByVisible().then(function (response) {

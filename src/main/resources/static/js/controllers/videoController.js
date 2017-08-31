@@ -75,7 +75,7 @@
 	            delete videoCtrl.rate.user.roles;
 	            videoCtrl.rate.video = videoCtrl.video;
 	            RateService.saveRate(videoCtrl.rate).then(function (response) {
-         
+	            	 getAverageRateForVideo();
 	            });           
         	}
         }

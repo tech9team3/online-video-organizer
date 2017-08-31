@@ -19,6 +19,9 @@
         videoListsCtrl.addVideo = addVideo;
         videoListsCtrl.saveVideo = saveVideo;
         videoListsCtrl.deleteVideo = deleteVideo;
+        videoListsCtrl.orderBy = orderBy;
+        videoListsCtrl.order = 'id';
+        videoListsCtrl.reverseOrder = false;
 
         videoListsCtrl.scrollbarsConfig = {
             axis: 'y',
@@ -43,7 +46,11 @@
                 getVideoListsByUserId(videoListsCtrl.loggedInUser);
             }
         }
-
+       
+        function orderBy(order) {
+        	videoListsCtrl.reverseOrder = (videoListsCtrl.order === order) ? !videoListsCtrl.reverseOrder : false;
+        	videoListsCtrl.order = order;
+        }
 
         function addVideoList() {
             videoListsCtrl.operation = "Add";

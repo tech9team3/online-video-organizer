@@ -188,8 +188,9 @@
         }
         
         function banUser()
-        {
+        {  
         	UserService.setBanUser(adminCtrl.user.username, adminCtrl.time).then(function (response) {
+        		 getUsers();
               $('#block-user-modal').modal('hide');
         	 });
         }
