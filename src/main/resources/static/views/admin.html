@@ -6,7 +6,7 @@
                     <div ui-tree-handle class="tree-node tree-node-content">
                         <div class="row">
                             <div class="col-md-2">
-                                <a class="btn btn-success btn-xs" data-nodrag ng-click="adminCtrl.getVideoListsByUser(user);this.toggle();">
+                                <a class="btn btn-primary btn-xs" data-nodrag ng-click="adminCtrl.getVideoListsByUser(user);this.toggle();">
                                     <span class="glyphicon glyphicon-chevron-right" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
                                 </a>
                             </div>
@@ -16,7 +16,7 @@
                             <div class="col-md-2">{{user.email}}</div>
                             <div class="col-md-2">
                                 <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#delete-user-modal" ng-click="adminCtrl.selectUser(user)"><span class="glyphicon glyphicon-remove"></span></a>
-                                <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#block-user-modal" ng-click="adminCtrl.selectUser(user)" style="margin-right: 8px;"><span class="glyphicon glyphicon-ban-circle"></span></a>
+                                <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#block-user-modal" ng-click="adminCtrl.selectUser(user)" style="margin-right: 8px;" ng-disabled="!user.status"><span class="glyphicon glyphicon-ban-circle"></span></a>
                                 <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#add-user-modal" ng-click="adminCtrl.editUser(user)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
                             </div>
                         </div>
@@ -26,7 +26,7 @@
                             <div ui-tree-handle>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <a class="btn btn-success btn-xs" data-nodrag ng-click="adminCtrl.getVideosByVideoList(videoList);this.toggle();">
+                                        <a class="btn btn-primary btn-xs" data-nodrag ng-click="adminCtrl.getVideosByVideoList(videoList);this.toggle();">
                                             <span class="glyphicon glyphicon-chevron-right" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
                                         </a>
                                     </div>
@@ -43,14 +43,17 @@
                                 <li ng-repeat="video in videoList.videos | filter: adminCtrl.searchByVideoTitle" data-collapsed="true" ui-tree-node>
                                     <div ui-tree-handle>
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <a ng-href="#/video/{{video.id}}">
                                                     <span>{{video.title}}</span>
-                                                    <span><img ng-click="" style="width: 120px" class="img-responsive" ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" /></span>
+                                                    <span><img ng-click="" style="width: 120px; margin-left:30px;" class="img-responsive" ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" /></span>
                                                 </a>
+                                                Averige rate:
+                                                <span uib-rating read-only="true" class="text-primary" ng-model="video.averageRate" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>
+                                                <span>({{video.averageRate}})</span>
                                             </div>
                                             <div class="col-md-2">{{video.description}}</div>
-                                            <div class="col-md-2"><span ng-if="video.visible===true">Public</span>
+                                            <div class="col-md-1"><span ng-if="video.visible===true">Public</span>
                                                 <span ng-if="video.visible===false">Private</span></div>
                                             <div class="col-md-2"> <span ng-repeat="tag in video.videoTag" class="tag-item">{{tag.name}}</span></div>
                                             <div class="col-md-2"><a ng-href="http://{{video.videoUrl}}" target="_blank">{{video.videoUrl}}</a></div>
@@ -59,7 +62,7 @@
                                                 <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#edit-video-modal" ng-click="adminCtrl.editVideo(video, videoList, user)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
                                             </div>
                                         </div>
-                                        <a class="btn btn-success btn-xs" data-nodrag ng-click="adminCtrl.getCommentsForVideo(video);this.toggle();">
+                                        <a class="btn btn-primary btn-xs" data-nodrag ng-click="adminCtrl.getCommentsForVideo(video);this.toggle();">
                                             <span class="glyphicon glyphicon-chevron-right" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
                                         </a>
                                     </div>
@@ -320,26 +323,26 @@
                 Period of time:
                 <div class="radio">
                     <label><input type="radio"  ng-model="adminCtrl.time" name="optradio" value="60000">One min</label>
-                <div class="radio">
-                    <label><input type="radio"  ng-model="adminCtrl.time" name="optradio" value="2592000000">One month</label>
+                    <div class="radio">
+                        <label><input type="radio"  ng-model="adminCtrl.time" name="optradio" value="2592000000">One month</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" ng-model="adminCtrl.time" name="optradio" value="7776000000">Three months</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" ng-model="adminCtrl.time" name="optradio" value="15552000000">Six months</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" ng-model="adminCtrl.time" name="optradio" value="23328000000">Nine months</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" ng-model="adminCtrl.time" name="optradio" value="31104000000">One year</label>
+                    </div>
                 </div>
-                <div class="radio">
-                    <label><input type="radio" ng-model="adminCtrl.time" name="optradio" value="7776000000">Three months</label>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="adminCtrl.banUser()">Save</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
-                <div class="radio">
-                    <label><input type="radio" ng-model="adminCtrl.time" name="optradio" value="15552000000">Six months</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" ng-model="adminCtrl.time" name="optradio" value="23328000000">Nine months</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" ng-model="adminCtrl.time" name="optradio" value="31104000000">One year</label>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" ng-click = "adminCtrl.banUser()">Save</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-</div>
