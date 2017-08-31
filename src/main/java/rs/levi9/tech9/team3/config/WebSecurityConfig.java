@@ -44,6 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	            .antMatchers(HttpMethod.GET, "/videos/search/public/videoListId/*").permitAll()
 	            .antMatchers(HttpMethod.GET, "/comments/search/comments/forVideo/*").permitAll()
 	            .antMatchers(HttpMethod.GET, "/videos/*").permitAll()
+	            .antMatchers(HttpMethod.GET, "/stompwebsocket/**").permitAll()
 	            .anyRequest().fullyAuthenticated().and()
 	            .httpBasic().and()
 	            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

@@ -28,39 +28,15 @@
 
         init();
 
-        function connect() {
+        function connectToWebSocketNotification() {
             var socket = new SockJS('/stompwebsocket');
             stompClient = Stomp.over(socket);
-            stompClient.connect({}, function (frame) {
-                stompClient.subscribe('/user/queue/private.messages', function (retVal) {
+            stompClient.connect({ }, function (frame) {
+                stompClient.subscribe('/queue/private.messages/' + UserService.getLoggedInUser().username, function (retVal) {
                     growl.success(retVal.body);
                 });
             });
         }
-
-        //        $stomp.setDebug(function (args) {
-        //            $log.debug(args);
-        //        })
-        //
-        //        $stomp.connect('/stompwebsocket', {
-        //                "headers": {
-        //                    'Authorization': 'Basic ' + btoa('perazdera:para@1234'),
-        //                    'X-Requested-With': 'XMLHttpRequest'
-        //                }
-        //            }) // frame = CONNECTED headers
-        //            .then(function (frame) {
-        //                var subscription = $stomp.subscribe('topic/public.messages', function (payload, headers, res) {
-        //                    mainCtrl.payload = payload;
-        //                    console.log(mainCtrl.payload);
-        //                }, {
-        //                    "headers": {
-        //                        'Authorization': 'Basic ' + btoa('perazdera:para@1234'),
-        //                        'X-Requested-With': 'XMLHttpRequest'
-        //                    }
-        //                })
-        //            });
-
-
 
         function init() {
 
@@ -135,7 +111,7 @@
                 }
                 mainCtrl.user = res;
                 UserService.setLoggedInUser(res);
-                connect();
+                connectToWebSocketNotification();
                 angular.element('#login-register-modal').modal('hide');
                 //$location.path('playlists');
             }).error(function (error) {

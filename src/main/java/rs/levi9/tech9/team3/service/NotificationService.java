@@ -91,7 +91,7 @@ public class NotificationService {
         mail.setSubject("Comment notification.");
         mail.setText("This is a email notification after " + commentAuthor.getUsername() + " posted a comment: "
                 + comment.getContent() + " on one of your video: " + comment.getVideo().getTitle());
-        simpMessagingTemplate.convertAndSendToUser(user.getUsername(), "/queue/private.messages", commentAuthor.getUsername() + " posted a comment: "
+        simpMessagingTemplate.convertAndSend("/queue/private.messages/" + user.getUsername(), commentAuthor.getUsername() + " posted a comment: "
                 + comment.getContent() + " on one of your video: " + comment.getVideo().getTitle());
         javaMailSender.send(mail);
     }
@@ -105,7 +105,7 @@ public class NotificationService {
         mail.setSubject("Rate notification.");
         mail.setText("This is a email notification after ~:" + ratetAuthor.getUsername() + " rated your video :"
                 + rate.getVideo().getTitle()+"he/she/it rated your video with mark ~:"+rate.getMark());
-        simpMessagingTemplate.convertAndSendToUser(user.getUsername(), "/queue/private.messages", ratetAuthor.getUsername() + " rated your video :"
+        simpMessagingTemplate.convertAndSend("/queue/private.messages/" + user.getUsername(), ratetAuthor.getUsername() + " rated your video :"
                 + rate.getVideo().getTitle()+"he/she/it rated your video with mark ~:"+rate.getMark());
         javaMailSender.send(mail);
     }
