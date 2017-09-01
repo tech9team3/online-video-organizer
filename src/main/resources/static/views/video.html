@@ -56,7 +56,7 @@
                             </div>
                             <div class="col-md-9">
                                 <button ng-if="comment.user.username == videoCtrl.loggedInUser.username" type="button" class="close pull-right" ng-click="videoCtrl.deleteComment(comment.id)"><span class="glyphicon glyphicon-remove"></span></button>
-                                <button class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#notifyAdminModal" ng-if="videoCtrl.loggedInUser.id && comment.user.username != videoCtrl.loggedInUser.username">Report</button>
+                                <button class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#notifyAdminModal" ng-click="videoCtrl.selectComment(comment)" ng-if="videoCtrl.loggedInUser.id && comment.user.username != videoCtrl.loggedInUser.username">Report</button>
 
                             </div>
                         </div>
@@ -83,10 +83,10 @@
             </div>
             <div class="modal-body">
                 Reason for notify:
-                <textarea class="form-control" ng-model="videoCtrl.reason"style="max-width: 100%;" id="notify"></textarea>
+                <textarea class="form-control" ng-model="videoCtrl.report.reportText"style="max-width: 100%;" id="notify"></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Send</button>
+                <button type="button" class="btn btn-primary" ng-click="videoCtrl.reportCommentToAdmin()">Send</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>

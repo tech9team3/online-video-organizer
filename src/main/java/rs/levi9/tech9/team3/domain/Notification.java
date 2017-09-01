@@ -1,72 +1,77 @@
 package rs.levi9.tech9.team3.domain;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "notification")
 public class Notification extends BaseEntity implements Serializable {
 
-	private static final long serialVersionUID = 4620567645342653211L;
+    private static final long serialVersionUID = 4620567645342653211L;
 
-	@OneToOne
-	@JoinColumn(nullable = true)
-	private Comment comment;
+    @OneToOne
+    @JoinColumn(nullable = true)
+    private Comment comment;
 
-	@OneToOne
-	@JoinColumn(nullable = true)
-	private Rate rate;
+    @OneToOne
+    @JoinColumn(nullable = true)
+    private Rate rate;
 
-	@NotNull
-	@ManyToOne
-	@JoinColumn(nullable = false)
-	private User user;// primaoc notifikacije
+    @OneToOne
+    @JoinColumn(nullable = true)
+    private Report report;
 
-	public Comment getComment() {
-		return comment;
-	}
+    @ManyToOne
+    @JoinColumn(nullable = true)
+    private User user;// primaoc notifikacije
 
-	@NotNull()
-	@Column(nullable = false)
-	private Date creationDate;
 
-	public void setComment(Comment comment) {
-		this.comment = comment;
-	}
+    public Comment getComment() {
+        return comment;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    @Column(nullable = true)
+    private Date creationDate;
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setComment(Comment comment) {
+        this.comment = comment;
+    }
 
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public Rate getRate() {
-		return rate;
-	}
+    public Date getCreationDate() {
+        return creationDate;
+    }
 
-	public void setRate(Rate rate) {
-		this.rate = rate;
-	}
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
 
-	public Notification() {
-	}
+    public Rate getRate() {
+        return rate;
+    }
+
+    public void setRate(Rate rate) {
+        this.rate = rate;
+    }
+
+    public Report getReport() {
+        return report;
+    }
+
+    public void setReport(Report report) {
+        this.report = report;
+    }
+
+    public Notification() {
+    }
 
 }

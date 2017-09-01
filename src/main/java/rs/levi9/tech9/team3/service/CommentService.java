@@ -2,11 +2,9 @@ package rs.levi9.tech9.team3.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import rs.levi9.tech9.team3.domain.Comment;
-import rs.levi9.tech9.team3.domain.Notification;
-import rs.levi9.tech9.team3.domain.User;
-import rs.levi9.tech9.team3.domain.Video;
+import rs.levi9.tech9.team3.domain.*;
 import rs.levi9.tech9.team3.repository.CommentRepository;
+import rs.levi9.tech9.team3.repository.UserRepository;
 import rs.levi9.tech9.team3.repository.VideoRepository;
 
 import java.util.List;
@@ -17,21 +15,24 @@ public class CommentService {
     private CommentRepository commentRepository;
     private VideoRepository videoRepository;
     private NotificationService notificationService;
-    private UserService userService;
+    private UserRepository userRepository;
     private VideoService videoService;
+    private ReportService reportService;
 
 
     @Autowired
     public CommentService(CommentRepository commentRepository,
                           VideoRepository videoRepository,
-                          UserService userService,
                           NotificationService notificationService,
-                          VideoService videoService) {
+                          VideoService videoService,
+                          ReportService reportService,
+                          UserRepository userRepository) {
         this.commentRepository = commentRepository;
         this.videoRepository = videoRepository;
-        this.userService = userService;
+        this.userRepository = userRepository;
         this.notificationService = notificationService;
         this.videoService = videoService;
+        this.reportService = reportService;
     }
 
     public List<Comment> findAll() {
@@ -62,11 +63,19 @@ public class CommentService {
 
     public void delete(Long id) {
 
+        Report foundReport = reportService.findByComment(id);
+        if (foundReport != null) {
+            System.out.println("Id reporta"+foundReport.getId());
+            reportService.delete(foundReport.getId());
+        }
         Notification notification = notificationService.findByComment(id);
-        if (notification!=null) {
+        if (notification != null) {
             notificationService.delete(notification.getId());
         }
+
         commentRepository.delete(id);
+
+
     }
 
     public List<Comment> findAllCommentsForVideo(Long videoId) {
@@ -76,12 +85,13 @@ public class CommentService {
     }
 
     public List<Comment> findAllCommentsForUser(Long userId) {
-        User foundUser = userService.findOne(userId);
+        User foundUser = userRepository.findOne(userId);
         List<Comment> listOfComments = commentRepository.findAllByUser(foundUser);
         return listOfComments;
 
     }
-    public Long getNumberOfCommentsForVideo (Long videoId){
+
+    public Long getNumberOfCommentsForVideo(Long videoId) {
         Video foundVideo = videoRepository.getOne(videoId);
         return commentRepository.countCommentByVideo(foundVideo);
     }
