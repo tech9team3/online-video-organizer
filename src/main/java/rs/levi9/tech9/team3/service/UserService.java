@@ -21,6 +21,9 @@ public class UserService {
     private CommentRepository commentRepository;
     private VideoService videoService;
     private Logger logger = LoggerFactory.getLogger(UserService.class);
+    private ReportService reportService;
+    private CommentService commentService;
+
 
     @Autowired
     public UserService(UserRepository userRepository,
@@ -28,7 +31,9 @@ public class UserService {
                        NotificationService notificationService,
                        RateService rateService,
                        CommentRepository commentRepository,
-                       VideoService videoService) {
+                       VideoService videoService,
+                       ReportService reportService,
+                       CommentService commentService) {
 
         this.userRepository = userRepository;
         this.videoListService = videoListService;
@@ -36,6 +41,8 @@ public class UserService {
         this.rateService = rateService;
         this.commentRepository = commentRepository;
         this.videoService = videoService;
+        this.reportService = reportService;
+        this.commentService = commentService;
     }
 
     public List<User> findAll() {
@@ -65,14 +72,20 @@ public class UserService {
 
     public void delete(Long id) {
         User foundUser = userRepository.findOne(id);
+
         List<Rate> foundRateList = rateService.findAllRatesByUser(foundUser.getId());
         for (Rate rate : foundRateList) {
             rateService.delete(rate.getId());
         }
 
-        List<Comment> foundCommentList = commentRepository.findAllByUser(foundUser);
+        List<Report> foundReportList = reportService.findByReportAuthor(id);
+        for (Report report: foundReportList) {
+            reportService.delete(report.getId());
+        }
+
+        List<Comment> foundCommentList = commentService.findAllCommentsForUser(foundUser.getId());
         for (Comment comment : foundCommentList) {
-            commentRepository.delete(comment.getId());
+            commentService.delete(comment.getId());
         }
         List<Notification> foundNotificationList = notificationService.findAllNotificationsByUser(foundUser.getId());
         for (Notification notification : foundNotificationList) {
@@ -87,7 +100,6 @@ public class UserService {
         for (VideoList videoList : foundVideoLists) {
             videoListService.delete(videoList.getId());
         }
-
         userRepository.delete(id);
     }
 

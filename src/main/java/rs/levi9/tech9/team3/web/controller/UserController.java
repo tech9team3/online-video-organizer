@@ -122,4 +122,5 @@ public class UserController {
 		userService.setBanToUser( username, new Date(newDate));
 	}
 
+
 }

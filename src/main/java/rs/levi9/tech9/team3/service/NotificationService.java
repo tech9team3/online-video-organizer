@@ -7,17 +7,16 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
-import rs.levi9.tech9.team3.domain.Comment;
-import rs.levi9.tech9.team3.domain.Notification;
-import rs.levi9.tech9.team3.domain.Rate;
-import rs.levi9.tech9.team3.domain.User;
+import rs.levi9.tech9.team3.domain.*;
 import rs.levi9.tech9.team3.repository.CommentRepository;
 import rs.levi9.tech9.team3.repository.NotificationRepository;
+import rs.levi9.tech9.team3.repository.ReportRepository;
 import rs.levi9.tech9.team3.repository.UserRepository;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class NotificationService {
@@ -27,15 +26,21 @@ public class NotificationService {
     private CommentRepository commentRepository;
     private UserRepository userRepository;
     private SimpMessagingTemplate simpMessagingTemplate;
+    private ReportRepository reportRepository;
 
     @Autowired
-    public NotificationService(NotificationRepository notificationRepository, JavaMailSender javaMailSender,
-                               CommentRepository commentRepository, UserRepository userRepository, SimpMessagingTemplate simpMessagingTemplate) {
+    public NotificationService(NotificationRepository notificationRepository,
+                               JavaMailSender javaMailSender,
+                               CommentRepository commentRepository,
+                               UserRepository userRepository,
+                               SimpMessagingTemplate simpMessagingTemplate,
+                               ReportRepository reportRepository) {
         this.notificationRepository = notificationRepository;
         this.javaMailSender = javaMailSender;
         this.commentRepository = commentRepository;
         this.userRepository = userRepository;
         this.simpMessagingTemplate = simpMessagingTemplate;
+        this.reportRepository = reportRepository;
     }
 
     public List<Notification> findAll() {
@@ -70,9 +75,9 @@ public class NotificationService {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper;
 
-        String text = "Thank you for registration. In order to use your account, you'll need to activate it. Just click " +
-                "activate to confirm.<br><br><a href='http://localhost:8080/#/activate/"
-                + user.getId() + "'>Activate your account " + user.getUsername() + "</a>";
+        String text = "Thank you for registration. In order to use your account, you'll need to activate it. Just click "
+                + "activate to confirm.<br><br><a href='http://localhost:8080/#/activate/" + user.getId()
+                + "'>Activate your account " + user.getUsername() + "</a>";
         System.out.println(user.getId());
         helper = new MimeMessageHelper(message, true);
         helper.setFrom("organizetech9@gmail.com");
@@ -91,8 +96,11 @@ public class NotificationService {
         mail.setSubject("Comment notification.");
         mail.setText("This is a email notification after " + commentAuthor.getUsername() + " posted a comment: "
                 + comment.getContent() + " on one of your video: " + comment.getVideo().getTitle());
-        simpMessagingTemplate.convertAndSend("/queue/private.messages/" + user.getUsername(), commentAuthor.getUsername() + " posted a comment: "
-                + comment.getContent() + " on one of your video: " + comment.getVideo().getTitle());
+
+        simpMessagingTemplate.convertAndSend("/queue/private.messages/" + user.getUsername(),
+                commentAuthor.getUsername() + " posted a comment: " + comment.getContent() + " on one of your video: "
+                        + comment.getVideo().getTitle());
+
         javaMailSender.send(mail);
     }
 
@@ -104,36 +112,68 @@ public class NotificationService {
         mail.setFrom("organizetech9@gmail.com");
         mail.setSubject("Rate notification.");
         mail.setText("This is a email notification after ~:" + ratetAuthor.getUsername() + " rated your video :"
-                + rate.getVideo().getTitle()+"he/she/it rated your video with mark ~:"+rate.getMark());
-        simpMessagingTemplate.convertAndSend("/queue/private.messages/" + user.getUsername(), ratetAuthor.getUsername() + " rated your video :"
-                + rate.getVideo().getTitle()+"he/she/it rated your video with mark ~:"+rate.getMark());
+                + rate.getVideo().getTitle() + "he/she/it rated your video with mark ~:" + rate.getMark());
+        simpMessagingTemplate.convertAndSend("/queue/private.messages/" + user.getUsername(),
+                ratetAuthor.getUsername() + " rated your video :" + rate.getVideo().getTitle()
+                        + "he/she/it rated your video with mark ~:" + rate.getMark());
         javaMailSender.send(mail);
     }
 
-    public void sendPermanentBanNotification(User user){
+    public void sendPermanentBanNotification(User user) {
         SimpleMailMessage mail = new SimpleMailMessage();
         mail.setTo(user.getEmail());
         mail.setFrom("organizetech9@gmail.com");
         mail.setSubject("Ban notification.");
-        mail.setText("Account with username: " +user.getUsername()+ " is permanently disabled.");
+        mail.setText("Account with username: " + user.getUsername() + " is permanently disabled.");
         javaMailSender.send(mail);
     }
 
-    public void sendTemporarilyBanNotification(User user){
+    public void sendTemporarilyBanNotification(User user) {
         SimpleMailMessage mail = new SimpleMailMessage();
         mail.setTo(user.getEmail());
         mail.setFrom("organizetech9@gmail.com");
         mail.setSubject("Ban notification.");
-        mail.setText("Account with username: " +user.getUsername()+ " is temporarily disabled. Untill :"+user.getBanExpirationDate().toString());
+        mail.setText("Account with username: " + user.getUsername() + " is temporarily disabled. Untill :"
+                + user.getBanExpirationDate().toString());
         javaMailSender.send(mail);
     }
 
-    public void sendAccountEnabledNotification(User user){
+    public void sendAccountEnabledNotification(User user) {
         SimpleMailMessage mail = new SimpleMailMessage();
         mail.setTo(user.getEmail());
         mail.setFrom("organizetech9@gmail.com");
         mail.setSubject("DisableBan notification.");
-        mail.setText("Account with username: " +user.getUsername()+ " is enabled. You can use it again...");
+        mail.setText("Account with username: " + user.getUsername() + " is enabled. You can use it again...");
         javaMailSender.send(mail);
+    }
+
+    public void sendReportToAdmin(Report report) {
+        List<User> listOfUsers = userRepository.findAll();
+        for (User user : listOfUsers) {
+            Set<Role> setOfRoles = user.getRoles();
+            for (Role role : setOfRoles) {
+                if (role.getType().equals(Role.RoleType.ROLE_ADMIN)) {
+
+                    SimpleMailMessage mail = new SimpleMailMessage();
+                    mail.setTo(user.getEmail());
+                    mail.setFrom("organizetech9@gmail.com");
+                    mail.setSubject("Report notification.");
+                    mail.setText("This is report notification for comment~:" + report.getReportedComment().getContent() + " posted by :" + report.getReportedComment().getUser().getUsername()
+                            + " on folowing video ~: " + report.getReportedComment().getVideo().getTitle() + ". This report is submited by user : " + report.getReportAuthor().getUsername() + ". Report text is : " + report.getReportText());
+
+                    simpMessagingTemplate.convertAndSend("/queue/private.messages/" + user.getUsername(),
+                            "This is report notification for comment~:" + report.getReportedComment().getContent() + " posted by :" + report.getReportedComment().getUser().getUsername()
+                                    + " on folowing video ~: " + report.getReportedComment().getVideo().getTitle() + ". This report is submited by user : " + report.getReportAuthor().getUsername() + ". Report text is : " + report.getReportText());
+                    javaMailSender.send(mail);
+                }
+            }
+        }
+
+
+    }
+
+    public Notification findOneByReport (Long reportId){
+        Report foundReport = reportRepository.findOne(reportId);
+        return  notificationRepository.findByReport(foundReport);
     }
 }

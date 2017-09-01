@@ -5,15 +5,17 @@
             $sceProvider.enabled(false);
         });
 
-    VideoController.$inject = ['$location', '$http', '$route', 'VideoService', '$routeParams', '$sce', 'CommentService', 'UserService', 'TagService', 'RateService'];
+    VideoController.$inject = ['$location', '$http', '$route', 'VideoService', '$routeParams', '$sce', 'CommentService', 'UserService', 'TagService', 'RateService', 'ReportService'];
 
-    function VideoController($location, $http, $route, VideoService, $routeParams, $sce, CommentService, UserService, TagService, RateService) {
+    function VideoController($location, $http, $route, VideoService, $routeParams, $sce, CommentService, UserService, TagService, RateService, ReportService) {
         var videoCtrl = this;
 
         videoCtrl.getCommentsForVideo = getCommentsForVideo;
         videoCtrl.postComment = postComment;
         videoCtrl.deleteComment = deleteComment;
         videoCtrl.saveRate = saveRate;
+        videoCtrl.reportCommentToAdmin = reportCommentToAdmin;
+        videoCtrl.selectComment = selectComment;
         var videoId = parseInt($routeParams.videoId);
         videoCtrl.spin = false;
 
@@ -92,7 +94,23 @@
             });        	
         }
         
+        function reportCommentToAdmin() {
+        	videoCtrl.report.reportAuthor = UserService.getLoggedInUser();
+        	delete videoCtrl.report.reportAuthor.roles;
+        	videoCtrl.report.reportedComment = videoCtrl.comment;
+            ReportService.reportCommentToAdmin(videoCtrl.report).then(function (response) {
+            	  $('#notifyAdminModal').modal('hide');
+               
+            });        	
         }
+        
+        function selectComment(comment) {
+            videoCtrl.comment = comment;
+        }
+        
+        
+    
+    }
         
           
     
