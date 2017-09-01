@@ -2,22 +2,18 @@ package rs.levi9.tech9.team3.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "report")
 public class Report extends BaseEntity implements Serializable {
 
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(nullable = false)
 	private User reportAuthor;
 	
-	@OneToOne
+	@OneToOne()
 	@JoinColumn(nullable = false)
 	private Comment reportedComment;
 	
