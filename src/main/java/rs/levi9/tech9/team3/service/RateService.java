@@ -45,16 +45,19 @@ public class RateService {
     public Rate save(Rate rate) {
         Rate savedRate = rateRepository.save(rate);
         Video ratedVideo = rate.getVideo();
+
         ratedVideo.setAverageRate(this.getAverageRateForVideo(ratedVideo.getId()));
         videoService.save(ratedVideo);
+        
         Notification notification = new Notification();
         User userToNotify = ratedVideo.getUser();
 
-        notificationService.sendNotification(userToNotify, savedRate);
+        notification.setStatus(true);
         notification.setRate(savedRate);
         notification.setCreationDate(rate.getCreationDate());
         notification.setUser(userToNotify);
         notificationService.save(notification);
+        notificationService.sendNotification(userToNotify, savedRate);
         return savedRate;
     }
 

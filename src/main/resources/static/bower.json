@@ -25,7 +25,8 @@
         "angular-ui-tree": "^2.22.6",
         "ng-scrollbars": "^0.0.11",
         "ng-stomp": "^0.4.0",
-        "angular-growl-v2": "latest"
+        "angular-growl-v2": "latest",
+        "angular-notification-icons": "latest"
     },
     "resolutions": {
         "angular-ui-router": "^0.3.1"

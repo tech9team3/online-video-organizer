@@ -2,9 +2,9 @@
     angular.module('app')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['$location', '$http', '$route', 'UserService', 'vcRecaptchaService', '$scope', '$stomp', '$log', 'growl'];
+    MainController.$inject = ['$location', '$http', '$route', 'UserService', 'NotificationService', 'vcRecaptchaService', '$scope', '$stomp', '$log', 'growl'];
 
-    function MainController($location, $http, $route, UserService, vcRecaptchaService, $scope, $stomp, $log, growl) {
+    function MainController($location, $http, $route, UserService, NotificationService, vcRecaptchaService, $scope, $stomp, $log, growl) {
 
         var mainCtrl = this;
         mainCtrl.isActive = isActive;
@@ -21,6 +21,8 @@
         mainCtrl.loginUserForm;
         mainCtrl.registerUserForm;
         mainCtrl.payload;
+        mainCtrl.getNotifications = getNotifications;
+        mainCtrl.showNotification = showNotification;
 
         //reCaptcha
         mainCtrl.publicKey = "6LceCy0UAAAAALAVMh0eYQnnlXsyvWkksQYayaCN";
@@ -28,18 +30,7 @@
 
         init();
 
-        function connectToWebSocketNotification() {
-            var socket = new SockJS('/stompwebsocket');
-            stompClient = Stomp.over(socket);
-            stompClient.connect({ }, function (frame) {
-                stompClient.subscribe('/queue/private.messages/' + UserService.getLoggedInUser().username, function (retVal) {
-                    growl.success(retVal.body);
-                });
-            });
-        }
-
         function init() {
-
             if (localStorage.getItem("base64Credential")) {
                 login(localStorage.getItem("base64Credential"));
                 mainCtrl.credentials = {
@@ -51,6 +42,39 @@
                 mainCtrl.loginUserForm.$setPristine();
             }
         }
+
+        function enableNotifications() {
+            connectToWebSocketNotification();
+            NotificationService.getNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
+                mainCtrl.notificationCount = angular.copy(response.data.length);
+            });
+
+        }
+
+        function connectToWebSocketNotification() {
+            var socket = new SockJS('/stompwebsocket');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function (frame) {
+                stompClient.subscribe('/queue/private.messages/' + UserService.getLoggedInUser().username, function (retVal) {
+                    NotificationService.getNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
+                        mainCtrl.notificationCount += 1;
+                        growl.success(retVal.body);
+                    });
+
+                });
+            });
+        }
+
+        function getNotifications() {
+            NotificationService.getNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
+                mainCtrl.notifications = response.data;
+            });
+        }
+        
+        function showNotification(notification) {
+            console.log(notification);
+        }
+
 
         //nav-bar
         function isActive(viewLocation) {
@@ -111,7 +135,7 @@
                 }
                 mainCtrl.user = res;
                 UserService.setLoggedInUser(res);
-                connectToWebSocketNotification();
+                enableNotifications();
                 angular.element('#login-register-modal').modal('hide');
                 //$location.path('playlists');
             }).error(function (error) {

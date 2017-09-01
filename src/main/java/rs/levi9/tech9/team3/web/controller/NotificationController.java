@@ -60,4 +60,9 @@ public class NotificationController {
 		return notificationService.save(notification);
 	}
 	
+	@RequestMapping(path = "/forUser/{userId}", method = RequestMethod.GET)
+	public List<Notification> getListOfNotificationForUser(@PathVariable("userId") Long userId){
+		return notificationService.findAllNotificationsByUser(userId);
+	}
+	
 }

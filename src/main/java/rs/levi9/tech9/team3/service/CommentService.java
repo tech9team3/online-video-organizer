@@ -52,11 +52,12 @@ public class CommentService {
         Notification notification = new Notification();
         User userToNotify = commentedVideo.getUser();
 
-        notificationService.sendNotification(userToNotify, savedComment);
+        notification.setStatus(true);
         notification.setComment(savedComment);
         notification.setCreationDate(savedComment.getCreationDate());
         notification.setUser(userToNotify);
         notificationService.save(notification);
+        notificationService.sendNotification(userToNotify, savedComment);
         return savedComment;
     }
 

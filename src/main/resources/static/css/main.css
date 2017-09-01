@@ -1,6 +1,6 @@
 @CHARSET "ISO-8859-1";
 body {
-/*    background: url(../images/bg.jpg) no-repeat center center fixed;*/
+    /*    background: url(../images/bg.jpg) no-repeat center center fixed;*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -122,7 +122,8 @@ tr.angular-ui-tree-empty {
 
 .video-list-thumbs>li:last-child {}
 
-.video-list-thumbs .play-video, .add-video{
+.video-list-thumbs .play-video,
+.add-video {
     display: block;
     position: relative;
     background-color: #111;
@@ -253,6 +254,17 @@ tr.angular-ui-tree-empty {
         height: 22px;
         margin: 8px 0 0;
     }
+}
+
+.angular-notifications-icon {
+    min-width: 10px;
+    padding-left: 0px;
+    padding-right: 1px;
+    padding-top: 0px;
+    width: 20px;
+    height: 20px;
+    font-weight: bolder;
+    font-size: 0.7em;
 }
 
 [ng\:cloak],
