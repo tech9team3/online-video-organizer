@@ -15,7 +15,7 @@
                             <div class="col-md-2">{{user.lastName}}</div>
                             <div class="col-md-2">{{user.email}}</div>
                             <div class="col-md-2">
-                                <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#delete-user-modal" ng-click="adminCtrl.selectUser(user)"><span class="glyphicon glyphicon-remove"></span></a>
+                                <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#delete-user-modal" ng-click="adminCtrl.selectUser(user)"> <span class="glyphicon glyphicon-trash"></span></a>
                                 <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#block-user-modal" ng-click="adminCtrl.selectUser(user)" style="margin-right: 8px;" ng-disabled="!user.status"><span class="glyphicon glyphicon-ban-circle"></span></a>
                                 <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#add-user-modal" ng-click="adminCtrl.editUser(user)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
                             </div>
@@ -34,7 +34,7 @@
                                     <div class="col-md-3"><span ng-if="videoList.visible===true">Public</span>
                                         <span ng-if="videoList.visible===false">Private</span></div>
                                     <div class="col-md-2">
-                                        <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#delete-videolist-modal" ng-click="adminCtrl.selectVideoList(videoList, user)"><span class="glyphicon glyphicon-remove"></span></a>
+                                        <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#delete-videolist-modal" ng-click="adminCtrl.selectVideoList(videoList, user)"> <span class="glyphicon glyphicon-trash"></span></a>
                                         <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#edit-lists-modal" ng-click="adminCtrl.editVideoList(videoList, user)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
                                     </div>
                                 </div>
@@ -50,7 +50,7 @@
                                                 </a>
                                                 Average rate:
                                                 <span uib-rating read-only="true" class="text-primary" ng-model="video.averageRate" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>
-                                                <span>({{video.averageRate}})</span>
+                                                <span>({{video.averageRate.toFixed(1)}})</span>
                                             </div>
                                             <div class="col-md-2">{{video.description}}</div>
                                             <div class="col-md-1"><span ng-if="video.visible===true">Public</span>
@@ -58,7 +58,7 @@
                                             <div class="col-md-2"> <span ng-repeat="tag in video.videoTag" class="tag-item">{{tag.name}}</span></div>
                                             <div class="col-md-2"><a ng-href="http://{{video.videoUrl}}" target="_blank">{{video.videoUrl}}</a></div>
                                             <div class="col-md-2">
-                                                <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#delete-video-modal" ng-click="adminCtrl.selectVideo(video, videoList)"><span class="glyphicon glyphicon-remove"></span></a>
+                                                <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#delete-video-modal" ng-click="adminCtrl.selectVideo(video, videoList)"> <span class="glyphicon glyphicon-trash"></span></a>
                                                 <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#edit-video-modal" ng-click="adminCtrl.editVideo(video, videoList, user)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
                                             </div>
                                         </div>
@@ -74,7 +74,7 @@
                                                     <div class="col-md-4">{{comment.content}}</div>
                                                     <div class="col-md-4">{{comment.creationDate | date: "dd. MMM y."}}</div>
                                                     <div class="col-md-2">
-                                                        <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="adminCtrl.deleteComment(comment.id, video)"><span class="glyphicon glyphicon-remove"></span></a>
+                                                        <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="adminCtrl.deleteComment(comment.id, video)"> <span class="glyphicon glyphicon-trash"></span></a>
                                                     </div>
                                                 </div>
                                             </div>

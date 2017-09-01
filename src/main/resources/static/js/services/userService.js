@@ -10,7 +10,7 @@
         var loggedInUser;
 
         this.getLoggedInUser = function() {
-            return loggedInUser;
+            return angular.copy(loggedInUser);
         }
             
         this.getLoggedInUserId = function() {

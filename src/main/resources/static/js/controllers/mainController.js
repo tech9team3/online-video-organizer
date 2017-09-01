@@ -109,8 +109,8 @@
                 if (mainCtrl.credentials.autologin) {
                     localStorage.setItem("base64Credential", base64Credential);
                 }
-                mainCtrl.user = res;
-                UserService.setLoggedInUser(res);
+                mainCtrl.user = angular.copy(res);
+                UserService.setLoggedInUser(angular.copy(res));
                 connectToWebSocketNotification();
                 angular.element('#login-register-modal').modal('hide');
                 //$location.path('playlists');

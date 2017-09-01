@@ -152,24 +152,6 @@ public class NotificationService {
 			for (Role role : listOfRolesForUser) {
 				if (role.getType().equals(RoleType.ROLE_ADMIN)) {
 
-					Comment foundComment = commentRepository.findOne(commentId);
-					User commentAuthor = foundComment.getUser();
-
-					SimpleMailMessage mail = new SimpleMailMessage();
-					mail.setTo(user.getEmail());
-					mail.setFrom("organizetech9@gmail.com");
-					mail.setSubject("ReportComment.");
-					mail.setText("This is report notification from user :" + logedInUser.getUsername()
-							+ " for comment: ~" + foundComment.getContent() + "~, posted by:"
-							+ foundComment.getUser().getUsername() + " on one of your video: "
-							+ foundComment.getVideo().getTitle() + ". For folowing reason: " + reportReason);
-
-					simpMessagingTemplate.convertAndSend("/queue/private.messages/" + user.getUsername(),
-							"This is report notification from user :"+logedInUser.getUsername()+" for comment: ~" + foundComment.getContent() + "~, posted by:"
-									+ foundComment.getUser().getUsername() + " on one of your video: "
-									+ foundComment.getVideo().getTitle() + ". For folowing reason: " + reportReason);
-
-					javaMailSender.send(mail);
 				}
 			}
 		}
