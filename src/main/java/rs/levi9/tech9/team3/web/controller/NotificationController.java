@@ -52,6 +52,7 @@ public class NotificationController {
 
     @RequestMapping(method = RequestMethod.PUT)
     public Notification put(@Valid @RequestBody Notification notification) {
+    	notification.setStatus(false);
         return notificationService.save(notification);
     }
     

@@ -41,7 +41,11 @@ public class ReportService {
     }
 
     public Report save(Report report) {
-        Report savedReport = reportRepository.save(report);
+    		if(report.getId()!=null){
+    			report.setStatus(true);
+    		}
+    	
+    	Report savedReport = reportRepository.save(report);
 
         Notification notification = new Notification();
         notification.setReport(savedReport);

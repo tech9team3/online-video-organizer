@@ -245,6 +245,7 @@ tr.angular-ui-tree-empty {
     text-shadow: 0 1px 3px rgba(0, 0, 0, .8);
 }
 
+
 @media (min-width:320px) and (max-width: 480px) {
     .video-list-thumbs .glyphicon-play-circle, .glyphicon-import {
         font-size: 35px;

@@ -15,7 +15,10 @@ import rs.levi9.tech9.team3.repository.UserRepository;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Service
@@ -52,6 +55,9 @@ public class NotificationService {
     }
 
     public Notification save(Notification notification) {
+    	if(notification.getId()!=null){
+    		notification.setStatus(true);
+    	}
         return notificationRepository.save(notification);
     }
 
@@ -148,7 +154,8 @@ public class NotificationService {
     }
 
     public void sendReportToAdmin(Report report) {
-        List<User> listOfUsers = userRepository.findAll();
+    	reportRepository.save(report);
+    	List<User> listOfUsers = userRepository.findAll();
         for (User user : listOfUsers) {
             Set<Role> setOfRoles = user.getRoles();
             for (Role role : setOfRoles) {

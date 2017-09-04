@@ -25,7 +25,7 @@
         adminCtrl.editVideo = editVideo;
         adminCtrl.saveVideo = saveVideo;
         adminCtrl.banUser = banUser;
-    
+      
 
 
         getUsers();
@@ -195,6 +195,8 @@
               $('#block-user-modal').modal('hide');
         	 });
         }
+        
+ 
         
     
     }
