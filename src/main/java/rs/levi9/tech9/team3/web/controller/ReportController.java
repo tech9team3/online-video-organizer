@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import rs.levi9.tech9.team3.domain.Notification;
 import rs.levi9.tech9.team3.domain.Report;
 import rs.levi9.tech9.team3.service.NotificationService;
 import rs.levi9.tech9.team3.service.ReportService;
@@ -61,4 +63,13 @@ public class ReportController {
     public void reportCommentToAdmin(@Valid @RequestBody Report report){
         notificationService.sendReportToAdmin(report);
     }
+    @RequestMapping(path = "/getNewReports", method = RequestMethod.GET)
+    public List<Report> findNewReportsForUser(){
+    		return reportService.findNewReportAuthor();
+    }
+    
+//    @RequestMapping(path = "/getNewNotifications/{userId}", method = RequestMethod.GET)
+//    public List<Notification> getListOfNewNotifications(@PathVariable("userId") Long userId){
+//    	    return notificationService.findAllNewNotificationsRateAndComment(userId);
+//    }
 }

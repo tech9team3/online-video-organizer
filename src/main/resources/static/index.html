@@ -81,21 +81,21 @@
                         </ul>
                         <ul ng-show="mainCtrl.user" class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a ng-click="mainCtrl.getNotifications();" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <a ng-click="mainCtrl.getNewNotifications();" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <notification-icon class="notificaton-count-icon" animation="bounce" count="mainCtrl.notificationCount">
                                         <i style="font-size: 18px; color: whitesmoke; padding-right: 2px;" class="fa fa-envelope-o fa-3x"></i>
                                     </notification-icon>
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li style="border-bottom:solid 1px rgba(0,0,0,0.15); font-size: 12px;" ng-if="notification.status && notification.comment" ng-repeat="notification in mainCtrl.notifications">
+                                    <li style="border-bottom:solid 1px rgba(0,0,0,0.15); font-size: 12px;" ng-if="notification.comment" ng-repeat="notification in mainCtrl.newNotifications">
                                         <a ng-click="mainCtrl.showNotification(notification)" ng-href="http://localhost:8080/#/video/{{notification.comment.video.id}}#{{notification.comment.id}}">
                                             <div><i>"{{notification.comment.user.username}}"</i> commented:</div>
                                             <div><i>"<b>{{notification.comment.content}}</b>"</i></div>
                                             <div>on <i>"{{notification.comment.video.title}}"</i> video.</div>
                                         </a>
                                     </li>
-                                    <li style="border-bottom:solid 1px rgba(0,0,0,0.15); font-size: 12px;" ng-if="notification.status && notification.rate" ng-repeat="notification in mainCtrl.notifications">
+                                    <li style="border-bottom:solid 1px rgba(0,0,0,0.15); font-size: 12px;" ng-if="notification.rate" ng-repeat="notification in mainCtrl.newNotifications">
                                         <a ng-click="mainCtrl.showNotification(notification)" ng-href="http://localhost:8080/#/video/{{notification.rate.video.id}}">
                                             <div><i>"{{notification.rate.user.username}}"</i> rated:</div>
                                             <div><i>"<b>{{notification.rate.mark}}</b>"</i></div>
@@ -113,14 +113,14 @@
                         </ul>
                           <ul ng-show="mainCtrl.user  && mainCtrl.user.roles.indexOf('ROLE_ADMIN') !== -1" class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a ng-click="mainCtrl.getReports()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <a ng-click="mainCtrl.getNewReports()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                    <notification-icon class="notificaton-count-icon" animation="bounce" count="mainCtrl.reportCount">
                                         <i style="font-size: 18px; color: whitesmoke; padding-right: 2px;" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                                     </notification-icon>
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li style="border-bottom:solid 1px rgba(0,0,0,0.15); font-size: 12px;" ng-if="!report.status" ng-repeat="report in mainCtrl.reports">
+                                    <li style="border-bottom:solid 1px rgba(0,0,0,0.15); font-size: 12px;" ng-repeat="report in mainCtrl.newReports">
                                         <a ng-click="mainCtrl.showReport(report)" ng-href="http://localhost:8080/#/video/{{report.reportedComment.video.id}}#{{report.reportedComment.id}}">
                                             <div><i>"{{report.reportAuthor.username}}"</i> notify:</div>
                                             <div><i>"<b>{{report.reportedComment.content}}</b>"</i></div>

@@ -21,9 +21,9 @@
         mainCtrl.loginUserForm;
         mainCtrl.registerUserForm;
         mainCtrl.payload;
-        mainCtrl.getNotifications = getNotifications;
+        mainCtrl.getNewNotifications = getNewNotifications;
         mainCtrl.showNotification = showNotification;
-        mainCtrl.getReports = getReports;
+        mainCtrl.getNewReports = getNewReports;
         mainCtrl.showReport = showReport;
 
         //reCaptcha
@@ -47,10 +47,12 @@
 
         function enableNotifications() {
             connectToWebSocketNotification();
-            NotificationService.getNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
+            NotificationService.getNewNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
                 mainCtrl.notificationCount = angular.copy(response.data.length);
             });
-
+        	ReportService.getNewReports().then(function (response) {
+                mainCtrl.reportCount = angular.copy(response.data.length);
+            });
         }
 
         function connectToWebSocketNotification() {
@@ -58,18 +60,23 @@
             stompClient = Stomp.over(socket);
             stompClient.connect({}, function (frame) {
                 stompClient.subscribe('/queue/private.messages/' + UserService.getLoggedInUser().username, function (retVal) {
-                    	if(retVal.data.report)
-                    		mainCtrl.reportCount += 1; 
-                    	if(retVal.data.comment || response.data.rate)
-                            mainCtrl.notificationCount += 1; 
+                        
+                	NotificationService.getNewNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
+                        mainCtrl.notificationCount = angular.copy(response.data.length);
+                    });
+                	ReportService.getNewReports().then(function (response) {
+                        mainCtrl.reportCount = angular.copy(response.data.length);
+                    });
+                	
+                	//    mainCtrl.notificationCount += 1; 
                       growl.success(retVal.body);
                 });
             });
         }
 
-        function getNotifications() {
-            NotificationService.getNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
-                mainCtrl.notifications = response.data;
+        function getNewNotifications() {
+            NotificationService.getNewNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
+                mainCtrl.newNotifications = response.data;
                 console.log(response.data);
                 
             });
@@ -79,9 +86,9 @@
             console.log(notification);
         }
         
-        function getReports() {
-            ReportService.getReports().then(function (response) {
-                mainCtrl.reports = response.data;
+        function getNewReports() {
+            ReportService.getNewReports().then(function (response) {
+                mainCtrl.newReports = response.data;
                 console.log(response.data);
             });
         }

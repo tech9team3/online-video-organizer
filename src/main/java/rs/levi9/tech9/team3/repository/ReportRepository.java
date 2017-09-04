@@ -11,4 +11,8 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 
     public Report findByReportedComment(Comment comment);
     public List<Report> findByReportAuthor(User user);
+    
+    public List<Report> findByStatusIsTrue();
+
+    
 }
