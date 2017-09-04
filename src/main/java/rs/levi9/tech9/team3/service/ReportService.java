@@ -15,55 +15,59 @@ import java.util.List;
 
 @Service
 public class ReportService {
-    private ReportRepository reportRepository;
-    private UserRepository userRepository;
-    private NotificationService notificationService;
-    private CommentRepository commentRepository;
+	private ReportRepository reportRepository;
+	private UserRepository userRepository;
+	private NotificationService notificationService;
+	private CommentRepository commentRepository;
 
+	@Autowired
+	public ReportService(ReportRepository reportRepository, UserRepository userRepository,
+			NotificationService notificationService, CommentRepository commentRepository) {
+		this.reportRepository = reportRepository;
+		this.userRepository = userRepository;
+		this.notificationService = notificationService;
+		this.commentRepository = commentRepository;
+	}
 
-    @Autowired
-    public ReportService(ReportRepository reportRepository,
-                         UserRepository userRepository,
-                         NotificationService notificationService,
-                         CommentRepository commentRepository) {
-        this.reportRepository = reportRepository;
-        this.userRepository = userRepository;
-        this.notificationService = notificationService;
-        this.commentRepository= commentRepository;
-    }
+	public List<Report> findAll() {
+		return reportRepository.findAll();
+	}
 
-    public List<Report> findAll() {
-        return reportRepository.findAll();
-    }
+	public Report findOne(Long id) {
+		return reportRepository.findOne(id);
+	}
 
-    public Report findOne(Long id) {
-        return reportRepository.findOne(id);
-    }
+	public Report save(Report report) {
+		if (report.getId() != null) {
+			report.setStatus(true);
+		}
 
-    public Report save(Report report) {
-        Report savedReport = reportRepository.save(report);
+		Report savedReport = reportRepository.save(report);;
 
-        Notification notification = new Notification();
-        notification.setReport(savedReport);
-        notificationService.save(notification);
-        notificationService.sendReportToAdmin(report);
-        return savedReport;
-    }
+		Notification notification = new Notification();
+		notification.setReport(savedReport);
+		notificationService.save(notification);
+		notificationService.sendReportToAdmin(report);
+		return savedReport;
+	}
 
-    public void delete(Long id) {
-        Notification foundNotification = notificationService.findOneByReport(id);
-        notificationService.delete(foundNotification.getId());
-        reportRepository.delete(id);
-    }
+	public void delete(Long id) {
+		Notification foundNotification = notificationService.findOneByReport(id);
+		notificationService.delete(foundNotification.getId());
+		reportRepository.delete(id);
+	}
 
-    public Report findByComment(Long commentId){
-        Comment foundComment = commentRepository.findOne(commentId);
-        return  reportRepository.findByReportedComment(foundComment);
-    }
+	public Report findByComment(Long commentId) {
+		Comment foundComment = commentRepository.findOne(commentId);
+		return reportRepository.findByReportedComment(foundComment);
+	}
 
-    public List<Report> findByReportAuthor(Long userId){
-        User foundUser = userRepository.findOne(userId);
-        return  reportRepository.findByReportAuthor(foundUser);
-    }
+	public List<Report> findByReportAuthor(Long userId) {
+		User foundUser = userRepository.findOne(userId);
+		return reportRepository.findByReportAuthor(foundUser);
+	}
 
+	public List<Report> findNewReportAuthor() {
+		return reportRepository.findByStatusIsTrue();
+	}
 }

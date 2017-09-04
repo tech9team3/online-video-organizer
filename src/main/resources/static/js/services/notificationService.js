@@ -60,6 +60,19 @@
             });
         } 
         
+        this.getNewNotificationsByUserId = function (userId) {
+            var def = $q.defer();
+            var req = {
+                method: 'GET',
+                url: "notification/getNewNotifications/" + userId,
+            }
+            return $http(req).success(function (response) {
+                return response.data;
+            }).error(function () {
+                return def.reject("Failed");
+            });
+        } 
+        
         this.saveNotification = function (notification) {
             var def = $q.defer();
             var req = {

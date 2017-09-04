@@ -98,15 +98,16 @@
         function reportCommentToAdmin() {
         	videoCtrl.report.reportAuthor = UserService.getLoggedInUser();
         	delete videoCtrl.report.reportAuthor.roles;
-        	videoCtrl.report.reportedComment = videoCtrl.comment;
+        	videoCtrl.report.reportedComment = videoCtrl.commentReport;
             ReportService.reportCommentToAdmin(videoCtrl.report).then(function (response) {
             	  $('#notifyAdminModal').modal('hide');
                
-            });        	
+            });     
+            delete videoCtrl.report;
         }
         
         function selectComment(comment) {
-            videoCtrl.comment = comment;
+            videoCtrl.commentReport = comment;
         }
         
         

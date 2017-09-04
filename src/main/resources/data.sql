@@ -78,7 +78,7 @@ INSERT INTO video_tag (name) VALUES ("Narodnjak");
 INSERT INTO video_tag (name) VALUES ("Zabavno");
 INSERT INTO video_tag (name) VALUES ("Opako");
 
-INSERT INTO video_tag (name) VALUES ("njeSra");
+INSERT INTO video_tag (name) VALUES ("lepoCvece");
 INSERT INTO video_tag (name) VALUES ("MP3");
 
 INSERT INTO video_video_tag (video_id, video_tag_id) VALUES (1,1);

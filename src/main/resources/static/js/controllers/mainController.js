@@ -2,9 +2,9 @@
     angular.module('app')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['$location', '$http', '$route', 'UserService', 'NotificationService', 'vcRecaptchaService', '$scope', '$stomp', '$log', 'growl'];
+    MainController.$inject = ['$location', '$http', '$route', 'UserService', 'NotificationService', 'vcRecaptchaService', '$scope', '$stomp', '$log', 'growl', 'ReportService'];
 
-    function MainController($location, $http, $route, UserService, NotificationService, vcRecaptchaService, $scope, $stomp, $log, growl) {
+    function MainController($location, $http, $route, UserService, NotificationService, vcRecaptchaService, $scope, $stomp, $log, growl, ReportService) {
 
         var mainCtrl = this;
         mainCtrl.isActive = isActive;
@@ -21,8 +21,10 @@
         mainCtrl.loginUserForm;
         mainCtrl.registerUserForm;
         mainCtrl.payload;
-        mainCtrl.getNotifications = getNotifications;
+        mainCtrl.getNewNotifications = getNewNotifications;
         mainCtrl.showNotification = showNotification;
+        mainCtrl.getNewReports = getNewReports;
+        mainCtrl.showReport = showReport;
 
         //reCaptcha
         mainCtrl.publicKey = "6LceCy0UAAAAALAVMh0eYQnnlXsyvWkksQYayaCN";
@@ -45,10 +47,12 @@
 
         function enableNotifications() {
             connectToWebSocketNotification();
-            NotificationService.getNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
+            NotificationService.getNewNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
                 mainCtrl.notificationCount = angular.copy(response.data.length);
             });
-
+        	ReportService.getNewReports().then(function (response) {
+                mainCtrl.reportCount = angular.copy(response.data.length);
+            });
         }
 
         function connectToWebSocketNotification() {
@@ -56,23 +60,41 @@
             stompClient = Stomp.over(socket);
             stompClient.connect({}, function (frame) {
                 stompClient.subscribe('/queue/private.messages/' + UserService.getLoggedInUser().username, function (retVal) {
-                    NotificationService.getNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
-                        mainCtrl.notificationCount += 1;
-                        growl.success(retVal.body);
+                        
+                	NotificationService.getNewNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
+                        mainCtrl.notificationCount = angular.copy(response.data.length);
                     });
-
+                	ReportService.getNewReports().then(function (response) {
+                        mainCtrl.reportCount = angular.copy(response.data.length);
+                    });
+                	
+                	//    mainCtrl.notificationCount += 1; 
+                      growl.success(retVal.body);
                 });
             });
         }
 
-        function getNotifications() {
-            NotificationService.getNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
-                mainCtrl.notifications = response.data;
+        function getNewNotifications() {
+            NotificationService.getNewNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
+                mainCtrl.newNotifications = response.data;
+                console.log(response.data);
+                
             });
         }
         
         function showNotification(notification) {
             console.log(notification);
+        }
+        
+        function getNewReports() {
+            ReportService.getNewReports().then(function (response) {
+                mainCtrl.newReports = response.data;
+                console.log(response.data);
+            });
+        }
+        
+        function showReport(report) {
+            console.log(report);
         }
 
 

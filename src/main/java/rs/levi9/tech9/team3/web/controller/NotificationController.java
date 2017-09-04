@@ -52,6 +52,9 @@ public class NotificationController {
 
     @RequestMapping(method = RequestMethod.PUT)
     public Notification put(@Valid @RequestBody Notification notification) {
+
+    	notification.setStatus(false);
+
         return notificationService.save(notification);
     }
     
@@ -59,4 +62,9 @@ public class NotificationController {
     	public List<Notification> getListOfNotificationForUser(@PathVariable("userId") Long userId){		
     		return notificationService.findAllNotificationsByUser(userId);		
     	}
+
+    @RequestMapping(path = "/getNewNotifications/{userId}", method = RequestMethod.GET)
+    public List<Notification> getListOfNewNotifications(@PathVariable("userId") Long userId){
+    	    return notificationService.findAllNewNotificationsRateAndComment(userId);
+    }
 }

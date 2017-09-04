@@ -22,6 +22,31 @@
             return def.promise;
         }
          
+         this.getReports = function () {
+             var def = $q.defer();
+             var req = {
+                 method: 'GET',
+                 url: "reports"
+             }
+             return $http(req).success(function (response) {
+                 return  response.data;
+             }).error(function () {
+                 return def.reject("Failed");
+             });
+         } 
+         
+         this.getNewReports = function () {
+             var def = $q.defer();
+             var req = {
+                 method: 'GET',
+                 url: "reports/getNewReports"
+             }
+             return $http(req).success(function (response) {
+                 return response.data;
+             }).error(function () {
+                 return def.reject("Failed");
+             });
+         } 
        
     };
 }());
