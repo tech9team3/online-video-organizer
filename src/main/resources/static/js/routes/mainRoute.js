@@ -36,6 +36,11 @@
                 controller: 'ActivateController',
                 controllerAs: 'activateCtrl'
             })
+            .when('/notifications', {
+                templateUrl: '/views/notifications.html',
+                controller: 'NotificationController',
+                controllerAs: 'notificationCtrl'
+            })
             .otherwise('/');
     }
 }());

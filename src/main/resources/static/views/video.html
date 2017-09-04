@@ -44,7 +44,7 @@
             </div>
             <br>
             <br>
-            <div ng-repeat="comment in videoCtrl.comments" id="{{comment.id}}">
+            <div ng-class="" ng-repeat="comment in videoCtrl.comments" id="{{comment.id}}">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
@@ -55,7 +55,6 @@
                             <div class="col-md-9">
                                 <button ng-if="comment.user.username == videoCtrl.loggedInUser.username" type="button" class="close pull-right" ng-click="videoCtrl.deleteComment(comment.id)"><span class="glyphicon glyphicon-remove"></span></button>
                                 <button class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#notifyAdminModal" ng-click="videoCtrl.selectComment(comment)" ng-if="videoCtrl.loggedInUser.id && comment.user.username != videoCtrl.loggedInUser.username">Report</button>
-
                             </div>
                         </div>
                     </div>
