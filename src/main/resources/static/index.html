@@ -88,10 +88,25 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li>
-                                        <a ng-click="mainCtrl.showNotification(notification)" ng-if="notification.status" ng-repeat="notification in mainCtrl.notifications" href="">{{notification.comment.content}}{{notification.rate.mark}}</a>
-                                        <hr>
-                                        <a href="">Show all notifications</a>
+                                    <li style="border-bottom:solid 1px rgba(0,0,0,0.15); font-size: 12px;" ng-if="notification.status && notification.comment" ng-repeat="notification in mainCtrl.notifications">
+                                        <a ng-click="mainCtrl.showNotification(notification)" ng-href="http://localhost:8080/#/video/{{notification.comment.video.id}}#{{notification.comment.id}}">
+                                            <div><i>"{{notification.user.username}}"</i> commented:</div>
+                                            <div><i>"<b>{{notification.comment.content}}</b>"</i></div>
+                                            <div>on <i>"{{notification.comment.video.title}}"</i> video.</div>
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom:solid 1px rgba(0,0,0,0.15); font-size: 12px;" ng-if="notification.status && notification.rate" ng-repeat="notification in mainCtrl.notifications">
+                                        <a ng-click="mainCtrl.showNotification(notification)" ng-href="http://localhost:8080/#/video/{{notification.rate.video.id}}">
+                                            <div><i>"{{notification.user.username}}"</i> rated:</div>
+                                            <div><i>"<b>{{notification.rate.mark}}</b>"</i></div>
+                                            <div>on <i>"{{notification.rate.video.title}}"</i> video.</div>
+                                        </a>
+                                    </li>
+                                    <li style="font-size: 12px;" ng-if="mainCtrl.notifications.length != 0">
+                                        <a href=""><strong>Show all notifications</strong></a>
+                                    </li>
+                                    <li style="font-size: 12px;" ng-if="mainCtrl.notifications.length == 0">
+                                        <a href=""><strong>No notifications</strong></a>
                                     </li>
                                 </ul>
                             </li>

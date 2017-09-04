@@ -54,5 +54,9 @@ public class NotificationController {
     public Notification put(@Valid @RequestBody Notification notification) {
         return notificationService.save(notification);
     }
-
+    
+    @RequestMapping(path = "/forUser/{userId}", method = RequestMethod.GET)		
+    	public List<Notification> getListOfNotificationForUser(@PathVariable("userId") Long userId){		
+    		return notificationService.findAllNotificationsByUser(userId);		
+    	}
 }

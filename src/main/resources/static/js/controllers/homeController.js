@@ -23,7 +23,7 @@
                 updateOnContentResize: true
             },
             setHeight: $window.innerHeight - 153,
-            scrollInertia: 500,
+            scrollInertia: 500
         }
 
         homeCtrl.videoLists;

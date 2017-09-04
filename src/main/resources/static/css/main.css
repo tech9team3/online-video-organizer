@@ -44,7 +44,9 @@ tags-input .tags {
     border-radius: 4px;
     padding-left: 5px;
     padding-right: 5px;
+    padding-bottom: 2px;
     margin: 2px;
+    font-size: 12px;
 }
 
 .angular-ui-tree-handle {
@@ -143,6 +145,7 @@ tr.angular-ui-tree-empty {
     font-size: 14px;
     height: 33px;
     margin: 8px 0 0;
+    color: #fff;
 }
 
 .video-list-thumbs .glyphicon-play-circle,
@@ -243,7 +246,7 @@ tr.angular-ui-tree-empty {
 }
 
 @media (min-width:320px) and (max-width: 480px) {
-    .video-list-thumbs .glyphicon-play-circle {
+    .video-list-thumbs .glyphicon-play-circle, .glyphicon-import {
         font-size: 35px;
         right: 36%;
         top: 27%;
