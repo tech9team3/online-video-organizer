@@ -52,6 +52,9 @@ public class NotificationService {
     }
 
     public Notification save(Notification notification) {
+        if(notification.getId()==null){
+            notification.setStatus(true);
+        }
         return notificationRepository.save(notification);
     }
 
@@ -149,6 +152,7 @@ public class NotificationService {
 
     public void sendReportToAdmin(Report report) {
         List<User> listOfUsers = userRepository.findAll();
+        reportRepository.save(report);
         for (User user : listOfUsers) {
             Set<Role> setOfRoles = user.getRoles();
             for (Role role : setOfRoles) {
@@ -175,5 +179,10 @@ public class NotificationService {
     public Notification findOneByReport (Long reportId){
         Report foundReport = reportRepository.findOne(reportId);
         return  notificationRepository.findByReport(foundReport);
+    }
+
+    public List<Notification> findAllNewNotificationsRateAndComment(Long userId){
+        User foundUser = userRepository.findOne(userId);
+        return notificationRepository.findByReportIsNullAndUserAndStatusIsTrue(foundUser);
     }
 }

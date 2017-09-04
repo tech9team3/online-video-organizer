@@ -11,4 +11,9 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
 public Notification findByComment(Comment comment);
 public List<Notification> findByUserOrderByCreationDateDesc(User user);
 public Notification findByReport(Report report);
+
+
+// vraca sve rate notifikacije i sve comment notifikacije za odredjenog usera
+public List<Notification> findByReportIsNullAndUserAndStatusIsTrue(User user);
+
 }
