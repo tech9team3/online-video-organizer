@@ -1,5 +1,5 @@
 (function () {
-    var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource', 'ui.bootstrap', 'vcRecaptcha', 'ngCookies', 'ngTagsInput', 'ui.tree', 'ngScrollbars', 'ngStomp', 'angular-growl', 'angular-notification-icons']);
+    var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource', 'ui.bootstrap', 'vcRecaptcha', 'ngCookies', 'ngTagsInput', 'ui.tree', 'ngScrollbars', 'ngStomp', 'angular-growl', 'angular-notification-icons', '720kb.socialshare']);
 
     // If we implement the basic security in spring boot then the response will
     // contains the header 'WWW-Authenticate: Basic'. So the browser will popup a
@@ -12,5 +12,6 @@
         growlProvider.globalTimeToLive(3000);
         growlProvider.globalReversedOrder(true);
         growlProvider.globalPosition('top-center');
+        //growlProvider.globalDisableIcons(true);
 }]);
 })();

@@ -17,7 +17,7 @@
         videoCtrl.reportCommentToAdmin = reportCommentToAdmin;
         videoCtrl.selectComment = selectComment;
         var videoId = parseInt($routeParams.videoId);
-        var commentId = $location.hash();
+        videoCtrl.highlitedCommentId = $location.hash();
         videoCtrl.spin = false;
 
         videoCtrl.loggedInUser = UserService.getLoggedInUser();

@@ -55,7 +55,7 @@ public class ReportController {
 
     @RequestMapping(method = RequestMethod.PUT)
     public Report put(@Valid @RequestBody Report report) {
-    		report.setStatus(false);
+    	//report.setStatus(false);
         return reportService.save(report);
     }
     

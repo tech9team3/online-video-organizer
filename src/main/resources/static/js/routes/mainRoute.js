@@ -41,6 +41,11 @@
                 controller: 'NotificationController',
                 controllerAs: 'notificationCtrl'
             })
+            .when('/reports', {
+                templateUrl: '/views/reports.html',
+                controller: 'ReportController',
+                controllerAs: 'reportCtrl'
+            })
             .otherwise('/');
     }
 }());

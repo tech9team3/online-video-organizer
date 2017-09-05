@@ -38,8 +38,10 @@ public class ReportService {
 	}
 
 	public Report save(Report report) {
-		if (report.getId() != null) {
+		if (report.getId() == null) {
 			report.setStatus(true);
+		} else {
+			report.setStatus(false);
 		}
 
 		Report savedReport = reportRepository.save(report);;

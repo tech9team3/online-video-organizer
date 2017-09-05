@@ -47,12 +47,8 @@
 
         function enableNotifications() {
             connectToWebSocketNotification();
-            NotificationService.getNewNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
-                mainCtrl.notificationCount = angular.copy(response.data.length);
-            });
-        	ReportService.getNewReports().then(function (response) {
-                mainCtrl.reportCount = angular.copy(response.data.length);
-            });
+            getNewNotifications();
+            getNewReports();
         }
 
         function connectToWebSocketNotification() {
@@ -60,16 +56,11 @@
             stompClient = Stomp.over(socket);
             stompClient.connect({}, function (frame) {
                 stompClient.subscribe('/queue/private.messages/' + UserService.getLoggedInUser().username, function (retVal) {
-                        
-                	NotificationService.getNewNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
-                        mainCtrl.notificationCount = angular.copy(response.data.length);
-                    });
-                	ReportService.getNewReports().then(function (response) {
-                        mainCtrl.reportCount = angular.copy(response.data.length);
-                    });
-                	
-                	//    mainCtrl.notificationCount += 1; 
-                      growl.success(retVal.body);
+
+                    getNewNotifications();
+                    getNewReports();
+
+                    growl.success(retVal.body);
                 });
             });
         }
@@ -77,24 +68,27 @@
         function getNewNotifications() {
             NotificationService.getNewNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
                 mainCtrl.newNotifications = response.data;
-                console.log(response.data);
-                
+                mainCtrl.notificationCount = angular.copy(response.data.length);
             });
         }
-        
+
         function showNotification(notification) {
-            console.log(notification);
+            NotificationService.saveNotification(notification).then(function() {
+                getNewNotifications();
+            });
         }
-        
+
         function getNewReports() {
             ReportService.getNewReports().then(function (response) {
                 mainCtrl.newReports = response.data;
-                console.log(response.data);
+                mainCtrl.reportCount = angular.copy(response.data.length);
             });
         }
-        
+
         function showReport(report) {
-            console.log(report);
+            ReportService.saveReport(report).then(function() {
+                getNewReports();
+            });
         }
 
 

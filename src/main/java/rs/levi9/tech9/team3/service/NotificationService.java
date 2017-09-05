@@ -53,8 +53,10 @@ public class NotificationService {
 
 	public Notification save(Notification notification) {
 
-		if (notification.getId() != null) {
+		if (notification.getId() == null) {
 			notification.setStatus(true);
+		} else {
+			notification.setStatus(false);
 		}
 
 		return notificationRepository.save(notification);
@@ -155,7 +157,11 @@ public class NotificationService {
 	public void sendReportToAdmin(Report report) {
 
 		List<User> listOfUsers = userRepository.findAll();
+		if (report.getId() == null) {
 			report.setStatus(true);
+		} else {
+			report.setStatus(false);
+		}
 		reportRepository.save(report);
 
 		for (User user : listOfUsers) {

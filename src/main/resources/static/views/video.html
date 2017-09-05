@@ -13,6 +13,12 @@
             <div class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item" ng-src="{{videoCtrl.video.videoPlayerUrl}}" frameborder="0" allowfullscreen></iframe>
             </div>
+            <div class="pull-right">
+                <button class="btn btn-xs btn-social-icon btn-facebook" socialshare socialshare-provider="facebook" socialshare-url="{{videoCtrl.video.videoUrl}}" socialshare-type="sharer" socialshare-text="Online Video Orgnizer - {{videoCtrl.video.title}}" socialshare-quote="Online Video Orgnizer" socialshare-hashtags="ovo"><span class="fa fa-facebook"></span></button>
+                <button class="btn btn-xs btn-social-icon btn-twitter" socialshare socialshare-provider="twitter" socialshare-url="{{videoCtrl.video.videoUrl}}" socialshare-text="Online Video Orgnizer - {{videoCtrl.video.title}}" socialshare-hashtags="ovo"><span class="fa fa-twitter"></span></button>
+                <button class="btn btn-xs btn-social-icon btn-google" socialshare socialshare-provider="google" socialshare-url="{{videoCtrl.video.videoUrl}}" socialshare-text="Online Video Orgnizer - {{videoCtrl.video.title}}"><span class="fa fa-google"></span></button>
+                <button class="btn btn-xs btn-social-icon btn-vk" socialshare socialshare-provider="vk" socialshare-url="http://localhost:8080/#/video/{{videoCtrl.video.id}}" socialshare-text="Online Video Orgnizer - {{videoCtrl.video.title}}" socialshare-description="{{videoCtrl.video.description}}" socialshare-media="{{videoCtrl.video.videoImageUrl}}"><span class="fa fa-vk"></span></button>
+            </div>
             <br>
             <p>
                 {{videoCtrl.video.description}}
@@ -44,7 +50,7 @@
             </div>
             <br>
             <br>
-            <div ng-class="" ng-repeat="comment in videoCtrl.comments" id="{{comment.id}}">
+            <div ng-repeat="comment in videoCtrl.comments" id="{{comment.id}}">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
@@ -58,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body" ng-class="{ 'bg-primary': videoCtrl.highlitedCommentId == comment.id }">
                         <span ng-if="comment.content">{{comment.content}}</span>
                         <div>
                             <h6><small class="pull-right">{{comment.creationDate | date : "d MMM y"}}</small></h6>
