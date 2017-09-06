@@ -93,20 +93,20 @@
                                         <a ng-click="mainCtrl.showNotification(notification)" ng-href="http://localhost:8080/#/video/{{notification.comment.video.id}}#{{notification.comment.id}}">
                                             <div><i>"{{notification.comment.user.username}}"</i> commented:</div>
                                             <div><i>"<b>{{notification.comment.content | limitTo:80}}</b>"</i></div>
-                                            <div>on <i>"{{notification.comment.video.title}}"</i> video.</div>
+                                            <div>on <i>"{{notification.comment.video.title | limitTo:80}}"</i> video.</div>
                                         </a>
                                     </li>
                                     <li style="border-bottom:solid 1px rgba(0,0,0,0.15); font-size: 12px;" ng-if="notification.rate" ng-repeat="notification in mainCtrl.newNotifications">
                                         <a ng-click="mainCtrl.showNotification(notification)" ng-href="http://localhost:8080/#/video/{{notification.rate.video.id}}">
                                             <div><i>"{{notification.rate.user.username}}"</i> rated:</div>
                                             <div><i>"<b>{{notification.rate.mark}}</b>"</i></div>
-                                            <div>on <i>"{{notification.rate.video.title}}"</i> video.</div>
+                                            <div>on <i>"{{notification.rate.video.title | limitTo:80}}"</i> video.</div>
                                         </a>
                                     </li>
-                                    <li style="font-size: 12px;" ng-if="mainCtrl.notifications.length != 0">
+                                    <li style="font-size: 12px;" ng-if="mainCtrl.newNotifications.length != 0">
                                         <a href="#notifications"><strong>Show all notifications</strong></a>
                                     </li>
-                                    <li style="font-size: 12px;" ng-if="mainCtrl.notifications.length == 0">
+                                    <li style="font-size: 12px;" ng-if="mainCtrl.newNotifications.length == 0">
                                         <a href=""><strong>No notifications</strong></a>
                                     </li>
                                 </ul>
@@ -124,15 +124,15 @@
                                     <li style="border-bottom:solid 1px rgba(0,0,0,0.15); font-size: 12px;" ng-repeat="notification in mainCtrl.newReports">
                                         <a ng-click="mainCtrl.showReport(notification)" ng-href="http://localhost:8080/#/video/{{notification.report.reportedComment.video.id}}#{{notification.report.reportedComment.id}}">
                                             <div><i>"{{notification.report.reportAuthor.username}}"</i> reported:</div>
-                                            <div><i>"<b>{{notification.report.reportText}}</b>"</i> on comment:</div>
-                                            <div><i>"<b>{{notification.report.reportedComment.content}}</b>"</i></div>
-                                            <div>on <i>"{{notification.report.reportedComment.video.title}}"</i> video.</div>
+                                            <div><i>"<b>{{notification.report.reportText | limitTo:80}}</b>"</i> on comment:</div>
+                                            <div><i>"<b>{{notification.report.reportedComment.content | limitTo:80}}</b>"</i></div>
+                                            <div>on <i>"{{notification.report.reportedComment.video.title | limitTo:80}}"</i> video.</div>
                                         </a>
                                     </li>
-                                    <li style="font-size: 12px;" ng-if="mainCtrl.reports.length != 0">
+                                    <li style="font-size: 12px;" ng-if="mainCtrl.newReports.length != 0">
                                         <a href="#reports"><strong>Show all reports</strong></a>
                                     </li>
-                                    <li style="font-size: 12px;" ng-if="mainCtrl.reports.length == 0">
+                                    <li style="font-size: 12px;" ng-if="mainCtrl.newReports.length == 0">
                                         <a href=""><strong>No reports</strong></a>
                                     </li>
                                 </ul>

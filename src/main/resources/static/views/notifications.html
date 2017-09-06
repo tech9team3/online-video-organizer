@@ -1,6 +1,9 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
+            <div class="page-header">
+                <h3>Notifications</h3>
+            </div>
             <ul class="list-group">
                 <li class="list-group-item" ng-if="notification.comment" ng-repeat="notification in notificationCtrl.notifications">
                     <a ng-style="{ fontWeight: notification.status?'bold':'normal' }" ng-click="notificationCtrl.showNotification(notification, getNewNotifications = mainCtrl.getNewNotifications);" ng-href="http://localhost:8080/#/video/{{notification.comment.video.id}}#{{notification.comment.id}}">
