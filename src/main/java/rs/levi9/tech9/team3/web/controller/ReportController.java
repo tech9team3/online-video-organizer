@@ -61,7 +61,9 @@ public class ReportController {
     
     @RequestMapping(path = "/commentReport", method = RequestMethod.POST)
     public void reportCommentToAdmin(@Valid @RequestBody Report report){
-        notificationService.sendReportToAdmin(report);
+      //  notificationService.sendReportToAdmin(report);
+        reportService.save(report);
+
     }
     @RequestMapping(path = "/getNewReports", method = RequestMethod.GET)
     public List<Report> findNewReportsForUser(){

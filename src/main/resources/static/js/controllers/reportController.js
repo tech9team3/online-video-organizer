@@ -2,20 +2,21 @@
     angular.module('app')
         .controller('ReportController', ReportController);
 
-    ReportController.$inject = ['$location', '$http', '$route', 'UserService', 'ReportService'];
+    ReportController.$inject = ['$location', '$http', '$route', 'UserService', 'NotificationService'];
 
-    function ReportController($location, $http, $route, UserService, ReportService) {
+    function ReportController($location, $http, $route, UserService, NotificationService) {
         var reportCtrl = this;
         reportCtrl.showReport = showReport;
 
-        ReportService.getReports().then(function (response) {
+        NotificationService.getReports().then(function (response) {
             reportCtrl.reports = response.data;
         });
 
-        function showReport(report) {
-            ReportService.saveReport(report).then(function () {
-
+        function showReport(report, getNewReports) {
+            NotificationService.saveNotification(report).then(function() {
+                getNewReports();
             });
+
         }
     }
 })();

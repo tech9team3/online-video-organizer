@@ -40,7 +40,7 @@ public class NotificationController {
 
     @RequestMapping(method = RequestMethod.POST)
     public Notification save(@Valid @RequestBody Notification notification) {
-        notification.setCreationDate(new Date());
+
         return notificationService.save(notification);
     }
 
@@ -67,4 +67,15 @@ public class NotificationController {
     public List<Notification> getListOfNewNotifications(@PathVariable("userId") Long userId){
     	    return notificationService.findAllNewNotificationsRateAndComment(userId);
     }
+
+    @RequestMapping(path = "/getNewReportNotifications", method = RequestMethod.GET)
+    public List<Notification> getListOfNewReportNotifications(){
+        return notificationService.findAllNewReportNotifications();
+    }
+
+    @RequestMapping(path = "/getReportNotifications", method = RequestMethod.GET)
+    public List<Notification> getListOfReportNotification(){
+        return  notificationService.findAllReportNotification();
+    }
+
 }

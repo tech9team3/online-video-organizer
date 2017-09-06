@@ -79,14 +79,14 @@
         }
 
         function getNewReports() {
-            ReportService.getNewReports().then(function (response) {
+            NotificationService.getNewReports().then(function (response) {
                 mainCtrl.newReports = response.data;
                 mainCtrl.reportCount = angular.copy(response.data.length);
             });
         }
 
         function showReport(report) {
-            ReportService.saveReport(report).then(function() {
+            NotificationService.saveNotification(report).then(function() {
                 getNewReports();
             });
         }

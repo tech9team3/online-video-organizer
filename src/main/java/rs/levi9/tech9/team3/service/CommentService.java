@@ -53,7 +53,6 @@ public class CommentService {
         Notification notification = new Notification();
         User userToNotify = commentedVideo.getUser();
 
-        notification.setStatus(true);
         notification.setComment(savedComment);
         notification.setCreationDate(savedComment.getCreationDate());
         notification.setUser(userToNotify);

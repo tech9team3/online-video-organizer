@@ -82,7 +82,7 @@
                         </ul>
                         <ul ng-show="mainCtrl.user" class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a ng-click="mainCtrl.getNewNotifications();" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <notification-icon class="notificaton-count-icon" animation="bounce" count="mainCtrl.notificationCount">
                                         <i style="font-size: 18px; color: whitesmoke; padding-right: 2px;" class="fa fa-envelope-o fa-3x"></i>
                                     </notification-icon>
@@ -114,18 +114,19 @@
                         </ul>
                         <ul ng-show="mainCtrl.user  && mainCtrl.user.roles.indexOf('ROLE_ADMIN') !== -1" class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a ng-click="mainCtrl.getNewReports()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <notification-icon class="notificaton-count-icon" animation="bounce" count="mainCtrl.reportCount">
                                         <i style="font-size: 18px; color: whitesmoke; padding-right: 2px;" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                                     </notification-icon>
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li style="border-bottom:solid 1px rgba(0,0,0,0.15); font-size: 12px;" ng-repeat="report in mainCtrl.newReports">
-                                        <a ng-click="mainCtrl.showReport(report)" ng-href="http://localhost:8080/#/video/{{report.reportedComment.video.id}}#{{report.reportedComment.id}}">
-                                            <div><i>"{{report.reportAuthor.username}}"</i> notify:</div>
-                                            <div><i>"<b>{{report.reportedComment.content}}</b>"</i></div>
-                                            <div>on <i>"{{report.reportedComment.video.title}}"</i> video.</div>
+                                    <li style="border-bottom:solid 1px rgba(0,0,0,0.15); font-size: 12px;" ng-repeat="notification in mainCtrl.newReports">
+                                        <a ng-click="mainCtrl.showReport(notification)" ng-href="http://localhost:8080/#/video/{{notification.report.reportedComment.video.id}}#{{notification.report.reportedComment.id}}">
+                                            <div><i>"{{notification.report.reportAuthor.username}}"</i> reported:</div>
+                                            <div><i>"<b>{{notification.report.reportText}}</b>"</i> on comment:</div>
+                                            <div><i>"<b>{{notification.report.reportedComment.content}}</b>"</i></div>
+                                            <div>on <i>"{{notification.report.reportedComment.video.title}}"</i> video.</div>
                                         </a>
                                     </li>
                                     <li style="font-size: 12px;" ng-if="mainCtrl.reports.length != 0">

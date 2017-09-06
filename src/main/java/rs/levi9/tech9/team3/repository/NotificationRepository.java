@@ -16,4 +16,9 @@ public Notification findByReport(Report report);
 // vraca sve rate notifikacije i sve comment notifikacije za odredjenog usera
 public List<Notification> findByReportIsNullAndUserAndStatusIsTrue(User user);
 
+//vraca sve report notifikacije koje imaju status true, koje nisu pregledane
+public List<Notification> findByRateIsNullAndCommentIsNullAndStatusIsTrue();
+
+public List<Notification> findByReportIsNotNull();
+
 }

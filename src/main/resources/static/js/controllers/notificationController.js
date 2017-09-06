@@ -12,9 +12,9 @@
             notificationCtrl.notifications = response.data;
         });
         
-        function showNotification(notification) {
+        function showNotification(notification,  getNewNotifications) {
             NotificationService.saveNotification(notification).then(function() {
-                
+                getNewNotifications();
             });
         }
     }

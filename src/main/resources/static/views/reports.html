@@ -2,11 +2,12 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <ul class="list-group">
-                <li class="list-group-item" ng-repeat="report in reportCtrl.reports">
-                    <a ng-style="{ fontWeight: report.status?'bold':'normal' }" ng-click="reportCtrl.showReport(report); mainCtrl.getNewReports();" ng-href="http://localhost:8080/#/video/{{report.reportedComment.video.id}}#{{report.reportedComment.id}}">
-                        <div><i>"{{report.reportAuthor.username}}"</i> notify:</div>
-                        <div><i>"<b>{{report.reportedComment.content}}</b>"</i></div>
-                        <div>on <i>"{{report.reportedComment.video.title}}"</i> video.</div>
+                <li class="list-group-item" ng-repeat="notification in reportCtrl.reports">
+                    <a ng-style="{ fontWeight: notification.status?'bold':'normal' }" ng-click="reportCtrl.showReport(notification, getNewReports = mainCtrl.getNewReports); " ng-href="http://localhost:8080/#/video/{{notification.report.reportedComment.video.id}}#{{notification.report.reportedComment.id}}">
+                        <div><i>"{{notification.report.reportAuthor.username}}"</i> reported:</div>
+                        <div><i>"<b>{{notification.report.reportText}}</b>"</i> on comment:</div>
+                        <div><i>"<b>{{notification.report.reportedComment.content}}</b>"</i></div>
+                        <div>on <i>"{{notification.report.reportedComment.video.title}}"</i> video.</div>
                     </a>
                 </li>
             </ul>

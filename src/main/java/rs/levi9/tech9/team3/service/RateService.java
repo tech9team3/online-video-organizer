@@ -52,7 +52,6 @@ public class RateService {
         Notification notification = new Notification();
         User userToNotify = ratedVideo.getUser();
 
-        notification.setStatus(true);
         notification.setRate(savedRate);
         notification.setCreationDate(rate.getCreationDate());
         notification.setUser(userToNotify);

@@ -3,14 +3,14 @@
         <div class="col-md-6 col-md-offset-3">
             <ul class="list-group">
                 <li class="list-group-item" ng-if="notification.comment" ng-repeat="notification in notificationCtrl.notifications">
-                    <a ng-style="{ fontWeight: notification.status?'bold':'normal' }" ng-click="notificationCtrl.showNotification(notification); mainCtrl.getNewNotifications();" ng-href="http://localhost:8080/#/video/{{notification.comment.video.id}}#{{notification.comment.id}}">
+                    <a ng-style="{ fontWeight: notification.status?'bold':'normal' }" ng-click="notificationCtrl.showNotification(notification, getNewNotifications = mainCtrl.getNewNotifications);" ng-href="http://localhost:8080/#/video/{{notification.comment.video.id}}#{{notification.comment.id}}">
                         <div><i>"{{notification.comment.user.username}}"</i> commented:</div>
                         <div><i>"<b>{{notification.comment.content}}</b>"</i></div>
                         <div>on <i>"{{notification.comment.video.title}}"</i> video.</div>
                     </a>
                 </li>
                 <li class="list-group-item" ng-if="notification.rate" ng-repeat="notification in notificationCtrl.notifications">
-                    <a ng-style="{ fontWeight: notification.status?'bold':'normal' }" ng-click="notificationCtrl.showNotification(notification); mainCtrl.getNewNotifications();" ng-href="http://localhost:8080/#/video/{{notification.rate.video.id}}">
+                    <a ng-style="{ fontWeight: notification.status?'bold':'normal' }" ng-click="notificationCtrl.showNotification(notification, getNewNotifications = mainCtrl.getNewNotifications);" ng-href="http://localhost:8080/#/video/{{notification.rate.video.id}}">
                         <div><i>"{{notification.rate.user.username}}"</i> rated:</div>
                         <div><i>"<b>{{notification.rate.mark}}</b>"</i></div>
                         <div>on <i>"{{notification.rate.video.title}}"</i> video.</div>

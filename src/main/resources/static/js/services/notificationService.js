@@ -58,8 +58,8 @@
             }).error(function () {
                 return def.reject("Failed");
             });
-        } 
-        
+        }
+
         this.getNewNotificationsByUserId = function (userId) {
             var def = $q.defer();
             var req = {
@@ -71,8 +71,34 @@
             }).error(function () {
                 return def.reject("Failed");
             });
-        } 
-        
+        }
+
+        this.getReports = function () {
+            var def = $q.defer();
+            var req = {
+                method: 'GET',
+                url: "notification/getReportNotifications"
+            }
+            return $http(req).success(function (response) {
+                return response.data;
+            }).error(function () {
+                return def.reject("Failed");
+            });
+        }
+
+        this.getNewReports = function () {
+            var def = $q.defer();
+            var req = {
+                method: 'GET',
+                url: "notification/getNewReportNotifications"
+            }
+            return $http(req).success(function (response) {
+                return response.data;
+            }).error(function () {
+                return def.reject("Failed");
+            });
+        }
+
         this.saveNotification = function (notification) {
             var def = $q.defer();
             var req = {
