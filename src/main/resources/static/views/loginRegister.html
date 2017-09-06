@@ -9,15 +9,15 @@
                     <div ng-switch-when="login">
                         <form class="modal-content" name="mainCtrl.loginUserForm" role="form" ng-submit="mainCtrl.login(btoa(mainCtrl.credentials.username + ':' + mainCtrl.credentials.password))" novalidate>
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <button ng-click="mainCtrl.clearForm(mainCtrl.loginUserForm)" type="button" class="close" data-dismiss="modal">&times;</button>
                                 <h4 class="modal-title">Login</h4>
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label for="username1">Username</label>
+                                    <label for="username">Username</label>
                                     <div class="input-group" ng-class="{ 'has-error' : mainCtrl.loginUserForm.username.$invalid && !mainCtrl.loginUserForm.username.$pristine }">
                                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                        <input type="text" class="form-control" id="username1" name="username-login" placeholder="Enter your username" required ng-model="mainCtrl.credentials.username" />
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required ng-model="mainCtrl.credentials.username" />
                                     </div>
                                     <span class="error" ng-show="mainCtrl.loginUserForm.username.$invalid && !mainCtrl.loginUserForm.username.$pristine">* Username is required!</span>
                                 </div>
@@ -39,7 +39,7 @@
                             <div class="modal-footer">
                                 <a href="javascript:void(0)" ng-click="mainCtrl.toggleLoginRegister('register')" class="pull-left">Register</a>
                                 <button type="submit" class="btn btn-primary" ng-disabled="mainCtrl.loginUserForm.$invalid">Submit</button>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                <button ng-click="mainCtrl.clearForm(mainCtrl.loginUserForm)" type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                             </div>
                         </form>
                     </div>
@@ -49,24 +49,24 @@
                     <div ng-switch-when="register">
                         <form class="modal-content" name="mainCtrl.registerUserForm" role="form" ng-submit="mainCtrl.register(mainCtrl.registerInput)" novalidate>
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <button ng-click="mainCtrl.clearForm(mainCtrl.registerUserForm)" type="button" class="close" data-dismiss="modal">&times;</button>
                                 <h4 class="modal-title">Register</h4>
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label for="username2">Username</label>
+                                    <label for="username">Username</label>
                                     <div class="input-group" ng-class="{ 'has-error' : mainCtrl.registerUserForm.username.$invalid && !mainCtrl.registerUserForm.username.$pristine }">
                                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                        <input name="username" type="text" class="form-control" id="username2" placeholder="Enter your username" required ng-model="mainCtrl.registerInput.username" ng-minlength="5" ng-maxlength="15"/>
+                                        <input name="username" type="text" class="form-control" id="username" placeholder="Enter your username" required ng-model="mainCtrl.registerInput.username" ng-minlength="5" ng-maxlength="15" uib-tooltip="Username must be from 5 to 15 characters long!" tooltip-trigger="'focus'" tooltip-placement="top-right"/>
                                     </div>
-                                    <span class="error" ng-show="mainCtrl.registerUserForm.username.$invalid && !mainCtrl.registerUserForm.username.$pristine">* Username is required!</span>
+                                    <span class="error" ng-show="mainCtrl.registerUserForm.username.$invalid && !mainCtrl.registerUserForm.username.$pristine">* Username is not valid!</span>
                                     <span ng-if="mainCtrl.registrationError.username" class="error">* {{mainCtrl.registrationError.username}}</span>
                                 </div>
-                                <div class="form-group" uib-tooltip="Password must contain between 8 and 20 characters! One special character and one number is required!">
+                                <div class="form-group">
                                     <label for="password">Password</label>
                                     <div class="input-group" ng-class="{ 'has-error' : mainCtrl.registerUserForm.password.$invalid && !mainCtrl.registerUserForm.password.$pristine }">
                                         <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                        <input name="password" type="password" ng-pattern="/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[@#$%^&+=!@#$%&*()_+=|<>?{}\\[\]~-])(?!.*\s).{8,20}$/" class="form-control" id="password" placeholder="Enter your password" required ng-model="mainCtrl.registerInput.password" />
+                                        <input name="password" type="password" ng-pattern="/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[@#$%^&+=!@#$%&*()_+=|<>?{}\\[\]~-])(?!.*\s).{8,20}$/" class="form-control" id="password" placeholder="Enter your password" required ng-model="mainCtrl.registerInput.password" uib-tooltip="Password must contain between 8 and 20 characters! One special character and one number is required!" tooltip-trigger="'focus'" tooltip-placement="top-right"/>
                                     </div>
                                     <span class="error" ng-show="mainCtrl.registerUserForm.password.$invalid && !mainCtrl.registerUserForm.password.$pristine">* Password is not valid!</span>
                                 </div>
@@ -90,13 +90,13 @@
                                         <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
                                         <input name="email" type="email" ng-pattern="/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/" class="form-control" id="email" placeholder="Enter your email" required ng-model="mainCtrl.registerInput.email" />
                                     </div>
-                                    <span class="error" ng-show="mainCtrl.registerUserForm.email.$invalid && !mainCtrl.registerUserForm.email.$pristine">* Email is required!</span>
+                                    <span class="error" ng-show="mainCtrl.registerUserForm.email.$invalid && !mainCtrl.registerUserForm.email.$pristine">* Email is not valid!</span>
                                     <span ng-if="mainCtrl.registrationError.email" class="error">* {{mainCtrl.registrationError.email}}</span>
                                 </div>
 
                                 <!-- reCaptcha -->
                                 <div class="text-center">
-                                    <div vc-recaptcha key="mainCtrl.publicKey" theme="dark" size="normal" style="display:inline-block"></div>
+                                    <div vc-recaptcha on-create="mainCtrl.setRecaptchaId(widgetId)" key="mainCtrl.publicKey" theme="lite" size="normal" style="display:inline-block"></div>
                                 </div>
                                 <!--  -->
                                 <br>
@@ -105,7 +105,7 @@
                             <div class="modal-footer">
                                 <a href="javascript:void(0)" ng-click="mainCtrl.toggleLoginRegister('login')" class=pull-left>Login</a>
                                 <button type="submit" class="btn btn-primary" ng-disabled="mainCtrl.registerUserForm.$invalid">Submit</button>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                <button ng-click="mainCtrl.clearForm(mainCtrl.registerUserForm)" type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                             </div>
                         </form>
                     </div>

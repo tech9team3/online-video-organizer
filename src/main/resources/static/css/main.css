@@ -124,15 +124,27 @@ tr.angular-ui-tree-empty {
 
 .video-list-thumbs>li:last-child {}
 
-.video-list-thumbs .play-video,
-.add-video {
+.video-list-thumbs .play-video {
     display: block;
     position: relative;
     background-color: #111;
     color: #fff;
     padding: 8px;
     border-radius: 3px transition:all 500ms ease-in-out;
-    border-radius: 4px
+    border-radius: 4px;
+}
+
+.video-list-thumbs .add-video {
+    display: block;
+    position: relative;
+    background-color: #111;
+    color: #fff;
+    padding: 8px;
+    border-radius: 3px transition:all 500ms ease-in-out;
+    border-radius: 4px;
+    max-height: 74px;
+    overflow: hidden;
+     display: -webkit-box;
 }
 
 .video-list-thumbs>li>a:hover {
@@ -148,8 +160,15 @@ tr.angular-ui-tree-empty {
     color: #fff;
 }
 
-.video-list-thumbs .glyphicon-play-circle,
-.glyphicon-import {
+.add-video>div>div>h2 {
+    bottom: 0;
+    font-size: 12px;
+    height: 100%;
+    margin: 1px 0px 1px 0px;
+    color: #fff;
+}
+
+.video-list-thumbs .glyphicon-play-circle {
     font-size: 60px;
     opacity: 0.6;
     position: absolute;
@@ -159,13 +178,24 @@ tr.angular-ui-tree-empty {
     transition: all 500ms ease-in-out;
 }
 
+.video-list-thumbs .fa-plus-circle {
+    font-size: 30px;
+    opacity: 0.6;
+    position: absolute;
+    left: 18%;
+    top: 30%;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+    transition: all 500ms ease-in-out;
+}
+
+
 .video-list-thumbs>li>a:hover .glyphicon-play-circle {
     color: #fff;
     opacity: 1;
     text-shadow: 0 1px 3px rgba(0, 0, 0, .8);
 }
 
-.video-list-thumbs>li>a:hover .glyphicon-import {
+.video-list-thumbs>li>a:hover .fa-plus-circle {
     color: #fff;
     opacity: 1;
     text-shadow: 0 1px 3px rgba(0, 0, 0, .8);

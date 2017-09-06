@@ -18,9 +18,15 @@
                 <ul class="list-unstyled video-list-thumbs row" style="width: 100%">
                     <li class="col-md-12" ng-repeat="video in $ctrl.providerVideoList">
                         <a class="add-video" href="" ng-click="$ctrl.onVideoSelect({video: video})" popover-title="Add video to playlist:" uib-popover="{{video.title}}" popover-append-to-body="true" popover-placement="right" popover-trigger="'mouseenter'">
-                            <img ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" class="img-responsive" />
-                            <h2 class="might-overflow">{{video.title}}</h2>
-                            <span class="glyphicon glyphicon-import"></span>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <img ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" class="img-responsive" />
+                                </div>
+                                <div class="col-xs-6">
+                                    <h2 class="">{{video.title}}</h2>
+                                </div>
+                            </div>
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
                         </a>
                     </li>
                 </ul>
@@ -32,3 +38,4 @@
             </div>
         </div>
     </div>
+</div>

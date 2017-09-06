@@ -28,7 +28,7 @@
 
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" ng-href="https://bootswatch.com/cosmo/bootstrap.min.css">
+<!--    <link rel="stylesheet" ng-href="https://bootswatch.com/cosmo/bootstrap.min.css">-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css">
     <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.bootstrap.min.css">
@@ -70,7 +70,7 @@
                             <li ng-if="mainCtrl.user && mainCtrl.user.roles.indexOf('ROLE_ADMIN') !== -1" ng-class="{ 'active': mainCtrl.isActive('/admin') }"><a href="#/admin">User </a></li>
                         </ul>
                         <ul ng-show="!mainCtrl.user" class="nav navbar-nav navbar-right">
-                            <li><a href="" data-toggle="modal" data-target="#login-register-modal">Login/Register </a></li>
+                            <li><a href="" data-toggle="modal" data-target="#login-register-modal" ng-click="mainCtrl.loginOrRegister = 'login'">Login/Register </a></li>
                         </ul>
                         <ul ng-show="mainCtrl.user" class="nav navbar-nav navbar-right">
                             <li class="dropdown">

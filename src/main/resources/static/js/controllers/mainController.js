@@ -25,6 +25,8 @@
         mainCtrl.showNotification = showNotification;
         mainCtrl.getNewReports = getNewReports;
         mainCtrl.showReport = showReport;
+        mainCtrl.setRecaptchaId = setRecaptchaId;
+        mainCtrl.clearForm = clearForm;
 
         //reCaptcha
         mainCtrl.publicKey = "6LceCy0UAAAAALAVMh0eYQnnlXsyvWkksQYayaCN";
@@ -38,10 +40,6 @@
                 mainCtrl.credentials = {
                     autologin: false
                 };
-            }
-            if (mainCtrl.user) {
-                $route.reload();
-                mainCtrl.loginUserForm.$setPristine();
             }
         }
 
@@ -60,7 +58,7 @@
                     getNewNotifications();
                     getNewReports();
 
-                    growl.success(retVal.body);
+                    growl.info(retVal.body);
                 });
             });
         }
@@ -73,7 +71,7 @@
         }
 
         function showNotification(notification) {
-            NotificationService.saveNotification(notification).then(function() {
+            NotificationService.saveNotification(notification).then(function () {
                 getNewNotifications();
             });
         }
@@ -86,20 +84,18 @@
         }
 
         function showReport(report) {
-            NotificationService.saveNotification(report).then(function() {
+            NotificationService.saveNotification(report).then(function () {
                 getNewReports();
             });
         }
 
-
-        //nav-bar
         function isActive(viewLocation) {
             return viewLocation === $location.path();
         }
 
         function register(user) {
             var data = {
-                'g-recaptcha-response': vcRecaptchaService.getResponse() //send g-captcah-reponse to our server        
+                'g-recaptcha-response': vcRecaptchaService.getResponse(mainCtrl.recaptchaId)
             }
             UserService.sendCaptcha(data).then(function (response) {
                 if (response.data.success) {
@@ -123,6 +119,10 @@
             UserService.saveUser(user).then(function (response) {
                 //mainCtrl.loginOrRegister = "login";
                 mainCtrl.registrationMessage = "Please check your email to activate your account!";
+                delete mainCtrl.registerInput;
+                delete mainCtrl.registrationError;
+                mainCtrl.registerUserForm.$setPristine();
+                grecaptcha.reset();
                 $('#registrationModal').modal('show');
             }, function (error) {
                 mainCtrl.registrationError = {};
@@ -130,8 +130,6 @@
                     errorHandler(e);
                 });
             })
-            //remove input value after submit
-            mainCtrl.registerUserForm.$setPristine();
         }
 
         function login(base64Credential) {
@@ -161,25 +159,39 @@
 
         function toggleLoginRegister(showForm) {
             if (showForm == "register") {
-                mainCtrl.loginUserForm.$setPristine();
                 delete mainCtrl.credentials;
                 delete mainCtrl.loginError;
+                mainCtrl.loginUserForm.$setPristine();
             } else {
-                mainCtrl.registerUserForm.$setPristine();
                 delete mainCtrl.registerInput;
                 delete mainCtrl.registrationError;
+                mainCtrl.registerUserForm.$setPristine();
             }
             mainCtrl.loginOrRegister = showForm;
             // grecaptcha.reset();
         }
 
         function closeRegistrationConfirmation() {
-            if (mainCtrl.registrationMessage.includes("is registered!")) {
+            if (mainCtrl.registrationMessage === "Please check your email to activate your account!") {
+                angular.element('#login-register-modal').modal('hide');
                 grecaptcha.reset();
                 mainCtrl.registerUserForm.$setPristine();
                 delete mainCtrl.registrationError;
-                mainCtrl.loginOrRegister = "login";
             }
+        }
+
+        function setRecaptchaId(widgetId) {
+            mainCtrl.recaptchaId = widgetId;
+        }
+
+        function clearForm(form) {
+            delete mainCtrl.credentials;
+            delete mainCtrl.loginError;
+            delete mainCtrl.registerInput;
+            delete mainCtrl.registrationError;
+            form.$setPristine();
+            form.$setUntouched();  
+            
         }
 
         function logout() {
