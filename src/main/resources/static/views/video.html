@@ -80,9 +80,9 @@
                             <ul class="list-unstyled video-list-thumbs row" style="width: 100%">
                                 <li class="col-md-12" ng-repeat="video in videoCtrl.videos">
                                     <a class="add-video" ng-href="#/video/{{video.id}}" popover-title="Play video" uib-popover="{{video.title}}" popover-append-to-body="true" popover-placement="left" popover-trigger="'mouseenter'">
-                                        <div class="row">
+                                        <div class="row" style="width: 100%">
                                             <div class="col-xs-6">
-                                                <img ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" class="img-responsive" />
+                                                <img ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" class="img-responsive image-thumb-sm" />
                                             </div>
                                             <div class="col-xs-6">
                                                 <h2 class="">{{video.title}}</h2>
