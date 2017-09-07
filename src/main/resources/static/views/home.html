@@ -24,8 +24,12 @@
                     <li class="col-lg-4 col-xs-6" ng-repeat="video in homeCtrl.publicVideos | orderBy:homeCtrl.order :homeCtrl.reverseOrder | searchFilter: homeCtrl.searchByVideo">
                         <!--:homeCtrl.reverseOrder-->
                         <a class="play-video" ng-href="#/video/{{video.id}}">
-                            <img ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" class="img-responsive image-thumb" />
-                            <h2 class="might-overflow" title="{{video.title}}">{{video.title}}</h2>
+                           <div class="image-div">
+                               <img ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" class="img-responsive image-thumb" />
+                           </div>
+                            <div class="header-div">
+                                <h2 class="might-overflow" title="{{video.title}}">{{video.title}}</h2>
+                            </div>                            
                             <span class="glyphicon glyphicon-play-circle"></span>
                             <span class="username">{{video.videoList.user.username}}</span>
                         </a>

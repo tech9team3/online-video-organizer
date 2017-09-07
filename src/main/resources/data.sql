@@ -24,9 +24,9 @@ INSERT INTO video_list (title, user_id, visible) VALUES ("Moja nova play lista",
 INSERT INTO video_list (title, user_id, visible) VALUES ("Spanish play lista", 2,false);
 INSERT INTO video_list (title, user_id, visible) VALUES ("Shakira play lista", 2,true);
 INSERT INTO video_list (title, user_id, visible) VALUES ("Moja rock play lista", 3,true);
-INSERT INTO video_list (title, user_id, visible) VALUES ("Moja nova omiljena play lista", 4,true);
-INSERT INTO video_list (title, user_id, visible) VALUES ("Moja nova ili stara play lista", 5,true);
-INSERT INTO video_list (title, user_id, visible) VALUES ("Moja nova rock play lista", 6,true);
+INSERT INTO video_list (title, user_id, visible) VALUES ("Omiljena play lista", 4,true);
+INSERT INTO video_list (title, user_id, visible) VALUES ("Stara play lista", 5,true);
+INSERT INTO video_list (title, user_id, visible) VALUES ("Rock play lista", 6,true);
 INSERT INTO video_list (title, user_id, visible) VALUES ("Neka lista", 7,true);
 
 INSERT INTO video (visible, description, title, video_url, user_id, video_list_id, video_player_url, video_image_url ) VALUES (true, "November Rain", "Guns N' Roses - November Rain","www.youtube.com/watch?v=8SbUC-UaAxE", 7,9, "https://www.youtube.com/embed/8SbUC-UaAxE", "https://i.ytimg.com/vi/8SbUC-UaAxE/mqdefault.jpg");

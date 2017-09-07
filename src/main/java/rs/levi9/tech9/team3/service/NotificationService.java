@@ -161,7 +161,20 @@ public class NotificationService {
 //			report.setStatus(false);
 //		}
 //		reportRepository.save(report);
-
+		for (User user : listOfUsers) {
+			Set<Role> setOfRoles = user.getRoles();
+			for (Role role : setOfRoles) {
+				if (role.getType().equals(Role.RoleType.ROLE_ADMIN)) {
+					simpMessagingTemplate.convertAndSend("/queue/private.messages/" + user.getUsername(),
+							"This is report notification for comment:" + report.getReportedComment().getContent()
+									+ " posted by:" + report.getReportedComment().getUser().getUsername()
+									+ " on folowing video: " + report.getReportedComment().getVideo().getTitle()
+									+ ". This report is submited by user: " + report.getReportAuthor().getUsername()
+									+ ". Report text is: " + report.getReportText());
+				}
+			}
+		}
+		
 		for (User user : listOfUsers) {
 			Set<Role> setOfRoles = user.getRoles();
 			for (Role role : setOfRoles) {
@@ -176,18 +189,10 @@ public class NotificationService {
 							+ " on folowing video: " + report.getReportedComment().getVideo().getTitle()
 							+ ". This report is submited by user: " + report.getReportAuthor().getUsername()
 							+ ". Report text is: " + report.getReportText());
-
-					simpMessagingTemplate.convertAndSend("/queue/private.messages/" + user.getUsername(),
-							"This is report notification for comment:" + report.getReportedComment().getContent()
-									+ " posted by:" + report.getReportedComment().getUser().getUsername()
-									+ " on folowing video: " + report.getReportedComment().getVideo().getTitle()
-									+ ". This report is submited by user: " + report.getReportAuthor().getUsername()
-									+ ". Report text is: " + report.getReportText());
 					javaMailSender.send(mail);
 				}
 			}
 		}
-
 	}
 
 	public Notification findOneByReport(Long reportId) {

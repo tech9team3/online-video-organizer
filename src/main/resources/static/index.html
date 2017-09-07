@@ -103,10 +103,10 @@
                                             <div>on <i>"{{notification.rate.video.title | limitTo:80}}"</i> video.</div>
                                         </a>
                                     </li>
-                                    <li style="font-size: 12px;" ng-if="mainCtrl.newNotifications.length != 0">
+                                    <li style="font-size: 12px;" ng-if="mainCtrl.notifications.length != 0">
                                         <a href="#notifications"><strong>Show all notifications</strong></a>
                                     </li>
-                                    <li style="font-size: 12px;" ng-if="mainCtrl.newNotifications.length == 0">
+                                    <li style="font-size: 12px;" ng-if="mainCtrl.notifications.length == 0">
                                         <a href=""><strong>No notifications</strong></a>
                                     </li>
                                 </ul>
@@ -129,10 +129,10 @@
                                             <div>on <i>"{{notification.report.reportedComment.video.title | limitTo:80}}"</i> video.</div>
                                         </a>
                                     </li>
-                                    <li style="font-size: 12px;" ng-if="mainCtrl.newReports.length != 0">
+                                    <li style="font-size: 12px;" ng-if="mainCtrl.reports.length != 0">
                                         <a href="#reports"><strong>Show all reports</strong></a>
                                     </li>
-                                    <li style="font-size: 12px;" ng-if="mainCtrl.newReports.length == 0">
+                                    <li style="font-size: 12px;" ng-if="mainCtrl.reports.length == 0">
                                         <a href=""><strong>No reports</strong></a>
                                     </li>
                                 </ul>

@@ -47,6 +47,8 @@
             connectToWebSocketNotification();
             getNewNotifications();
             getNewReports();
+            getNotifications();
+            getReports();
         }
 
         function connectToWebSocketNotification() {
@@ -54,10 +56,10 @@
             stompClient = Stomp.over(socket);
             stompClient.connect({}, function (frame) {
                 stompClient.subscribe('/queue/private.messages/' + UserService.getLoggedInUser().username, function (retVal) {
-
                     getNewNotifications();
                     getNewReports();
-
+                    getNotifications();
+                    getReports();
                     growl.info(retVal.body);
                 });
             });
@@ -67,6 +69,12 @@
             NotificationService.getNewNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
                 mainCtrl.newNotifications = response.data;
                 mainCtrl.notificationCount = angular.copy(response.data.length);
+            });
+        }
+
+        function getNotifications() {
+            NotificationService.getNotificationsByUserId(UserService.getLoggedInUserId()).then(function (response) {
+                mainCtrl.notifications = response.data;
             });
         }
 
@@ -80,6 +88,12 @@
             NotificationService.getNewReports().then(function (response) {
                 mainCtrl.newReports = response.data;
                 mainCtrl.reportCount = angular.copy(response.data.length);
+            });
+        }
+
+        function getReports() {
+            NotificationService.getReports().then(function (response) {
+                mainCtrl.reports = response.data;
             });
         }
 
@@ -190,8 +204,8 @@
             delete mainCtrl.registerInput;
             delete mainCtrl.registrationError;
             form.$setPristine();
-            form.$setUntouched();  
-            
+            form.$setUntouched();
+
         }
 
         function logout() {

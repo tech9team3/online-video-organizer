@@ -25,6 +25,7 @@
         videoCtrl.scrollbarsConfig = {
             axis: 'y',
             autoHideScrollbar: true,
+            alwaysShowScrollbar: 1,
             theme: 'rounded-dots-dark',
             advanced: {
                 updateOnContentResize: true
@@ -125,7 +126,6 @@
             videoCtrl.report.reportedComment = videoCtrl.commentReport;
             ReportService.reportCommentToAdmin(videoCtrl.report).then(function (response) {
                 $('#notifyAdminModal').modal('hide');
-
             });
             delete videoCtrl.report;
         }

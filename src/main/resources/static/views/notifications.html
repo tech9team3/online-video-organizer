@@ -5,20 +5,30 @@
                 <h3>Notifications</h3>
             </div>
             <ul class="list-group">
-                <li class="list-group-item" ng-if="notification.comment" ng-repeat="notification in notificationCtrl.notifications">
-                    <a ng-style="{ fontWeight: notification.status?'bold':'normal' }" ng-click="notificationCtrl.showNotification(notification, getNewNotifications = mainCtrl.getNewNotifications);" ng-href="http://localhost:8080/#/video/{{notification.comment.video.id}}#{{notification.comment.id}}">
-                        <div><i>"{{notification.comment.user.username}}"</i> commented:</div>
-                        <div><i>"<b>{{notification.comment.content}}</b>"</i></div>
-                        <div>on <i>"{{notification.comment.video.title}}"</i> video.</div>
-                    </a>
-                </li>
-                <li class="list-group-item" ng-if="notification.rate" ng-repeat="notification in notificationCtrl.notifications">
-                    <a ng-style="{ fontWeight: notification.status?'bold':'normal' }" ng-click="notificationCtrl.showNotification(notification, getNewNotifications = mainCtrl.getNewNotifications);" ng-href="http://localhost:8080/#/video/{{notification.rate.video.id}}">
-                        <div><i>"{{notification.rate.user.username}}"</i> rated:</div>
-                        <div><i>"<b>{{notification.rate.mark}}</b>"</i></div>
-                        <div>on <i>"{{notification.rate.video.title}}"</i> video.</div>
-                    </a>
-                </li>
+                <a class="list-group-item" ng-if="notification.comment" ng-repeat="notification in notificationCtrl.notifications" ng-class="{'list-group-item-info':notification.status}" ng-click="notificationCtrl.showNotification(notification, getNewNotifications = mainCtrl.getNewNotifications);" ng-href="http://localhost:8080/#/video/{{notification.comment.video.id}}#{{notification.comment.id}}">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <div><i>"{{notification.comment.user.username}}"</i> commented:</div>
+                            <div><i>"<b>{{notification.comment.content}}</b>"</i></div>
+                            <div>on <i>"{{notification.comment.video.title}}"</i> video.</div>
+                        </div>
+                        <div class="col-xs-3">
+                            <h5><small class="pull-right">{{notification.creationDate | date : "d MMM y - HH:mm"}}</small></h5>
+                        </div>
+                    </div>
+                </a>
+                <a class="list-group-item" ng-if="notification.rate" ng-repeat="notification in notificationCtrl.notifications" ng-class="{'list-group-item-info':notification.status}" ng-click="notificationCtrl.showNotification(notification, getNewNotifications = mainCtrl.getNewNotifications);" ng-href="http://localhost:8080/#/video/{{notification.rate.video.id}}">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <div><i>"{{notification.rate.user.username}}"</i> rated:</div>
+                            <div><i>"<b>{{notification.rate.mark}}</b>"</i></div>
+                            <div>on <i>"{{notification.rate.video.title}}"</i> video.</div>
+                        </div>
+                        <div class="col-xs-3">
+                            <h5><small class="pull-right">{{notification.creationDate | date : "d MMM y - HH:mm"}}</small></h5>
+                        </div>
+                    </div>
+                </a>
             </ul>
         </div>
     </div>

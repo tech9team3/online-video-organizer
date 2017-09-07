@@ -26,8 +26,12 @@
                 <ul class="list-unstyled video-list-thumbs row" style="width: 100%">
                     <li class="col-lg-4 col-xs-6" ng-repeat="video in videoListsCtrl.videos | orderBy:videoListsCtrl.order | searchFilter: videoListsCtrl.searchByVideo">
                         <a class="play-video" ng-href="#/video/{{video.id}}">
-                            <img ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" class="img-responsive image-thumb" />
-                            <h2 class="might-overflow" title="{{video.title}}">{{video.title}}</h2>
+                            <div class="image-div">
+                                <img ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" class="img-responsive image-thumb" />
+                            </div>
+                            <div class="header-div">
+                                <h2 class="might-overflow" title="{{video.title}}">{{video.title}}</h2>
+                            </div>
                             <span class="glyphicon glyphicon-play-circle"></span>
                             <span class="username">{{video.videoList.user.username}}</span>
                             <a class="delete-video" href="" ng-click="videoListsCtrl.selectVideo(video);" data-toggle="modal" data-target="#delete-video-modal"><span class="glyphicon glyphicon-remove-circle"></span></a>
@@ -89,7 +93,7 @@
                     <p>Do you want to delete <i>{{videoListsCtrl.videoList.title}}</i> ?</p>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="videoListsCtrl.deleteVideoList(videoListsCtrl.videoList)">OK</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -123,7 +127,7 @@
                         </div>
                         <div class="col-xs-9">
                             <button type="button" class="btn btn-primary" ng-click="videoListsCtrl.saveVideoList(videoListsCtrl.videoList)">Save</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -171,7 +175,7 @@
                         </div>
                         <div class="col-xs-9">
                             <button type="submit" class="btn btn-primary" ng-disabled="videoListsCtrl.addVideoForm.$invalid">Submit</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -191,7 +195,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="videoListsCtrl.deleteVideo()">OK</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>

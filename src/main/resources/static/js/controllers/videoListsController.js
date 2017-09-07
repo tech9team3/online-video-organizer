@@ -26,6 +26,7 @@
         videoListsCtrl.scrollbarsConfig = {
             axis: 'y',
             autoHideScrollbar: true,
+            alwaysShowScrollbar: 1,
             theme: 'rounded-dots-dark',
             advanced: {
                 updateOnContentResize: true

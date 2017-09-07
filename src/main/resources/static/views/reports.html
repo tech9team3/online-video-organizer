@@ -5,14 +5,19 @@
                 <h3>Reports</h3>
             </div>
             <ul class="list-group">
-                <li class="list-group-item" ng-repeat="notification in reportCtrl.reports">
-                    <a ng-style="{ fontWeight: notification.status?'bold':'normal' }" ng-click="reportCtrl.showReport(notification, getNewReports = mainCtrl.getNewReports); " ng-href="http://localhost:8080/#/video/{{notification.report.reportedComment.video.id}}#{{notification.report.reportedComment.id}}">
-                        <div><i>"{{notification.report.reportAuthor.username}}"</i> reported:</div>
-                        <div><i>"<b>{{notification.report.reportText}}</b>"</i> on comment:</div>
-                        <div><i>"<b>{{notification.report.reportedComment.content}}</b>"</i></div>
-                        <div>on <i>"{{notification.report.reportedComment.video.title}}"</i> video.</div>
-                    </a>
-                </li>
+                <a class="list-group-item" ng-repeat="notification in reportCtrl.reports" ng-class="{'list-group-item-info':notification.status}" ng-click="reportCtrl.showReport(notification, getNewReports = mainCtrl.getNewReports); " ng-href="http://localhost:8080/#/video/{{notification.report.reportedComment.video.id}}#{{notification.report.reportedComment.id}}">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <div><i>"{{notification.report.reportAuthor.username}}"</i> reported:</div>
+                            <div><i>"<b>{{notification.report.reportText}}</b>"</i> on comment:</div>
+                            <div><i>"<b>{{notification.report.reportedComment.content}}</b>"</i></div>
+                            <div>on <i>"{{notification.report.reportedComment.video.title}}"</i> video.</div>
+                        </div>
+                        <div class="col-xs-3">
+                            <h5><small class="pull-right">{{notification.creationDate | date : "d MMM y - HH:mm"}}</small></h5>
+                        </div>
+                    </div>
+                </a>
             </ul>
         </div>
     </div>
