@@ -30,7 +30,7 @@
             advanced: {
                 updateOnContentResize: true
             },
-            setHeight: $window.innerHeight - 153,
+            //setHeight: $window.innerHeight - 153,
             scrollInertia: 500,
         }
 

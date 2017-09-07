@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="form-group form-group-sm">
-            <input type="text" class="form-control" placeholder="Add video..." ng-model="$ctrl.searchVideoTerm">
+            <input type="text" class="form-control" placeholder="Add video..." ng-model="$ctrl.searchVideoTerm" ng-keyup="$event.keyCode == 13 && $ctrl.searchYouTube('')">
         </div>
         <div class="text-center">
             <button class="btn btn-sm btn-default" ng-click="$ctrl.searchYouTube('')">YouTube&nbsp;&nbsp;<span class="glyphicon glyphicon-search"></span></button>
@@ -14,7 +14,7 @@
     <div class="col-md-12">
         <br>
         <div>
-            <div ng-scrollbars ng-scrollbars-config="$ctrl.scrollbarsConfig">
+            <div ng-scrollbars ng-scrollbars-config="$ctrl.scrollbarsConfig" style="max-height: 75vh">
                 <ul class="list-unstyled video-list-thumbs row" style="width: 100%">
                     <li class="col-md-12" ng-repeat="video in $ctrl.providerVideoList">
                         <a class="add-video" href="" ng-click="$ctrl.onVideoSelect({video: video})" popover-title="Add video to playlist:" uib-popover="{{video.title}}" popover-append-to-body="true" popover-placement="right" popover-trigger="'mouseenter'">

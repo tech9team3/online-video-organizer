@@ -24,40 +24,8 @@
             <div class="pull-right">
                 <span ng-repeat="tag in videoCtrl.video.videoTag" class="tag-item">{{tag.name}}</span>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="page-header">
-                        <h4><strong>{{videoCtrl.video.videoList.title | limitTo:20}}</strong></h4>
-                    </div>
-                    <div>
-                        <div ng-scrollbars ng-scrollbars-config="videoCtrl.scrollbarsConfig">
-                            <ul class="list-unstyled video-list-thumbs row" style="width: 100%">
-                                <li class="col-md-12" ng-repeat="video in videoCtrl.videos">
-                                    <a class="add-video" ng-href="#/video/{{video.id}}" popover-title="Play video" uib-popover="{{video.title}}" popover-append-to-body="true" popover-placement="left" popover-trigger="'mouseenter'">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <img ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" class="img-responsive" />
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <h2 class="">{{video.title}}</h2>
-                                            </div>
-                                        </div>
-                                        <span class="glyphicon glyphicon-play-circle"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+
+            <!--Comments-->
             <div ng-if="videoCtrl.loggedInUser.id !== videoCtrl.video.user.id">
                 <h4>
                     <span><i class="fa fa-comment fa" aria-hidden="true"></i></span>
@@ -99,9 +67,38 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h4><strong>{{videoCtrl.video.videoList.title | limitTo:20}}</strong></h4>
+                    </div>
+                    <div>
+                        <div ng-scrollbars ng-scrollbars-config="videoCtrl.scrollbarsConfig" style="max-height: 75vh">
+                            <ul class="list-unstyled video-list-thumbs row" style="width: 100%">
+                                <li class="col-md-12" ng-repeat="video in videoCtrl.videos">
+                                    <a class="add-video" ng-href="#/video/{{video.id}}" popover-title="Play video" uib-popover="{{video.title}}" popover-append-to-body="true" popover-placement="left" popover-trigger="'mouseenter'">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <img ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" class="img-responsive" />
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <h2 class="">{{video.title}}</h2>
+                                            </div>
+                                        </div>
+                                        <span class="glyphicon glyphicon-play-circle"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
 
 
 <div class="modal fade" id="notifyAdminModal">
