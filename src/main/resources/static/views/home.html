@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div ng-scrollbars ng-scrollbars-config="homeCtrl.scrollbarsConfig" style="max-height: 81vh">
-                <ul class="list-unstyled video-list-thumbs row">
+                <ul class="list-unstyled video-list-thumbs row" style="width: 100%">
                     <li class="col-lg-4 col-xs-6" ng-repeat="video in homeCtrl.publicVideos | orderBy:homeCtrl.order :homeCtrl.reverseOrder | searchFilter: homeCtrl.searchByVideo">
                         <!--:homeCtrl.reverseOrder-->
                         <a class="play-video" ng-href="#/video/{{video.id}}">

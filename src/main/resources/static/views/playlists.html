@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div ng-scrollbars ng-scrollbars-config="videoListsCtrl.scrollbarsConfig" style="max-height: 81vh">
-                <ul class="list-unstyled video-list-thumbs row">
+                <ul class="list-unstyled video-list-thumbs row" style="width: 100%">
                     <li class="col-lg-4 col-xs-6" ng-repeat="video in videoListsCtrl.videos | orderBy:videoListsCtrl.order | searchFilter: videoListsCtrl.searchByVideo">
                         <a class="play-video" ng-href="#/video/{{video.id}}">
                             <img ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" class="img-responsive" height="130px" />
