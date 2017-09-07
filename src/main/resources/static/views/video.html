@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="page-header">
-                <h4><strong>{{videoCtrl.video.title}}</strong>
+                <h4><strong>{{videoCtrl.video.title | limitTo:60}}</strong>
                     <div class="pull-right">
                         <div>Average Rate:</div>
                         <span uib-rating read-only="true" class="text-primary" ng-model="videoCtrl.rateModel" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>
@@ -20,12 +20,38 @@
                 <button class="btn btn-xs btn-social-icon btn-vk" socialshare socialshare-provider="vk" socialshare-url="http://localhost:8080/#/video/{{videoCtrl.video.id}}" socialshare-text="Online Video Orgnizer - {{videoCtrl.video.title}}" socialshare-description="{{videoCtrl.video.description}}" socialshare-media="{{videoCtrl.video.videoImageUrl}}"><span class="fa fa-vk"></span></button>
             </div>
             <br>
-            <p>
-                {{videoCtrl.video.description}}
-                <div class="pull-right">
-                    <span ng-repeat="tag in videoCtrl.video.videoTag" class="tag-item">{{tag.name}}</span>
+            <p>{{videoCtrl.video.description}}</p>
+            <div class="pull-right">
+                <span ng-repeat="tag in videoCtrl.video.videoTag" class="tag-item">{{tag.name}}</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h4><strong>{{videoCtrl.video.videoList.title | limitTo:20}}</strong></h4>
+                    </div>
+                    <div>
+                        <div ng-scrollbars ng-scrollbars-config="videoCtrl.scrollbarsConfig">
+                            <ul class="list-unstyled video-list-thumbs row" style="width: 100%">
+                                <li class="col-md-12" ng-repeat="video in videoCtrl.videos">
+                                    <a class="add-video" ng-href="#/video/{{video.id}}" popover-title="Play video" uib-popover="{{video.title}}" popover-append-to-body="true" popover-placement="left" popover-trigger="'mouseenter'">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <img ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" class="img-responsive" />
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <h2 class="">{{video.title}}</h2>
+                                            </div>
+                                        </div>
+                                        <span class="glyphicon glyphicon-play-circle"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </p>
+            </div>
         </div>
     </div>
 </div>
@@ -59,7 +85,7 @@
                                 <span><strong><i>{{comment.user.username}}</i></strong></span>
                             </div>
                             <div class="col-md-9">
-                                <button ng-if="comment.user.username == videoCtrl.loggedInUser.username" type="button" class="close pull-right" ng-click="videoCtrl.deleteComment(comment.id)"><span class="glyphicon glyphicon-remove"></span></button>
+                                <button ng-if="comment.user.username == videoCtrl.loggedInUser.username || (videoCtrl.loggedInUser && videoCtrl.loggedInUser.roles.indexOf('ROLE_ADMIN') !== -1)" type="button" class="close pull-right" ng-click="videoCtrl.deleteComment(comment.id)"><span class="glyphicon glyphicon-remove"></span></button>
                                 <button class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#notifyAdminModal" ng-click="videoCtrl.selectComment(comment)" ng-if="videoCtrl.loggedInUser.id && comment.user.username != videoCtrl.loggedInUser.username">Report</button>
                             </div>
                         </div>
@@ -75,9 +101,12 @@
         </div>
     </div>
 </div>
+
+
+
 <div class="modal fade" id="notifyAdminModal">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <form class="modal-content" name="videoCtrl.notifayAdminForm" role="form" ng-submit="videoCtrl.reportCommentToAdmin()">
             <div class="modal-header">
                 <h4 class="modal-title"><b>Notify admin</b></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -86,12 +115,12 @@
             </div>
             <div class="modal-body">
                 Reason for notify:
-                <textarea class="form-control" ng-model="videoCtrl.report.reportText" style="max-width: 100%;" id="notify"></textarea>
+                <textarea class="form-control" ng-model="videoCtrl.report.reportText" style="max-width: 100%;" id="notify" required></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" ng-click="videoCtrl.reportCommentToAdmin()">Send</button>
+                <button type="submit" class="btn btn-primary" ng-disabled="videoCtrl.notifayAdminForm.$invalid">Send</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>

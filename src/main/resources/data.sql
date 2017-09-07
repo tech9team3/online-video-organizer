@@ -22,7 +22,7 @@ INSERT INTO user_roles(user_id,role_id) VALUES (7,2);
 INSERT INTO video_list (title, user_id, visible) VALUES ("Moja play lista", 1,true);
 INSERT INTO video_list (title, user_id, visible) VALUES ("Moja nova play lista", 1,false);
 INSERT INTO video_list (title, user_id, visible) VALUES ("Spanish play lista", 2,false);
-INSERT INTO video_list (title, user_id, visible) VALUES (" Shakira play lista", 2,true);
+INSERT INTO video_list (title, user_id, visible) VALUES ("Shakira play lista", 2,true);
 INSERT INTO video_list (title, user_id, visible) VALUES ("Moja rock play lista", 3,true);
 INSERT INTO video_list (title, user_id, visible) VALUES ("Moja nova omiljena play lista", 4,true);
 INSERT INTO video_list (title, user_id, visible) VALUES ("Moja nova ili stara play lista", 5,true);

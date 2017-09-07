@@ -21,10 +21,11 @@
             </div>
             <div ng-scrollbars ng-scrollbars-config="homeCtrl.scrollbarsConfig">
                 <ul class="list-unstyled video-list-thumbs row">
-                    <li class="col-lg-4 col-xs-6" ng-repeat="video in homeCtrl.publicVideos | orderBy:homeCtrl.order :homeCtrl.reverseOrder | searchFilter: homeCtrl.searchByVideo"> <!--:homeCtrl.reverseOrder-->
-                        <a class="play-video" ng-href="#/video/{{video.id}}" uib-popover="{{video.title}}" popover-append-to-body="true" popover-placement="auto top" popover-trigger="'mouseenter'">
+                    <li class="col-lg-4 col-xs-6" ng-repeat="video in homeCtrl.publicVideos | orderBy:homeCtrl.order :homeCtrl.reverseOrder | searchFilter: homeCtrl.searchByVideo">
+                        <!--:homeCtrl.reverseOrder-->
+                        <a class="play-video" ng-href="#/video/{{video.id}}">
                             <img ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" class="img-responsive" height="130px" />
-                            <h2 class="might-overflow">{{video.title}}</h2>
+                            <h2 class="might-overflow" title="{{video.title}}">{{video.title}}</h2>
                             <span class="glyphicon glyphicon-play-circle"></span>
                             <span class="username">{{video.videoList.user.username}}</span>
                         </a>
@@ -33,28 +34,26 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="affix">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="input-group input-group-sm">
-                            <input type="text" class="form-control" ng-model="homeCtrl.searchByVideo" placeholder="Search..."/>
-                            <span class="input-group-btn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" ng-model="homeCtrl.searchByVideo" placeholder="Search..." />
+                        <span class="input-group-btn">
 					        <button class="btn btn-default" type="button" ng-click="homeCtrl.searchByVideo = ''">
 						        <span class="glyphicon glyphicon-remove"></span>
-                            </button>
-                            </span>
-                        </div>
+                        </button>
+                        </span>
                     </div>
                 </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="panel panel-default playlists">
-                            <div class="panel-heading">Playlists <button type="button" class="btn btn-default btn-xs pull-right" ng-click="homeCtrl.getPublicVideos();homeCtrl.selectVideoList(null);">All videos</button></div>
-                            <div class="list-group">
-                                <div ng-repeat="videoList in homeCtrl.publicVideoLists">
-                                    <a ng-class="{ 'active': homeCtrl.selectedVideoList() === videoList }" href="" class="list-group-item" ng-click="homeCtrl.getPublicVideosByVideoListId(videoList.id);homeCtrl.selectVideoList(videoList);">{{videoList.title}}</a>
-                                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default playlists">
+                        <div class="panel-heading">Playlists <button type="button" class="btn btn-default btn-xs pull-right" ng-click="homeCtrl.getPublicVideos();homeCtrl.selectVideoList(null);">All videos</button></div>
+                        <div class="list-group">
+                            <div ng-repeat="videoList in homeCtrl.publicVideoLists">
+                                <a ng-class="{ 'active': homeCtrl.selectedVideoList() === videoList }" href="" class="list-group-item" ng-click="homeCtrl.getPublicVideosByVideoListId(videoList.id);homeCtrl.selectVideoList(videoList);">{{videoList.title}}</a>
                             </div>
                         </div>
                     </div>

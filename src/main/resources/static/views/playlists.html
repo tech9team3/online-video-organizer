@@ -1,9 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3">
-            <div class="affix">
-                <search-video-providers on-video-select="videoListsCtrl.addVideo(video)" ng-if="videoListsCtrl.videoList.id"></search-video-providers>
-            </div>
+            <search-video-providers on-video-select="videoListsCtrl.addVideo(video)" ng-if="videoListsCtrl.videoList.id"></search-video-providers>
         </div>
         <div class="col-md-6">
             <div class="row">
@@ -27,9 +25,9 @@
             <div ng-scrollbars ng-scrollbars-config="videoListsCtrl.scrollbarsConfig">
                 <ul class="list-unstyled video-list-thumbs row">
                     <li class="col-lg-4 col-xs-6" ng-repeat="video in videoListsCtrl.videos | orderBy:videoListsCtrl.order | searchFilter: videoListsCtrl.searchByVideo">
-                        <a class="play-video" ng-href="#/video/{{video.id}}" uib-popover="{{video.title}}" popover-append-to-body="true" popover-placement="auto top" popover-trigger="'mouseenter'">
+                        <a class="play-video" ng-href="#/video/{{video.id}}">
                             <img ng-src="{{video.videoImageUrl}}" alt="{{video.title}}" class="img-responsive" height="130px" />
-                            <h2 class="might-overflow">{{video.title}}</h2>
+                            <h2 class="might-overflow" title="{{video.title}}">{{video.title}}</h2>
                             <span class="glyphicon glyphicon-play-circle"></span>
                             <span class="username">{{video.videoList.user.username}}</span>
                             <a class="delete-video" href="" ng-click="videoListsCtrl.selectVideo(video);" data-toggle="modal" data-target="#delete-video-modal"><span class="glyphicon glyphicon-remove-circle"></span></a>
@@ -40,31 +38,30 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="affix">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="input-group input-group-sm">
-                            <input type="text" class="form-control" ng-model="videoListsCtrl.searchByVideo" placeholder="Search..."></input>
-                            <span class="input-group-btn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" ng-model="videoListsCtrl.searchByVideo" placeholder="Search..."></input>
+                        <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
                                  <span class="glyphicon glyphicon-remove"></span>
-                            </button>
-                            </span>
-                        </div>
+                        </button>
+                        </span>
                     </div>
                 </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="panel panel-default playlists">
-                            <div class="panel-heading">Playlists
-                                <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#add-lists-modal" ng-click="videoListsCtrl.addVideoList()">    
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default playlists">
+                        <div class="panel-heading">Playlists
+                            <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#add-lists-modal" ng-click="videoListsCtrl.addVideoList()">    
                                 <span class="glyphicon glyphicon-plus"></span>
                                 </button>
-                            </div>
-                            <div class="list-group">
-                                <div ng-repeat="videoList in videoListsCtrl.videoLists">
-                                    <a ng-class="{ 'active': videoListsCtrl.selectedVideoList() === videoList }" href="" class="list-group-item" ng-click="videoListsCtrl.getVideosByVideoList(videoList.id);videoListsCtrl.selectVideoList(videoList);">{{videoList.title}}  
+                        </div>
+                        <div class="list-group">
+                            <div ng-repeat="videoList in videoListsCtrl.videoLists">
+                                <a ng-class="{ 'active': videoListsCtrl.selectedVideoList() === videoList }" href="" class="list-group-item" ng-click="videoListsCtrl.getVideosByVideoList(videoList.id);videoListsCtrl.selectVideoList(videoList);">{{videoList.title}}  
                                         <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#deleteVideoListModal" ng-click="videoListsCtrl.selectVideoList(videoList)" >
                                           <span class="glyphicon glyphicon-trash"></span>
                                         </button>
@@ -72,7 +69,6 @@
                                           <span class="glyphicon glyphicon-edit"></span>
                                         </button>
                                     </a>
-                                </div>
                             </div>
                         </div>
                     </div>

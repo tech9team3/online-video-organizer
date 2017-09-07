@@ -5,9 +5,9 @@
             $sceProvider.enabled(false);
         });
 
-    VideoController.$inject = ['$location', '$http', '$route', 'VideoService', '$routeParams', '$sce', 'CommentService', 'UserService', 'TagService', 'RateService', 'ReportService'];
+    VideoController.$inject = ['$location', '$http', '$route', '$window', 'VideoService', '$routeParams', '$sce', 'CommentService', 'UserService', 'TagService', 'RateService', 'ReportService'];
 
-    function VideoController($location, $http, $route, VideoService, $routeParams, $sce, CommentService, UserService, TagService, RateService, ReportService) {
+    function VideoController($location, $http, $route, $window, VideoService, $routeParams, $sce, CommentService, UserService, TagService, RateService, ReportService) {
         var videoCtrl = this;
 
         videoCtrl.getCommentsForVideo = getCommentsForVideo;
@@ -22,21 +22,45 @@
 
         videoCtrl.loggedInUser = UserService.getLoggedInUser();
 
+        videoCtrl.scrollbarsConfig = {
+            axis: 'y',
+            autoHideScrollbar: true,
+            theme: 'rounded-dots-dark',
+            advanced: {
+                updateOnContentResize: true
+            },
+            setHeight: $window.innerHeight - 210,
+            scrollInertia: 500,
+        }
+
         init();
 
         function init() {
             getVideoByVideoId(videoId);
             getCommentsForVideo(videoId);
-            if (UserService.getLoggedInUser()){
-            getRateByVideoAndUser();
-            getAverageRateForVideo();
+            if (UserService.getLoggedInUser()) {
+                getRateByVideoAndUser();
+                getAverageRateForVideo();
             }
         }
 
         function getVideoByVideoId(videoId) {
             VideoService.getVideoByVideoId(videoId).then(function (response) {
                 videoCtrl.video = response.data;
+                getVideosByVideoList(videoCtrl.video.videoList.id);
             })
+        }
+
+        function getVideosByVideoList(videoListId) {
+            if (videoCtrl.video.user.id === UserService.getLoggedInUserId()) {
+                VideoService.getVideosByVideoListId(videoListId).then(function (response) {
+                    videoCtrl.videos = response.data;
+                })
+            } else {
+                VideoService.getPublicVideosByVideoListId(videoListId).then(function (response) {
+                    videoCtrl.videos = response.data;
+                })
+            }
         }
 
         function getCommentsForVideo(videoId) {
@@ -69,52 +93,52 @@
             });
             //videoCtrl.comment= {};
         }
-        
+
         function saveRate() {
-        	 if (!UserService.getLoggedInUser()) {
-                 $('#login-register-modal').modal('show');
-        	 } else {
-	            videoCtrl.rate.user = UserService.getLoggedInUser();
-	            delete videoCtrl.rate.user.roles;
-	            videoCtrl.rate.video = videoCtrl.video;
-	            RateService.saveRate(videoCtrl.rate).then(function (response) {
-	            	 getAverageRateForVideo();
-	            });           
-        	}
+            if (!UserService.getLoggedInUser()) {
+                $('#login-register-modal').modal('show');
+            } else {
+                videoCtrl.rate.user = UserService.getLoggedInUser();
+                delete videoCtrl.rate.user.roles;
+                videoCtrl.rate.video = videoCtrl.video;
+                RateService.saveRate(videoCtrl.rate).then(function (response) {
+                    getAverageRateForVideo();
+                });
+            }
         }
-        
+
         function getRateByVideoAndUser() {
             RateService.getRateByVideoAndUser(videoId, UserService.getLoggedInUser().username).then(function (response) {
-            	videoCtrl.rate = response.data;
-            });        	
+                videoCtrl.rate = response.data;
+            });
         }
-        
+
         function getAverageRateForVideo() {
             RateService.getAverageRateForVideo(videoId).then(function (response) {
-               videoCtrl.rateModel=response.data;
-            });        	
+                videoCtrl.rateModel = response.data;
+            });
         }
-        
+
         function reportCommentToAdmin() {
-        	videoCtrl.report.reportAuthor = UserService.getLoggedInUser();
-        	delete videoCtrl.report.reportAuthor.roles;
-        	videoCtrl.report.reportedComment = videoCtrl.commentReport;
+            videoCtrl.report.reportAuthor = UserService.getLoggedInUser();
+            delete videoCtrl.report.reportAuthor.roles;
+            videoCtrl.report.reportedComment = videoCtrl.commentReport;
             ReportService.reportCommentToAdmin(videoCtrl.report).then(function (response) {
-            	  $('#notifyAdminModal').modal('hide');
-               
-            });     
+                $('#notifyAdminModal').modal('hide');
+
+            });
             delete videoCtrl.report;
         }
-        
+
         function selectComment(comment) {
             videoCtrl.commentReport = comment;
         }
-        
-        
-    
+
+
+
     }
-        
-          
-    
+
+
+
 
 })();
