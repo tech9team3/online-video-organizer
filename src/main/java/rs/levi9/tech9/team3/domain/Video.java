@@ -17,8 +17,7 @@ public class Video extends BaseEntity implements Serializable {
     @Column(nullable = false)
     private String title;
 
-    @NotNull
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = true, columnDefinition = "TEXT")
     private String description;
 
     @NotNull

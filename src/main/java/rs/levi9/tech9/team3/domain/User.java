@@ -16,10 +16,10 @@ public class User extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = -5675226269896661922L;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String firstName;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String lastName;
 
     @Email
