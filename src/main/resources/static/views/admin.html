@@ -2,10 +2,10 @@
     <div class="col-md-9">
         <div ui-tree data-drag-enabled="false">
             <ol ui-tree-nodes="" ng-model="adminCtrl.users" ng-class="{hidden: collapsed}">
-                <li ng-repeat="user in adminCtrl.users  | filter: adminCtrl.searchByUsername" data-collapsed="true" ui-tree-node>
+                <li  ng-if="adminCtrl.loggedInUser.username!==user.username" ng-repeat="user in adminCtrl.users  | filter: adminCtrl.searchByUsername" data-collapsed="true" ui-tree-node>
                     <div ui-tree-handle class="tree-node tree-node-content">
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <a class="btn btn-primary btn-xs" data-nodrag ng-click="adminCtrl.getVideoListsByUser(user);this.toggle();">
                                     <span class="glyphicon glyphicon-chevron-right" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
                                 </a>
@@ -14,6 +14,7 @@
                             <div class="col-md-2">{{user.firstName}}</div>
                             <div class="col-md-2">{{user.lastName}}</div>
                             <div class="col-md-2">{{user.email}}</div>
+                              <div class="col-md-1"><div ng-repeat="role in user.roles">{{role.type}}</div></div>
                             <div class="col-md-2">
                                 <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#delete-user-modal" ng-click="adminCtrl.selectUser(user)"> <span class="glyphicon glyphicon-trash"></span></a>
                                 <a class="pull-right btn btn-primary btn-xs" data-nodrag data-toggle="modal" data-target="#block-user-modal" ng-click="adminCtrl.selectUser(user)" style="margin-right: 8px;" ng-disabled="!user.status"><span class="glyphicon glyphicon-ban-circle"></span></a>

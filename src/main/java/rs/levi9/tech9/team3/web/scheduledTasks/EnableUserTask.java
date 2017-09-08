@@ -2,7 +2,10 @@ package rs.levi9.tech9.team3.web.scheduledTasks;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +27,7 @@ public class EnableUserTask {
     }
 
     @Scheduled(fixedRate = 1*60*1000)
-    public void checkBanList() {
+    public void checkBanList() throws MailException, MessagingException {
 
         List<User> listBanUsers=userService.listOfBanUsers();
         if(listBanUsers.isEmpty()){

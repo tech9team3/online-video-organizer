@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailException;
+import org.springframework.messaging.simp.user.UserRegistryMessageHandler;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +24,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestOperations;
 import rs.levi9.tech9.team3.domain.User;
+import rs.levi9.tech9.team3.repository.UserRepository;
 import rs.levi9.tech9.team3.service.CommentService;
 import rs.levi9.tech9.team3.service.UserService;
+import rs.levi9.tech9.team3.web.validation.exceptions.EmailAlreadyExistsException;
+import rs.levi9.tech9.team3.web.validation.exceptions.UsernameAlreadyExistsException;
 
 @RestController
 @RequestMapping("/users")
@@ -55,13 +61,25 @@ public class UserController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public User save(@Valid @RequestBody User user) {
+	public User save(@Valid @RequestBody User user) throws UsernameAlreadyExistsException, EmailAlreadyExistsException, MailException, MessagingException {
 		user.setRegistrationDate(new Date());
+		
+		User fondUser = userService.findOneByUsername(user.getUsername());
+		if(fondUser!=null){
+			throw new UsernameAlreadyExistsException("Username already taken, choose another one!");
+		}
+		User foundEmailUser =userService.findOneByEmail(user.getEmail());
+		if(foundEmailUser!=null){
+			throw new EmailAlreadyExistsException("User with this email already exists!");
+		}
+		
+		
+		 
 		return userService.save(user);
 	}
 
 	@RequestMapping(path = "/activateUser/{userId}", method = RequestMethod.GET)
-	public String enableUser( @PathVariable Long userId){
+	public String enableUser( @PathVariable Long userId) throws MailException, MessagingException{
 		User foundUser = userService.findOne(userId);
 		
 		foundUser.setStatus(true);
@@ -69,7 +87,7 @@ public class UserController {
 		
 	}
 	@RequestMapping(method = RequestMethod.PUT)
-	public User put(@Valid @RequestBody User user) {
+	public User put(@Valid @RequestBody User user) throws MailException, MessagingException {
 		return userService.save(user);
 	}
 
@@ -117,7 +135,7 @@ public class UserController {
 
 	@RequestMapping(path = "/admin/banUser/{username}/forTime/{time}", method = RequestMethod.GET)
 	public void banUser(@PathVariable("username") String username,
-						@PathVariable("time")Long time){
+						@PathVariable("time")Long time) throws MailException, MessagingException{
 			Long newDate = System.currentTimeMillis()+time;
 		userService.setBanToUser( username, new Date(newDate));
 	}

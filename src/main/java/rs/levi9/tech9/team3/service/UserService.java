@@ -1,15 +1,27 @@
 package rs.levi9.tech9.team3.service;
 
+import java.util.Date;
+import java.util.List;
+
+import javax.mail.MessagingException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
-import rs.levi9.tech9.team3.domain.*;
+
+import rs.levi9.tech9.team3.domain.Comment;
+import rs.levi9.tech9.team3.domain.Notification;
+import rs.levi9.tech9.team3.domain.Rate;
+import rs.levi9.tech9.team3.domain.Report;
+import rs.levi9.tech9.team3.domain.User;
+import rs.levi9.tech9.team3.domain.Video;
+import rs.levi9.tech9.team3.domain.VideoList;
 import rs.levi9.tech9.team3.repository.CommentRepository;
 import rs.levi9.tech9.team3.repository.UserRepository;
-
-import java.util.Date;
-import java.util.List;
+import rs.levi9.tech9.team3.web.validation.exceptions.EmailAlreadyExistsException;
+import rs.levi9.tech9.team3.web.validation.exceptions.UsernameAlreadyExistsException;
 
 @Service
 public class UserService {
@@ -53,19 +65,11 @@ public class UserService {
         return userRepository.findOne(id);
     }
 
-    public User save(User user) {
+    public User save(User user) throws MailException, MessagingException  {
 
-        if (userRepository.findByEmail(user.getEmail()) == null
-                && userRepository.findByUsername(user.getUsername()) == null) {
-            try {
                 user.setStatus(false);
                 userRepository.save(user);
                 notificationService.sendRegistrationNotification(user);
-
-            } catch (Exception e) {
-                logger.info("Sending email error : " + e.getMessage());
-            }
-        }
         return userRepository.save(user);
     }
 
@@ -119,7 +123,7 @@ public class UserService {
 
         return userRepository.findAllByBanExpirationDateIsNotNullAndBanExpirationDateAfterAndBanExpirationDateBefore(startDate,endDate);
     }
-    public void setBanToUser (String userName, Date banExpDate){
+    public void setBanToUser (String userName, Date banExpDate) throws MailException, MessagingException {
         User foundUser = this.findOneByUsername(userName);
         foundUser.setBanExpirationDate(banExpDate);
         foundUser.setStatus(false);

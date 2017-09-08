@@ -26,7 +26,7 @@
         adminCtrl.saveVideo = saveVideo;
         adminCtrl.banUser = banUser;
       
-
+        adminCtrl.loggedInUser = UserService.getLoggedInUser();
 
         getUsers();
 
