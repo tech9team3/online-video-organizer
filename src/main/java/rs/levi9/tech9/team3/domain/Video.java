@@ -51,6 +51,7 @@ public class Video extends BaseEntity implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "video_tag_id"))
     private Set<VideoTag> videoTag;
 
+    
     @Column(nullable = true)
     private Long numberOfComments;
 

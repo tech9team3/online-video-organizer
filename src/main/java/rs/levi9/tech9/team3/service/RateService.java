@@ -61,7 +61,8 @@ public class RateService {
     }
 
     public void delete(Long id) {
-        rateRepository.delete(id);
+        Notification foundNotification = notificationService.findByRate(id);
+        		rateRepository.delete(id);
     }
 
     public List<Rate> findAllRatesForVideo(Long videoId) {

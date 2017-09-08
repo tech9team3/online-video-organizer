@@ -7,13 +7,13 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="nav nav-pills">
-                        <li role="presentation"><a href="" ng-click="homeCtrl.orderBy('id')">Latest 
-                        									<span ng-hide ="homeCtrl.order !== 'id' || homeCtrl.reverseOrder===true"  class="glyphicon glyphicon-chevron-down"></span>
-                                                         <span ng-hide = "homeCtrl.order !== 'id' || homeCtrl.reverseOrder===false"  class="glyphicon glyphicon-chevron-up"></span> </a></li>
-                        <li role="presentation"><a href="" ng-click="homeCtrl.orderBy('averageRate')">Top Rated <span  ng-hide ="homeCtrl.order !== 'averageRate' || homeCtrl.reverseOrder===true" class="glyphicon glyphicon-chevron-down"></span>
-                                                          <span ng-hide = "homeCtrl.order !== 'averageRate' || homeCtrl.reverseOrder===false"  class="glyphicon glyphicon-chevron-up"></span></a></li>
-                        <li role="presentation"><a href="" ng-click="homeCtrl.orderBy('numberOfComments')">Most Commented <span ng-hide ="homeCtrl.order !== 'numberOfComments' || homeCtrl.reverseOrder===true" class="glyphicon glyphicon-chevron-down"></span>
-                                                          <span ng-hide = "homeCtrl.order !== 'numberOfComments' || homeCtrl.reverseOrder===false"  class="glyphicon glyphicon-chevron-up"></span></a></li>
+                        <li role="presentation"><a href="" ng-click="homeCtrl.orderBy('-id')">Latest 
+                        									<span ng-hide ="homeCtrl.order !== '-id' || homeCtrl.reverseOrder===true"  class="glyphicon glyphicon-chevron-down"></span>
+                                                         <span ng-hide = "homeCtrl.order !== '-id' || homeCtrl.reverseOrder===false"  class="glyphicon glyphicon-chevron-up"></span> </a></li>
+                        <li role="presentation"><a href="" ng-click="homeCtrl.orderBy('-averageRate')">Top Rated <span  ng-hide ="homeCtrl.order !== '-averageRate' || homeCtrl.reverseOrder===true" class="glyphicon glyphicon-chevron-down"></span>
+                                                          <span ng-hide = "homeCtrl.order !== '-averageRate' || homeCtrl.reverseOrder===false"  class="glyphicon glyphicon-chevron-up"></span></a></li>
+                        <li role="presentation"><a href="" ng-click="homeCtrl.orderBy('-numberOfComments')">Most Commented <span ng-hide ="homeCtrl.order !== '-numberOfComments' || homeCtrl.reverseOrder===true" class="glyphicon glyphicon-chevron-down"></span>
+                                                          <span ng-hide = "homeCtrl.order !== '-numberOfComments' || homeCtrl.reverseOrder===false"  class="glyphicon glyphicon-chevron-up"></span></a></li>
                         <li role="presentation"><a href="" ng-click="homeCtrl.orderBy('title')">Alphabetic Order <span ng-hide ="homeCtrl.order !== 'title' || homeCtrl.reverseOrder===true" class="glyphicon glyphicon-chevron-down"></span>
                                                            <span ng-hide = "homeCtrl.order !== 'title' || homeCtrl.reverseOrder===false"  class="glyphicon glyphicon-chevron-up"></span></a></li>
                     </ul>

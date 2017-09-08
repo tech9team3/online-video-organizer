@@ -66,31 +66,35 @@ public class UserService {
     }
 
     public User save(User user) throws MailException, MessagingException  {
-
+    			if(user.getId()==null){
                 user.setStatus(false);
                 userRepository.save(user);
                 notificationService.sendRegistrationNotification(user);
+    			}
+                
         return userRepository.save(user);
     }
 
 
     public void delete(Long id) {
-        User foundUser = userRepository.findOne(id);
 
-        List<Rate> foundRateList = rateService.findAllRatesByUser(foundUser.getId());
-        for (Rate rate : foundRateList) {
-            rateService.delete(rate.getId());
-        }
+    	
+    	User foundUser = userRepository.findOne(id);
 
-        List<Report> foundReportList = reportService.findByReportAuthor(id);
-        for (Report report: foundReportList) {
-            reportService.delete(report.getId());
-        }
-
-        List<Comment> foundCommentList = commentService.findAllCommentsForUser(foundUser.getId());
-        for (Comment comment : foundCommentList) {
-            commentService.delete(comment.getId());
-        }
+    	 List<Rate> foundRateList = rateService.findAllRatesByUser(foundUser.getId());
+         for (Rate rate : foundRateList) {
+             rateService.delete(rate.getId());
+         }
+         List<Report> foundReportList = reportService.findByReportAuthor(id);
+         for (Report report: foundReportList) {
+             reportService.delete(report.getId());
+         }
+        
+         List<Comment> foundCommentList = commentService.findAllCommentsForUser(foundUser.getId());
+         for (Comment comment : foundCommentList) {
+             commentService.delete(comment.getId());
+         }
+         
         List<Notification> foundNotificationList = notificationService.findAllNotificationsByUser(foundUser.getId());
         for (Notification notification : foundNotificationList) {
             notificationService.delete(notification.getId());
@@ -100,10 +104,11 @@ public class UserService {
         for (Video video : foundVideoList) {
             videoService.delete(video.getId());
         }
+        
         List<VideoList> foundVideoLists = videoListService.findAllVideoListsByUser(foundUser.getId());
         for (VideoList videoList : foundVideoLists) {
-            videoListService.delete(videoList.getId());
-        }
+			videoListService.delete(videoList.getId());
+		}
         userRepository.delete(id);
     }
 

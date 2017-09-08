@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import rs.levi9.tech9.team3.domain.*;
 import rs.levi9.tech9.team3.repository.CommentRepository;
 import rs.levi9.tech9.team3.repository.NotificationRepository;
+import rs.levi9.tech9.team3.repository.RateRepository;
 import rs.levi9.tech9.team3.repository.ReportRepository;
 import rs.levi9.tech9.team3.repository.UserRepository;
 
@@ -27,17 +28,19 @@ public class NotificationService {
 	private UserRepository userRepository;
 	private SimpMessagingTemplate simpMessagingTemplate;
 	private ReportRepository reportRepository;
+	private RateRepository rateRepository;
 
 	@Autowired
 	public NotificationService(NotificationRepository notificationRepository, JavaMailSender javaMailSender,
 			CommentRepository commentRepository, UserRepository userRepository,
-			SimpMessagingTemplate simpMessagingTemplate, ReportRepository reportRepository) {
+			SimpMessagingTemplate simpMessagingTemplate, ReportRepository reportRepository,RateRepository rateRepository) {
 		this.notificationRepository = notificationRepository;
 		this.javaMailSender = javaMailSender;
 		this.commentRepository = commentRepository;
 		this.userRepository = userRepository;
 		this.simpMessagingTemplate = simpMessagingTemplate;
 		this.reportRepository = reportRepository;
+		this.rateRepository = rateRepository;
 	}
 
 	public List<Notification> findAll() {
@@ -210,5 +213,13 @@ public class NotificationService {
 
 	public List<Notification> findAllReportNotification(){
 		return  notificationRepository.findByReportIsNotNull();
+	}
+	
+	public Notification findByRate(Long rateId){
+	
+		Rate foundRate = rateRepository.findOne(rateId);
+		
+		Notification foundNotification = notificationRepository.findByRate(foundRate);
+		return foundNotification;
 	}
 }
