@@ -1,27 +1,17 @@
 package rs.levi9.tech9.team3.service;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.mail.MessagingException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
-
-import rs.levi9.tech9.team3.domain.Comment;
-import rs.levi9.tech9.team3.domain.Notification;
-import rs.levi9.tech9.team3.domain.Rate;
-import rs.levi9.tech9.team3.domain.Report;
-import rs.levi9.tech9.team3.domain.User;
-import rs.levi9.tech9.team3.domain.Video;
-import rs.levi9.tech9.team3.domain.VideoList;
+import rs.levi9.tech9.team3.domain.*;
 import rs.levi9.tech9.team3.repository.CommentRepository;
 import rs.levi9.tech9.team3.repository.UserRepository;
-import rs.levi9.tech9.team3.web.validation.exceptions.EmailAlreadyExistsException;
-import rs.levi9.tech9.team3.web.validation.exceptions.UsernameAlreadyExistsException;
+
+import javax.mail.MessagingException;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -32,7 +22,6 @@ public class UserService {
     private RateService rateService;
     private CommentRepository commentRepository;
     private VideoService videoService;
-    private Logger logger = LoggerFactory.getLogger(UserService.class);
     private ReportService reportService;
     private CommentService commentService;
 
